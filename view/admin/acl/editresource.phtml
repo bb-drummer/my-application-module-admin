@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<label>
+			<span class="panel-title"><?php echo $this->translate("Resource ändern"); ?></span>
+		</label>
+	</div>
+	<div class="panel-body">
+		<?php
+			$form->setAttribute('action', $this->url('admin/acledit', array('action' => 'editresource', 'acl_id' => $acl_id)));
+			$form->prepare();
+			echo $this->form()->openTag($form); ?>
+			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('resourceslug')))) ? ' has-error' : '' ?>">
+				<?php echo $this->formLabel($form->get('resourceslug')); ?>
+				<?php echo $this->formInput($form->get('resourceslug')->setAttributes(array('class' => 'form-control', 'disabled' => 'disabled'))); ?>
+				<?php echo $this->formHidden($form->get('resourceslug')->setAttributes(array('disabled' => false))); ?>
+			</div>
+			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('resourcename')))) ? ' has-error' : '' ?>">
+				<?php echo $this->formLabel($form->get('resourcename')); ?>
+				<?php echo $this->formInput($form->get('resourcename')->setAttributes(array('class' => 'form-control'))); ?>
+				<?php echo $this->formElementErrors($form->get('resourcename')); ?>
+			</div>
+			<hr />
+			<?php echo $this->formHidden($form->get('aclresources_id')); ?>
+			<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-default'))); ?>
+			<?php echo $this->formReset($form->get('reset')->setAttributes(array('class' =>'btn btn-default'))); ?>
+			<a class="btn btn-danger" href="<?php echo $this->url('admin/acledit'); ?>"><?php echo $this->translate("abbrechen"); ?></a>
+		<?php echo $this->form()->closeTag($form); ?>
+	</div>
+</div>

@@ -1,0 +1,15 @@
+.DS_*
+.settings
+.buildpath
+.project
+*cache*
+*vendor*
+data/
+components/
+public/js/*/*
+public/css/*/*
+composer.lock
+composer.phar
+deployment.properties
+deployment.xml
+*.local.php

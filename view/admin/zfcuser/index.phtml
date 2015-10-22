@@ -1,0 +1,13 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="panel-title"><strong><?php echo $this->translate('Profil'); ?></strong></span>
+	</div>
+	<div class="panel-body">
+		<section>
+			<div style="float:left; padding-right:16px;"><?php echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?></div>
+			<h3><?php echo $this->translate('Hallo'); ?>, <?php echo $this->zfcUserDisplayName() ?>!</h3>
+			<a href="<?php echo $this->url('zfcuser/logout') ?>"><?php echo $this->translate('Logout'); ?></a>
+			<div style="clear:both;"></div>
+		</section>
+	</div>
+</div>

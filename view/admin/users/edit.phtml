@@ -1,0 +1,76 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<label>
+			<span class="panel-title"><?php echo $this->translate("Benutzer-Daten bearbeiten"); ?></span>
+		</label>
+	</div>
+	<div class="panel-body">
+		<?php 
+			$form = $this->form;
+			$form->setAttribute('action', $this->url(
+			    'admin/default',
+			    array(
+			        'controller'	=> 'users',
+			        'action'		=> 'edit',
+			        'user_id'		=> $this->user_id,
+			    )
+			));
+			$form->prepare();
+		
+			echo $this->form()->openTag($form); ?>
+			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('username')))) ? ' has-error' : '' ?>">
+				<?php echo $this->formLabel($form->get('username')); ?>
+				<?php echo $this->formInput($form->get('username')->setAttributes(array('class' => 'form-control'))); ?>
+				<?php echo $this->formElementErrors($form->get('username')); ?>
+			</div>
+			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('email')))) ? ' has-error' : '' ?>">
+				<?php echo $this->formLabel($form->get('email')); ?>
+				<?php echo $this->formInput($form->get('email')->setAttributes(array('class' => 'form-control'))); ?>
+				<?php echo $this->formElementErrors($form->get('email')); ?>
+			</div>
+			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('display_name')))) ? ' has-error' : '' ?>">
+				<?php echo $this->formLabel($form->get('display_name')); ?>
+				<?php echo $this->formInput($form->get('display_name')->setAttributes(array('class' => 'form-control'))); ?>
+				<?php echo $this->formElementErrors($form->get('display_name')); ?>
+			</div>
+			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('password')))) ? ' has-error' : '' ?>">
+				<?php echo $this->formLabel($form->get('password')); ?>
+				<?php echo $this->formInput($form->get('password')->setAttributes(array('class' => 'form-control'))); ?>
+				<?php echo $this->formElementErrors($form->get('password')); ?>
+			</div>
+			<hr />
+			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('street')))) ? ' has-error' : '' ?>">
+				<?php echo $this->formLabel($form->get('street')); ?>
+				<?php echo $this->formInput($form->get('street')->setAttributes(array('class' => 'form-control'))); ?>
+				<?php echo $this->formElementErrors($form->get('street')); ?>
+			</div>
+			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('city')))) ? ' has-error' : '' ?>">
+				<?php echo $this->formLabel($form->get('city')); ?>
+				<?php echo $this->formInput($form->get('city')->setAttributes(array('class' => 'form-control'))); ?>
+				<?php echo $this->formElementErrors($form->get('city')); ?>
+			</div>
+			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('phone')))) ? ' has-error' : '' ?>">
+				<?php echo $this->formLabel($form->get('phone')); ?>
+				<?php echo $this->formInput($form->get('phone')->setAttributes(array('class' => 'form-control'))); ?>
+				<?php echo $this->formElementErrors($form->get('phone')); ?>
+			</div>
+			<hr />
+			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('aclrole')))) ? ' has-error' : '' ?>">
+				<?php echo $this->formLabel($form->get('aclrole')); ?>
+				<?php echo $this->formSelect($form->get('aclrole')->setAttributes(array('class' => 'form-control'))); ?>
+				<?php echo $this->formElementErrors($form->get('aclrole')); ?>
+			</div>
+			<hr />
+			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('state')))) ? ' has-error' : '' ?>">
+				<?php echo $this->formLabel($form->get('state')); ?>
+				<?php echo $this->formSelect($form->get('state')->setAttributes(array('class' => 'form-control'))); ?>
+				<?php echo $this->formElementErrors($form->get('state')); ?>
+			</div>
+			<hr />
+			<?php echo $this->formHidden($form->get('user_id')); ?>
+			<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-default'))); ?>
+			<?php echo $this->formReset($form->get('reset')->setAttributes(array('class' =>'btn btn-default'))); ?>
+			<a class="btn btn-danger" href="<?php echo $this->url('admin/default'); ?>"><?php echo $this->translate("abbrechen"); ?></a>
+		<?php echo $this->form()->closeTag($form); ?>
+	</div>
+</div>

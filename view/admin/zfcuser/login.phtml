@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="panel-title"><strong><?php echo $this->translate('Login'); ?></strong></span>
+	</div>
+	<div class="panel-body">
+		<?php
+		$form = $this->loginForm;
+		$form->prepare();
+		$form->setAttribute('action', $this->url('zfcuser/login'));
+		$form->setAttribute('method', 'post');
+		?>
+		
+		<?php echo $this->form()->openTag($form) ?>
+			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('identity')))) ? ' has-error' : '' ?>">
+				<?php echo $this->formLabel($form->get('identity')); ?>
+				<?php echo $this->formInput($form->get('identity')->setAttributes(array('class' => 'form-control'))); ?>
+				<?php echo $this->formElementErrors($form->get('identity')); ?>
+			</div>
+			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('credential')))) ? ' has-error' : '' ?>">
+				<?php echo $this->formLabel($form->get('credential')); ?>
+				<?php echo $this->formInput($form->get('credential')->setAttributes(array('class' => 'form-control'))); ?>
+				<?php echo $this->formElementErrors($form->get('credential')); ?>
+			</div>
+			<hr />
+			<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-default', 'value' => $this->translate('Login')))); ?>
+			<a class="btn btn-danger" href="<?php echo $this->url('home'); ?>"><?php echo $this->translate("abbrechen"); ?></a>
+	        <?php if ($this->redirect): ?><input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" /><?php endif ?>
+		<?php echo $this->form()->closeTag() ?>
+		<br />
+		<?php if ($this->enableRegistration) : ?>
+		<p class="enabled_registration">
+			<?php echo $this->translate('Noch nicht registriert?'); ?>
+			<a href="<?php echo $this->url('zfcuser/register') . ($this->redirect ? '?redirect='.$this->escapeUrl($this->redirect) : '') ?>"><?php echo $this->translate('Jetzt anmelden!'); ?></a>
+		</p>
+		<?php endif; ?>
+	</div>
+</div>

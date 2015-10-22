@@ -1,0 +1,33 @@
+{
+  "name" : "my-application/module-admin",
+  "description" : "basic admin module",
+  "version" : "1.0",
+  "require" : {
+    "php" : ">=5.3.3"
+  },
+  "license" : "BSD-3-Clause",
+  "keywords" : [ "ZendFramework2", "zf2", "module", "admin", "user", "settings", "acl", "roles", "resources", "zfc-user" ],
+  "extra" : {
+    "branch-alias" : {
+      "dev-master" : "master"
+    }
+  },
+  "autoload" : {
+    "psr-0" : {
+      "Admin" : "src/"
+    },
+    "classmap" : [ "./Module.php" ]
+  },
+  "suggest" : { },
+  "scripts" : {
+    "post-install-cmd" : [ ],
+    "post-update-cmd" : [ ]
+  },
+  "type" : "module",
+  "homepage" : "http://git.dragon-projects.de:81/zf2/module-admin.git",
+  "authors" : [ {
+    "name" : "Björn Bartels",
+    "email" : "bartels@dragon-projects.net",
+    "homepage" : "http://dragon-projects.net"
+  } ]
+}
