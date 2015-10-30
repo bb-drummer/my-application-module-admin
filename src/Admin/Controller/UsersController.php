@@ -20,6 +20,7 @@ use Admin;
 class UsersController extends BaseActionController
 {
 	protected $userTable;
+	protected $AclroleTable;
 
 	public function indexAction()
     {
@@ -39,6 +40,13 @@ class UsersController extends BaseActionController
         $form = new UserForm();
         $form->get('submit')->setValue('Benutzer anlegen');
 
+        $roles = $this->getAclroleTable()->fetchAll()->toArray();
+        $valueoptions = array();
+        foreach ($roles as $role) {
+        	$valueoptions[$role["aclroles_id"]] = $role["rolename"];
+        }
+        $form->get('aclrole')->setValueOptions($valueoptions);
+               
         $request = $this->getRequest();
         $user = new User();
         if ($request->isPost()) {
@@ -79,6 +87,13 @@ class UsersController extends BaseActionController
         $form->bind($user);
         $form->get('submit')->setAttribute('value', 'speichern');
 
+        $roles = $this->getAclroleTable()->fetchAll()->toArray();
+        $valueoptions = array();
+        foreach ($roles as $role) {
+        	$valueoptions[$role["aclroles_id"]] = $role["rolename"];
+        }
+        $form->get('aclrole')->setValueOptions($valueoptions);
+               
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setInputFilter($user->getInputFilter());
@@ -245,4 +260,14 @@ class UsersController extends BaseActionController
         }
         return $this->userTable;
     }
+    
+    public function getAclroleTable()
+    {
+        if (!$this->AclroleTable) {
+            $sm = $this->getServiceLocator();
+            $this->AclroleTable = $sm->get('Admin\Model\AclroleTable');
+        }
+        return $this->AclroleTable;
+    }
+
 }
