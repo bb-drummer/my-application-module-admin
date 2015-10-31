@@ -85,13 +85,13 @@ class UserForm extends Form
         
 
         $this->add(array(
-        		'name' => 'street',
-        		'attributes' => array(
-        				'type'  => 'text',
-        		),
-        		'options' => array(
-        				'label' => 'street',
-        		),
+        	'name' => 'street',
+        	'attributes' => array(
+        		'type'  => 'text',
+        	),
+        	'options' => array(
+        		'label' => 'street',
+        	),
         ));
         $this->add(array(
             'name' => 'city',

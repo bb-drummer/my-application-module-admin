@@ -49,6 +49,9 @@ class AclmatrixForm extends Form
         		'value' => 'reset',
         		'id' => 'resetbutton',
         	),
+            'options' => array(
+                'label' => 'reset',
+            ),
         ));
         $this->add(array(
             'name' => 'submit',
@@ -56,6 +59,9 @@ class AclmatrixForm extends Form
                 'type'  => 'submit',
                 'value' => 'save',
                 'id' => 'submitbutton',
+            ),
+            'options' => array(
+                'label' => 'save',
             ),
         ));
     }

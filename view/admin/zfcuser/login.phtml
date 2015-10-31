@@ -1,6 +1,6 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<span class="panel-title"><strong><?php echo $this->translate('Login'); ?></strong></span>
+		<span class="panel-title"><strong><?php echo $this->translate('login'); ?></strong></span>
 	</div>
 	<div class="panel-body">
 		<?php
@@ -22,15 +22,15 @@
 				<?php echo $this->formElementErrors($form->get('credential')); ?>
 			</div>
 			<hr />
-			<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-default', 'value' => $this->translate('Login')))); ?>
-			<a class="btn btn-danger" href="<?php echo $this->url('home'); ?>"><?php echo $this->translate("abbrechen"); ?></a>
+			<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-default', 'value' => $this->translate('login')))); ?>
+			<a class="btn btn-danger" href="<?php echo $this->url('home'); ?>"><?php echo $this->translate("cancel"); ?></a>
 	        <?php if ($this->redirect): ?><input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" /><?php endif ?>
 		<?php echo $this->form()->closeTag() ?>
 		<br />
 		<?php if ($this->enableRegistration) : ?>
 		<p class="enabled_registration">
-			<?php echo $this->translate('Noch nicht registriert?'); ?>
-			<a href="<?php echo $this->url('zfcuser/register') . ($this->redirect ? '?redirect='.$this->escapeUrl($this->redirect) : '') ?>"><?php echo $this->translate('Jetzt anmelden!'); ?></a>
+			<?php echo $this->translate('do not have an account?'); ?>
+			<a href="<?php echo $this->url('zfcuser/register') . ($this->redirect ? '?redirect='.$this->escapeUrl($this->redirect) : '') ?>"><?php echo $this->translate('register now!'); ?></a>
 		</p>
 		<?php endif; ?>
 	</div>

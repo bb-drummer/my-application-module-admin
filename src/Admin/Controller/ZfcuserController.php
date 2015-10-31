@@ -49,7 +49,7 @@ class ZfcuserController extends UserController
             );
         }
 
-        $this->flashMessenger()->addSuccessMessage("login succeeded");
+        $this->flashMessenger()->addSuccessMessage($this->translate("login succeeded"));
         $redirect = $this->redirectCallback;
 
         return $redirect();
@@ -111,12 +111,12 @@ class ZfcuserController extends UserController
         $oModule = new AdminModule();
         $oModule->setAppConfig($config);
         
-       	$this->flashMessenger()->addSuccessMessage("registration succeeded");
+       	$this->flashMessenger()->addSuccessMessage($this->translate("registration succeeded"));
        	if ($config['zfcuser_user_must_confirm']) {
-       		$this->flashMessenger()->addInfoMessage("you have been sent an email with further instructions to follow");
+       		$this->flashMessenger()->addInfoMessage($this->translate("you have been sent an email with further instructions to follow"));
         	return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
        	} else if ($config['zfcuser_admin_must_activate']) {
-       		$this->flashMessenger()->addInfoMessage("admin has been notified for activation");
+       		$this->flashMessenger()->addInfoMessage($this->translate("admin has been notified for activation"));
         	return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
        	}
         
@@ -130,7 +130,7 @@ class ZfcuserController extends UserController
             $post['credential'] = $post['password'];
             $request->setPost(new Parameters($post));
             $oModule->sendActivationNotificationMail($user);
-        	$this->flashMessenger()->addSuccessMessage("registration and activation succeeded");
+        	$this->flashMessenger()->addSuccessMessage($this->translate("registration and activation succeeded"));
             return $this->forward()->dispatch(static::CONTROLLER_NAME, array('action' => 'authenticate'));
         }
         

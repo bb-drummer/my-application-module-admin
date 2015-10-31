@@ -1,16 +1,16 @@
 <?php if (!$this->enableRegistration) { ?>
 <div class="panel panel-warning">
 	<div class="panel-heading">
-		<span class="panel-title"><strong><?php echo $this->translate('Registrierung'); ?></strong></span>
+		<span class="panel-title"><strong><?php echo $this->translate('register user'); ?></strong></span>
 	</div>
 	<div class="panel-body">
-		<p class="text-xl"><?php echo $this->translate('Registrierungen sind derzeit nicht möglich.'); ?></p>
+		<p class="text-xl"><?php echo $this->translate('registration is currently not available, please try again later'); ?></p>
 	</div>
 </div>
 <?php } else { ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<span class="panel-title"><strong><?php echo $this->translate('Registrierung'); ?></strong></span>
+		<span class="panel-title"><strong><?php echo $this->translate('register user'); ?></strong></span>
 	</div>
 	<div class="panel-body">
 		<?php
@@ -53,8 +53,8 @@
 				<?php echo $this->formElementErrors($form->get('captcha')); ?>
 			</div>
 			<hr />
-			<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-default', 'value' => $this->translate('Registrieren')))); ?>
-			<a class="btn btn-danger" href="<?php echo $this->url('home'); ?>"><?php echo $this->translate("abbrechen"); ?></a>
+			<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-default', 'value' => $this->translate('register')))); ?>
+			<a class="btn btn-danger" href="<?php echo $this->url('home'); ?>"><?php echo $this->translate("cancel"); ?></a>
 	        <?php if ($this->redirect): ?><input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" /><?php endif ?>
 		<?php echo $this->form()->closeTag() ?>
 	</div>
