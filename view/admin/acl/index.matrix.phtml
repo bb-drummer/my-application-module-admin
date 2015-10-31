@@ -1,16 +1,16 @@
-		<h4 class="hide"><?php echo $this->translate("Matrix-Ansicht")?></h4>
+		<h4 class="hide"><?php echo $this->translate("matrix view")?></h4>
 
 		<table class="table matrix">
 			<thead>
 				<tr>
-				    <th style="text-align: right; border-bottom: none; vertical-align: top;"><?php echo $this->translate("Rolle")?>:</th>
+				    <th style="text-align: right; border-bottom: none; vertical-align: top;"><?php echo $this->translate("role")?>:</th>
 					<?php foreach ($roles as $role) : ?>
 				    <th rowspan="2" style="vertical-align: top;"><?php echo $this->escapehtml($role['rolename']) ?></th>
 					<?php endforeach; ?>
 				    <th rowspan="2">&nbsp;</th>
 				</tr>
 				<tr>
-				    <th style="text-align: left; border-top: none; vertical-align: bottom;"><?php echo $this->translate("Resource")?>:</th>
+				    <th style="text-align: left; border-top: none; vertical-align: bottom;"><?php echo $this->translate("resource")?>:</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -46,8 +46,8 @@
 					echo $this->formSubmit($form
 							->get('submit')
 							->setAttribute('class', 'btn btn-success btn-xs')
-							->setAttribute('value', 'erlauben')
-							->setAttribute('title', 'erlauben')
+							->setAttribute('value', 'allow')
+							->setAttribute('title', $this->translate("allow"))
 					);
 					echo $this->form()->closeTag();
 					
@@ -74,8 +74,8 @@
 					echo $this->formSubmit($form
 							->get('submit')
 							->setAttribute('class', 'btn btn-danger btn-xs')
-							->setAttribute('value', 'verbieten')
-							->setAttribute('title', 'verbieten')
+							->setAttribute('value', 'deny')
+							->setAttribute('title', $this->translate("deny"))
 					);
 					echo $this->form()->closeTag();
 				?>

@@ -1,11 +1,11 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<label>
-			<span class="panel-title"><?php echo $this->translate("Rolle entfernen"); ?></span>
+			<span class="panel-title"><?php echo $this->translate("delete role"); ?></span>
 		</label>
 	</div>
 	<div class="panel-body">
-		<p><?php echo $this->translate("Rolle wirklich entfernen?"); ?></p>
+		<p><?php echo $this->translate("Do you really want to delete this role"); ?></p>
 		<p>
 			'<?php echo $this->escapeHtml($aclrole->rolename); ?>' - 
 			'<?php echo $this->escapeHtml($aclrole->roleslug); ?>'?
@@ -19,8 +19,8 @@
 		<form action="<?php echo $url; ?>" method="post">
 			<div>
 				<input type="hidden" name="id" value="<?php echo (int)$acl_id; ?>" />
-				<input class="btn btn-default" type="submit" name="del" value="<?php echo $this->translate("entfernen"); ?>" />
-				<input class="btn btn-danger" type="submit" name="abort" value="<?php echo $this->translate("abbrechen"); ?>" />
+				<input class="btn btn-default" type="submit" name="del" value="<?php echo $this->translate("delete"); ?>" />
+				<input class="btn btn-danger" type="submit" name="abort" value="<?php echo $this->translate("cancel"); ?>" />
 			</div>
 		</form>
 	</div>
