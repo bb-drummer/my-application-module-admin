@@ -1,7 +1,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<label>
-			<span class="panel-title"><?php echo $this->translate("Neue Einstellung hinzufügen"); ?></span>
+			<span class="panel-title"><?php echo $this->translate("add setting"); ?></span>
 		</label>
 	</div>
 	<div class="panel-body">
@@ -29,7 +29,7 @@
 			<?php echo $this->formHidden($form->get('settings_id')); ?>
 			<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-default'))); ?>
 			<?php echo $this->formReset($form->get('reset')->setAttributes(array('class' =>'btn btn-default'))); ?>
-			<a class="btn btn-danger" href="<?php echo $this->url('admin/settingsedit'); ?>"><?php echo $this->translate("abbrechen"); ?></a>
+			<a class="btn btn-danger" href="<?php echo $this->url('admin/settingsedit'); ?>"><?php echo $this->translate("cancel"); ?></a>
 		<?php echo $this->form()->closeTag($form); ?>
 	</div>
 </div>

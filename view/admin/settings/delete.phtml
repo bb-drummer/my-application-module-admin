@@ -1,11 +1,11 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<label>
-			<span class="panel-title"><?php echo $this->translate("Einstellung entfernen"); ?></span>
+			<span class="panel-title"><?php echo $this->translate("delete setting"); ?></span>
 		</label>
 	</div>
 	<div class="panel-body">
-		<p><?php echo $this->translate("Diese Einstellung wirklich entfernen?"); ?>:</p>
+		<p><?php echo $this->translate("Do you really want to delete this setting?"); ?>:</p>
 		<p><strong>
 			'<?php echo $this->escapeHtml($settings->type); ?>' - 
 			'<?php echo $this->escapeHtml($settings->name); ?>'?
@@ -20,8 +20,8 @@
 		<form action="<?php echo $url; ?>" method="post">
 			<div class="form-group">
 				<input type="hidden" name="id" value="<?php echo (int) $settings->settings_id; ?>" />
-				<input class="btn btn-default" type="submit" name="del" value="<?php echo $this->translate("entfernen"); ?>" />
-				<a class="btn btn-danger" href="<?php echo $this->url('admin/settingsedit'); ?>"><?php echo $this->translate("abbrechen"); ?></a>
+				<input class="btn btn-default" type="submit" name="del" value="<?php echo $this->translate("delete"); ?>" />
+				<a class="btn btn-danger" href="<?php echo $this->url('admin/settingsedit'); ?>"><?php echo $this->translate("cancel"); ?></a>
 			</div>
 		</form>
 	</div>

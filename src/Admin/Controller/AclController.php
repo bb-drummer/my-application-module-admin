@@ -75,7 +75,6 @@ class AclController extends BaseActionController
 		);
         //if (!class_exists('\Admin\Form\AclForm')) { require_once __DIR__ . '/../Form/AclForm.php'; }
         $form = new AclForm();
-        $form->get('submit')->setValue('add permission');
 
         $roles = $this->getAclroleTable()->fetchAll()->toArray();
         $valueoptions = array();
@@ -101,7 +100,7 @@ class AclController extends BaseActionController
                 $Acl->exchangeArray($form->getData());
                 $this->getAclTable()->saveAcl($Acl);
                 // Redirect to list of Acl
-        		$this->flashMessenger()->addSuccessMessage("permission has been saved");
+        		$this->flashMessenger()->addSuccessMessage($this->translate("permission has been saved"));
                 return $this->redirect()->toRoute('admin/acledit', array());
             }
 	        $tmplVars["acl"] = $Acl;
@@ -123,7 +122,7 @@ class AclController extends BaseActionController
 		);
         $id = (int) $this->params()->fromRoute('acl_id', 0);
         if (!$id) {
-        	$this->flashMessenger()->addWarningMessage("missing parameters");
+        	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
             return $this->redirect()->toRoute('admin/acledit', array(
                 'action' => 'addacl'
             ));
@@ -156,7 +155,7 @@ class AclController extends BaseActionController
                 $this->getAclTable()->saveAcl($Acl);
 
                 // Redirect to list of Acl
-        		$this->flashMessenger()->addSuccessMessage("permission has been saved");
+        		$this->flashMessenger()->addSuccessMessage($this->translate("permission has been saved"));
                 return $this->redirect()->toRoute('admin/acledit', array());
             }
         } else {
@@ -180,7 +179,7 @@ class AclController extends BaseActionController
 		);
         $id = (int) $this->params()->fromRoute('acl_id', 0);
         if (!$id) {
-        	$this->flashMessenger()->addWarningMessage("missing parameters");
+        	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
             return $this->redirect()->toRoute('admin/acledit', array());
         }
 
@@ -191,7 +190,7 @@ class AclController extends BaseActionController
             if ($del == 'Yes') {
                 $id = (int) $request->getPost('id');
                 $this->getAclTable()->deleteAcl($id);
-        		$this->flashMessenger()->addSuccessMessage("permission has been deleted");
+        		$this->flashMessenger()->addSuccessMessage($this->translate("permission has been deleted"));
             }
 
             // Redirect to list of albums
@@ -217,7 +216,6 @@ class AclController extends BaseActionController
 	        )
 		);
         $form = new AclroleForm();
-        $form->get('submit')->setValue('Rolle anlegen');
 
         $request = $this->getRequest();
         $Aclrole = new Aclrole();
@@ -229,7 +227,7 @@ class AclController extends BaseActionController
                 $Aclrole->exchangeArray($form->getData());
                 $this->getAclroleTable()->saveAclrole($Aclrole);
                 // Redirect to list of Acl
-        		$this->flashMessenger()->addSuccessMessage("role has been saved");
+        		$this->flashMessenger()->addSuccessMessage($this->translate("role has been saved"));
                 return $this->redirect()->toRoute('admin/acledit', array('action' => 'roles'));
             }
 	        $tmplVars["acl"] = $Aclrole;
@@ -252,7 +250,7 @@ class AclController extends BaseActionController
 		);
         $id = (int) $this->params()->fromRoute('acl_id', 0);
         if (!$id) {
-        	$this->flashMessenger()->addWarningMessage("missing parameter");
+        	$this->flashMessenger()->addWarningMessage($this->translate("missing parameter"));
             return $this->redirect()->toRoute('admin/acledit', array(
                 'action' => 'addrole'
             ));
@@ -271,7 +269,7 @@ class AclController extends BaseActionController
                 $this->getAclroleTable()->saveAclrole($Aclrole);
 
                 // Redirect to list of Acl
-        		$this->flashMessenger()->addSuccessMessage("role has been saved");
+        		$this->flashMessenger()->addSuccessMessage($this->translate("role has been saved"));
                 return $this->redirect()->toRoute('admin/acledit', array('action' => 'roles'));
             }
         } else {
@@ -296,7 +294,7 @@ class AclController extends BaseActionController
 		);
         $id = (int) $this->params()->fromRoute('acl_id', 0);
         if (!$id) {
-        	$this->flashMessenger()->addWarningMessage("missing parameters");
+        	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
             return $this->redirect()->toRoute('admin/acledit', array('action' => 'roles'));
         }
 
@@ -307,7 +305,7 @@ class AclController extends BaseActionController
             if (!empty($del)) {
         		$id = (int) $request->getPost('id');
                 $this->getAclroleTable()->deleteAclrole($id);
-        		$this->flashMessenger()->addSuccessMessage("role has been deleted");
+        		$this->flashMessenger()->addSuccessMessage($this->translate("role has been deleted"));
             }
 
             // Redirect to list of albums
@@ -335,7 +333,6 @@ class AclController extends BaseActionController
 		);
         //if (!class_exists('\Admin\Form\AclForm')) { require_once __DIR__ . '/../Form/AclForm.php'; }
         $form = new AclresourceForm();
-        $form->get('submit')->setValue('add resource');
 
         $request = $this->getRequest();
         $Aclresource = new Aclresource();
@@ -347,7 +344,7 @@ class AclController extends BaseActionController
                 $Aclresource->exchangeArray($form->getData());
                 $this->getAclresourceTable()->saveAclresource($Aclresource);
                 // Redirect to list of Acl
-        		$this->flashMessenger()->addSuccessMessage("resource has been saved");
+        		$this->flashMessenger()->addSuccessMessage($this->translate("resource has been saved"));
                 return $this->redirect()->toRoute('admin/acledit', array('action' => 'resources'));
             }
 	        $tmplVars["aclresource"] = $Aclresource;
@@ -370,7 +367,7 @@ class AclController extends BaseActionController
 		);
         $id = (int) $this->params()->fromRoute('acl_id', 0);
         if (!$id) {
-        	$this->flashMessenger()->addWarningMessage("missing parameters");
+        	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
             return $this->redirect()->toRoute('admin/acledit', array(
                 'action' => 'addresource'
             ));
@@ -389,7 +386,7 @@ class AclController extends BaseActionController
                 $this->getAclresourceTable()->saveAclresource($Aclresource);
 
                 // Redirect to list of Acl
-        		$this->flashMessenger()->addSuccessMessage("resource has been saved");
+        		$this->flashMessenger()->addSuccessMessage($this->translate("resource has been saved"));
                 return $this->redirect()->toRoute('admin/acledit', array('action' => 'resources'));
             }
         } else {
@@ -415,7 +412,7 @@ class AclController extends BaseActionController
 		);
         $id = (int) $this->params()->fromRoute('acl_id', 0);
         if (!$id) {
-        	$this->flashMessenger()->addWarningMessage("missing parameters");
+        	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
             return $this->redirect()->toRoute('admin/acledit', array('action' => 'resources'));
         }
 
@@ -426,7 +423,7 @@ class AclController extends BaseActionController
             if (!empty($del)) {
                 $id = (int) $request->getPost('id');
                 $this->getAclresourceTable()->deleteAclresource($id);
-        		$this->flashMessenger()->addSuccessMessage("resource has been deleted");
+        		$this->flashMessenger()->addSuccessMessage($this->translate("resource has been deleted"));
             }
 
             // Redirect to list of albums
