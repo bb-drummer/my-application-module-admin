@@ -38,7 +38,6 @@ class UsersController extends BaseActionController
 		);
         //if (!class_exists('\Admin\Form\UserForm')) { require_once __DIR__ . '/../Form/UserForm.php'; }
         $form = new UserForm();
-        $form->get('submit')->setValue('Benutzer anlegen');
 
         $roles = $this->getAclroleTable()->fetchAll()->toArray();
         $valueoptions = array();
@@ -57,7 +56,7 @@ class UsersController extends BaseActionController
                 $user->exchangeArray($form->getData());
                 $this->getUserTable()->saveUser($user);
                 // Redirect to list of users
-        		$this->flashMessenger()->addSuccessMessage("Benutzer wurde angelegt.");
+        		$this->flashMessenger()->addSuccessMessage("user has been saved");
                 return $this->redirect()->toRoute('admin/default', array('controller' => 'users'));
             }
 	        $tmplVars["user"] = $user;
@@ -75,7 +74,7 @@ class UsersController extends BaseActionController
 		);
         $id = (int) $this->params()->fromRoute('user_id', 0);
         if (!$id) {
-        	$this->flashMessenger()->addWarningMessage("Fehlende Parameter");
+        	$this->flashMessenger()->addWarningMessage("missing parameters");
             return $this->redirect()->toRoute('admin/default', array(
             	'controller' => 'users',
                 'action' => 'add'
@@ -85,7 +84,6 @@ class UsersController extends BaseActionController
 
         $form  = new UserForm();
         $form->bind($user);
-        $form->get('submit')->setAttribute('value', 'speichern');
 
         $roles = $this->getAclroleTable()->fetchAll()->toArray();
         $valueoptions = array();
@@ -104,7 +102,7 @@ class UsersController extends BaseActionController
                 $this->getUserTable()->saveUser($user);
 
                 // Redirect to list of users
-        		$this->flashMessenger()->addSuccessMessage("Benutzer wurde gespeichert.");
+        		$this->flashMessenger()->addSuccessMessage("user has been saved");
                 return $this->redirect()->toRoute('admin/default', array('controller' => 'users', 'action' => 'index'));
             }
         } else {
@@ -119,7 +117,7 @@ class UsersController extends BaseActionController
     {
         $id = (int) $this->params()->fromRoute('user_id', 0);
         if (!$id) {
-        	$this->flashMessenger()->addWarningMessage("Fehlende Parameter");
+        	$this->flashMessenger()->addWarningMessage("missing parameters");
             return $this->redirect()->toRoute('admin/default', array('controller' => 'users', 'action' => 'index'));
         }
 
@@ -130,7 +128,7 @@ class UsersController extends BaseActionController
             if (!empty($del)) {
                 $id = (int) $request->getPost('id');
                 $this->getUserTable()->deleteUser($id);
-        		$this->flashMessenger()->addSuccessMessage("Benutzer wurde entfernt.");
+        		$this->flashMessenger()->addSuccessMessage("user has been deleted");
             }
 
             // Redirect to list of albums
@@ -155,7 +153,7 @@ class UsersController extends BaseActionController
         $user_id	= $this->params()->fromRoute('user_id', '');
         $token		= $this->params()->fromRoute('confirmtoken', '');
         if (empty($user_id) || empty($token)) {
-        	$this->flashMessenger()->addWarningMessage("Fehlende Parameter");
+        	$this->flashMessenger()->addWarningMessage("missing parameters");
             return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
         }
         
@@ -165,11 +163,11 @@ class UsersController extends BaseActionController
 			$oUser = $users->findByUsername($user_id);
 		}
         if ( !$oUser ) {
-        	$this->flashMessenger()->addWarningMessage("Benutzer nicht gefunden");
+        	$this->flashMessenger()->addWarningMessage("user could not be found");
         	return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
         }
         if ( ($oUser->getState() != 0) || ($oUser->getToken() != $token) ) {
-        	$this->flashMessenger()->addWarningMessage("Bestätigung ungültig");
+        	$this->flashMessenger()->addWarningMessage("confirmation is invalid");
         	return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
         }
 
@@ -185,13 +183,13 @@ class UsersController extends BaseActionController
         	"user_id"	=> $oUser->getId(),
         ));
         $oUser = $users->findById($user_id);
-        $this->flashMessenger()->addSuccessMessage("Benutzer-Bestätigung erfolgreich");
+        $this->flashMessenger()->addSuccessMessage("confirmation succeeded");
         if ($config["zfcuser_admin_must_activate"]) {
         	$oModule->sendActivationMail($oUser);
-       		$this->flashMessenger()->addInfoMessage("Der Administrator wird zur Aktivierung benachrichtigt");
+       		$this->flashMessenger()->addInfoMessage("admin will be noticed for activation");
         	return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
         } else {
-        	$this->flashMessenger()->addSuccessMessage("Benutzer-Aktivierung erfolgreich");
+        	$this->flashMessenger()->addSuccessMessage("activation succeeded");
         	return $this->redirect()->toRoute('zfcuser/login', array());
         }
         
@@ -214,7 +212,7 @@ class UsersController extends BaseActionController
         $user_id	= $this->params()->fromRoute('user_id', '');
         $token		= $this->params()->fromRoute('activatetoken', '');
         if (empty($user_id) || empty($token)) {
-        	$this->flashMessenger()->addWarningMessage("Fehlende Parameter");
+        	$this->flashMessenger()->addWarningMessage("missing parameters");
             return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
         }
 
@@ -224,11 +222,11 @@ class UsersController extends BaseActionController
 			$oUser = $users->findByUsername($user_id);
 		}
         if ( !$oUser ) {
-        	$this->flashMessenger()->addWarningMessage("Benutzer nicht gefunden");
+        	$this->flashMessenger()->addWarningMessage("user could not be found");
         	return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
         }
         if ( ($oUser->getState() != 0) || ($oUser->getToken() != $token) ) {
-        	$this->flashMessenger()->addWarningMessage("Aktivierung ungültig");
+        	$this->flashMessenger()->addWarningMessage("activation is invalid");
         	return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
         }
         
@@ -242,7 +240,7 @@ class UsersController extends BaseActionController
         	"user_id"	=> $oUser->getId(),
         ));
         $oUser = $users->findById($user_id);
-        $this->flashMessenger()->addSuccessMessage("Benutzer-Aktivierung erfolgreich");
+        $this->flashMessenger()->addSuccessMessage("activation succeeded");
         $oModule->sendActivationNotificationMail($oUser);
         return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
         

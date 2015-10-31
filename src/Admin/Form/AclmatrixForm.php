@@ -36,8 +36,8 @@ class AclmatrixForm extends Form
                 'type'  => 'select',
             	'options'	=> array(
             		''	=> '---',
-            		'allow'	=> 'erlauben',
-            		'deny'	=> 'verbieten',
+            		'allow'	=> 'allow',
+            		'deny'	=> 'deny',
             	),
             ),
         ));
@@ -46,7 +46,7 @@ class AclmatrixForm extends Form
         	'name' => 'reset',
         	'attributes' => array(
         		'type'  => 'reset',
-        		'value' => 'zurücksetzen',
+        		'value' => 'reset',
         		'id' => 'resetbutton',
         	),
         ));
@@ -54,7 +54,7 @@ class AclmatrixForm extends Form
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'value' => 'absenden',
+                'value' => 'save',
                 'id' => 'submitbutton',
             ),
         ));

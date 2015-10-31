@@ -39,7 +39,7 @@ class SettingsController extends BaseActionController {
 		);
         //if (!class_exists('\Admin\Form\SettingsForm')) { require_once __DIR__ . '/../Form/SettingsForm.php'; }
         $form = new SettingsForm();
-        $form->get('submit')->setValue('Einstellung anlegen');
+        $form->get('submit')->setValue('add setting');
 
         $request = $this->getRequest();
         $settings = new Settings();
@@ -51,7 +51,7 @@ class SettingsController extends BaseActionController {
                 $settings->exchangeArray($form->getData());
                 $this->getSettingsTable()->saveSettings($settings);
                 // Redirect to list of settings
-        		$this->flashMessenger()->addSuccessMessage('Einstellung wurde gespeichert.');
+        		$this->flashMessenger()->addSuccessMessage('setting has been saved');
                 return $this->redirect()->toRoute('admin/settingsedit', array('action' => 'index'));
             }
 	        $tmplVars["settings"] = $settings;
@@ -69,7 +69,7 @@ class SettingsController extends BaseActionController {
 		);
         $id = (int) $this->params()->fromRoute('set_id', 0);
         if (!$id) {
-        	$this->flashMessenger()->addWarningMessage("Fehlende Parameter");
+        	$this->flashMessenger()->addWarningMessage("missing parameters");
             return $this->redirect()->toRoute('admin/settingsedit', array(
                 'action' => 'add'
             ));
@@ -78,8 +78,6 @@ class SettingsController extends BaseActionController {
 
         $form  = new SettingsForm();
         $form->bind($settings);
-        $form->get('submit')->setValue('Einstellung speichern');
-        $form->get('submit')->setAttribute('value', 'Einstellung speichern');
 
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -90,7 +88,7 @@ class SettingsController extends BaseActionController {
                 $this->getSettingsTable()->saveSettings($settings);
 
                 // Redirect to list of settings
-        		$this->flashMessenger()->addSuccessMessage("Einstellung wurde gespeichert.");
+        		$this->flashMessenger()->addSuccessMessage("setting has been saved");
                 return $this->redirect()->toRoute('admin/settingsedit', array('action' => 'index'));
             }
         } else {
@@ -105,7 +103,7 @@ class SettingsController extends BaseActionController {
     {
         $id = (int) $this->params()->fromRoute('set_id', 0);
         if (!$id) {
-        	$this->flashMessenger()->addWarningMessage("Fehlende Parameter");
+        	$this->flashMessenger()->addWarningMessage("missing parameters");
             return $this->redirect()->toRoute('admin/settingsedit', array('action' => 'index'));
         }
 

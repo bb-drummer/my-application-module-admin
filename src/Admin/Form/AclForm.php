@@ -26,7 +26,7 @@ class AclForm extends Form
             	),
             ),
             'options' => array(
-                'label' => 'Rolle',
+                'label' => 'role',
             ),
         ));
         $this->add(array(
@@ -38,7 +38,7 @@ class AclForm extends Form
             	),
             ),
             'options' => array(
-                'label' => 'Resource',
+                'label' => 'resource',
             ),
         ));
         $this->add(array(
@@ -48,12 +48,12 @@ class AclForm extends Form
                 'type'  => 'select',
             	'options'	=> array(
             		''	=> '---',
-            		'allow'	=> 'erlauben',
-            		'deny'	=> 'verbieten',
+            		'allow'	=> 'allow',
+            		'deny'	=> 'deny',
             	),
             ),
             'options' => array(
-                'label' => 'Status',
+                'label' => 'state',
             ),
         ));
 
@@ -61,7 +61,7 @@ class AclForm extends Form
         	'name' => 'reset',
         	'attributes' => array(
         		'type'  => 'reset',
-        		'value' => 'zurücksetzen',
+        		'value' => 'reset',
         		'id' => 'resetbutton',
         	),
         ));
@@ -69,7 +69,7 @@ class AclForm extends Form
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'value' => 'absenden',
+                'value' => 'save',
                 'id' => 'submitbutton',
             ),
         ));

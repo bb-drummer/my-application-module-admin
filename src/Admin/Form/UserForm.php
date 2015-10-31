@@ -22,7 +22,7 @@ class UserForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Benutzername',
+                'label' => 'user name',
             ),
         ));
         $this->add(array(
@@ -31,7 +31,7 @@ class UserForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'E-Mail',
+                'label' => 'email',
             ),
         ));
         $this->add(array(
@@ -40,7 +40,7 @@ class UserForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Anzeigename',
+                'label' => 'display name',
             ),
         ));
         $this->add(array(
@@ -49,7 +49,7 @@ class UserForm extends Form
                 'type'  => 'password',
             ),
             'options' => array(
-                'label' => 'Passwort',
+                'label' => 'password',
             ),
         ));
         $this->add(array(
@@ -63,23 +63,23 @@ class UserForm extends Form
             	),
             ),
             'options' => array(
-                'label' => 'Status',
+                'label' => 'status',
             ),
         ));
+        
         $this->add(array(
             'name' => 'aclrole',
         	'type' => 'select',
             'attributes' => array(
                 'type'  => 'select',
             	'options'	=> array(
-            		'public'	=> 'keine Rolle',
-            		'swimmer'	=> 'Schwimmer',
-            		'manager'	=> 'Manager',
-            		'admin'		=> 'Administrator',
+            		'public'	=> 'no role',
+            		'user'	=> 'user',
+            		'admin'		=> 'administrator',
             	),
             ),
             'options' => array(
-                'label' => 'Rolle',
+                'label' => 'role',
             ),
         ));
         
@@ -90,7 +90,7 @@ class UserForm extends Form
         				'type'  => 'text',
         		),
         		'options' => array(
-        				'label' => 'Strasse',
+        				'label' => 'street',
         		),
         ));
         $this->add(array(
@@ -99,7 +99,7 @@ class UserForm extends Form
                 'type'  => 'text',
             ),
             'options' => array( 
-                'label' => 'Ort',
+                'label' => 'city',
             ),
         ));
         $this->add(array(
@@ -108,45 +108,7 @@ class UserForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Telefon',
-            ),
-        ));
-        
-
-        $this->add(array(
-        		'name' => 'swimteam',
-        		'attributes' => array(
-        				'type'  => 'text',
-        		),
-        		'options' => array(
-        				'label' => 'Schwimm-Team',
-        		),
-        ));
-        $this->add(array(
-            'name' => 'teamemail',
-            'attributes' => array(
-                'type'  => 'text',
-            ),
-            'options' => array(
-                'label' => 'E-Mail',
-            ),
-        ));
-        $this->add(array(
-            'name' => 'teamstreet',
-            'attributes' => array(
-                'type'  => 'text',
-            ),
-            'options' => array(
-                'label' => 'Strasse',
-            ),
-        ));
-        $this->add(array(
-            'name' => 'teamcity',
-            'attributes' => array(
-                'type'  => 'text',
-            ),
-            'options' => array(
-                'label' => 'Ort',
+                'label' => 'phone',
             ),
         ));
         
@@ -154,8 +116,11 @@ class UserForm extends Form
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'value' => 'absenden',
+                'value' => 'save',
                 'id' => 'submitbutton',
+            ),
+            'options' => array(
+                'label' => 'save',
             ),
         ));
         
@@ -163,8 +128,11 @@ class UserForm extends Form
             'name' => 'reset',
             'attributes' => array(
                 'type'  => 'reset',
-                'value' => 'zurücksetzen',
+                'value' => 'reset',
                 'id' => 'resetbutton',
+            ),
+            'options' => array(
+                'label' => 'reset',
             ),
         ));
     }

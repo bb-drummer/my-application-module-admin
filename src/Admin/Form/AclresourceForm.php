@@ -24,7 +24,7 @@ class AclresourceForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Resource-Slug',
+                'label' => 'resource slug',
             ),
         ));
         $this->add(array(
@@ -34,7 +34,7 @@ class AclresourceForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Resource-Name',
+                'label' => 'resource name',
             ),
         ));
 
@@ -42,16 +42,22 @@ class AclresourceForm extends Form
         	'name' => 'reset',
         	'attributes' => array(
         		'type'  => 'reset',
-        		'value' => 'zurücksetzen',
+        		'value' => 'reset',
         		'id' => 'resetbutton',
         	),
+            'options' => array(
+                'label' => 'reset',
+            ),
         ));
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'value' => 'absenden',
+                'value' => 'save',
                 'id' => 'submitbutton',
+            ),
+            'options' => array(
+                'label' => 'save',
             ),
         ));
     }

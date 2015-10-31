@@ -27,7 +27,7 @@ class SettingsForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Type',
+                'label' => 'type',
             ),
         ));
         $this->add(array(
@@ -36,7 +36,7 @@ class SettingsForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Name',
+                'label' => 'name',
             ),
         ));
         $this->add(array(
@@ -45,7 +45,7 @@ class SettingsForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Wert',
+                'label' => 'value',
             ),
         ));
         
@@ -53,8 +53,11 @@ class SettingsForm extends Form
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'value' => 'absenden',
+                'value' => 'save',
                 'id' => 'submitbutton',
+            ),
+            'options' => array(
+                'label' => 'save',
             ),
         ));
         
@@ -62,8 +65,11 @@ class SettingsForm extends Form
             'name' => 'reset',
             'attributes' => array(
                 'type'  => 'reset',
-                'value' => 'zurücksetzen',
+                'value' => 'reset',
                 'id' => 'resetbutton',
+            ),
+            'options' => array(
+                'label' => 'reset',
             ),
         ));
     }

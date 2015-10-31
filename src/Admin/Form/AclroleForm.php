@@ -24,7 +24,7 @@ class AclroleForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Rollen-Slug',
+                'label' => 'role slug',
             ),
         ));
         $this->add(array(
@@ -34,24 +34,31 @@ class AclroleForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Rollen-Name',
+                'label' => 'role name',
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'submit',
+            'attributes' => array(
+                'type'  => 'submit',
+                'value' => 'save',
+                'id' => 'submitbutton',
+            ),
+            'options' => array(
+                'label' => 'save',
             ),
         ));
 
         $this->add(array(
         	'name' => 'reset',
         	'attributes' => array(
-        		'type'  => 'reset',
-        		'value' => 'zurücksetzen',
-        		'id' => 'resetbutton',
-        	),
-        ));
-        $this->add(array(
-            'name' => 'submit',
-            'attributes' => array(
-                'type'  => 'submit',
-                'value' => 'absenden',
-                'id' => 'submitbutton',
+       			'type'  => 'reset',
+      			'value' => 'reset',
+      			'id' => 'resetbutton',
+       		),
+            'options' => array(
+                'label' => 'reset',
             ),
         ));
     }
