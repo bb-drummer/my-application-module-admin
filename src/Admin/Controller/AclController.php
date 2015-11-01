@@ -250,7 +250,7 @@ class AclController extends BaseActionController
 		);
         $id = (int) $this->params()->fromRoute('acl_id', 0);
         if (!$id) {
-        	$this->flashMessenger()->addWarningMessage($this->translate("missing parameter"));
+        	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
             return $this->redirect()->toRoute('admin/acledit', array(
                 'action' => 'addrole'
             ));

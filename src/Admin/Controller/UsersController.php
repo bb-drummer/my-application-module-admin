@@ -183,7 +183,7 @@ class UsersController extends BaseActionController
         $this->flashMessenger()->addSuccessMessage($this->translate("user's registration has been confirmed"));
         if ($config["zfcuser_admin_must_activate"]) {
         	$oModule->sendActivationMail($oUser);
-       		$this->flashMessenger()->addInfoMessage($this->translate("admin will be noticed for activation"));
+       		$this->flashMessenger()->addInfoMessage($this->translate("admin has been notified for activation"));
         	return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
         } else {
         	$this->flashMessenger()->addSuccessMessage($this->translate("user has been activated"));
