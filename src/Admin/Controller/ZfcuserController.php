@@ -19,6 +19,8 @@ use Zend\Stdlib\Parameters;
 class ZfcuserController extends UserController
 {
 	
+	protected $translator;
+	
     /**
      * General-purpose authentication action
      */
@@ -28,6 +30,7 @@ class ZfcuserController extends UserController
             return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
         }
 
+        $translator = $this->getTranslator();
         $adapter = $this->zfcUserAuthentication()->getAuthAdapter();
         $redirect = $this->params()->fromPost('redirect', $this->params()->fromQuery('redirect', false));
 
@@ -49,7 +52,7 @@ class ZfcuserController extends UserController
             );
         }
 
-        $this->flashMessenger()->addSuccessMessage($this->getServiceLocator()->get('translator')->translate("login succeeded"));
+        $this->flashMessenger()->addSuccessMessage($translator->translate("login succeeded"));
         $redirect = $this->redirectCallback;
 
         return $redirect();
@@ -73,7 +76,8 @@ class ZfcuserController extends UserController
         $request = $this->getRequest();
         $service = $this->getUserService();
         $form = $this->getRegisterForm();
-
+        $translator = $this->getTranslator();
+        
         if ($this->getOptions()->getUseRedirectParameterIfPresent() && $request->getQuery()->get('redirect')) {
             $redirect = $request->getQuery()->get('redirect');
         } else {
@@ -111,12 +115,12 @@ class ZfcuserController extends UserController
         $oModule = new AdminModule();
         $oModule->setAppConfig($config);
         
-       	$this->flashMessenger()->addSuccessMessage($this->translate("registration succeeded"));
+       	$this->flashMessenger()->addSuccessMessage($translator->translate("registration succeeded"));
        	if ($config['zfcuser_user_must_confirm']) {
-       		$this->flashMessenger()->addInfoMessage($this->translate("you have been sent an email with further instructions to follow"));
+       		$this->flashMessenger()->addInfoMessage($translator->translate("you have been sent an email with further instructions to follow"));
         	return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
        	} else if ($config['zfcuser_admin_must_activate']) {
-       		$this->flashMessenger()->addInfoMessage($this->translate("admin has been notified for activation"));
+       		$this->flashMessenger()->addInfoMessage($translator->translate("admin has been notified for activation"));
         	return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
        	}
         
@@ -130,11 +134,29 @@ class ZfcuserController extends UserController
             $post['credential'] = $post['password'];
             $request->setPost(new Parameters($post));
             $oModule->sendActivationNotificationMail($user);
-        	$this->flashMessenger()->addSuccessMessage($this->translate("registration and activation succeeded"));
+        	$this->flashMessenger()->addSuccessMessage($translator->translate("registration and activation succeeded"));
             return $this->forward()->dispatch(static::CONTROLLER_NAME, array('action' => 'authenticate'));
         }
         
        	return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
     }
+    
+	/**
+	 * @return the $translator
+	 */
+	public function getTranslator() {
+		if (!$this->translator) {
+			$this->setTranslator( $this->getServiceLocator()->get('translator') );
+		}
+		return $this->translator;
+	}
+
+	/**
+	 * @param field_type $translator
+	 */
+	public function setTranslator($translator) {
+		$this->translator = $translator;
+	}
+
 
 }
