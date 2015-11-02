@@ -49,7 +49,7 @@ class ZfcuserController extends UserController
             );
         }
 
-        $this->flashMessenger()->addSuccessMessage($this->translate("login succeeded"));
+        $this->flashMessenger()->addSuccessMessage($this->getServiceLocator()->get('translator')->translate("login succeeded"));
         $redirect = $this->redirectCallback;
 
         return $redirect();
