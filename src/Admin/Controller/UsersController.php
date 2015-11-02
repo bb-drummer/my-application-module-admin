@@ -153,7 +153,8 @@ class UsersController extends BaseActionController
         $token		= $this->params()->fromRoute('confirmtoken', '');
         if (empty($user_id) || empty($token)) {
         	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
-            return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
+        	return $this->redirect()->toRoute('zfcuser/login', array());
+            //return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
         }
         
 		if ( is_numeric($user_id) ) {
@@ -163,11 +164,13 @@ class UsersController extends BaseActionController
 		}
         if ( !$oUser ) {
         	$this->flashMessenger()->addWarningMessage($this->translate("user could not be found"));
-        	return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
+        	return $this->redirect()->toRoute('zfcuser/login', array());
+        	//return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
         }
         if ( ($oUser->getState() != 0) || ($oUser->getToken() != $token) ) {
         	$this->flashMessenger()->addWarningMessage($this->translate("confirmation token is invalid"));
-        	return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
+        	return $this->redirect()->toRoute('zfcuser/login', array());
+        	//return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
         }
         
         // all ok, do stuff...
@@ -184,16 +187,17 @@ class UsersController extends BaseActionController
         if ($config["zfcuser_admin_must_activate"]) {
         	$oModule->sendActivationMail($oUser);
        		$this->flashMessenger()->addInfoMessage($this->translate("admin has been notified for activation"));
-        	return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
+        	return $this->redirect()->toRoute('zfcuser/login', array());
+        	//return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
         } else {
         	$this->flashMessenger()->addSuccessMessage($this->translate("user has been activated"));
         	return $this->redirect()->toRoute('zfcuser/login', array());
         }
         
-        $tmplVars["user_id"]	= $user_id;
+        /*$tmplVars["user_id"]	= $user_id;
         $tmplVars["user"]		= $oUser;
         $tmplVars["token"]		= $token;
-        return new ViewModel($tmplVars);
+        return new ViewModel($tmplVars);*/
     }
 
     public function activateAction()
@@ -210,7 +214,8 @@ class UsersController extends BaseActionController
         $token		= $this->params()->fromRoute('activatetoken', '');
         if (empty($user_id) || empty($token)) {
         	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
-            return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
+        	return $this->redirect()->toRoute('zfcuser/login', array());
+            //return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
         }
 
 		if ( is_numeric($user_id) ) {
@@ -220,11 +225,13 @@ class UsersController extends BaseActionController
 		}
         if ( !$oUser ) {
         	$this->flashMessenger()->addWarningMessage($this->translate("user could not be found"));
-        	return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
+        	return $this->redirect()->toRoute('zfcuser/login', array());
+        	//return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
         }
         if ( ($oUser->getState() != 0) || ($oUser->getToken() != $token) ) {
         	$this->flashMessenger()->addWarningMessage($this->translate("activation token is invalid"));
-        	return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
+        	return $this->redirect()->toRoute('zfcuser/login', array());
+        	//return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
         }
         
         // all ok, do stuff...
@@ -239,12 +246,14 @@ class UsersController extends BaseActionController
         $oUser = $users->findById($user_id);
         $this->flashMessenger()->addSuccessMessage($this->translate("user has been activated"));
         $oModule->sendActivationNotificationMail($oUser);
-        return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
+        return $this->redirect()->toRoute('zfcuser/login', array());
         
-        $tmplVars["user_id"]	= $user_id;
+        //return $this->redirect()->toRoute($config["zfcuser_registration_redirect_route"], array());
+        
+        /*$tmplVars["user_id"]	= $user_id;
         $tmplVars["user"]		= $oUser;
         $tmplVars["token"]		= $token;
-        return new ViewModel($tmplVars);
+        return new ViewModel($tmplVars);*/
     }
 
     public function getUserTable()
