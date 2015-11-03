@@ -1,17 +1,14 @@
-<div class="well well-sm">
-	<ul class="nav nav-pills">
-		<li role="presentation"><a href="<?php echo $this->url('admin/acledit', array('action'=>'addrole'));?>"><?php echo $this->translate("add role")?></a></li>
-		<li role="presentation"><a href="<?php echo $this->url('admin/acledit', array('action'=>'roles'));?>"><?php echo $this->translate("manage roles")?></a></li>
-		<li role="presentation"><a href="<?php echo $this->url('admin/acledit', array('action'=>'addresource'));?>"><?php echo $this->translate("add resource")?></a></li>
-		<li role="presentation"><a href="<?php echo $this->url('admin/acledit', array('action'=>'resources'));?>"><?php echo $this->translate("manage resources")?></a></li>
-	</ul>
-</div>
-
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<label>
-			<span class="panel-title"><?php echo $this->translate("manage permissions"); ?></span>
-		</label>
+		<span class="panel-title"><?php echo $this->translate("manage permissions"); ?></span>
+	</div>
+	<div class="panel-body panel-toolbar">
+		<div class="btn-group btn-group-sm">
+			<a class="btn btn-default btn-clean btn-cta-xhr btn-sm" href="<?php echo $this->url('admin/acledit', array('action'=>'addrole'));?>"><span class="fa fa-plus"></span> <?php echo $this->translate("add role")?></a>
+			<a class="btn btn-default btn-clean btn-sm" href="<?php echo $this->url('admin/acledit', array('action'=>'roles'));?>"><span class="fa fa-users"></span> <?php echo $this->translate("manage roles")?></a>
+			<a class="btn btn-default btn-clean btn-cta-xhr btn-sm" href="<?php echo $this->url('admin/acledit', array('action'=>'addresource'));?>"><span class="fa fa-plus"></span> <?php echo $this->translate("add resource")?></a>
+			<a class="btn btn-default btn-clean btn-sm" href="<?php echo $this->url('admin/acledit', array('action'=>'resources'));?>"><span class="fa fa-list-alt"></span> <?php echo $this->translate("manage resources")?></a>
+		</div>
 	</div>
 	<div class="panel-body">
 	
