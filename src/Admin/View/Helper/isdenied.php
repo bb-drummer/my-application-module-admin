@@ -3,7 +3,7 @@ namespace Admin\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
 
-class IsDenied extends AbstractHelper
+class Isdenied extends AbstractHelper
 {
 	/**
 	 * @var AuthenticationService

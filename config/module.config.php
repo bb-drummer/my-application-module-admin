@@ -19,8 +19,8 @@ return array(
 	'navigation_helpers' => array (
 	    'invokables' => array(
 	    	// override or add a view helper
-	        'isallowed' => '\Admin\View\Helper\IsAllowed',
-	        'isdenied' => '\Admin\View\Helper\IsDenied',
+	        'isallowed' => 'Admin\View\Helper\Isallowed',
+	        'isdenied' => 'Admin\View\Helper\Isdenied',
 	    ),
 	),
 		
