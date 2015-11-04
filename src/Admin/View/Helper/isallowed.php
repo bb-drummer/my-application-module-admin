@@ -23,9 +23,10 @@ class Isallowed extends AbstractHelper
 		if ( empty($resource) || !$acl->hasResource($resource) ) {
 			return true;
 		}	
-		if ($this->getAuthService()->hasIdentity()) {
-			/** @var \Admin\Entity\User $user **/
-			$user = $this->getAuthService()->getIdentity();
+		/** @var \Admin\Entity\User $user **/
+		$user = $this->view->zfcUserIdentity(); // ->getIdentity();
+		if ($user) { // ($this->getAuthService()->hasIdentity()) {
+			//$user = $this->getAuthService()->getIdentity();
 			$role = $user->getAclrole();
 		} else {
 			$role = 'public';
