@@ -16,7 +16,15 @@ return array(
             'Admin\Controller\Settings' => 'Admin\Controller\SettingsController',
         ),
     ),
-    'router' => array(
+	'navigation_helpers' => array (
+	    'invokables' => array(
+	    	// override or add a view helper
+	        'isallowed' => '\Admin\View\Helper\IsAllowed',
+	        'isdenied' => '\Admin\View\Helper\IsDenied',
+	    ),
+	),
+		
+	'router' => array(
         'routes' => array(
             'admin' => array(
                 'type'    => 'Literal',
