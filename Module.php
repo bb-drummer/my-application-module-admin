@@ -62,6 +62,14 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		);
 	}
 
+	public function getViewHelperConfig()
+	{
+		return array(
+			'factories' => array(
+			),
+		);
+	}
+	
 	public function getConfig()
 	{
 		return include __DIR__ . '/config/module.config.php';
@@ -81,6 +89,16 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		$em = \Zend\EventManager\StaticEventManager::getInstance();
 		$em->attach('ZfcUser\Service\User', 'register', array($this, 'userRegisterBeforeInsert'));
 		$em->attach('ZfcUser\Service\User', 'register.post', array($this, 'userRegisterAfterInsert'));
+		
+		$application = $e->getApplication();
+		/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
+		$serviceManager = $application->getServiceManager();
+		
+		// override or add a view helper
+		/** @var $pm \Zend\View\Helper\Navigation\PluginManager */
+		$pm = $serviceManager->get('ViewHelperManager')->get('Navigation')->getPluginManager();
+		$pm->setInvokableClass('isallowed', '\Admin\View\Helper\Isallowed');
+		$pm->setInvokableClass('isdenied', '\Admin\View\Helper\Isdenied');
 		
 	}
 	
