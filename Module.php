@@ -24,6 +24,7 @@ use Zend\Permissions\Acl\Role\GenericRole;
 use Zend\Permissions\Acl\Resource\GenericResource;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\View\HelperPluginManager;
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer;
 
@@ -66,6 +67,12 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	{
 		return array(
 			'factories' => array(
+				'isallowed' => function(HelperPluginManager $pm) {
+					return $pm->get('Admin\View\Helper\Isallowed');
+				},
+				'isdenied' => function(HelperPluginManager $pm) {
+					return $pm->get('Admin\View\Helper\Isdenied');
+				},
 			),
 		);
 	}
@@ -96,9 +103,9 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		
 		// override or add a view helper
 		/** @var $pm \Zend\View\Helper\Navigation\PluginManager */
-		$pm = $serviceManager->get('ViewHelperManager')->get('Navigation')->getPluginManager();
-		$pm->setInvokableClass('isallowed', '\Admin\View\Helper\Isallowed');
-		$pm->setInvokableClass('isdenied', '\Admin\View\Helper\Isdenied');
+		//$pm = $serviceManager->get('ViewHelperManager')->get('Navigation')->getPluginManager();
+		//$pm->setInvokableClass('isallowed', '\Admin\View\Helper\Isallowed');
+		//$pm->setInvokableClass('isdenied', '\Admin\View\Helper\Isdenied');
 		
 	}
 	
