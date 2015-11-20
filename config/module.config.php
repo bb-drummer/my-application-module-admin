@@ -12,6 +12,7 @@ return array(
         'invokables' => array(
             'Admin\Controller\Index'	=> 'Admin\Controller\IndexController',
             'Admin\Controller\Users'	=> 'Admin\Controller\UsersController',
+            'Admin\Controller\Zfcuser'	=> 'Admin\Controller\ZfcuserController',
             'Admin\Controller\Acl'		=> 'Admin\Controller\AclController',
             'Admin\Controller\Settings' => 'Admin\Controller\SettingsController',
         ),
@@ -116,6 +117,36 @@ return array(
 					'defaults' => array(
 						'controller' => 'Admin\Controller\Users',
 						'action'	 => 'activate'
+					),
+				),
+                'may_terminate' => true,
+                'child_routes' => array(),
+			),
+        	'userrequestpasswordreset' => array(
+				'type'    => 'Literal',
+				'options' => array(
+					'route'    => '/requestpasswordreset',
+					'constraints' => array(
+					),
+					'defaults' => array(
+						'controller' => 'Admin\Controller\Zfcuser',
+						'action'	 => 'requestpasswordreset'
+					),
+				),
+                'may_terminate' => true,
+                'child_routes' => array(),
+			),
+        	'userresetpassword' => array(
+				'type'    => 'Segment',
+				'options' => array(
+					'route'    => '/resetpassword[/:user_id[/:resettoken]]',
+					'constraints' => array(
+						'user_id'		=> '[a-zA-Z0-9_-]*',
+						'activatetoken'	=> '.*',
+					),
+					'defaults' => array(
+						'controller' => 'Admin\Controller\Zfcuser',
+						'action'	 => 'resetpassword'
 					),
 				),
                 'may_terminate' => true,

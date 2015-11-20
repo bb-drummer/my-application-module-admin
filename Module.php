@@ -84,28 +84,32 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 
 	public function onBootstrap(MvcEvent $e)
 	{
-		$eventManager		= $e->getApplication()->getEventManager();
+		/** @var $application \Zend\Mvc\Application */
+		$application = $e->getApplication();
+		/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
+		$serviceManager = $application->getServiceManager();
+		/** @var $pluginManagerViewHelper \Zend\View\HelperPluginManager */
+		$pluginManagerViewHelper = $serviceManager->get('ViewHelperManager')->getPluginManager();
+		/** @var $eventManager \Zend\EventManager\EventManager */
+		$eventManager		= $application->getEventManager();
+		
 		$moduleRouteListener = new ModuleRouteListener();
 		$moduleRouteListener->attach($eventManager);
 		
 		$this->setAppConfig($e->getApplication()->getConfig());
 		
+		// setup acl
 		$this->initAcl($e);
 		$eventManager->attach('dispatch', array($this, 'checkAcl'));
 		
-		$em = \Zend\EventManager\StaticEventManager::getInstance();
-		$em->attach('ZfcUser\Service\User', 'register', array($this, 'userRegisterBeforeInsert'));
-		$em->attach('ZfcUser\Service\User', 'register.post', array($this, 'userRegisterAfterInsert'));
+		// setup user registration mails
+		$eventManager->attach('ZfcUser\Service\User', 'register', array($this, 'userRegisterBeforeInsert'));
+		$eventManager->attach('ZfcUser\Service\User', 'register.post', array($this, 'userRegisterAfterInsert'));
 		
-		$application = $e->getApplication();
-		/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
-		$serviceManager = $application->getServiceManager();
 		
-		// override or add a view helper
-		/** @var $pm \Zend\View\Helper\Navigation\PluginManager */
-		//$pm = $serviceManager->get('ViewHelperManager')->get('Navigation')->getPluginManager();
-		//$pm->setInvokableClass('isallowed', '\Admin\View\Helper\Isallowed');
-		//$pm->setInvokableClass('isdenied', '\Admin\View\Helper\Isdenied');
+		// override or add a view helper ... or setup in 'getViewHelperConfig' method
+		//$pluginManagerViewHelper->setInvokableClass('isallowed', '\Admin\View\Helper\Isallowed');
+		//$pluginManagerViewHelper->setInvokableClass('isdenied', '\Admin\View\Helper\Isdenied');
 		
 	}
 	
@@ -113,7 +117,6 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		$user = $e->getParam('user');  // User account object
 		$form = $e->getParam('form');  // Form object
 
-		// Perform your custom action here
 		if (empty($user->getAclrole())) { 
 			$user->setAclrole('user');
 		}
@@ -125,14 +128,12 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		$user->setState(0);
 		if (!$config["zfcuser_user_must_confirm"] && !$config["zfcuser_admin_must_activate"]) {
 			$user->setState(1);
-			//$user->setState($config["zfcuser"]["default_user_state"]);
 		}
 	}
 	
 	public function userRegisterAfterInsert($e) {
 		$user = $e->getParam('user');  // User account object
 		$form = $e->getParam('form');  // Form object
-		// Perform your custom action here
 		
 		$config = $this->getAppConfig();
 		if ($config["zfcuser_user_must_confirm"]) {
@@ -376,13 +377,13 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
         return array(
             'factories' => array(
                 'zfcuser' => function($controllerManager) {
-                        /* @var ControllerManager $controllerManager*/
+                        /** @var ControllerManager $controllerManager*/
                         $serviceManager = $controllerManager->getServiceLocator();
 
-                        /* @var RedirectCallback $redirectCallback */
+                        /** @var RedirectCallback $redirectCallback */
                         $redirectCallback = $serviceManager->get('zfcuser_redirect_callback');
 
-                        /* @var UserController $controller */
+                        /** @var UserController $controller */
                         $controller = new ZfcuserController($redirectCallback);
 
                         return $controller;
@@ -455,14 +456,13 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 				},
 
                 'zfcuser_redirect_callback' => function ($sm) {
-                    /* @var RouteInterface $router */
+                    /** @var RouteInterface $router */
                     $router = $sm->get('router');
                     
-					//echo '<pre>'.print_r($router, true).'</pre>'; die();
-                    /* @var Application $application */
+                    /** @var Application $application */
                     $application = $sm->get('Application');
 
-                    /* @var ModuleOptions $options */
+                    /** @var ModuleOptions $options */
                     $options = $sm->get('zfcuser_module_options');
 
                     return new RedirectCallback($application, $router, $options);
