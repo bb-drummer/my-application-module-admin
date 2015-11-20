@@ -92,6 +92,8 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		$viewHelperManager = $serviceManager->get('ViewHelperManager');
 		/** @var $eventManager \Zend\EventManager\EventManager */
 		$eventManager		= $application->getEventManager();
+		/** @var $staticEventManager \Zend\EventManager\StaticEventManager */
+		$staticEventManager		= \Zend\EventManager\StaticEventManager::getInstance();
 		
 		$moduleRouteListener = new ModuleRouteListener();
 		$moduleRouteListener->attach($eventManager);
@@ -103,8 +105,8 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		$eventManager->attach('dispatch', array($this, 'checkAcl'));
 		
 		// setup user registration mails
-		$eventManager->attach('ZfcUser\Service\User', 'register', array($this, 'userRegisterBeforeInsert'));
-		$eventManager->attach('ZfcUser\Service\User', 'register.post', array($this, 'userRegisterAfterInsert'));
+		$staticEventManager->attach('ZfcUser\Service\User', 'register', array($this, 'userRegisterBeforeInsert'));
+		$staticEventManager->attach('ZfcUser\Service\User', 'register.post', array($this, 'userRegisterAfterInsert'));
 		
 		
 		// override or add a view helper ... or setup in 'getViewHelperConfig' method
