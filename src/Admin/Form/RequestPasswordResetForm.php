@@ -19,9 +19,6 @@ class RequestPasswordResetForm extends Form
 			'attributes' => array(
 				'type'	=> 'text',
 			),
-			'options' => array(
-				'label' => 'username or email',
-			),
 		));
 		
 		$emailElement = $this->get('identity');
