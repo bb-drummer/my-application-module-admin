@@ -89,7 +89,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
 		$serviceManager = $application->getServiceManager();
 		/** @var $pluginManagerViewHelper \Zend\View\HelperPluginManager */
-		$pluginManagerViewHelper = $serviceManager->get('ViewHelperManager')->getPluginManager();
+		$viewHelperManager = $serviceManager->get('ViewHelperManager');
 		/** @var $eventManager \Zend\EventManager\EventManager */
 		$eventManager		= $application->getEventManager();
 		
@@ -108,8 +108,8 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		
 		
 		// override or add a view helper ... or setup in 'getViewHelperConfig' method
-		//$pluginManagerViewHelper->setInvokableClass('isallowed', '\Admin\View\Helper\Isallowed');
-		//$pluginManagerViewHelper->setInvokableClass('isdenied', '\Admin\View\Helper\Isdenied');
+		//$viewHelperManager->get('navigation')->getPluginManager()->setInvokableClass('isallowed', '\Admin\View\Helper\Isallowed');
+		//$viewHelperManager->get('navigation')->getPluginManager()->setInvokableClass('isdenied', '\Admin\View\Helper\Isdenied');
 		
 	}
 	
