@@ -158,6 +158,7 @@ class ZfcuserController extends UserController
             return array('enableRegistration' => false);
         }
 
+        $config  = $this->getServiceLocator()->get('Config');
         $options = $this->getServiceLocator()->get('zfcuser_module_options');
         $request = $this->getRequest();
         $service = $this->getUserService();
@@ -179,7 +180,7 @@ class ZfcuserController extends UserController
         } elseif ($prg === false) {
             return array(
                 'requestPasswordResetForm' => $form,
-                'enableRegistration' => $this->getOptions()->getEnableRegistration(),
+                'enablePasswordReset' => $this->getOptions()->getEnablePasswordreset(),
                 'redirect' => $redirect,
             );
         }
@@ -197,7 +198,6 @@ class ZfcuserController extends UserController
             );
         }
 
-        $config = $this->getServiceLocator()->get('Config');
         $oModule = new AdminModule();
         $oModule->setAppConfig($config);
         
