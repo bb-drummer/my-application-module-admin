@@ -15,9 +15,10 @@ class RequestPasswordResetForm extends Form
 		
 		$this->setAttribute('method', 'post');
 		$this->add(array(
-			'name' => 'identity',
-			'attributes' => array(
-				'type'	=> 'text',
+			'name'		=> 'identity',
+			'type'			=> 'email',
+			'attributes'	=> array(
+				'type'	=> 'email',
 			),
 		));
 		
@@ -30,14 +31,14 @@ class RequestPasswordResetForm extends Form
 		$emailElement->setLabel($label);
 		
 		$this->add(array(
-			'name' => 'submit',
-			'attributes' => array(
+			'name'			=> 'submit',
+			'attributes'	=> array(
 				'type'	=> 'submit',
-				'value' => 'request password reset',
-				'id' => 'submitbutton',
+				'value'	=> 'request password reset',
+				'id'	=> 'submitbutton',
 			),
-			'options' => array(
-				'label' => 'request password reset',
+			'options'		=> array(
+				'label'	=> 'request password reset',
 			),
 		));
 		
@@ -49,23 +50,23 @@ class RequestPasswordResetForm extends Form
 		$factory	 = new InputFactory();
 
 		$inputFilter->add($factory->createInput(array(
-			'name'	 => 'identity',
-			'required' => true,
-			'filters'	=> array(
-				array('name' => 'StripTags'),
-				array('name' => 'StringTrim'),
+			'name'			=> 'identity',
+			'required'		=> true,
+			'filters'		=> array(
+				array('name'	=> 'StripTags'),
+				array('name'	=> 'StringTrim'),
 			),
-			'validators' => array(
+			'validators'	=> array(
 				array(
-					'name'	=> 'StringLength',
-					'options' => array(
-						'encoding' => 'UTF-8',
+					'name'		=> 'StringLength',
+					'options'	=> array(
+						'encoding'	=> 'UTF-8',
 						'min'		=> 1,
 						'max'		=> 100,
 					),
 				),
 				array(
-					'name'	=> 'EmailAddress',
+					'name'		=> 'EmailAddress',
 				),
 			),
 		)));
