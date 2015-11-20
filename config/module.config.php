@@ -129,7 +129,7 @@ return array(
 					'constraints' => array(
 					),
 					'defaults' => array(
-						'controller' => 'Admin\Controller\Zfcuser',
+						'controller' => 'zfcuser',
 						'action'	 => 'requestpasswordreset'
 					),
 				),
@@ -145,7 +145,7 @@ return array(
 						'activatetoken'	=> '.*',
 					),
 					'defaults' => array(
-						'controller' => 'Admin\Controller\Zfcuser',
+						'controller' => 'zfcuser',
 						'action'	 => 'resetpassword'
 					),
 				),
