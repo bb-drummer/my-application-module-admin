@@ -2,6 +2,8 @@
 namespace Admin\Form;
 
 use Zend\Form\Form;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Factory as InputFactory;
 use ZfcUser\Options\AuthenticationOptionsInterface;
 
 class RequestPasswordResetForm extends Form
