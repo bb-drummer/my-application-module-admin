@@ -34,7 +34,7 @@
 			</div>
 			<hr />
 			<?php echo $this->formHidden($form->get('settings_id')); ?>
-			<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-default'))); ?>
+			<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary'))); ?>
 			<?php echo $this->formReset($form->get('reset')->setAttributes(array('class' =>'btn btn-default'))); ?>
 			<a class="btn btn-danger" href="<?php echo $this->url('admin/settingsedit'); ?>"><?php echo $this->translate("cancel"); ?></a>
 		<?php echo $this->form()->closeTag($form); ?>

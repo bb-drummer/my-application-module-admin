@@ -20,7 +20,7 @@
 		<form action="<?php echo $url; ?>" method="post">
 			<div class="form-group">
 				<input type="hidden" name="id" value="<?php echo (int) $settings->settings_id; ?>" />
-				<input class="btn btn-default" type="submit" name="del" value="<?php echo $this->translate("delete"); ?>" />
+				<input class="btn btn-primary" type="submit" name="del" value="<?php echo $this->translate("delete"); ?>" />
 				<a class="btn btn-danger" href="<?php echo $this->url('admin/settingsedit'); ?>"><?php echo $this->translate("cancel"); ?></a>
 			</div>
 		</form>

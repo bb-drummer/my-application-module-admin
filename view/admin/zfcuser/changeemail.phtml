@@ -41,8 +41,9 @@
 			    <input type="hidden" name="redirect" value="<?php echo $this->redirect ?>" />
 			    <?php endif ?>
 				<?php echo $this->formHidden($form->get('identity')); ?>
-				<input class="btn btn-default" type="submit" name="submit" value="<?php echo $this->translate("save"); ?>" />
-				<a class="btn btn-default" href="<?php echo $this->url('zfcuser') ?>"><?php echo $this->translate("cancel"); ?></a>
+				<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary', 'value' => $this->translate('save')))); ?>
+				<?php echo $this->formInput($form->get('reset')->setAttributes(array('class' =>'btn btn-default'))); ?>
+				<a class="btn btn-danger" href="<?php echo $this->url('home'); ?>"><?php echo $this->translate("cancel"); ?></a>
 			<?php echo $this->form()->closeTag() ?>
 		</section>
 	</div>
