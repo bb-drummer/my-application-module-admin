@@ -54,7 +54,6 @@
 			</div>
 			<hr />
 			<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary', 'value' => $this->translate('register')))); ?>
-			<?php //echo $this->formInput($form->get('reset')->setAttributes(array('class' =>'btn btn-default'))); ?>
 			<input class="btn btn-default" type="reset" value="<?php echo $this->translate("reset"); ?>" />
 			<a class="btn btn-danger" href="<?php echo $this->url('home'); ?>"><?php echo $this->translate("cancel"); ?></a>
 	        <?php if ($this->redirect): ?><input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" /><?php endif ?>
