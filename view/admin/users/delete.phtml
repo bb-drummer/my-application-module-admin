@@ -18,8 +18,8 @@
 		?>
 		<form action="<?php echo $url; ?>" method="post">
 			<div>
-				<input class="btn btn-primary" type="hidden" name="id" value="<?php echo (int) $user->user_id; ?>" />
-				<input class="btn btn-default" type="submit" name="del" value="<?php echo $this->translate("delete"); ?>" />
+				<input type="hidden" name="id" value="<?php echo (int) $user->user_id; ?>" />
+				<input class="btn btn-primary" type="submit" name="del" value="<?php echo $this->translate("delete"); ?>" />
 				<a class="btn btn-danger" href="<?php echo $this->url('admin/default'); ?>"><?php echo $this->translate("cancel"); ?></a>
 			</div>
 		</form>
