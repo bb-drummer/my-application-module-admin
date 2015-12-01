@@ -193,7 +193,7 @@ class ZfcuserController extends UserController
 		$oModule = new AdminModule();
 		$oModule->setAppConfig($config);
 		
-		$user = $oModule->findUserByEmailOrUsername($request->getParam("identity"));
+		$user = $oModule->findUserByEmailOrUsername($this->params("identity"));
 		
 		$redirect = isset($prg['redirect']) ? $prg['redirect'] : null;
 
