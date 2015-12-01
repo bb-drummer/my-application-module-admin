@@ -194,16 +194,18 @@ class ZfcuserController extends UserController
 		
 		$oModule = new AdminModule();
 		$oModule->setAppConfig($config);
+		$user = false;
 		
 		try {
-			$user = $oModule->findUserByEmailOrUsername($this->params("identity"));
+    		$userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
+    		$user = $userTable->getUserByEmailOrUsername($this->params("identity"));
 		} catch (Exception $e) {
 			$this->flashMessenger()->addWarningMessage($translator->translate($e->getMessage()));
-			return array(
+			/*return array(
 				'requestPasswordResetForm' => $form,
 				'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
 				'redirect' => $redirect,
-			);
+			);*/
 		}
 
 		if (!$user) {
@@ -216,7 +218,7 @@ class ZfcuserController extends UserController
 		}
 
 		$oModule->sendPasswordResetMail($user);
-		$this->flashMessenger()->addSuccessMessage($translator->translate("password rest email has been sent"));
+		$this->flashMessenger()->addSuccessMessage($translator->translate("password reset email has been sent"));
 		
 		return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
 	}
