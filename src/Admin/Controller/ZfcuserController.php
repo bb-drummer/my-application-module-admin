@@ -194,7 +194,7 @@ class ZfcuserController extends UserController
 		
 		$oModule = new AdminModule();
 		$oModule->setAppConfig($config);
-		$identity = $this->params('identity');
+		$identity = $this->getRequest()->getPost('identity');
 		$user = false;
 		
 		try {
