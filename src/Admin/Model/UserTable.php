@@ -3,6 +3,7 @@ namespace Admin\Model;
 
 use Zend\Db\TableGateway\TableGateway;
 use Admin\Model\User;
+use Zend\Db\Sql\Select;
 
 class UserTable
 {
@@ -17,6 +18,27 @@ class UserTable
     {
         $resultSet = $this->tableGateway->select();
         return $resultSet;
+    }
+
+    public function getUserByEmailOrUsername ( $id )
+    {
+    	if ( empty($id) ) {
+    		return false;
+    	}
+        $resultSet = $this->tableGateway->select(function (Select $select) use ($id) {
+        	$select->where(
+        		array(
+        			"username = '".$id."'",
+        			"email = '".$id."'"
+        		),
+        		'OR'
+        	);
+        });
+        $user = $resultSet->current();
+        if (!$user) {
+            throw new \Exception("Could not find user with email or username '$id'");
+        }
+        return $user;
     }
 
     public function getUser($id)

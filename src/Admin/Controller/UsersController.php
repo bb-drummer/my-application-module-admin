@@ -9,7 +9,6 @@
 
 namespace Admin\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
 use Application\Controller\BaseActionController;
 use Zend\View\Model\ViewModel;
 use Admin\Module as AdminModule;

@@ -257,6 +257,43 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		
 	}
 	
+	public function sendPasswordResetMail (\Admin\Entity\User $user) {
+
+		$config = $this->getAppConfig();
+
+		$viewRender = new PhpRenderer();
+		$viewRender->resolver()->addPath(__DIR__.'/view/');
+		
+		$mailModel = new ViewModel();
+		$mailModel->setVariables($user->__getArrayCopy());
+		
+		$mailModel->setVariable('login_url', $config["zfcuser_mail_http_basepath"].'/user/login');
+		$mailModel->setVariable('resetpassword_url', $config["zfcuser_mail_http_basepath"].'/resetpassword/' . $user->getId() . '/' . $user->getToken());
+		
+		$mailModel->setTemplate('mails/userresetpassword_html');
+		$htmlMarkup = $viewRender->render($mailModel);
+		
+		$html = new MimePart($htmlMarkup);
+		$html->type = "text/html";
+		
+		$body = new MimeMessage();
+		$body->setParts(array($html));
+		
+		$message = new Message();
+		$message->addFrom($config["zfcuser_admin_from_email"])
+		        ->addTo($user->getEmail())
+		        ->addBcc($config["zfcuser_admin_to_email"])
+		        ->setSubject($config["zfcuser_activate_subject"]);
+		$message->getHeaders()->addHeaderLine('X-Mailer', '[myApplication]/php');
+		$message->setBody($body);		
+
+		$transport = new SmtpTransport();
+		$options   = new SmtpOptions($config["zfcuser_smtp"]);
+		$transport->setOptions($options);
+		$transport->send($message);
+		
+	}
+	
 	public function initAcl(MvcEvent $e) {
 		$sm = $e->getApplication()->getServiceManager();
 		$acl = new ZendAcl();
@@ -326,6 +363,11 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 			}
 		}
 	}
+    
+    public function findUserByEmailOrUsername ( $param ) {
+    	$userTable = $this->getServiceLocator()->get('Admin\Model\UserTable');
+    	return $userTable->getUserByEmailOrUsername($param);
+    }
 	
 	/**
 	 * Set app config

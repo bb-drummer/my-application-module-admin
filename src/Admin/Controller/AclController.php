@@ -9,8 +9,6 @@
 
 namespace Admin\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
 use Admin\Model\Acl;
 use Admin\Model\Aclresource;
 use Admin\Model\Aclrole;
@@ -21,8 +19,9 @@ use Admin\Form\AclForm;
 use Admin\Form\AclmatrixForm;
 use Admin\Form\AclresourceForm;
 use Admin\Form\AclroleForm;
-use Zend\View\HelperPluginManager;
 use Application\Controller\BaseActionController;
+use Zend\View\HelperPluginManager;
+use Zend\View\Model\ViewModel;
 
 class AclController extends BaseActionController
 {
