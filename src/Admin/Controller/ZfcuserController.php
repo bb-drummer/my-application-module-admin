@@ -174,7 +174,7 @@ class ZfcuserController extends UserController
 			$redirect = false;
 		}
 
-		$redirectUrl = $this->url()->fromRoute(static::ROUTE_REGISTER)
+		$redirectUrl = $this->url()
 			. ($redirect ? '?redirect=' . rawurlencode($redirect) : '');
 		$prg = $this->prg($redirectUrl, true);
 
@@ -192,12 +192,6 @@ class ZfcuserController extends UserController
 		
 		$oModule = new AdminModule();
 		$oModule->setAppConfig($config);
-		
-		$post = $prg;
-		//$user = $service->register($post);
-		
-		$userEntityClass = $service->getOptions()->getUserEntityClass();
-		$user  = new $userEntityClass;
 		
 		$user = $oModule->findUserByEmailOrUsername($request->getPost("identity"));
 		
