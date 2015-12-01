@@ -187,15 +187,24 @@ class ZfcuserController extends UserController
 				'redirect' => $redirect,
 			);
 		}
+		
+		$redirect = isset($prg['redirect']) ? $prg['redirect'] : null;
 
 		// ... form input valid, do stuff...
 		
 		$oModule = new AdminModule();
 		$oModule->setAppConfig($config);
 		
-		$user = $oModule->findUserByEmailOrUsername($this->params("identity"));
-		
-		$redirect = isset($prg['redirect']) ? $prg['redirect'] : null;
+		try {
+			$user = $oModule->findUserByEmailOrUsername($this->params("identity"));
+		} catch (Exception $e) {
+			$this->flashMessenger()->addWarningMessage($translator->translate($e->getMessage()));
+			return array(
+				'requestPasswordResetForm' => $form,
+				'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
+				'redirect' => $redirect,
+			);
+		}
 
 		if (!$user) {
 			$this->flashMessenger()->addWarningMessage($translator->translate("user not found"));
