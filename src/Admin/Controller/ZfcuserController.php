@@ -194,7 +194,7 @@ class ZfcuserController extends UserController
 			return array(
 				'requestPasswordResetForm' => $form,
 				'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
-				'redirect' => $redirectUrl,
+				'redirect' => $redirect,
 			);
 		}
 		// ... form input valid, do stuff...
