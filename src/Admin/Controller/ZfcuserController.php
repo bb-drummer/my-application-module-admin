@@ -216,7 +216,14 @@ class ZfcuserController extends UserController
 		}
 		try {
     		$userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
-    		$user = $userTable->getUserByEmailOrUsername($identity);
+    		$selectedUser = $userTable->getUserByEmailOrUsername($identity);
+    		if ($selectedUser) {
+    			$userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
+    			$user = $userTable->fingByUsername($selectedUser->getUsername());
+    			if (!user) {
+    				$user = $userTable->fingByEmail($selectedUser->getEmail());
+    			}
+    		}
 		} catch (\Exception $e) {
 			$this->flashMessenger()->addWarningMessage($translator->translate($e->getMessage()));
 			/*return array(
