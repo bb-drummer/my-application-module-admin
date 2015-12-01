@@ -217,7 +217,7 @@ class ZfcuserController extends UserController
 		try {
     		$userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
     		$user = $userTable->getUserByEmailOrUsername($identity);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			$this->flashMessenger()->addWarningMessage($translator->translate($e->getMessage()));
 			/*return array(
 				'requestPasswordResetForm' => $form,
