@@ -194,9 +194,19 @@ class ZfcuserController extends UserController
 		
 		$oModule = new AdminModule();
 		$oModule->setAppConfig($config);
-		$identity = $this->getRequest()->getPost('identity');
+		//$identity = $this->getRequest()->getPost('identity');
+		$identity = $this->params()->fromPost('identity');
 		$user = false;
 		
+		if (!$this->getRequest()->isPost()) {
+			$this->flashMessenger()->addWarningMessage(
+				$translator->translate("invalid request")
+			);
+		} else {
+			$this->flashMessenger()->addWarningMessage(
+				$translator->translate("post request")." ".print_r($_REQUEST, true)
+			);
+		}
 		try {
     		$userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
     		$user = $userTable->getUserByEmailOrUsername($identity);
