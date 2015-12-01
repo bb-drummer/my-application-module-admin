@@ -174,7 +174,7 @@ class ZfcuserController extends UserController
 			$redirect = false;
 		}
 
-		$redirectUrl = $this->url()->fromRoute('userrequestpasswordreset')
+		/*$redirectUrl = $this->url()->fromRoute('userrequestpasswordreset')
 			. ($redirect ? '?redirect=' . rawurlencode($redirect) : '');
 		$prg = $this->prg($redirectUrl, true);
 
@@ -189,7 +189,7 @@ class ZfcuserController extends UserController
 		}
 		
 		$redirect = isset($prg['redirect']) ? $prg['redirect'] : null;
-
+		*/
 		// ... form input valid, do stuff...
 		
 		$oModule = new AdminModule();
