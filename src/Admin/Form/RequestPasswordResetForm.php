@@ -16,9 +16,9 @@ class RequestPasswordResetForm extends Form
 		$this->setAttribute('method', 'post');
 		$this->add(array(
 			'name'		=> 'identity',
-			'type'			=> 'email',
+			'type'			=> 'text',
 			'attributes'	=> array(
-				'type'	=> 'email',
+				'type'	=> 'text',
 			),
 		));
 		

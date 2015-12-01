@@ -365,13 +365,6 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 			}
 		}
 	}
-    
-    public function findUserByEmailOrUsername ( $param ) {
-		$oSM = $this->appobj->getServiceManager();
-    	$userTable = $oSM->get('\Admin\Model\UserTable');
-    	//$userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
-    	return $userTable->getUserByEmailOrUsername($param);
-    }
 	
 	/**
 	 * Set app config
