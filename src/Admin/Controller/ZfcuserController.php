@@ -174,9 +174,9 @@ class ZfcuserController extends UserController
 			$redirect = false;
 		}
 
-		/*$redirectUrl = $this->url()->fromRoute('userrequestpasswordreset')
+		$redirectUrl = $this->url()->fromRoute('userrequestpasswordreset')
 			. ($redirect ? '?redirect=' . rawurlencode($redirect) : '');
-		$prg = $this->prg($redirectUrl, true);
+		/*$prg = $this->prg($redirectUrl, true);
 
 		if ($prg instanceof Response) {
 			return $prg;
@@ -190,6 +190,13 @@ class ZfcuserController extends UserController
 		
 		$redirect = isset($prg['redirect']) ? $prg['redirect'] : null;
 		*/
+		if (!$this->getRequest()->isPost()) {
+			return array(
+				'requestPasswordResetForm' => $form,
+				'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
+				'redirect' => $redirectUrl,
+			);
+		}
 		// ... form input valid, do stuff...
 		
 		$oModule = new AdminModule();
