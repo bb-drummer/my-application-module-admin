@@ -365,7 +365,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	}
     
     public function findUserByEmailOrUsername ( $param ) {
-    	$userTable = $this->getServiceLocator()->get('Admin\Model\UserTable');
+    	$userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
     	return $userTable->getUserByEmailOrUsername($param);
     }
 	
