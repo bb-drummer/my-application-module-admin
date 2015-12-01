@@ -237,11 +237,12 @@ class ZfcuserController extends UserController
 			$this->flashMessenger()->addWarningMessage(
 				sprintf($translator->translate("user '%s' not found"), $identity)
 			);
-			return array(
+			return $this->redirect()->toUrl($redirectUrl);
+			/*return array(
 				'requestPasswordResetForm' => $form,
 				'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
 				'redirect' => $redirect,
-			);
+			);*/
 		}
 
 		$oModule->sendPasswordResetMail($user);
