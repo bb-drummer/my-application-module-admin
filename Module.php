@@ -45,6 +45,7 @@ use Admin\Model\AclresourceTable;
 class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterface
 {
 
+	protected $appobj;
 	protected $appconfig;
 	protected $serviceLocator;
 	
@@ -86,6 +87,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	{
 		/** @var $application \Zend\Mvc\Application */
 		$application = $e->getApplication();
+		$this->appobj = $application;
 		/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
 		$serviceManager = $application->getServiceManager();
 		/** @var $pluginManagerViewHelper \Zend\View\HelperPluginManager */
@@ -365,7 +367,9 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	}
     
     public function findUserByEmailOrUsername ( $param ) {
-    	$userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
+		$oSM = $this->appobj->getServiceManager();
+    	$userTable = $oSM->get('\Admin\Model\UserTable');
+    	//$userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
     	return $userTable->getUserByEmailOrUsername($param);
     }
 	
