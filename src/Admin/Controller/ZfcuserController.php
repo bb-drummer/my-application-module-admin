@@ -122,10 +122,10 @@ class ZfcuserController extends UserController
 		$this->flashMessenger()->addSuccessMessage($translator->translate("registration succeeded"));
 		if ($config['zfcuser_user_must_confirm']) {
 			$this->flashMessenger()->addInfoMessage($translator->translate("you have been sent an email with further instructions to follow"));
-		return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
+			return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
 		} else if ($config['zfcuser_admin_must_activate']) {
 			$this->flashMessenger()->addInfoMessage($translator->translate("admin has been notified for activation"));
-		return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
+			return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
 		}
 		
 		if ($service->getOptions()->getLoginAfterRegistration()) {
@@ -142,7 +142,7 @@ class ZfcuserController extends UserController
 			return $this->forward()->dispatch(static::CONTROLLER_NAME, array('action' => 'authenticate'));
 		}
 		
-			return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
+		return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
 	}
 
 	/**
@@ -233,15 +233,17 @@ class ZfcuserController extends UserController
 			$this->flashMessenger()->addWarningMessage(
 				sprintf($translator->translate("user '%s' not found"), $identity)
 			);
-			//return $this->redirect()->toUrl($redirectUrl);
-			return array(
+			return $this->redirect()->toUrl($redirectUrl);
+			/*return array(
 				'requestPasswordResetForm' => $form,
 				'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
 				'redirect' => $redirect,
-			);
+			);*/
 		}
 
 		$user->setToken($oModule->createUserToken($user));
+		$service->getUserMapper()->update($user);
+		
 		$oModule->sendPasswordResetMail($user);
 		$this->flashMessenger()->addSuccessMessage(
 			sprintf($translator->translate("password reset email has been sent to user '%s'"), $identity)
