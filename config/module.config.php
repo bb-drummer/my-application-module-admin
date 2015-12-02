@@ -99,8 +99,8 @@ return array(
 						'confirmtoken'	=> '.*',
 					),
 					'defaults' => array(
-						'controller' => 'Admin\Controller\Users',
-						'action'	 => 'confirm'
+						'controller'	=> 'Admin\Controller\Users',
+						'action'		=> 'confirm'
 					),
 				),
                 'may_terminate' => true,
@@ -115,8 +115,8 @@ return array(
 						'activatetoken'	=> '.*',
 					),
 					'defaults' => array(
-						'controller' => 'Admin\Controller\Users',
-						'action'	 => 'activate'
+						'controller'	=> 'Admin\Controller\Users',
+						'action'		=> 'activate'
 					),
 				),
                 'may_terminate' => true,
@@ -129,8 +129,8 @@ return array(
 					'constraints' => array(
 					),
 					'defaults' => array(
-						'controller' => 'zfcuser',
-						'action'	 => 'requestpasswordreset'
+						'controller'	=> 'zfcuser',
+						'action'		=> 'requestpasswordreset'
 					),
 				),
                 'may_terminate' => true,
@@ -142,11 +142,11 @@ return array(
 					'route'    => '/resetpassword[/:user_id[/:resettoken]]',
 					'constraints' => array(
 						'user_id'		=> '[a-zA-Z0-9_-]*',
-						'activatetoken'	=> '.*',
+						'resettoken'	=> '.*',
 					),
 					'defaults' => array(
-						'controller' => 'zfcuser',
-						'action'	 => 'resetpassword'
+						'controller'	=> 'zfcuser',
+						'action'		=> 'resetpassword'
 					),
 				),
                 'may_terminate' => true,

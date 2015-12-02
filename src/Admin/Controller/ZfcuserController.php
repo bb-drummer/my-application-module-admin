@@ -146,18 +146,14 @@ class ZfcuserController extends UserController
 	}
 
 	/**
-	 * Register new user
+	 * request a user's password reset link
 	 */
 	public function requestpasswordresetAction()
 	{
-			// if the user is logged in, we don't need to register
+		// if the user is logged in, we don't need to 'reset' the password
 		if ($this->zfcUserAuthentication()->hasIdentity()) {
 			// redirect to the login redirect route
 			return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
-		}
-		// if registration is disabled
-		if (!$this->getOptions()->getEnableRegistration()) {
-			return array('enableRegistration' => false);
 		}
 
 		$config		= $this->getServiceLocator()->get('Config');
@@ -167,6 +163,10 @@ class ZfcuserController extends UserController
 		$form		= new RequestPasswordResetForm(null, $options); // $this->getRegisterForm();
 		$translator	= $this->getTranslator();
 		
+		// if password reset is disabled
+		if (!$config['zfcuser']['enable_passwordreset']) {
+			return array('enableRegistration' => false);
+		}
 		
 		if ($this->getOptions()->getUseRedirectParameterIfPresent() && $request->getQuery()->get('redirect')) {
 			$redirect = $request->getQuery()->get('redirect');
@@ -174,22 +174,8 @@ class ZfcuserController extends UserController
 			$redirect = false;
 		}
 
-		$redirectUrl = $this->url()->fromRoute('userrequestpasswordreset')
-			. ($redirect ? '?redirect=' . rawurlencode($redirect) : '');
-		/*$prg = $this->prg($redirectUrl, true);
-
-		if ($prg instanceof Response) {
-			return $prg;
-		} elseif ($prg === false) {
-			return array(
-				'requestPasswordResetForm' => $form,
-				'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
-				'redirect' => $redirect,
-			);
-		}
+		$redirectUrl = $this->url()->fromRoute('userrequestpasswordreset') . ($redirect ? '?redirect=' . rawurlencode($redirect) : '');
 		
-		$redirect = isset($prg['redirect']) ? $prg['redirect'] : null;
-		*/
 		if (!$this->getRequest()->isPost()) {
 			return array(
 				'requestPasswordResetForm' => $form,
@@ -197,19 +183,12 @@ class ZfcuserController extends UserController
 				'redirect' => $redirect,
 			);
 		}
-		// ... form input valid, do stuff...
 		
 		$oModule = new AdminModule();
 		$oModule->setAppConfig($config);
-		//$identity = $this->getRequest()->getPost('identity');
 		$identity = $this->params()->fromPost('identity');
 		$user = false;
 		
-		if (!$this->getRequest()->isPost()) {
-			$this->flashMessenger()->addWarningMessage(
-				$translator->translate("invalid request")
-			);
-		}
 		try {
     		$userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
     		$selectedUser = $userTable->getUserByEmailOrUsername($identity);
@@ -221,12 +200,6 @@ class ZfcuserController extends UserController
     			}
     		}
 		} catch (\Exception $e) {
-			//$this->flashMessenger()->addWarningMessage($translator->translate($e->getMessage()));
-			/*return array(
-				'requestPasswordResetForm' => $form,
-				'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
-				'redirect' => $redirect,
-			);*/
 		}
 
 		if (!$user) {
@@ -234,13 +207,10 @@ class ZfcuserController extends UserController
 				sprintf($translator->translate("user '%s' not found"), $identity)
 			);
 			return $this->redirect()->toUrl($redirectUrl);
-			/*return array(
-				'requestPasswordResetForm' => $form,
-				'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
-				'redirect' => $redirect,
-			);*/
 		}
 
+		// user found, create token and send link via email
+		
 		$user->setToken($oModule->createUserToken($user));
 		$service->getUserMapper()->update($user);
 		
@@ -253,11 +223,97 @@ class ZfcuserController extends UserController
 	}
 
 	/**
-	 * Register new user
+	 * reset a user's password
 	 */
 	public function resetpasswordAction()
 	{
-			return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
+		// if the user is logged in, we don't need to 'reset' the password
+		if ($this->zfcUserAuthentication()->hasIdentity()) {
+			// redirect to the login redirect route
+			return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
+		}
+
+		$config		= $this->getServiceLocator()->get('Config');
+		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
+		$request	= $this->getRequest();
+		$service	= $this->getUserService();
+		$form		= new ResetPasswordForm(null, $options); // $this->getRegisterForm();
+		$translator	= $this->getTranslator();
+		
+		// if password reset is disabled
+		if (!$config['zfcuser']['enable_passwordreset']) {
+			return array('enableRegistration' => false);
+		}
+		
+		if ($this->getOptions()->getUseRedirectParameterIfPresent() && $request->getQuery()->get('redirect')) {
+			$redirect = $request->getQuery()->get('redirect');
+		} else {
+			$redirect = false;
+		}
+
+		$redirectUrl = $this->url()->fromRoute('userresetpassword') . ($redirect ? '?redirect=' . rawurlencode($redirect) : '');
+		
+		if ( !$this->getRequest()->isPost() ) {
+			$user = false;
+			$userId = (int) $this->params()->fromRoute('user_id');
+			$resetToken = $this->params()->fromRoute('resettoken');
+			
+			try {
+				$userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
+				$user = $userTable->findById($userId);
+			} catch (Exception $e) {}
+			
+			if ( !$user ) {
+				$this->flashMessenger()->addWarningMessage(
+						sprintf($translator->translate("user '%s' not found"), $identity)
+						);
+				return $this->redirect()->toUrl($redirectUrl);
+			}
+			
+			if ( empty($resetToken) || ($resetToken != $user->getToken()) ) {
+				$this->flashMessenger()->addWarningMessage(
+						sprintf($translator->translate("invalid token"), $identity)
+						);
+				return $this->redirect()->toUrl($redirectUrl);
+			}
+			
+			return array(
+				'user' => $user,
+				'userId' => $userId,
+				'resetToken' => $resetToken,
+				'resetPasswordForm' => $form,
+				'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
+				'redirect' => $redirect,
+			);
+		}
+		
+		$oModule = new AdminModule();
+		$oModule->setAppConfig($config);
+		$identity = $this->params()->fromPost('identity');
+		$user = false;
+		
+		try {
+			$userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
+			$selectedUser = $userTable->getUserByEmailOrUsername($identity);
+			if ($selectedUser) {
+				$userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
+				$user = $userTable->findByUsername($selectedUser->username);
+				if (!user) {
+					$user = $userTable->findByEmail($selectedUser->email);
+				}
+			}
+		} catch (\Exception $e) {
+		}
+		
+		if (!$user) {
+			$this->flashMessenger()->addWarningMessage(
+					sprintf($translator->translate("user '%s' not found"), $identity)
+					);
+			return $this->redirect()->toUrl($redirectUrl);
+		}
+		
+		
+		return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
 	}
 	
 	/**
