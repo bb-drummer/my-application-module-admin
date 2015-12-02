@@ -251,7 +251,7 @@ class ZfcuserController extends UserController
 			$redirect = false;
 		}
 
-		$redirectUrl = $this->url()->fromRoute('userresetpassword') . ($redirect ? '?redirect=' . rawurlencode($redirect) : '');
+		$redirectUrl = $this->url()->fromRoute(static::ROUTE_LOGIN) . ($redirect ? '?redirect=' . rawurlencode($redirect) : '');
 		
 		if ( !$this->getRequest()->isPost() ) {
 			$user = false;
