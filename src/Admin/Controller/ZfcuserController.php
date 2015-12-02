@@ -221,7 +221,7 @@ class ZfcuserController extends UserController
     			}
     		}
 		} catch (\Exception $e) {
-			$this->flashMessenger()->addWarningMessage($translator->translate($e->getMessage()));
+			//$this->flashMessenger()->addWarningMessage($translator->translate($e->getMessage()));
 			/*return array(
 				'requestPasswordResetForm' => $form,
 				'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
@@ -233,12 +233,12 @@ class ZfcuserController extends UserController
 			$this->flashMessenger()->addWarningMessage(
 				sprintf($translator->translate("user '%s' not found"), $identity)
 			);
-			return $this->redirect()->toUrl($redirectUrl);
-			/*return array(
+			//return $this->redirect()->toUrl($redirectUrl);
+			return array(
 				'requestPasswordResetForm' => $form,
 				'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
 				'redirect' => $redirect,
-			);*/
+			);
 		}
 
 		$user->setToken($oModule->createUserToken($user));
