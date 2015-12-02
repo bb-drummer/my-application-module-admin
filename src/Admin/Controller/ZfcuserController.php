@@ -299,10 +299,7 @@ class ZfcuserController extends UserController
 		
 		try {
 			$userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
-			$user = $userTable->findByUsername($selectedUser->username);
-			if (!user) {
-				$user = $userTable->findByEmail($userId);
-			}
+			$user = $userTable->findByEmail($userId);
 		} catch (\Exception $e) {
 		}
 			
