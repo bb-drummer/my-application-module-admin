@@ -22,6 +22,16 @@ class ResetPasswordForm extends Form
                 'type' => 'hidden'
             ),
         ));
+        
+        $this->add(array(
+            'name' => 'token',
+            'options' => array(
+                'label' => '',
+            ),
+            'attributes' => array(
+                'type' => 'hidden'
+            ),
+        ));
 
         $this->add(array(
             'name' => 'newCredential',
