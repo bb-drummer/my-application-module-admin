@@ -7,6 +7,8 @@ use Zend\InputFilter\Factory as InputFactory;
 
 class ResetPasswordForm extends Form
 {
+	protected $inputFilter;
+	
     public function __construct($name = null)
     {
         // we want to ignore the name passed
