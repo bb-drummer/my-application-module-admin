@@ -254,6 +254,7 @@ class ZfcuserController extends UserController
 		$redirectUrl = $this->url()->fromRoute(static::ROUTE_LOGIN) . ($redirect ? '?redirect=' . rawurlencode($redirect) : '');
 		
 		if ( !$this->getRequest()->isPost() ) {
+			
 			$user = false;
 			$userId = (int) $this->params()->fromRoute('user_id');
 			$resetToken = $this->params()->fromRoute('resettoken');
@@ -265,14 +266,14 @@ class ZfcuserController extends UserController
 			
 			if ( !$user ) {
 				$this->flashMessenger()->addWarningMessage(
-						sprintf($translator->translate("user '%s' not found"), $identity)
+						sprintf($translator->translate("invalid request"), $identity)
 						);
 				return $this->redirect()->toUrl($redirectUrl);
 			}
 			
 			if ( empty($resetToken) || ($resetToken != $user->getToken()) ) {
 				$this->flashMessenger()->addWarningMessage(
-						sprintf($translator->translate("invalid token"), $identity)
+						sprintf($translator->translate("invalid request"), $resetToken)
 						);
 				return $this->redirect()->toUrl($redirectUrl);
 			}
@@ -285,33 +286,51 @@ class ZfcuserController extends UserController
 				'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
 				'redirect' => $redirect,
 			);
+			
 		}
+			
+		$user = false;
+		$userId = (int) $this->params()->fromPost('identity');
+		$resetToken = $this->params()->fromPost('token');
 		
 		$oModule = new AdminModule();
 		$oModule->setAppConfig($config);
-		$identity = $this->params()->fromPost('identity');
 		$user = false;
 		
 		try {
-			$userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
-			$selectedUser = $userTable->getUserByEmailOrUsername($identity);
-			if ($selectedUser) {
-				$userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
-				$user = $userTable->findByUsername($selectedUser->username);
-				if (!user) {
-					$user = $userTable->findByEmail($selectedUser->email);
-				}
+			$userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
+			$user = $userTable->findByUsername($selectedUser->username);
+			if (!user) {
+				$user = $userTable->findByEmail($userId);
 			}
 		} catch (\Exception $e) {
 		}
-		
-		if (!$user) {
+			
+		if ( !$user ) {
 			$this->flashMessenger()->addWarningMessage(
-					sprintf($translator->translate("user '%s' not found"), $identity)
+					sprintf($translator->translate("invalid request"), $identity)
 					);
 			return $this->redirect()->toUrl($redirectUrl);
 		}
 		
+		if ( empty($resetToken) || ($resetToken != $user->getToken()) ) {
+			$this->flashMessenger()->addWarningMessage(
+					sprintf($translator->translate("invalid request"), $resetToken)
+					);
+			return $this->redirect()->toUrl($redirectUrl);
+		}
+		
+		$form->setData( (array)$this->params()->fromPost() );
+		if ( !$form->isValid() ) {
+			return array(
+					'user' => $user,
+					'userId' => $userId,
+					'resetToken' => $resetToken,
+					'resetPasswordForm' => $form,
+					'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
+					'redirect' => $redirect,
+			);
+		}
 		
 		return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
 	}
