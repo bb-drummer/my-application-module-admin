@@ -241,6 +241,7 @@ class ZfcuserController extends UserController
 			);*/
 		}
 
+		$user->setToken($oModule->createUserToken($user));
 		$oModule->sendPasswordResetMail($user);
 		$this->flashMessenger()->addSuccessMessage(
 			sprintf($translator->translate("password reset email has been sent to user '%s'"), $identity)
