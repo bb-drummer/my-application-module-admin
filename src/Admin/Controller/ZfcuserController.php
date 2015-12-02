@@ -209,10 +209,6 @@ class ZfcuserController extends UserController
 			$this->flashMessenger()->addWarningMessage(
 				$translator->translate("invalid request")
 			);
-		} else {
-			$this->flashMessenger()->addWarningMessage(
-				$translator->translate("post request")." ".print_r($_REQUEST, true)
-			);
 		}
 		try {
     		$userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
