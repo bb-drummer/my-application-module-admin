@@ -285,7 +285,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		$message->addFrom($config["zfcuser_admin_from_email"])
 		        ->addTo($user->getEmail())
 		        ->addBcc($config["zfcuser_admin_to_email"])
-		        ->setSubject($config["zfcuser_activate_subject"]);
+		        ->setSubject($config["zfcuser_resetpassword_subject"]);
 		$message->getHeaders()->addHeaderLine('X-Mailer', '[myApplication]/php');
 		$message->setBody($body);		
 
