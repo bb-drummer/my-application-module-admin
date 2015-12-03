@@ -9,6 +9,7 @@
 
 namespace Admin;
 
+use Zend\Crypt\Password\Bcrypt;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Mail\Message;
@@ -286,7 +287,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		        ->addTo($user->getEmail())
 		        ->addBcc($config["zfcuser_admin_to_email"])
 		        ->setSubject($config["zfcuser_resetpassword_subject"]);
-		$message->getHeaders()->addHeaderLine('X-Mailer', '[myApplication]/php');
+		$message->getHeaders()->addHeaderLine('X-Mailer', $config["app"]["title"].'/php');
 		$message->setBody($body);		
 
 		$transport = new SmtpTransport();
@@ -294,6 +295,16 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		$transport->setOptions($options);
 		$transport->send($message);
 		
+	}
+	
+	public function resetUserPassword ($user, $newCredential) {
+		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
+		$service	= $this->getServiceLocator()->get('zfcuser_user_service');
+		$bcrypt		= new Bcrypt;
+		$bcrypt->setCost($options->getPasswordCost());
+		$user->setPassword($bcrypt->create($newCredential));
+		$service->getUserMapper()->update($user);
+	
 	}
 	
 	public function initAcl(MvcEvent $e) {

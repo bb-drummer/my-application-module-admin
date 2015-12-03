@@ -331,12 +331,18 @@ class ZfcuserController extends UserController
 				'redirect' => $redirect,
 			);
 			
+		} else {
+		
+			$newCredential = $this->params()->fromPost('newCredential');
+			$oModule->resetUserPassword($user, $newCredential);
+			$this->flashMessenger()->addSuccessMessage(
+				sprintf($translator->translate("password has been set"), $resetToken)
+			);
+			return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) 
+				. ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
+			
 		}
-
-		$this->flashMessenger()->addSuccessMessage(
-			sprintf($translator->translate("form valid, change password"), $resetToken)
-		);
-		return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
+		
 	}
 	
 	/**
