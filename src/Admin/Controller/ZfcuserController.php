@@ -307,7 +307,7 @@ class ZfcuserController extends UserController
 			
 		if ( !$user ) {
 			$this->flashMessenger()->addWarningMessage(
-				sprintf($translator->translate("invalid user '%s'"), $userId)
+				sprintf($translator->translate("invalid request"), $userId)
 			);
 			return $this->redirect()->toUrl($redirectUrl);
 		}
@@ -316,7 +316,7 @@ class ZfcuserController extends UserController
 		
 		if ( empty($resetToken) || ($resetToken != $user->getToken()) ) {
 			$this->flashMessenger()->addWarningMessage(
-				sprintf($translator->translate("invalid token '%s', '%s'"), $resetToken, $user->token)
+				sprintf($translator->translate("invalid request"), $resetToken)
 			);
 			return $this->redirect()->toUrl($redirectUrl);
 		}
