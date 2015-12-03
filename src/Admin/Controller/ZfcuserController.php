@@ -337,7 +337,6 @@ class ZfcuserController extends UserController
 		} else {
 		
 			$newCredential = $this->params()->fromPost('newCredential');
-			$oModule->resetUserPassword($user, $newCredential);
 			
 			$bcrypt		= new Bcrypt;
 			$bcrypt->setCost($options->getPasswordCost());
