@@ -266,15 +266,15 @@ class ZfcuserController extends UserController
 			
 			if ( !$user ) {
 				$this->flashMessenger()->addWarningMessage(
-						sprintf($translator->translate("invalid request"), $identity)
-						);
+					sprintf($translator->translate("invalid request"), $identity)
+				);
 				return $this->redirect()->toUrl($redirectUrl);
 			}
 			
 			if ( empty($resetToken) || ($resetToken != $user->getToken()) ) {
 				$this->flashMessenger()->addWarningMessage(
-						sprintf($translator->translate("invalid request"), $resetToken)
-						);
+					sprintf($translator->translate("invalid request"), $resetToken)
+				);
 				return $this->redirect()->toUrl($redirectUrl);
 			}
 			
@@ -304,33 +304,38 @@ class ZfcuserController extends UserController
 			
 		if ( !$user ) {
 			$this->flashMessenger()->addWarningMessage(
-					sprintf($translator->translate("invalid user '%s'"), $userId)
-					);
+				sprintf($translator->translate("invalid user '%s'"), $userId)
+			);
 			return $this->redirect()->toUrl($redirectUrl);
 		}
 
-		print_r($userId); print_r($user); die;
+		//print_r($userId); print_r($user); die;
 		
 		if ( empty($resetToken) || ($resetToken != $user->getToken()) ) {
 			$this->flashMessenger()->addWarningMessage(
-					sprintf($translator->translate("invalid token '%s', '%s'"), $resetToken, $user->token)
-					);
+				sprintf($translator->translate("invalid token '%s', '%s'"), $resetToken, $user->token)
+			);
 			return $this->redirect()->toUrl($redirectUrl);
 		}
 		
 		$form->setData( (array)$this->params()->fromPost() );
 		
 		if ( !$form->isValid() ) {
+			
 			return array(
-					'user' => $user,
-					'userId' => $userId,
-					'resetToken' => $resetToken,
-					'resetPasswordForm' => $form,
-					'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
-					'redirect' => $redirect,
+				'user' => $user,
+				'userId' => $userId,
+				'resetToken' => $resetToken,
+				'resetPasswordForm' => $form,
+				'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
+				'redirect' => $redirect,
 			);
+			
 		}
-		
+
+		$this->flashMessenger()->addSuccessMessage(
+			sprintf($translator->translate("form valid, change password"), $resetToken)
+		);
 		return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
 	}
 	
