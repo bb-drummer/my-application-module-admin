@@ -9,7 +9,6 @@
 
 namespace Admin;
 
-use Zend\Crypt\Password\Bcrypt;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Mail\Message;
@@ -295,16 +294,6 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		$transport->setOptions($options);
 		$transport->send($message);
 		
-	}
-	
-	public function resetUserPassword ($user, $newCredential) {
-		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
-		$service	= $this->getServiceLocator()->get('zfcuser_user_service');
-		$bcrypt		= new Bcrypt;
-		$bcrypt->setCost($options->getPasswordCost());
-		$user->setPassword($bcrypt->create($newCredential));
-		$service->getUserMapper()->update($user);
-	
 	}
 	
 	public function initAcl(MvcEvent $e) {

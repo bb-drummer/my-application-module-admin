@@ -14,9 +14,12 @@ namespace Admin\Controller;
 use Admin\Module as AdminModule;
 use Admin\Form\RequestPasswordResetForm;
 use Admin\Form\ResetPasswordForm;
-use ZfcUser\Controller\UserController; 
+
+use Zend\Crypt\Password\Bcrypt;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Stdlib\Parameters;
+
+use ZfcUser\Controller\UserController;
 
 class ZfcuserController extends UserController
 {
@@ -335,6 +338,12 @@ class ZfcuserController extends UserController
 		
 			$newCredential = $this->params()->fromPost('newCredential');
 			$oModule->resetUserPassword($user, $newCredential);
+			
+			$bcrypt		= new Bcrypt;
+			$bcrypt->setCost($options->getPasswordCost());
+			$user->setPassword($bcrypt->create($newCredential));
+			$service->getUserMapper()->update($user);
+		
 			$this->flashMessenger()->addSuccessMessage(
 				sprintf($translator->translate("password has been set"), $resetToken)
 			);
