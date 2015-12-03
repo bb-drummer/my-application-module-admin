@@ -300,8 +300,7 @@ class ZfcuserController extends UserController
 		try {
 			$userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
 			$user = $userTable->findByEmail($userId);
-		} catch (\Exception $e) {
-		}
+		} catch (\Exception $e) {}
 			
 		if ( !$user ) {
 			$this->flashMessenger()->addWarningMessage(
@@ -310,7 +309,8 @@ class ZfcuserController extends UserController
 			return $this->redirect()->toUrl($redirectUrl);
 		}
 
-		print_r($user); die;
+		print_r($userId); print_r($user); die;
+		
 		if ( empty($resetToken) || ($resetToken != $user->getToken()) ) {
 			$this->flashMessenger()->addWarningMessage(
 					sprintf($translator->translate("invalid token '%s', '%s'"), $resetToken, $user->token)
