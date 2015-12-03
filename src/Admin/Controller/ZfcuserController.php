@@ -341,6 +341,7 @@ class ZfcuserController extends UserController
 			$bcrypt		= new Bcrypt;
 			$bcrypt->setCost($options->getPasswordCost());
 			$user->setPassword($bcrypt->create($newCredential));
+			$user->setToken('');
 			$service->getUserMapper()->update($user);
 		
 			$this->flashMessenger()->addSuccessMessage(
