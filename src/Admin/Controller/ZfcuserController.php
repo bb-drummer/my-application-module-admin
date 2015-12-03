@@ -270,7 +270,7 @@ class ZfcuserController extends UserController
 						);
 				return $this->redirect()->toUrl($redirectUrl);
 			}
-			print_r($user); die;
+			
 			if ( empty($resetToken) || ($resetToken != $user->getToken()) ) {
 				$this->flashMessenger()->addWarningMessage(
 						sprintf($translator->translate("invalid request"), $resetToken)
@@ -309,7 +309,8 @@ class ZfcuserController extends UserController
 					);
 			return $this->redirect()->toUrl($redirectUrl);
 		}
-		
+
+		print_r($user); die;
 		if ( empty($resetToken) || ($resetToken != $user->getToken()) ) {
 			$this->flashMessenger()->addWarningMessage(
 					sprintf($translator->translate("invalid token '%s', '%s'"), $resetToken, $user->token)
