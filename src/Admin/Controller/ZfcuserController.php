@@ -290,7 +290,7 @@ class ZfcuserController extends UserController
 		}
 			
 		$user = false;
-		$userId = (int) $this->params()->fromPost('identity');
+		$userId = $this->params()->fromPost('identity');
 		$resetToken = $this->params()->fromPost('token');
 		
 		$oModule = new AdminModule();
