@@ -60,26 +60,13 @@ class ResetPasswordForm extends Form
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'value' => 'request password reset',
+                'value' => 'reset password',
                 'id' => 'submitbutton',
             ),
             'options' => array(
-                'label' => 'request password reset',
+                'label' => 'reset password',
             ),
         ));
-        
-        $this->add(array(
-        	'name' => 'reset',
-        	'attributes' => array(
-       			'type'  => 'reset',
-       			'value' => 'reset',
-       			'id' => 'resetbutton',
-        	),
-        	'options' => array(
-        		'label' => 'reset',
-        	),
-        ));
-        
         
     }
     
