@@ -4,40 +4,40 @@
 	</div>
 	<div class="panel-body">
 		<section class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<?php echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?>
 			</div>
-			<div class="col-md-9">
+			<div class="col-md-10">
 				<h3><?php echo $this->translate('Hallo'); ?>, <?php echo $this->zfcUserDisplayName() ?>!</h3>
 				<hr />
 				<div class="row">
-					<span class="col-md-4"><?php echo $this->translate('user'); ?>:</span>
-					<span class="col-md-8"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getUsername()); ?>, 
+					<span class="col-md-2"><?php echo $this->translate('user'); ?>:</span>
+					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getUsername()); ?>, 
 						<?php echo $this->escapeHtml($this->zfcUserIdentity()->getEmail()); ?></span>
 				</div>
 				<div class="row">
-					<span class="col-md-4"><?php echo $this->translate('role'); ?>:</span>
-					<span class="col-md-8"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getAclrole()); ?></span>
+					<span class="col-md-2"><?php echo $this->translate('role'); ?>:</span>
+					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getAclrole()); ?></span>
 				</div>
 				<hr />
 				<div class="row">
-					<span class="col-md-4"><?php echo $this->translate('street'); ?>:</span>
-					<span class="col-md-8"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getStreet()); ?></span>
+					<span class="col-md-2"><?php echo $this->translate('street'); ?>:</span>
+					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getStreet()); ?></span>
 				</div>
 				<div class="row">
-					<span class="col-md-4"><?php echo $this->translate('city'); ?>:</span>
-					<span class="col-md-8"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getCity()); ?></span>
+					<span class="col-md-2"><?php echo $this->translate('city'); ?>:</span>
+					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getCity()); ?></span>
 				</div>
 				<div class="row">
-					<span class="col-md-4"><?php echo $this->translate('phone'); ?>:</span>
-					<span class="col-md-8"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getPhone()); ?></span>
+					<span class="col-md-2"><?php echo $this->translate('phone'); ?>:</span>
+					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getPhone()); ?></span>
 				</div>
 				<hr />
-				<div class="btn-group btn-group-default" role="group" aria-label="<?php echo $this->translate('user profile actions'); ?>">
-					<a class="btn btn-default" href="<?php echo $this->url('admin/default', array("controller" => "user", "action" => "editprofile")) ?>"><?php echo $this->translate('edit profile'); ?></a>
-					<a class="btn btn-default" href="<?php echo $this->url('zfcuser/changeemail') ?>"><?php echo $this->translate('change email'); ?></a>
-					<a class="btn btn-default" href="<?php echo $this->url('zfcuser/changepassword') ?>"><?php echo $this->translate('change password'); ?></a>
-					<a class="btn btn-default" href="<?php echo $this->url('zfcuser/logout') ?>"><?php echo $this->translate('logout'); ?></a>
+				<div class="btn-group btn-group-sm" role="group" aria-label="<?php echo $this->translate('user profile actions'); ?>">
+					<a class="btn btn-clear" href="<?php echo $this->url('admin/default', array("controller" => "user", "action" => "edituserprofile")) ?>"><?php echo $this->translate('edit profile'); ?></a>
+					<a class="btn btn-clear" href="<?php echo $this->url('zfcuser/changeemail') ?>"><?php echo $this->translate('change email'); ?></a>
+					<a class="btn btn-clear" href="<?php echo $this->url('zfcuser/changepassword') ?>"><?php echo $this->translate('change password'); ?></a>
+					<a class="btn btn-clear" href="<?php echo $this->url('zfcuser/logout') ?>"><?php echo $this->translate('logout'); ?></a>
 				</div>
 			</div>
 		</section>
