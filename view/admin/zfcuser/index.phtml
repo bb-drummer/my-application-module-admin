@@ -3,11 +3,11 @@
 		<span class="panel-title"><strong><?php echo $this->translate('user profile'); ?></strong></span>
 	</div>
 	<div class="panel-body">
-		<section>
-			<div class="pull-left">
+		<section class="row">
+			<div class="col-md-3">
 				<?php echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?>
 			</div>
-			<div class="pull-right">
+			<div class="col-md-9">
 				<h3><?php echo $this->translate('Hallo'); ?>, <?php echo $this->zfcUserDisplayName() ?>!</h3>
 				<hr />
 				<div class="row">
