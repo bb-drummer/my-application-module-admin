@@ -2,6 +2,14 @@
 	<div class="panel-heading">
 		<span class="panel-title"><strong><?php echo $this->translate('user profile'); ?></strong></span>
 	</div>
+	<div class="panel-body panel-toolbar">
+		<div class="btn-group btn-group-sm" role="group" aria-label="<?php echo $this->translate('user profile actions'); ?>">
+			<a class="btn btn-default btn-clean btn-sm" href="<?php echo $this->url('admin/default', array("controller" => "user", "action" => "edituserprofile")) ?>"><span class="fa fa-edit"></span> <?php echo $this->translate('edit profile'); ?></a>
+			<a class="btn btn-default btn-clean btn-sm" href="<?php echo $this->url('zfcuser/changeemail') ?>"><span class="fa fa-envelope"></span> <?php echo $this->translate('change email'); ?></a>
+			<a class="btn btn-default btn-clean btn-sm" href="<?php echo $this->url('zfcuser/changepassword') ?>"><span class="fa fa-lock"></span> <?php echo $this->translate('change password'); ?></a>
+			<a class="btn btn-default btn-clean btn-sm" href="<?php echo $this->url('zfcuser/logout') ?>"><span class="fa fa-power-off"></span> <?php echo $this->translate('logout'); ?></a>
+		</div>
+	</div>
 	<div class="panel-body">
 		<section class="row">
 			<div class="col-md-2">
@@ -31,13 +39,6 @@
 				<div class="row">
 					<span class="col-md-2"><?php echo $this->translate('phone'); ?>:</span>
 					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getPhone()); ?></span>
-				</div>
-				<hr />
-				<div class="btn-group btn-group-sm" role="group" aria-label="<?php echo $this->translate('user profile actions'); ?>">
-					<a class="btn btn-clear" href="<?php echo $this->url('admin/default', array("controller" => "user", "action" => "edituserprofile")) ?>"><?php echo $this->translate('edit profile'); ?></a>
-					<a class="btn btn-clear" href="<?php echo $this->url('zfcuser/changeemail') ?>"><?php echo $this->translate('change email'); ?></a>
-					<a class="btn btn-clear" href="<?php echo $this->url('zfcuser/changepassword') ?>"><?php echo $this->translate('change password'); ?></a>
-					<a class="btn btn-clear" href="<?php echo $this->url('zfcuser/logout') ?>"><?php echo $this->translate('logout'); ?></a>
 				</div>
 			</div>
 		</section>
