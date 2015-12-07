@@ -4,10 +4,43 @@
 	</div>
 	<div class="panel-body">
 		<section>
-			<div style="float:left; padding-right:16px;"><?php echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?></div>
-			<h3><?php echo $this->translate('Hallo'); ?>, <?php echo $this->zfcUserDisplayName() ?>!</h3>
-			<a href="<?php echo $this->url('zfcuser/logout') ?>"><?php echo $this->translate('logout'); ?></a>
-			<div style="clear:both;"></div>
+			<div class="pull-left">
+				<?php echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?>
+			</div>
+			<div class="pull-right">
+				<h3><?php echo $this->translate('Hallo'); ?>, <?php echo $this->zfcUserDisplayName() ?>!</h3>
+				<hr />
+				<div calss="row">
+					<span class="col-md-4"><?php echo $this->translate('user'); ?>:</span>
+					<span class="col-md-8"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getUsername()); ?>, 
+						<?php echo $this->escapeHtml($this->zfcUserIdentity()->getEmail()); ?></span>
+				</div>
+				<div calss="row">
+					<span class="col-md-4"><?php echo $this->translate('role'); ?>:</span>
+					<span class="col-md-8"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getAclrole()); ?></span>
+				</div>
+				<hr />
+				<div calss="row">
+					<span class="col-md-4"><?php echo $this->translate('street'); ?>:</span>
+					<span class="col-md-8"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getStreet()); ?></span>
+				</div>
+				<div calss="row">
+					<span class="col-md-4"><?php echo $this->translate('city'); ?>:</span>
+					<span class="col-md-8"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getCity()); ?></span>
+				</div>
+				<div calss="row">
+					<span class="col-md-4"><?php echo $this->translate('phone'); ?>:</span>
+					<span class="col-md-8"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getPhone()); ?></span>
+				</div>
+			</div>
+		</section>
+		<section>
+			<div class="btn-group btn-group-default" role="group" aria-label="<?php echo $this->translate('user profile actions'); ?>">
+				<a class="btn btn-default" href="<?php echo $this->url('admin/default', array("controller" => "zfcuser", "action" => "editprofile")) ?>"><?php echo $this->translate('edit profile'); ?></a>
+				<a class="btn btn-default" href="<?php echo $this->url('zfcuser/changeemail') ?>"><?php echo $this->translate('change email'); ?></a>
+				<a class="btn btn-default" href="<?php echo $this->url('zfcuser/changepassword') ?>"><?php echo $this->translate('change password'); ?></a>
+				<a class="btn btn-default" href="<?php echo $this->url('zfcuser/logout') ?>"><?php echo $this->translate('logout'); ?></a>
+			</div>
 		</section>
 	</div>
 </div>

@@ -25,6 +25,24 @@ class User extends ZfcUser
      */
     protected $user_id;
     
+    /**
+     * user's street
+     * @var string
+     */
+    protected $street;
+    
+    /**
+     * user's city
+     * @var string
+     */
+    protected $city;
+    
+    /**
+     * user's phonenumber
+     * @var string
+     */
+    protected $phone;
+    
     
     
     /**
@@ -72,7 +90,7 @@ class User extends ZfcUser
     }
 
     /**
-     * Get token string.
+     * Get user-id string.
      *
      * @return STRING
      */
@@ -82,7 +100,7 @@ class User extends ZfcUser
     }
 
     /**
-     * Set token string.
+     * Set user-id string.
      *
      * @param STRING $aclrole
      * @return UserInterface
@@ -93,6 +111,83 @@ class User extends ZfcUser
         return $this;
     }
 
+
+    
+    /**
+     * Get user's street string.
+     *
+     * @return STRING
+     */
+    public function getStreet()
+    {
+    	return $this->street;
+    }
+    
+    /**
+     * Set user's street string.
+     *
+     * @param STRING $street
+     * @return UserInterface
+     */
+    public function setStreet($street)
+    {
+    	$this->street = $street;
+    	return $this;
+    }
+    
+    /**
+     * Get user's city string.
+     *
+     * @return STRING
+     */
+    public function getCity()
+    {
+    	return $this->city;
+    }
+    
+    /**
+     * Set user's city string.
+     *
+     * @param STRING $city
+     * @return UserInterface
+     */
+    public function setCity($city)
+    {
+    	$this->city = $city;
+    	return $this;
+    }
+    
+    /**
+     * Get user's phonenumber string.
+     *
+     * @return STRING
+     */
+    public function getPhone()
+    {
+    	return $this->phone;
+    }
+    
+    /**
+     * Set user's phonenumber string.
+     *
+     * @param STRING $phone
+     * @return UserInterface
+     */
+    public function setPhone($phone)
+    {
+    	$this->phone = $phone;
+    	return $this;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public function __getArrayCopy()
     {
         return array(
@@ -104,6 +199,10 @@ class User extends ZfcUser
         	"state"			=> $this->getState(),
         	"aclrole"		=> $this->getAclrole(),
         	"token"			=> $this->getToken(),
+
+        	"street"		=> $this->getStreet(),
+        	"city"			=> $this->getCity(),
+        	"phone"			=> $this->getPhone(),
         );
     }
     
