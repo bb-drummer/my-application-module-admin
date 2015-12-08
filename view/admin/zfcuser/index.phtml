@@ -19,25 +19,25 @@
 				<h3><?php echo $this->translate('Hallo'); ?>, <?php echo $this->zfcUserDisplayName() ?>!</h3>
 				<hr />
 				<div class="row">
-					<span class="col-md-2"><?php echo $this->translate('user'); ?>:</span>
+					<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('user')); ?>:</span>
 					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getUsername()); ?>, 
-						<?php echo $this->escapeHtml($this->zfcUserIdentity()->getEmail()); ?></span>
+						<a href="mailto:<?php echo ($this->zfcUserIdentity()->getEmail()); ?>" target="_blank"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getEmail()); ?></a></span>
 				</div>
 				<div class="row">
-					<span class="col-md-2"><?php echo $this->translate('role'); ?>:</span>
+					<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('role')); ?>:</span>
 					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getAclrole()); ?></span>
 				</div>
 				<hr />
 				<div class="row">
-					<span class="col-md-2"><?php echo $this->translate('street'); ?>:</span>
+					<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('street')); ?>:</span>
 					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getStreet()); ?></span>
 				</div>
 				<div class="row">
-					<span class="col-md-2"><?php echo $this->translate('city'); ?>:</span>
+					<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('city')); ?>:</span>
 					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getCity()); ?></span>
 				</div>
 				<div class="row">
-					<span class="col-md-2"><?php echo $this->translate('phone'); ?>:</span>
+					<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('phone')); ?>:</span>
 					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getPhone()); ?></span>
 				</div>
 			</div>
