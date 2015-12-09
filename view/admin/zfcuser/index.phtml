@@ -33,7 +33,7 @@
 	</div>
 	<div class="panel-body panel-user-profile">
 		
-		<div class="panel-group row" id="accordion" role="tablist" aria-multiselectable="true">
+		<div class="panel-group row container-fluid" id="accordion" role="tablist" aria-multiselectable="true">
 		
 			<div class="panel panel-default col-md-6 col-xs-12">
 				<div class="panel-heading" role="tab" id="h1">
@@ -43,7 +43,7 @@
 						</a>
 					</h4>
 				</div>
-				<div id="p1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h1">
+				<div id="p1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="h1">
 					<div class="panel-body">
 						<div class="row">
 							<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('street')); ?>:</span>
@@ -73,7 +73,7 @@
 						</a>
 					</h4>
 				</div>
-				<div id="p2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h2">
+				<div id="p2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="h2">
 					<div class="panel-body">
 						<div class="row">
 							<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('twitter')); ?>:</span>
@@ -105,7 +105,8 @@
 				</div>
 				<div id="p3" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h3">
 					<div class="panel-body">
-						...
+						<pre>user: <?php print_r($this->zfcUserIdentity())?></pre>
+						<pre>profile: <?php print_r($this->zfcUserIdentity()->getProfile())?></pre>
 					</div>
 				</div>
 			</div>
