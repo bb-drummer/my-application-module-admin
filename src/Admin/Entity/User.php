@@ -2,6 +2,7 @@
 
 namespace Admin\Entity;
 
+use \Admin\Module as AdminModule;
 use \ZfcUser\Entity\User as ZfcUser;
 
 class User extends ZfcUser
@@ -181,9 +182,17 @@ class User extends ZfcUser
     
     
     
-    
-    
-    
+    /**
+     * Get user's (basic) profile data.
+     *
+     * @return STRING
+     */
+    public function getProfile()
+    {
+    	$oModule = new AdminModule();
+    	$profile = $oModule->getUserProfile( $this->getId() );
+    	return new \Zend\Config($profile);
+    }
     
     
     

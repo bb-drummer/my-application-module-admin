@@ -367,6 +367,40 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	}
 	
 	/**
+	 * fetch user's profile data
+	 *
+	 * @param $appconfig
+	 * @return Module
+	 */
+	public function getUserProfile( $user_id )
+	{	
+		$nodata = array(
+			"user_id"	=> $user_id,
+			"street"	=> "",
+			"city"		=> "",
+			"country"	=> "",
+			"phone"		=> "",
+			"cell"		=> "",
+
+			"twitter"	=> "",
+			"facebook"	=> "",
+			"skype"		=> "",
+			"icq"		=> "",
+		);
+		try {
+			$table = $this->getServiceLocator('Admin\Model\UserProfileTable');
+			$profile = $table->getUserProfile($user_id);
+			if (!$profile) {
+				$data = $nodata;
+			}
+			return $profile->getArrayCopy();
+		} catch (\Exception $ex) {
+			$data = $nodata;
+		}
+	}
+	
+	
+	/**
 	 * Set app config
 	 *
 	 * @param $appconfig
@@ -437,38 +471,23 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	{
 		return array(
 			'factories' => array(
+					
 				'Admin\Model\UserTable' =>  function($sm) {
 					$tableGateway = $sm->get('AdminUserTableGateway');
 					$table = new UserTable($tableGateway);
 					return $table;
 				},
-				'Admin\Model\SettingsTable' =>  function($sm) {
-					$tableGateway = $sm->get('AdminSettingsTableGateway');
-					$table = new SettingsTable($tableGateway);
-					return $table;
-				},
-				
-				'Admin\Model\AclTable' =>  function($sm) {
-					$tableGateway = $sm->get('AdminAclTableGateway');
-					$table = new AclTable($tableGateway);
-					return $table;
-				},
-				'Admin\Model\AclroleTable' =>  function($sm) {
-					$tableGateway = $sm->get('AdminAclroleTableGateway');
-					$table = new AclroleTable($tableGateway);
-					return $table;
-				},
-				'Admin\Model\AclresourceTable' =>  function($sm) {
-					$tableGateway = $sm->get('AdminAclresourceTableGateway');
-					$table = new AclresourceTable($tableGateway);
-					return $table;
-				},
-				
 				'AdminUserTableGateway' => function ($sm) {
 					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
 					$resultSetPrototype = new ResultSet();
 					$resultSetPrototype->setArrayObjectPrototype(new User());
 					return new TableGateway('user', $dbAdapter, null, $resultSetPrototype);
+				},
+				
+				'Admin\Model\SettingsTable' =>  function($sm) {
+					$tableGateway = $sm->get('AdminSettingsTableGateway');
+					$table = new SettingsTable($tableGateway);
+					return $table;
 				},
 				'AdminSettingsTableGateway' => function ($sm) {
 					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
@@ -477,11 +496,22 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 					return new TableGateway('settings', $dbAdapter, null, $resultSetPrototype);
 				},
 				
+				
+				'Admin\Model\AclTable' =>  function($sm) {
+					$tableGateway = $sm->get('AdminAclTableGateway');
+					$table = new AclTable($tableGateway);
+					return $table;
+				},
 				'AdminAclTableGateway' => function ($sm) {
 					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
 					$resultSetPrototype = new ResultSet();
 					$resultSetPrototype->setArrayObjectPrototype(new Acl());
 					return new TableGateway('acl', $dbAdapter, null, $resultSetPrototype);
+				},
+				'Admin\Model\AclroleTable' =>  function($sm) {
+					$tableGateway = $sm->get('AdminAclroleTableGateway');
+					$table = new AclroleTable($tableGateway);
+					return $table;
 				},
 				'AdminAclroleTableGateway' => function ($sm) {
 					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
@@ -489,11 +519,28 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 					$resultSetPrototype->setArrayObjectPrototype(new Aclrole());
 					return new TableGateway('aclrole', $dbAdapter, null, $resultSetPrototype);
 				},
+				'Admin\Model\AclresourceTable' =>  function($sm) {
+					$tableGateway = $sm->get('AdminAclresourceTableGateway');
+					$table = new AclresourceTable($tableGateway);
+					return $table;
+				},
 				'AdminAclresourceTableGateway' => function ($sm) {
 					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
 					$resultSetPrototype = new ResultSet();
 					$resultSetPrototype->setArrayObjectPrototype(new Aclresource());
 					return new TableGateway('aclresource', $dbAdapter, null, $resultSetPrototype);
+				},
+
+				'Admin\Model\UserProfileTable' =>  function($sm) {
+					$tableGateway = $sm->get('AdminUserProfileTableGateway');
+					$table = new UserProfileTable($tableGateway);
+					return $table;
+				},
+				'AdminUserProfileTableGateway' => function ($sm) {
+					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+					$resultSetPrototype = new ResultSet();
+					$resultSetPrototype->setArrayObjectPrototype(new UserProfile());
+					return new TableGateway('userprofile', $dbAdapter, null, $resultSetPrototype);
 				},
 
                 'zfcuser_redirect_callback' => function ($sm) {

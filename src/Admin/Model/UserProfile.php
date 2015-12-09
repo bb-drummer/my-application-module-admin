@@ -1,28 +1,23 @@
 <?php
 namespace Admin\Model;
-use Zend\Crypt\Password\Bcrypt;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
-use Zend\ServiceManager\ServiceLocator;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\ServiceManagerInterface;
 
-class User implements InputFilterAwareInterface
+class UserProfile implements InputFilterAwareInterface
 {
     public $user_id;
-    public $display_name;
-    public $username;
-    public $email;
+    
     public $street;
     public $city;
     public $phone;
-    public $password;
-    public $state;
-    public $aclrole;
-    public $token;
+    public $cell;
+
+    public $twitter;
+    public $facebook;
+    public $skype;
+    public $icq;
 
     protected $inputFilter;
     protected $userService;
@@ -32,19 +27,18 @@ class User implements InputFilterAwareInterface
     public function exchangeArray($data)
     {
         $this->user_id		= (isset($data['user_id'])) ? $data['user_id'] : null;
-        $this->username		= (isset($data['username'])) ? $data['username'] : null;
-        $this->email		= (isset($data['email'])) ? $data['email'] : null;
+        
         $this->street		= (isset($data['street'])) ? $data['street'] : '';
         $this->city			= (isset($data['city'])) ? $data['city'] : '';
+        $this->country		= (isset($data['country'])) ? $data['country'] : '';
         $this->phone		= (isset($data['phone'])) ? $data['phone'] : '';
-        /* $bcrypt = new Bcrypt;
-        $bcrypt->setCost(null); // @TODO $this->getUserService()->getOptions()->getPasswordCost());
-        $this->password		= (isset($data['password'])) ? $bcrypt->create($data['password']) : null; */
-        $this->password		= (isset($data['password'])) ? $data['password'] : null;
-        $this->display_name	= (isset($data['display_name'])) ? $data['display_name'] : '';
-        $this->state		= (isset($data['state'])) ? $data['state'] : 0;
-        $this->aclrole		= (isset($data['aclrole'])) ? $data['aclrole'] : 'public';
-        $this->token		= (isset($data['token'])) ? $data['token'] : '';
+        $this->cell			= (isset($data['cell'])) ? $data['cell'] : '';
+        
+        $this->twitter		= (isset($data['twitter'])) ? $data['twitter'] : '';
+        $this->facebook		= (isset($data['facebook'])) ? $data['facebook'] : '';
+        $this->skype		= (isset($data['skype'])) ? $data['skype'] : '';
+        $this->icq			= (isset($data['icq'])) ? $data['icq'] : '';
+        
     }
 
     public function getArrayCopy()
@@ -72,8 +66,8 @@ class User implements InputFilterAwareInterface
             )));
 
             $inputFilter->add($factory->createInput(array(
-                'name'     => 'username',
-                'required' => true,
+                'name'     => 'street',
+                'required' => false,
                 'filters'  => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
@@ -91,8 +85,8 @@ class User implements InputFilterAwareInterface
             )));
 
             $inputFilter->add($factory->createInput(array(
-                'name'     => 'email',
-                'required' => true,
+                'name'     => 'city',
+                'required' => false,
                 'filters'  => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
@@ -113,8 +107,8 @@ class User implements InputFilterAwareInterface
             )));
 
             $inputFilter->add($factory->createInput(array(
-                'name'     => 'display_name',
-                'required' => true,
+                'name'     => 'country',
+                'required' => false,
                 'filters'  => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
@@ -132,8 +126,8 @@ class User implements InputFilterAwareInterface
             )));
 
             $inputFilter->add($factory->createInput(array(
-                'name'     => 'password',
-                'required' => true,
+                'name'     => 'phone',
+                'required' => false,
                 'filters'  => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
@@ -143,8 +137,103 @@ class User implements InputFilterAwareInterface
                         'name'    => 'StringLength',
                         'options' => array(
                             'encoding' => 'UTF-8',
-                            'min'      => 6,
-                            'max'      => 32,
+                            'min'      => 1,
+                            'max'      => 100,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'cell',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 100,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'twitter',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 255,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'facebook',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 255,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'skype',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 255,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'icq',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 255,
                         ),
                     ),
                 ),
@@ -155,6 +244,10 @@ class User implements InputFilterAwareInterface
 
         return $this->inputFilter;
     }
+    
+    
+    
+    
     /**
      * Getters/setters for DI stuff
      */
@@ -189,7 +282,7 @@ class User implements InputFilterAwareInterface
      * @param ServiceManager $serviceManager
      * @return User
      */
-    public function setServiceManager(ServiceManagerInterface $serviceManager)
+    public function setServiceManager(ServiceManager $serviceManager)
     {
         $this->serviceManager = $serviceManager;
         return $this;
