@@ -34,6 +34,7 @@
 	<div class="panel-body">
 		
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
 	<div class="panel panel-default">
 		<div class="panel-heading" role="tab" id="h1">
 			<h4 class="panel-title">
@@ -54,6 +55,10 @@
 				</div>
 				<div class="row">
 					<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('phone')); ?>:</span>
+					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getPhone()); ?></span>
+				</div>
+				<div class="row">
+					<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('mobile')); ?>:</span>
 					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getPhone()); ?></span>
 				</div>
 			</div>
@@ -94,7 +99,7 @@
 		<div class="panel-heading" role="tab" id="h3">
 			<h4 class="panel-title">
 				<a role="button" data-toggle="collapse" data-parent="#accordion" href="#p3" aria-expanded="true" aria-controls="p3">
-					<?php echo $this->escapeHtml($this->translate('messengers')); ?>
+					<?php echo $this->escapeHtml($this->translate('others...')); ?>
 				</a>
 			</h4>
 		</div>
