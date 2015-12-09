@@ -388,7 +388,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 			"icq"		=> "",
 		);
 		try {
-			$table = $this->getServiceLocator()->get('Admin\Model\UserProfileTable');
+			$table = $this->getServiceManager()->get('Admin\Model\UserProfileTable');
 			$profile = $table->getUserProfile($user_id);
 			if (!$profile) {
 				$data = $nodata;
