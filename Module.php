@@ -381,7 +381,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	public function getUserProfile( $user_id )
 	{	
 		$oProfile = new UserProfile();
-		$oProfile->load($user_id);
+		$oProfile->load( $user_id );
 		return $oProfile;
 	}
 	

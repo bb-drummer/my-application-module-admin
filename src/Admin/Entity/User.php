@@ -194,7 +194,7 @@ class User extends ZfcUser
     public function getProfile()
     {
 		$oProfile = new UserProfile();
-		$oProfile->load($user_id);
+		$oProfile->load($this->getId());
 		return $oProfile;
     }
     
