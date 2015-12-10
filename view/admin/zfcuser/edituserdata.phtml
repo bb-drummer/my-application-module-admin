@@ -6,7 +6,7 @@
 		<?php
 			$form = $this->userdataForm;
 			$form->prepare();
-			$form->setAttribute('action', $this->url('zfcuser/register'));
+			$form->setAttribute('action', $this->url('zfcuser/edituserdata'));
 			$form->setAttribute('method', 'post');
 			
 			echo $this->form()->openTag($form) ?>
