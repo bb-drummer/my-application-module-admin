@@ -95,7 +95,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		$this->appobj = $application;
 		/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
 		$serviceManager = $application->getServiceManager();
-		self::$serviceManager = $serviceManager;
+		$this->setServiceManager( $serviceManager );
 		/** @var $pluginManagerViewHelper \Zend\View\HelperPluginManager */
 		$viewHelperManager = $serviceManager->get('ViewHelperManager');
 		/** @var $eventManager \Zend\EventManager\EventManager */
@@ -380,31 +380,6 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	 */
 	public function getUserProfile( $user_id )
 	{	
-		/*$nodata = array(
-			"user_id"	=> $user_id,
-			"street"	=> "",
-			"city"		=> "",
-			"country"	=> "",
-			"phone"		=> "",
-			"cell"		=> "",
-
-			"twitter"	=> "",
-			"facebook"	=> "",
-			"skype"		=> "",
-			"icq"		=> "",
-		);
-		try {
-			$oSM = self::$serviceManager;
-			$table = $oSM->get('Admin\Model\UserProfileTable'); // $this->getServiceManager()->get('Admin\Model\UserProfileTable');
-			$profile = $table->getUserProfile($user_id);
-			if (!$profile) {
-				$data = $nodata;
-			}
-			return $profile->getArrayCopy();
-		} catch (\Exception $ex) {
-			$data = $nodata;
-		}*/
-		
 		$oProfile = new UserProfile();
 		$oProfile->load($user_id);
 		return $oProfile;
@@ -431,6 +406,32 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	public function getAppConfig()
 	{
 		return $this->appconfig;
+	}
+	
+	/**
+	 * Set serviceManager instance
+	 *
+	 * @param  ServiceLocatorInterface $serviceLocator
+	 * @return \Admin\Module
+	 */
+	public function setServiceManager($serviceManager)
+	{
+		self::$serviceManager = $serviceManager;
+		return $this;
+	}
+
+	/**
+	 * Retrieve serviceManager instance
+	 *
+	 * @return \Zend\ServiceManager\ServiceManager
+	 */
+	public function getServiceManager()
+	{
+		if (!self::$serviceManager) {
+			
+			self::$serviceManager = new \Zend\ServiceManager\ServiceManager();
+		}
+		return self::$serviceManager;
 	}
 	
 	/**

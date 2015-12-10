@@ -30,7 +30,8 @@ class UserProfile implements InputFilterAwareInterface
     public function load( $id )
     {
     	try {
-    		$oSM = AdminModule::$serviceManager;
+    		$oModule = new AdminModule();
+    		$oSM = $oModule->getServiceManager();
     		$table = $oSM->get('Admin\Model\UserProfileTable'); // $this->getServiceManager()->get('Admin\Model\UserProfileTable');
     		$profile = $table->getUserProfile($user_id);
     		if ($profile) {
@@ -44,7 +45,8 @@ class UserProfile implements InputFilterAwareInterface
     public function save()
     {
     	try {
-    		$oSM = AdminModule::$serviceManager;
+    		$oModule = new AdminModule();
+    		$oSM = $oModule->getServiceManager();
     		$table = $oSM->get('Admin\Model\UserProfileTable'); // $this->getServiceManager()->get('Admin\Model\UserProfileTable');
     		$table->saveUserProfile( $this->getArrayCopy() );
         	return true;

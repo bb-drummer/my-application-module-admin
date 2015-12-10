@@ -3,6 +3,7 @@
 namespace Admin\Entity;
 
 use \Admin\Module as AdminModule;
+use \Admin\Model\UserProfile;
 
 use \Zend\Config\Config;
 
@@ -192,9 +193,9 @@ class User extends ZfcUser
      */
     public function getProfile()
     {
-    	$oModule = new AdminModule();
-    	$profile = $oModule->getUserProfile( $this->getId() );
-    	return $profile; //new \Zend\Config\Config($profile);
+		$oProfile = new UserProfile();
+		$oProfile->load($user_id);
+		return $oProfile;
     }
     
     
