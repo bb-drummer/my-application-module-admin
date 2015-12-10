@@ -160,7 +160,7 @@ return array(
                             'route' => '/profile',
                             'defaults' => array(
                                 'controller' => 'zfcuser',
-                                'action'     => 'profile',
+                                'action'     => 'index',
                             ),
                         ),
                     ),

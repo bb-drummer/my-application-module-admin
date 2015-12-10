@@ -2,11 +2,7 @@
 
 namespace Admin\Entity;
 
-use \Admin\Module as AdminModule;
 use \Admin\Model\UserProfile;
-
-use \Zend\Config\Config;
-
 use \ZfcUser\Entity\User as ZfcUser;
 
 class User extends ZfcUser
