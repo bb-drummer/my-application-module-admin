@@ -30,10 +30,12 @@ use Zend\View\Renderer\PhpRenderer;
 
 use Admin\Controller\RedirectCallback;
 use Admin\Controller\ZfcuserController;
-use Admin\Model\User;
-use Admin\Model\UserTable;
+use Admin\Model\UserProfile;
+use Admin\Model\UserProfileTable;
 use Admin\Model\Settings;
 use Admin\Model\SettingsTable;
+use Admin\Model\User;
+use Admin\Model\UserTable;
 use Admin\Model\Acl;
 use Admin\Model\AclTable;
 use Admin\Model\Aclrole;
