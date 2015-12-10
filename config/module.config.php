@@ -167,7 +167,7 @@ return array(
                     'edituserdata' => array(
                         'type' => 'Literal',
                         'options' => array(
-                            'route' => '/editdata',
+                            'route' => '/edit-userdata',
                             'defaults' => array(
                                 'controller' => 'zfcuser',
                                 'action'     => 'edituserdata',
@@ -177,7 +177,7 @@ return array(
                     'edituserprofile' => array(
                         'type' => 'Literal',
                         'options' => array(
-                            'route' => '/editprofile',
+                            'route' => '/edit-profile',
                             'defaults' => array(
                                 'controller' => 'zfcuser',
                                 'action'     => 'edituserprofile',

@@ -1,20 +1,10 @@
-<?php if (!$this->enableRegistration) { ?>
-<div class="panel panel-warning">
-	<div class="panel-heading">
-		<span class="panel-title"><strong><?php echo $this->translate('register user'); ?></strong></span>
-	</div>
-	<div class="panel-body">
-		<p class="text-xl"><?php echo $this->translate('registration is currently not available, please try again later'); ?></p>
-	</div>
-</div>
-<?php } else { ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<span class="panel-title"><strong><?php echo $this->translate('register user'); ?></strong></span>
+		<span class="panel-title"><strong><?php echo $this->translate('edit userdata'); ?></strong></span>
 	</div>
 	<div class="panel-body">
 		<?php
-			$form = $this->registerForm;
+			$form = $this->userdataForm;
 			$form->prepare();
 			$form->setAttribute('action', $this->url('zfcuser/register'));
 			$form->setAttribute('method', 'post');
@@ -55,7 +45,7 @@
 			<hr />
 			<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary', 'value' => $this->translate('register')))); ?>
 			<input class="btn btn-default" type="reset" value="<?php echo $this->translate("reset"); ?>" />
-			<a class="btn btn-danger" href="<?php echo $this->url('home'); ?>"><?php echo $this->translate("cancel"); ?></a>
+			<a class="btn btn-danger" href="<?php echo $this->url('zfcuser'); ?>"><?php echo $this->translate("cancel"); ?></a>
 	        <?php if ($this->redirect): ?><input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" /><?php endif ?>
 		<?php echo $this->form()->closeTag() ?>
 	</div>

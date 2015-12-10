@@ -17,88 +17,20 @@ class UserProfileForm extends Form
             ),
         ));
         $this->add(array(
-            'name' => 'username',
+            'name' => 'street',
             'attributes' => array(
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'user name',
+                'label' => 'street',
             ),
-        ));
-        $this->add(array(
-            'name' => 'email',
-            'attributes' => array(
-                'type'  => 'text',
-            ),
-            'options' => array(
-                'label' => 'email',
-            ),
-        ));
-        $this->add(array(
-            'name' => 'display_name',
-            'attributes' => array(
-                'type'  => 'text',
-            ),
-            'options' => array(
-                'label' => 'display name',
-            ),
-        ));
-        $this->add(array(
-            'name' => 'password',
-            'attributes' => array(
-                'type'  => 'password',
-            ),
-            'options' => array(
-                'label' => 'password',
-            ),
-        ));
-        $this->add(array(
-            'name' => 'state',
-        	'type' => 'select',
-            'attributes' => array(
-                'type'  => 'select',
-            	'options'	=> array(
-            		'1'	=> 'aktiv',
-            		'0'	=> 'inaktiv',
-            	),
-            ),
-            'options' => array(
-                'label' => 'status',
-            ),
-        ));
-        
-        $this->add(array(
-            'name' => 'aclrole',
-        	'type' => 'select',
-            'attributes' => array(
-                'type'  => 'select',
-            	'options'	=> array(
-            		'public'	=> 'no role',
-            		'user'	=> 'user',
-            		'admin'		=> 'administrator',
-            	),
-            ),
-            'options' => array(
-                'label' => 'role',
-            ),
-        ));
-        
-
-        $this->add(array(
-        	'name' => 'street',
-        	'attributes' => array(
-        		'type'  => 'text',
-        	),
-        	'options' => array(
-        		'label' => 'street',
-        	),
         ));
         $this->add(array(
             'name' => 'city',
             'attributes' => array(
                 'type'  => 'text',
             ),
-            'options' => array( 
+            'options' => array(
                 'label' => 'city',
             ),
         ));
@@ -109,6 +41,53 @@ class UserProfileForm extends Form
             ),
             'options' => array(
                 'label' => 'phone',
+            ),
+        ));
+        $this->add(array(
+            'name' => 'cell',
+            'attributes' => array(
+                'type'  => 'text',
+            ),
+            'options' => array(
+                'label' => 'mobile',
+            ),
+        ));
+        
+
+        $this->add(array(
+        	'name' => 'facebook',
+        	'attributes' => array(
+       			'type'  => 'url',
+       		),
+       		'options' => array(
+       			'label' => 'Facebook',
+       		),
+        ));
+        $this->add(array(
+            'name' => 'twitter',
+            'attributes' => array(
+                'type'  => 'url',
+            ),
+            'options' => array(
+                'label' => 'Twitter',
+            ),
+        ));
+        $this->add(array(
+            'name' => 'skype',
+            'attributes' => array(
+                'type'  => 'text',
+            ),
+            'options' => array(
+                'label' => 'Skype',
+            ),
+        ));
+        $this->add(array(
+            'name' => 'icq',
+            'attributes' => array(
+                'type'  => 'number',
+            ),
+            'options' => array(
+                'label' => 'ICQ',
             ),
         ));
         

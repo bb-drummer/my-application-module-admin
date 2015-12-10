@@ -379,7 +379,7 @@ class ZfcuserController extends UserController
 		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
 		$request	= $this->getRequest();
 		$service	= $this->getUserService();
-		$form		= new UserProfileForm(null, $options); // $this->getRegisterForm();
+		$form		= new UserForm(null, $options);
 		$translator	= $this->getTranslator();
 		
 	}
@@ -407,8 +407,46 @@ class ZfcuserController extends UserController
 		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
 		$request	= $this->getRequest();
 		$service	= $this->getUserService();
-		$form		= new UserProfileForm(); // $this->getRegisterForm();
+		$form		= new UserProfileForm();
 		$translator	= $this->getTranslator();
+		
+		$user = $this->zfcUserAuthentication()->getIdentity();
+		$userId = (int) $user->getId();
+		
+		if ( !$this->getRequest()->isPost() ) {
+			
+			return array(
+				'user' => $user,
+				'userId' => $userId,
+				'userprofileForm'  => $form,
+			);
+			
+		}
+		
+		$data = (array)$this->params()->fromPost();
+		$form->setData( $data );
+		
+		if ( !$form->isValid() ) {
+			
+			return array(
+				'user' => $user,
+				'userId' => $userId,
+				'userprofileForm'  => $form,
+			);
+				
+		} else {
+		
+			$profile = $user->getProfile();
+			$profile->exchangeArray( $data );
+			$profile->save();
+		
+			$this->flashMessenger()->addSuccessMessage(
+					sprintf($translator->translate("user profile data has been changed"), $resetToken)
+					);
+			return $this->redirect()->toRoute('zfcuser');
+				
+		}
+		
 		
 	}
 	
