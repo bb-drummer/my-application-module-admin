@@ -30,8 +30,12 @@
 		<?php if ($this->enableRegistration) : ?>
 		<p class="enabled_registration">
 			<?php echo $this->translate('do not have an account?'); ?>
-			<a href="<?php echo $this->url('zfcuser/register') . ($this->redirect ? '?redirect='.$this->escapeUrl($this->redirect) : '') ?>"><?php echo $this->translate('register now!'); ?></a>
+			<a href="<?php echo $this->url('zfcuser/register') . ($this->redirect ? '?redirect='.$this->escapeUrl($this->redirect) : ''); ?>"><?php echo $this->translate('register now!'); ?></a>
 		</p>
 		<?php endif; ?>
+		<p class="enabled_resetpassword">
+			<?php echo $this->translate('forgot your credentials?'); ?>
+			<a href="<?php echo $this->url('userrequestpasswordreset'); ?>"><?php echo $this->translate('reset your password'); ?></a>
+		</p>
 	</div>
 </div>
