@@ -55,7 +55,7 @@ class UserProfile implements InputFilterAwareInterface
     		$table->saveUserProfile( $this );
         	return true;
     	} catch (\Exception $ex) {
-        	return false;
+        	return $ex->getMessage();
 		}
     }
     

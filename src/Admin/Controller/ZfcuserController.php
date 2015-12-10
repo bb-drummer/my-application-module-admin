@@ -438,11 +438,16 @@ class ZfcuserController extends UserController
 		
 			$profile = $user->getProfile();
 			$profile->exchangeArray( $data );
-			$profile->save();
-		
-			$this->flashMessenger()->addSuccessMessage(
+			$result = $profile->save();
+			if ( $result === true ) {
+				$this->flashMessenger()->addSuccessMessage(
 					sprintf($translator->translate("user profile data has been changed"), $resetToken)
-					);
+				);
+			} else {
+				$this->flashMessenger()->addSuccessMessage(
+					sprintf($translator->translate("user profile could not be changed: ".$result), $resetToken)
+				);
+			}
 			return $this->redirect()->toRoute('zfcuser');
 				
 		}
