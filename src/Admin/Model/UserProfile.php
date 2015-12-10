@@ -29,6 +29,10 @@ class UserProfile implements InputFilterAwareInterface
     
     public function load( $id )
     {
+    	if ( !$id ) {
+    		return $this;
+    	}
+    	$this->user_id = $id;
     	try {
     		$oModule = new AdminModule();
     		$oSM = $oModule->getServiceManager();
