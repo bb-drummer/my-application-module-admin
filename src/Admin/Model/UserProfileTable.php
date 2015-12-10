@@ -57,7 +57,7 @@ class UserProfileTable
         		if ($this->getUserProfile($id)) {
 	                $this->tableGateway->update($data, array('user_id' => $id));
 	            }
-        	} catch (Exception $e) {
+        	} catch (\Exception $e) {
 	            $this->tableGateway->insert($data);
         	}
         }
