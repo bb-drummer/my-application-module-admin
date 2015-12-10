@@ -194,7 +194,7 @@ class User extends ZfcUser
     {
     	$oModule = new AdminModule();
     	$profile = $oModule->getUserProfile( $this->getId() );
-    	return new \Zend\Config\Config($profile);
+    	return $profile; //new \Zend\Config\Config($profile);
     }
     
     
