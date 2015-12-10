@@ -53,12 +53,15 @@ class UserProfileTable
         if ($id == 0) {
         	throw new \Exception('invalid user');
         } else {
-            if ($this->getUserProfile($id)) {
-                $this->tableGateway->update($data, array('user_id' => $id));
-            } else {
-            	$this->tableGateway->insert($data);
-            }
+        	try {
+        		if ($this->getUserProfile($id)) {
+	                $this->tableGateway->update($data, array('user_id' => $id));
+	            }
+        	} catch (Exception $e) {
+	            $this->tableGateway->insert($data);
+        	}
         }
+        return $this;
     }
 
     public function deleteUserProfile($id)
