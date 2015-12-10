@@ -39,7 +39,7 @@
 			<hr />
 			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('captcha')))) ? ' has-error' : '' ?>">
 				<?php echo $this->formLabel($form->get('captcha')); ?>
-				<?php echo $this->formCaptcha($form->get('captcha')->setAttributes(array('class' => 'form-control'))); ?>
+				<?php echo $this->formInput($form->get('captcha')->setAttributes(array('class' => 'form-control'))); ?>
 				<?php echo $this->formElementErrors($form->get('captcha')); ?>
 			</div>
 			<hr />
