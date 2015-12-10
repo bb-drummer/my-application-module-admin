@@ -343,5 +343,133 @@ class UserProfile implements InputFilterAwareInterface
     {
         return $this->serviceLocator;
     }
+    
+	/**
+	 * @return the $user_id
+	 */
+	public function getId() {
+		return $this->user_id;
+	}
 
+	/**
+	 * @param Ambigous <unknown, NULL> $user_id
+	 */
+	public function setId($user_id) {
+		$this->user_id = $user_id;
+	}
+
+	/**
+	 * @return the $street
+	 */
+	public function getStreet() {
+		return $this->street;
+	}
+
+	/**
+	 * @param Ambigous <string, unknown> $street
+	 */
+	public function setStreet($street) {
+		$this->street = $street;
+	}
+
+	/**
+	 * @return the $city
+	 */
+	public function getCity() {
+		return $this->city;
+	}
+
+	/**
+	 * @param Ambigous <string, unknown> $city
+	 */
+	public function setCity($city) {
+		$this->city = $city;
+	}
+
+	/**
+	 * @return the $phone
+	 */
+	public function getPhone() {
+		return $this->phone;
+	}
+
+	/**
+	 * @param Ambigous <string, unknown> $phone
+	 */
+	public function setPhone($phone) {
+		$this->phone = $phone;
+	}
+
+	/**
+	 * @return the $cell
+	 */
+	public function getCell() {
+		return $this->cell;
+	}
+
+	/**
+	 * @param Ambigous <string, unknown> $cell
+	 */
+	public function setCell($cell) {
+		$this->cell = $cell;
+	}
+
+	/**
+	 * @return the $twitter
+	 */
+	public function getTwitter() {
+		return $this->twitter;
+	}
+
+	/**
+	 * @param Ambigous <string, unknown> $twitter
+	 */
+	public function setTwitter($twitter) {
+		$this->twitter = $twitter;
+	}
+
+	/**
+	 * @return the $facebook
+	 */
+	public function getFacebook() {
+		return $this->facebook;
+	}
+
+	/**
+	 * @param Ambigous <string, unknown> $facebook
+	 */
+	public function setFacebook($facebook) {
+		$this->facebook = $facebook;
+	}
+
+	/**
+	 * @return the $skype
+	 */
+	public function getSkype() {
+		return $this->skype;
+	}
+
+	/**
+	 * @param Ambigous <string, unknown> $skype
+	 */
+	public function setSkype($skype) {
+		$this->skype = $skype;
+	}
+
+	/**
+	 * @return the $icq
+	 */
+	public function getIcq() {
+		return $this->icq;
+	}
+
+	/**
+	 * @param Ambigous <string, unknown> $icq
+	 */
+	public function setIcq($icq) {
+		$this->icq = $icq;
+	}
+
+
+    
 }
