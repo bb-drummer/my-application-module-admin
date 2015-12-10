@@ -152,6 +152,40 @@ return array(
                 'may_terminate' => true,
                 'child_routes' => array(),
 			),
+            'zfcuser' => array(
+                'child_routes' => array(
+                    'userprofile' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/profile',
+                            'defaults' => array(
+                                'controller' => 'zfcuser',
+                                'action'     => 'profile',
+                            ),
+                        ),
+                    ),
+                    'edituserdata' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/editdata',
+                            'defaults' => array(
+                                'controller' => 'zfcuser',
+                                'action'     => 'edituserdata',
+                            ),
+                        ),
+                    ),
+                    'edituserprofile' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/editprofile',
+                            'defaults' => array(
+                                'controller' => 'zfcuser',
+                                'action'     => 'edituserprofile',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
     'view_manager' => array(

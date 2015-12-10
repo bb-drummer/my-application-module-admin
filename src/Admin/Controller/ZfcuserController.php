@@ -14,6 +14,8 @@ namespace Admin\Controller;
 use Admin\Module as AdminModule;
 use Admin\Form\RequestPasswordResetForm;
 use Admin\Form\ResetPasswordForm;
+use Admin\Form\UserForm;
+use Admin\Form\UserProfileForm;
 
 use Zend\Crypt\Password\Bcrypt;
 use Zend\Stdlib\ResponseInterface as Response;
@@ -351,6 +353,62 @@ class ZfcuserController extends UserController
 				. ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
 			
 		}
+		
+	}
+
+	/**
+	 * view user's basic data
+	 */
+	public function userdataAction()
+	{
+	}
+
+	/**
+	 * edit user's basic data
+	 */
+	public function edituserdataAction()
+	{
+		
+		// if the user is logged in...
+		if (!$this->zfcUserAuthentication()->hasIdentity()) {
+			// ...redirect to the login redirect route
+			return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
+		}
+		
+		$config		= $this->getServiceLocator()->get('Config');
+		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
+		$request	= $this->getRequest();
+		$service	= $this->getUserService();
+		$form		= new UserProfileForm(null, $options); // $this->getRegisterForm();
+		$translator	= $this->getTranslator();
+		
+	}
+	
+	/**
+	 * view user's profile data
+	 */
+	public function userprofileAction()
+	{
+	}
+
+	/**
+	 * edit user's profile data
+	 */
+	public function edituserprofileAction()
+	{
+		
+		// if the user is logged in...
+		if (!$this->zfcUserAuthentication()->hasIdentity()) {
+			// ...redirect to the login redirect route
+			return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
+		}
+		
+		$config		= $this->getServiceLocator()->get('Config');
+		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
+		$request	= $this->getRequest();
+		$service	= $this->getUserService();
+		$form		= new UserProfileForm(); // $this->getRegisterForm();
+		$translator	= $this->getTranslator();
 		
 	}
 	
