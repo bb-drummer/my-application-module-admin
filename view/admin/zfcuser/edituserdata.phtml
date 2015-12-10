@@ -10,43 +10,16 @@
 			$form->setAttribute('method', 'post');
 			
 			echo $this->form()->openTag($form) ?>
-			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('username')))) ? ' has-error' : '' ?>">
-				<?php echo $this->formLabel($form->get('username')); ?>
-				<?php echo $this->formInput($form->get('username')->setAttributes(array('class' => 'form-control'))); ?>
-				<?php echo $this->formElementErrors($form->get('username')); ?>
-			</div>
-			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('email')))) ? ' has-error' : '' ?>">
-				<?php echo $this->formLabel($form->get('email')); ?>
-				<?php echo $this->formInput($form->get('email')->setAttributes(array('class' => 'form-control'))); ?>
-				<?php echo $this->formElementErrors($form->get('email')); ?>
-			</div>
 			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('display_name')))) ? ' has-error' : '' ?>">
 				<?php echo $this->formLabel($form->get('display_name')); ?>
 				<?php echo $this->formInput($form->get('display_name')->setAttributes(array('class' => 'form-control'))); ?>
 				<?php echo $this->formElementErrors($form->get('display_name')); ?>
 			</div>
-			<hr />
-			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('password')))) ? ' has-error' : '' ?>">
-				<?php echo $this->formLabel($form->get('password')); ?>
-				<?php echo $this->formInput($form->get('password')->setAttributes(array('class' => 'form-control'))); ?>
-				<?php echo $this->formElementErrors($form->get('password')); ?>
-			</div>
-			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('passwordVerify')))) ? ' has-error' : '' ?>">
-				<?php echo $this->formLabel($form->get('passwordVerify')); ?>
-				<?php echo $this->formInput($form->get('passwordVerify')->setAttributes(array('class' => 'form-control'))); ?>
-				<?php echo $this->formElementErrors($form->get('passwordVerify')); ?>
-			</div>
-			<hr />
-			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('captcha')))) ? ' has-error' : '' ?>">
-				<?php echo $this->formLabel($form->get('captcha')); ?>
-				<?php echo $this->formInput($form->get('captcha')->setAttributes(array('class' => 'form-control'))); ?>
-				<?php echo $this->formElementErrors($form->get('captcha')); ?>
-			</div>
-			<hr />
 			<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary'))); ?>
 			<input class="btn btn-default" type="reset" value="<?php echo $this->translate("reset"); ?>" />
 			<a class="btn btn-danger" href="<?php echo $this->url('zfcuser'); ?>"><?php echo $this->translate("cancel"); ?></a>
 	        <?php if ($this->redirect): ?><input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" /><?php endif ?>
+	        <input type="hidden" name="user_id" value="<?php echo $this->escapeHtml($this->userId) ?>" />
 		<?php echo $this->form()->closeTag() ?>
 	</div>
 </div>

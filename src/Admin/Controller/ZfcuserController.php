@@ -14,7 +14,7 @@ namespace Admin\Controller;
 use Admin\Module as AdminModule;
 use Admin\Form\RequestPasswordResetForm;
 use Admin\Form\ResetPasswordForm;
-use Admin\Form\UserForm;
+use Admin\Form\UserDataForm;
 use Admin\Form\UserProfileForm;
 
 use Zend\Crypt\Password\Bcrypt;
@@ -361,14 +361,6 @@ class ZfcuserController extends UserController
 	 */
 	public function userdataAction()
 	{
-	}
-
-	/**
-	 * edit user's basic data
-	 */
-	public function edituserdataAction()
-	{
-		
 		// if the user is logged in...
 		if (!$this->zfcUserAuthentication()->hasIdentity()) {
 			// ...redirect to the login redirect route
@@ -379,7 +371,6 @@ class ZfcuserController extends UserController
 		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
 		$request	= $this->getRequest();
 		$service	= $this->getUserService();
-		$form		= new UserForm(null, $options);
 		$translator	= $this->getTranslator();
 		
 	}
@@ -389,15 +380,92 @@ class ZfcuserController extends UserController
 	 */
 	public function userprofileAction()
 	{
+		// if the user is logged in...
+		if (!$this->zfcUserAuthentication()->hasIdentity()) {
+			// ...redirect to the login redirect route
+			return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
+		}
+		
+		$config		= $this->getServiceLocator()->get('Config');
+		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
+		$request	= $this->getRequest();
+		$service	= $this->getUserService();
+		$translator	= $this->getTranslator();
+		
 	}
 
+	/**
+	 * edit user's basic data
+	 */
+	public function edituserdataAction()
+	{
+		
+		// if the user is not logged in...
+		if (!$this->zfcUserAuthentication()->hasIdentity()) {
+			// ...redirect to the login redirect route
+			return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
+		}
+		
+		$config		= $this->getServiceLocator()->get('Config');
+		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
+		$request	= $this->getRequest();
+		$service	= $this->getUserService();
+		$form		= new UserDataForm();
+		$translator	= $this->getTranslator();
+		
+		$user = $this->zfcUserAuthentication()->getIdentity();
+		$userId = (int) $user->getId();
+
+		$form->bind( $user );
+		
+		if ( !$this->getRequest()->isPost() ) {
+			
+			return array(
+				'user' => $user,
+				'userId' => $userId,
+				'userdataForm'  => $form,
+			);
+			
+		}
+		
+		$data = (array)$this->params()->fromPost();
+		$form->setData( $data );
+		
+		if ( !$form->isValid() ) {
+			
+			return array(
+				'user' => $user,
+				'userId' => $userId,
+				'userdataForm'  => $form,
+			);
+				
+		} else {
+		
+			$profile->exchangeArray( $data );
+			$result = $profile->save();
+			if ( $result === true ) {
+				$this->flashMessenger()->addSuccessMessage(
+					$translator->translate("user data has been changed")
+				);
+			} else {
+				$this->flashMessenger()->addSuccessMessage(
+					$translator->translate("user data could not be changed")
+				);
+			}
+			return $this->redirect()->toRoute('zfcuser');
+				
+		}
+		
+		
+	}
+	
 	/**
 	 * edit user's profile data
 	 */
 	public function edituserprofileAction()
 	{
 		
-		// if the user is logged in...
+		// if the user is not logged in...
 		if (!$this->zfcUserAuthentication()->hasIdentity()) {
 			// ...redirect to the login redirect route
 			return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
@@ -443,11 +511,11 @@ class ZfcuserController extends UserController
 			$result = $profile->save();
 			if ( $result === true ) {
 				$this->flashMessenger()->addSuccessMessage(
-					sprintf($translator->translate("user profile data has been changed"), $resetToken)
+					$translator->translate("user profile data has been changed")
 				);
 			} else {
 				$this->flashMessenger()->addSuccessMessage(
-					sprintf($translator->translate("user profile could not be changed: ".$result), $resetToken)
+					$translator->translate("user profile data could not be changed")
 				);
 			}
 			return $this->redirect()->toRoute('zfcuser');
