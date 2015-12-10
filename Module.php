@@ -405,7 +405,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 			$data = $nodata;
 		}
 		$oProfile = new UserProfile();
-		$oProfile->exchangeArray($profile);
+		$oProfile->exchangeArray($data);
 		return $oProfile;
 	}
 	
