@@ -412,6 +412,9 @@ class ZfcuserController extends UserController
 		
 		$user = $this->zfcUserAuthentication()->getIdentity();
 		$userId = (int) $user->getId();
+
+		$profile = $user->getProfile();
+		$form->bind( $profile );
 		
 		if ( !$this->getRequest()->isPost() ) {
 			
@@ -436,7 +439,6 @@ class ZfcuserController extends UserController
 				
 		} else {
 		
-			$profile = $user->getProfile();
 			$profile->exchangeArray( $data );
 			$result = $profile->save();
 			if ( $result === true ) {
