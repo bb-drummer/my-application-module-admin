@@ -380,7 +380,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	 */
 	public function getUserProfile( $user_id )
 	{	
-		$nodata = array(
+		/*$nodata = array(
 			"user_id"	=> $user_id,
 			"street"	=> "",
 			"city"		=> "",
@@ -403,9 +403,10 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 			return $profile->getArrayCopy();
 		} catch (\Exception $ex) {
 			$data = $nodata;
-		}
+		}*/
+		
 		$oProfile = new UserProfile();
-		$oProfile->exchangeArray($data);
+		$oProfile->load($user_id);
 		return $oProfile;
 	}
 	

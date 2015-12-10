@@ -1,5 +1,8 @@
 <?php
 namespace Admin\Model;
+
+use Admin\Module as AdminModule;
+
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilterAwareInterface;
@@ -23,6 +26,32 @@ class UserProfile implements InputFilterAwareInterface
     protected $userService;
     protected $serviceManager;
     protected $serviceLocator;
+    
+    public function load( $id )
+    {
+    	try {
+    		$oSM = AdminModule::$serviceManager;
+    		$table = $oSM->get('Admin\Model\UserProfileTable'); // $this->getServiceManager()->get('Admin\Model\UserProfileTable');
+    		$profile = $table->getUserProfile($user_id);
+    		if ($profile) {
+    			$this->exchangeArray( $profile->getArrayCopy() );
+    		}
+    	} catch (\Exception $ex) { }
+    	
+        return $this;
+    }
+    
+    public function save()
+    {
+    	try {
+    		$oSM = AdminModule::$serviceManager;
+    		$table = $oSM->get('Admin\Model\UserProfileTable'); // $this->getServiceManager()->get('Admin\Model\UserProfileTable');
+    		$table->saveUserProfile( $this->getArrayCopy() );
+        	return true;
+    	} catch (\Exception $ex) {
+        	return false;
+		}
+    }
     
     public function exchangeArray($data)
     {
