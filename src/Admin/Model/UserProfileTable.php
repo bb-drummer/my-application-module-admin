@@ -33,7 +33,10 @@ class UserProfileTable
 
     public function saveUserProfile(UserProfile $user)
     {
+    	
         $data = array(
+            'user_id'		=> $user->user_id,
+        		
             'street'		=> $user->street,
             'city'			=> $user->city,
             'country'		=> $user->country,
@@ -48,12 +51,12 @@ class UserProfileTable
 
         $id = (int)$user->user_id;
         if ($id == 0) {
-            $this->tableGateway->insert($data);
+        	throw new \Exception('invalid user');
         } else {
             if ($this->getUserProfile($id)) {
                 $this->tableGateway->update($data, array('user_id' => $id));
             } else {
-                throw new \Exception('User id does not exist');
+            	$this->tableGateway->insert($data);
             }
         }
     }
