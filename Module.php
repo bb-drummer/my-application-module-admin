@@ -48,6 +48,9 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	protected $appobj;
 	protected $appconfig;
 	protected $serviceLocator;
+
+	/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
+	protected static $serviceManager;
 	
 	public function getAutoloaderConfig()
 	{
@@ -90,6 +93,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		$this->appobj = $application;
 		/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
 		$serviceManager = $application->getServiceManager();
+		self::$serviceManager = $serviceManager;
 		/** @var $pluginManagerViewHelper \Zend\View\HelperPluginManager */
 		$viewHelperManager = $serviceManager->get('ViewHelperManager');
 		/** @var $eventManager \Zend\EventManager\EventManager */
@@ -388,7 +392,8 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 			"icq"		=> "",
 		);
 		try {
-			$table = $this->getServiceManager()->get('Admin\Model\UserProfileTable');
+			$oSM = self::$serviceManager;
+			$table = $oSM->get('Admin\Model\UserProfileTable'); // $this->getServiceManager()->get('Admin\Model\UserProfileTable');
 			$profile = $table->getUserProfile($user_id);
 			if (!$profile) {
 				$data = $nodata;
