@@ -52,7 +52,7 @@ class UserProfile implements InputFilterAwareInterface
     		$oModule = new AdminModule();
     		$oSM = $oModule->getServiceManager();
     		$table = $oSM->get('Admin\Model\UserProfileTable'); // $this->getServiceManager()->get('Admin\Model\UserProfileTable');
-    		$table->saveUserProfile( $this->getArrayCopy() );
+    		$table->saveUserProfile( $this );
         	return true;
     	} catch (\Exception $ex) {
         	return false;
