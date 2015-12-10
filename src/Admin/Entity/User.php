@@ -197,9 +197,17 @@ class User extends ZfcUser
     
     
     
+    public function getArrayCopy()
+    {
+    	return $this->__getArrayCopy();
+    }
+    
+    
+    
+    
     public function __getArrayCopy()
     {
-        return array(
+		return array(
         	"id"			=> $this->getId(),
         	"username"		=> $this->getUsername(),
         	"email"			=> $this->getEmail(),

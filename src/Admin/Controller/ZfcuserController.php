@@ -414,9 +414,11 @@ class ZfcuserController extends UserController
 		$translator	= $this->getTranslator();
 		
 		$user = $this->zfcUserAuthentication()->getIdentity();
+		$oUser = new \Admin\Model\User();
+		$oUser->exchangeArray($user->getArrayCopy());
 		$userId = (int) $user->getId();
 
-		$form->bind( $user );
+		$form->bind( $oUser );
 		
 		if ( !$this->getRequest()->isPost() ) {
 			
