@@ -404,6 +404,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		} catch (\Exception $ex) {
 			$data = $nodata;
 		}
+		return $data;
 	}
 	
 	
