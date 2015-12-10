@@ -77,19 +77,19 @@
 					<div class="panel-body">
 						<div class="row">
 							<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('twitter')); ?>:</span>
-							<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getStreet()); ?></span>
+							<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getTwitter()); ?></span>
 						</div>
 						<div class="row">
 							<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('facebook')); ?>:</span>
-							<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getCity()); ?></span>
+							<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getFacebook()); ?></span>
 						</div>
 						<div class="row">
 							<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('skype')); ?>:</span>
-							<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getPhone()); ?></span>
+							<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getSkype()); ?></span>
 						</div>
 						<div class="row">
 							<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('icq')); ?>:</span>
-							<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getPhone()); ?></span>
+							<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getIcq()); ?></span>
 						</div>
 					</div>
 				</div>
