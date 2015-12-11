@@ -1,43 +1,39 @@
-<div class="row">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<span class="panel-title"><strong><?php echo $this->translate('user profile'); ?></strong></span>
-		</div>
-		<div class="panel-body panel-toolbar">
-			<div class="btn-group btn-group-sm" role="group" aria-label="<?php echo $this->translate('user profile actions'); ?>">
-				<a class="btn btn-default btn-clean btn-sm" href="<?php echo $this->url('zfcuser/edituserprofile') ?>"><span class="fa fa-edit"></span> <?php echo $this->translate('edit profile'); ?></a>
-				<a class="btn btn-default btn-clean btn-sm" href="<?php echo $this->url('zfcuser/edituserdata') ?>"><span class="fa fa-user"></span> <?php echo $this->translate('edit userdata'); ?></a>
-				<a class="btn btn-default btn-clean btn-sm" href="<?php echo $this->url('zfcuser/changeemail') ?>"><span class="fa fa-envelope"></span> <?php echo $this->translate('change email'); ?></a>
-				<a class="btn btn-default btn-clean btn-sm" href="<?php echo $this->url('zfcuser/changepassword') ?>"><span class="fa fa-lock"></span> <?php echo $this->translate('change password'); ?></a>
-				<a class="btn btn-default btn-clean btn-sm" href="<?php echo $this->url('zfcuser/logout') ?>"><span class="fa fa-power-off"></span> <?php echo $this->translate('logout'); ?></a>
-			</div>
-		</div>
-		<div class="panel-body">
-			<section class="row">
-				<div class="col-md-2">
-					<?php echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?>
-				</div>
-				<div class="col-md-10">
-					<h3><?php echo $this->translate('Hallo'); ?>, <?php echo $this->zfcUserDisplayName() ?>!</h3>
-					<hr />
-					<div class="row">
-						<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('user')); ?>:</span>
-						<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getUsername()); ?>, 
-							<a href="mailto:<?php echo ($this->zfcUserIdentity()->getEmail()); ?>" target="_blank"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getEmail()); ?></a></span>
-					</div>
-					<div class="row">
-						<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('role')); ?>:</span>
-						<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getAclrole()); ?></span>
-					</div>
-				</div>
-			</section>
-		</div>
-		<div class="panel-body panel-user-profile hide hidden">
-	
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="panel-title"><strong><?php echo $this->translate('user profile'); ?></strong></span>
+	</div>
+	<div class="panel-body panel-toolbar">
+		<div class="btn-group btn-group-sm" role="group" aria-label="<?php echo $this->translate('user profile actions'); ?>">
+			<a class="btn btn-default btn-clean btn-sm" href="<?php echo $this->url('zfcuser/edituserprofile') ?>"><span class="fa fa-edit"></span> <?php echo $this->translate('edit profile'); ?></a>
+			<a class="btn btn-default btn-clean btn-sm" href="<?php echo $this->url('zfcuser/edituserdata') ?>"><span class="fa fa-user"></span> <?php echo $this->translate('edit userdata'); ?></a>
+			<a class="btn btn-default btn-clean btn-sm" href="<?php echo $this->url('zfcuser/changeemail') ?>"><span class="fa fa-envelope"></span> <?php echo $this->translate('change email'); ?></a>
+			<a class="btn btn-default btn-clean btn-sm" href="<?php echo $this->url('zfcuser/changepassword') ?>"><span class="fa fa-lock"></span> <?php echo $this->translate('change password'); ?></a>
+			<a class="btn btn-default btn-clean btn-sm" href="<?php echo $this->url('zfcuser/logout') ?>"><span class="fa fa-power-off"></span> <?php echo $this->translate('logout'); ?></a>
 		</div>
 	</div>
-</div>		
-		<div class="panel-group row" id="accordion" role="__tablist" aria-multiselectable="true">
+	<div class="panel-body">
+		<section class="row">
+			<div class="col-md-2">
+				<?php echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?>
+			</div>
+			<div class="col-md-10">
+				<h3><?php echo $this->translate('Hallo'); ?>, <?php echo $this->zfcUserDisplayName() ?>!</h3>
+				<hr />
+				<div class="row">
+					<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('user')); ?>:</span>
+					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getUsername()); ?>, 
+						<a href="mailto:<?php echo ($this->zfcUserIdentity()->getEmail()); ?>" target="_blank"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getEmail()); ?></a></span>
+				</div>
+				<div class="row">
+					<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('role')); ?>:</span>
+					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getAclrole()); ?></span>
+				</div>
+			</div>
+		</section>
+	</div>
+	<div class="panel-body panel-user-profile">
+		
+		<div class="panel-group row container-fluid" id="accordion" role="tablist" aria-multiselectable="true">
 		
 			<div class="panel panel-default col-md-6 col-xs-12">
 				<div class="panel-heading" role="tab" id="h1">
@@ -118,4 +114,6 @@
 		</div>
 
 
+	</div>
+</div>
 
