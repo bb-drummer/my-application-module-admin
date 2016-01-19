@@ -16,7 +16,7 @@
     "psr-0" : {
       "Admin" : "src/"
     },
-    "classmap" : [ "./Module.php" ]
+    "classmap" : [ "./Module.php", "./src/" ]
   },
   "suggest" : { },
   "scripts" : {
