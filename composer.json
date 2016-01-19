@@ -14,7 +14,7 @@
   },
   "autoload" : {
     "psr-0" : {
-      "Admin" : "src/"
+      "Admin" : "src/Admin/"
     },
     "classmap" : [ "./Module.php" ]
   },
@@ -29,5 +29,8 @@
     "name" : "Björn Bartels",
     "email" : "bartels@dragon-projects.net",
     "homepage" : "http://dragon-projects.net"
-  } ]
+  } ],
+  "require-dev": {
+    "phpunit/phpunit": "^5.1"
+  }
 }
