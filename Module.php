@@ -484,6 +484,8 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		return array(
 			'factories' => array(
 					
+				
+					
 				'Admin\Model\UserTable' =>  function($sm) {
 					$tableGateway = $sm->get('AdminUserTableGateway');
 					$table = new UserTable($tableGateway);

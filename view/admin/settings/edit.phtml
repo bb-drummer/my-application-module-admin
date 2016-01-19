@@ -17,6 +17,16 @@
 			$form->prepare();
 		
 			echo $this->form()->openTag($form); ?>
+			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('scope')))) ? ' has-error' : '' ?>">
+				<?php echo $this->formLabel($form->get('scope')); ?>
+				<?php echo $this->formInput($form->get('scope')->setAttributes(array('class' => 'form-control'))); ?>
+				<?php echo $this->formElementErrors($form->get('scope')); ?>
+			</div>
+			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('ref_id')))) ? ' has-error' : '' ?>">
+				<?php echo $this->formLabel($form->get('ref_id')); ?>
+				<?php echo $this->formInput($form->get('ref_id')->setAttributes(array('class' => 'form-control'))); ?>
+				<?php echo $this->formElementErrors($form->get('ref_id')); ?>
+			</div>
 			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('type')))) ? ' has-error' : '' ?>">
 				<?php echo $this->formLabel($form->get('type')); ?>
 				<?php echo $this->formInput($form->get('type')->setAttributes(array('class' => 'form-control'))); ?>

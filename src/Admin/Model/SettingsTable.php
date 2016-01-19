@@ -14,10 +14,32 @@ class SettingsTable
         $this->tableGateway = $tableGateway;
     }
 
-    public function fetchAll()
+    public function fetchAll($scope = '')
     {
-        $resultSet = $this->tableGateway->select(function (Select $select) {
-		     $select->order('type, name ASC');
+        $resultSet = $this->tableGateway->select(function (Select $select) use ($scope) {
+        	if (!empty($scope)) {
+				$select->where('scope = \''.$scope.'\'')->order('type, name ASC');
+        	} else {
+				$select->order('type, name ASC');
+        	}
+		});
+        return $resultSet;
+    }
+
+    public function fetchApplication()
+    {
+        return $this->fetchAll('application');
+    }
+
+    public function fetchUser( $id )
+    {
+    	if (!$id) { return array(); }
+        $resultSet = $this->tableGateway->select(function (Select $select) use ($id) {
+        	if (!empty($scope)) {
+				$select->where(array( '(scope = \'user\') AND (ref_id = \''.((int)$id).'\')' ))->order('type, name ASC');
+        	} else {
+				$select->order('type, name ASC');
+        	}
 		});
         return $resultSet;
     }
@@ -36,9 +58,11 @@ class SettingsTable
     public function saveSettings(Settings $settings)
     {
         $data = array(
-            'type'	=> $settings->type,
+            'scope'		=> $settings->scope,
+            'ref_id'	=> $settings->ref_id,
+            'type'		=> $settings->type,
             'name'		=> $settings->name,
-            'value'			=> $settings->value,
+            'value'		=> $settings->value,
         );
 
         $id = (int)$settings->settings_id;

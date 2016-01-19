@@ -8,6 +8,10 @@
 		<div class="btn-group btn-group-sm">
 			<a class="btn btn-default btn-clean btn-cta-xhr btn-sm" href="<?php echo $this->url('admin/acledit', array('action'=>'addrole'));?>"><span class="fa fa-plus"></span> <?php echo $this->translate("add role")?></a>
 		</div>
+		<div class="btn-group btn-group-sm">
+			<a class="btn btn-default btn-clean btn-cta-xhr btn-sm" href="<?php echo $this->url('admin/acledit');?>"><span class="fa fa-plus"></span> <?php echo $this->translate("ACL")?></a>
+			<a class="btn btn-default btn-clean btn-cta-xhr btn-sm" href="<?php echo $this->url('admin/acledit', array('action'=>'resources'));?>"><span class="fa fa-plus"></span> <?php echo $this->translate("manage resources")?></a>
+		</div>
 	</div>
 	<div class="panel-body">
 		<div class="table-responsive">

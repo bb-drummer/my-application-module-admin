@@ -1,14 +1,19 @@
 <?php
 namespace Admin\Model;
+
+use Zend\Crypt\Password\Bcrypt;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
-use Zend\Crypt\Password\Bcrypt;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
-class Settings implements InputFilterAwareInterface
+class Settings implements InputFilterAwareInterface, ServiceLocatorAwareInterface
 {
     public $settings_id;
+    public $scope;
+    public $ref_id;
     public $type;
     public $name;
     public $value;
@@ -21,6 +26,8 @@ class Settings implements InputFilterAwareInterface
     public function exchangeArray($data)
     {
         $this->settings_id	= (isset($data['settings_id'])) ? $data['settings_id'] : null;
+        $this->scope		= (isset($data['scope'])) ? $data['scope'] : null;
+        $this->ref_id		= (isset($data['ref_id'])) ? $data['ref_id'] : null;
         $this->type			= (isset($data['type'])) ? $data['type'] : null;
         $this->name			= (isset($data['name'])) ? $data['name'] : null;
         $this->value		= (isset($data['value'])) ? $data['value'] : null;
@@ -47,6 +54,44 @@ class Settings implements InputFilterAwareInterface
                 'required' => true,
                 'filters'  => array(
                     array('name' => 'Int'),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'scope',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 32,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'ref_id',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 32,
+                        ),
+                    ),
                 ),
             )));
 

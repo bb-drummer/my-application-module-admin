@@ -1,6 +1,11 @@
 <?php
 return array(
 	'settings' => array(
+		'scopes' => array(
+			'system'		=> 'system',
+			'application'	=> 'application',
+			'user'			=> 'user',
+		),
 		'types' => array(
 			'system'		=> 'system',
 			'application'	=> 'application',
