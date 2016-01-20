@@ -534,7 +534,7 @@ class ZfcuserController extends UserController
 					$this->layout('layout/ajax');
 					
 					$viewHelperManager = $this->getServiceLocator()->get('ViewHelperManager');
-					$flashMessenger = $viewHelperManager->get('flashMessenger'); // $escapeHtml can be called as function because of its __invoke method
+					$flashMessenger = $viewHelperManager->get('flashmessenger'); // $escapeHtml can be called as function because of its __invoke method
 					$messages = $this->flashMessenger()->getCurrentErrorMessages();
 					print_r(array_merge_recursive(
 						$messages,
