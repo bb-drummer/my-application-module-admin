@@ -22,6 +22,7 @@ use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Stdlib\Parameters;
 
 use ZfcUser\Controller\UserController;
+use Zend\View\Helper\ViewModel;
 
 class ZfcuserController extends UserController
 {
@@ -450,7 +451,7 @@ class ZfcuserController extends UserController
 					$translator->translate("user data has been changed")
 				);
 			} else {
-				$this->flashMessenger()->addSuccessMessage(
+				$this->flashMessenger()->addWarningMessage(
 					$translator->translate("user data could not be changed")
 				);
 			}
@@ -517,7 +518,7 @@ class ZfcuserController extends UserController
 					$translator->translate("user profile data has been changed")
 				);
 			} else {
-				$this->flashMessenger()->addSuccessMessage(
+				$this->flashMessenger()->addWarningMessage(
 					$translator->translate("user profile data could not be changed")
 				);
 			}
@@ -529,10 +530,11 @@ class ZfcuserController extends UserController
 				//if ( strpos($sAccept, 'text/html') !== false ) {
 				if ( strpos($sFancybox, 'true') !== false ) {
 					$this->layout('layout/ajax');
-					echo $this->flashMessenger()->render('error', array('error alert flashmessages'));
-					echo $this->flashMessenger()->render('warning', array('warning alert flashmessages'));
-					echo $this->flashMessenger()->render('success', array('success alert flashmessages'));
-					echo $this->flashMessenger()->render('info', array('info alert flashmessages'));
+					$view = new ViewModel();
+					echo $view->flashMessenger()->render('error', array('error alert flashmessages'));
+					echo $view->flashMessenger()->render('warning', array('warning alert flashmessages'));
+					echo $view->flashMessenger()->render('success', array('success alert flashmessages'));
+					echo $view->flashMessenger()->render('info', array('info alert flashmessages'));
 				} else {
 					$this->layout('layout/json');
 					echo json_encode($this->flashMessenger()->getMessages());
