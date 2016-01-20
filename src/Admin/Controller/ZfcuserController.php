@@ -511,6 +511,17 @@ class ZfcuserController extends UserController
 		
 			$profile->exchangeArray( $data );
 			$result = $profile->save();
+
+			if ( $result === true ) {
+				$this->flashMessenger()->addSuccessMessage(
+					$translator->translate("user profile data has been changed")
+				);
+			} else {
+				$this->flashMessenger()->addSuccessMessage(
+					$translator->translate("user profile data could not be changed")
+				);
+			}
+			
 			if ( $oController->getRequest()->isXmlHttpRequest() ) {
 				if ( strpos($sAccept, 'text/html') !== false ) {
 					$oController->layout('layout/ajax');
@@ -525,15 +536,6 @@ class ZfcuserController extends UserController
 				exit();
 			} else {
 				//$oController->layout('layout/layout');
-				if ( $result === true ) {
-					$this->flashMessenger()->addSuccessMessage(
-						$translator->translate("user profile data has been changed")
-					);
-				} else {
-					$this->flashMessenger()->addSuccessMessage(
-						$translator->translate("user profile data could not be changed")
-					);
-				}
 				return $this->redirect()->toRoute('zfcuser');
 			}
 				
