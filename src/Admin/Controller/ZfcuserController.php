@@ -490,6 +490,7 @@ class ZfcuserController extends UserController
 		if ( !$this->getRequest()->isPost() ) {
 			
 			return array(
+				'isXHR' => $this->getRequest()->isXmlHttpRequest(),
 				'user' => $user,
 				'userId' => $userId,
 				'userprofileForm'  => $form,
