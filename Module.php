@@ -49,7 +49,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 
 	protected $appobj;
 	protected $appconfig;
-	protected $serviceLocator;
+	protected static $serviceLocator;
 
 	/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
 	protected static $serviceManager;
@@ -442,21 +442,22 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	 */
 	public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
 	{
-		$this->serviceLocator = $serviceLocator;
+		self::$serviceLocator = $serviceLocator;
 		return $this;
 	}
 
 	/**
 	 * Retrieve serviceManager instance
 	 *
-	 * @return ServiceLocatorInterface
+	 * @return \Zend\Di\ServiceLocator
 	 */
 	public function getServiceLocator()
 	{
-		if (!$this->serviceLocator) {
-			$this->serviceLocator = new \Zend\Di\ServiceLocator();
+		if (!self::$serviceLocator) {
+			self::$serviceLocator = new \Zend\Di\ServiceLocator();
+			//$this->serviceLocator = new \Zend\Di\ServiceLocator();
 		}
-		return $this->serviceLocator;
+		return self::$serviceLocator;
 	}
 	
     public function getControllerConfig()
