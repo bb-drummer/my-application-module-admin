@@ -528,53 +528,35 @@ class ZfcuserController extends UserController
 			if ( $this->getRequest()->isXmlHttpRequest() ) {
 				$sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
 				$sFancybox = $this->getRequest()->getHeaders()->get('X-Fancybox')->toString();
-				// print_r($sAccept); print_r($sFancybox);
-				if ( strpos($sAccept, 'text/html') !== false ) {
-				//if ( strpos($sFancybox, 'true') !== false ) {
-					$this->layout('layout/ajax');
+				if ( ( strpos($sAccept, 'text/html') !== false ) || ( strpos($sFancybox, 'true') !== false ) ) {
+					//$this->layout('layout/ajax');
 					
 					$viewHelperManager = $this->getServiceLocator()->get('ViewHelperManager');
-					$flashMessenger = $viewHelperManager->get('flashmessenger'); // $escapeHtml can be called as function because of its __invoke method
-					/*$messages = $this->flashMessenger()->getCurrentErrorMessages();
-					print_r(array_merge_recursive(
-						$messages,
-						$this->flashMessenger()->getCurrentWarningMessages(),
-						$this->flashMessenger()->getCurrentSuccessMessages(),
-						$this->flashMessenger()->getCurrentInfoMessages()
-					));*/
-					echo $flashMessenger()->renderCurrent('error', array('error alert flashmessages'));
-					echo $flashMessenger()->renderCurrent('warning', array('warning alert flashmessages'));
-					echo $flashMessenger()->renderCurrent('success', array('success alert flashmessages'));
-					echo $flashMessenger()->renderCurrent('info', array('info alert flashmessages'));
+					$flashMessenger = $viewHelperManager->get('flashmessenger');
+					$messages = $flashMessenger()->renderCurrent('error', array('error alert flashmessages'));
+					$messages .= $flashMessenger()->renderCurrent('warning', array('warning alert flashmessages'));
+					$messages .= $flashMessenger()->renderCurrent('success', array('success alert flashmessages'));
+					$messages .= $flashMessenger()->renderCurrent('info', array('info alert flashmessages'));
 					
 					$this->flashMessenger()->clearCurrentMessagesFromContainer();
-
-					/* return array(
-							'isXHR' => true,
-							'user' => $user,
-							'userId' => $userId,
-							'userprofileForm'  => $form,
-					); */
+					return ($messages);
 					
 				} else {
-					$this->layout('layout/json');
+					//$this->layout('layout/json');
 					$messages = $this->flashMessenger()->getCurrentErrorMessages();
-					echo json_encode(array_merge_recursive(
+					return (json_encode(array_merge_recursive(
 						$messages,
 						$this->flashMessenger()->getCurrentWarningMessages(),
 						$this->flashMessenger()->getCurrentSuccessMessages(),
 						$this->flashMessenger()->getCurrentInfoMessages()
-					));
+					)));
 				}
 				exit();
 			} else {
 				return $this->redirect()->toRoute('zfcuser');
 			}
 				
-			
-				
 		}
-		
 		
 	}
 	
