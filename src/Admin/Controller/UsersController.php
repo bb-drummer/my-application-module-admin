@@ -66,11 +66,11 @@ class UsersController extends BaseActionController
 						$messages = $flashMessenger()->renderCurrent('warning', array('warning alert flashmessages'));
 						$messages .= $flashMessenger()->renderCurrent('success', array('success alert flashmessages'));
 						$this->flashMessenger()->clearCurrentMessagesFromContainer();
-						return array_merge_recursive($response, array("content" => preg_replace('/<button(.*)<\/button>/i', "", $messages)));
+						return array_merge_recursive($tmplVars, array("content" => preg_replace('/<button(.*)<\/button>/i', "", $messages)));
 						
 					} else {
 						$messages = $this->flashMessenger()->getCurrentErrorMessages();
-						return array_merge_recursive($response, array("content" => json_encode(array_merge_recursive(
+						return array_merge_recursive($tmplVars, array("content" => json_encode(array_merge_recursive(
 							$this->flashMessenger()->getCurrentWarningMessages(),
 							$this->flashMessenger()->getCurrentSuccessMessages()
 						))));
@@ -135,11 +135,11 @@ class UsersController extends BaseActionController
 						$messages = $flashMessenger()->renderCurrent('warning', array('warning alert flashmessages'));
 						$messages .= $flashMessenger()->renderCurrent('success', array('success alert flashmessages'));
 						$this->flashMessenger()->clearCurrentMessagesFromContainer();
-						return array_merge_recursive($response, array("content" => preg_replace('/<button(.*)<\/button>/i', "", $messages)));
+						return array_merge_recursive($tmplVars, array("content" => preg_replace('/<button(.*)<\/button>/i', "", $messages)));
 						
 					} else {
 						$messages = $this->flashMessenger()->getCurrentErrorMessages();
-						return array_merge_recursive($response, array("content" => json_encode(array_merge_recursive(
+						return array_merge_recursive($tmplVars, array("content" => json_encode(array_merge_recursive(
 							$this->flashMessenger()->getCurrentWarningMessages(),
 							$this->flashMessenger()->getCurrentSuccessMessages()
 						))));
@@ -187,11 +187,11 @@ class UsersController extends BaseActionController
 						$messages = $flashMessenger()->renderCurrent('warning', array('warning alert flashmessages'));
 						$messages .= $flashMessenger()->renderCurrent('success', array('success alert flashmessages'));
 						$this->flashMessenger()->clearCurrentMessagesFromContainer();
-						return array_merge_recursive($response, array("content" => preg_replace('/<button(.*)<\/button>/i', "", $messages)));
+						return array_merge_recursive($tmplVars, array("content" => preg_replace('/<button(.*)<\/button>/i', "", $messages)));
 						
 					} else {
 						$messages = $this->flashMessenger()->getCurrentErrorMessages();
-						return array_merge_recursive($response, array("content" => json_encode(array_merge_recursive(
+						return array_merge_recursive($tmplVars, array("content" => json_encode(array_merge_recursive(
 							$this->flashMessenger()->getCurrentWarningMessages(),
 							$this->flashMessenger()->getCurrentSuccessMessages()
 						))));
