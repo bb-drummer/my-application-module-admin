@@ -522,15 +522,16 @@ class ZfcuserController extends UserController
 				);
 			}
 			
-			if ( $oController->getRequest()->isXmlHttpRequest() ) {
+			if ( $this->getRequest()->isXmlHttpRequest() ) {
+				$sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
 				if ( strpos($sAccept, 'text/html') !== false ) {
-					$oController->layout('layout/ajax');
+					$this->layout('layout/ajax');
 					echo $this->flashMessenger()->render('error', array('error alert flashmessages'));
 					echo $this->flashMessenger()->render('warning', array('warning alert flashmessages'));
 					echo $this->flashMessenger()->render('success', array('success alert flashmessages'));
 					echo $this->flashMessenger()->render('info', array('info alert flashmessages'));
 				} else {
-					$oController->layout('layout/json');
+					$this->layout('layout/json');
 					echo json_encode($this->flashMessenger()->getMessages());
 				}
 				exit();
