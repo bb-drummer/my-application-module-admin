@@ -1,3 +1,9 @@
+<?php if ($isXHR) {
+	echo $this->flashMessenger()->render('error', array('error alert flashmessages'));
+	echo $this->flashMessenger()->render('warning', array('warning alert flashmessages'));
+	echo $this->flashMessenger()->render('success', array('success alert flashmessages'));
+	echo $this->flashMessenger()->render('info', array('info alert flashmessages'));
+} ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<span class="panel-title"><strong><?php echo $this->translate('edit profile'); ?></strong></span>
