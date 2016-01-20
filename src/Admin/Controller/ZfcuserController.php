@@ -529,25 +529,17 @@ class ZfcuserController extends UserController
 				$sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
 				$sFancybox = $this->getRequest()->getHeaders()->get('X-Fancybox')->toString();
 				if ( ( strpos($sAccept, 'text/html') !== false ) || ( strpos($sFancybox, 'true') !== false ) ) {
-					//$this->layout('layout/ajax');
-					
 					$viewHelperManager = $this->getServiceLocator()->get('ViewHelperManager');
 					$flashMessenger = $viewHelperManager->get('flashmessenger');
-					$messages = $flashMessenger()->renderCurrent('error', array('error alert flashmessages'));
-					$messages .= $flashMessenger()->renderCurrent('warning', array('warning alert flashmessages'));
+					$messages = $flashMessenger()->renderCurrent('warning', array('warning alert flashmessages'));
 					$messages .= $flashMessenger()->renderCurrent('success', array('success alert flashmessages'));
-					$messages .= $flashMessenger()->renderCurrent('info', array('info alert flashmessages'));
-					
 					$this->flashMessenger()->clearCurrentMessagesFromContainer();
-					//return new ViewModel($messages);
-					//$oVM->setTemplate($template)
 					return new ViewModel(array("content" => $messages));
 					
 				} else {
-					//$this->layout('layout/json');
 					$messages = $this->flashMessenger()->getCurrentErrorMessages();
-					return (array("content" => json_encode(array_merge_recursive(
-						$messages,
+					return new ViewModel(array("content" => json_encode(array_merge_recursive(
+						$this->flashMessenger()->getCurrentErrorMessages(), // $messages,
 						$this->flashMessenger()->getCurrentWarningMessages(),
 						$this->flashMessenger()->getCurrentSuccessMessages(),
 						$this->flashMessenger()->getCurrentInfoMessages()

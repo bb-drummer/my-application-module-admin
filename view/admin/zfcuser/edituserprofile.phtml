@@ -1,9 +1,6 @@
-<?php /*if ($isXHR) {
-	echo $this->flashMessenger()->renderCurrent('error', array('error alert flashmessages'));
-	echo $this->flashMessenger()->renderCurrent('warning', array('warning alert flashmessages'));
-	echo $this->flashMessenger()->renderCurrent('success', array('success alert flashmessages'));
-	echo $this->flashMessenger()->renderCurrent('info', array('info alert flashmessages'));
-}*/ ?>
+<?php if ($isXHR) {
+	echo $content;
+} else { ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<span class="panel-title"><strong><?php echo $this->translate('edit profile'); ?></strong></span>
@@ -67,3 +64,4 @@
 		<?php echo $this->form()->closeTag() ?>
 	</div>
 </div>
+<?php } ?>
