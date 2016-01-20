@@ -424,6 +424,7 @@ class ZfcuserController extends UserController
 		if ( !$this->getRequest()->isPost() ) {
 			
 			return array(
+				'showForm' => true,
 				'user' => $user,
 				'userId' => $userId,
 				'userdataForm'  => $form,
@@ -437,6 +438,7 @@ class ZfcuserController extends UserController
 		if ( !$form->isValid() ) {
 			
 			return array(
+				'showForm' => true,
 				'user' => $user,
 				'userId' => $userId,
 				'userdataForm'  => $form,
@@ -455,7 +457,30 @@ class ZfcuserController extends UserController
 					$translator->translate("user data could not be changed")
 				);
 			}
-			return $this->redirect()->toRoute('zfcuser');
+			if ( $this->getRequest()->isXmlHttpRequest() ) {
+				$response = array(
+					'showForm' => false,
+				);
+				$sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
+				$sFancybox = $this->getRequest()->getHeaders()->get('X-Fancybox')->toString();
+				if ( ( strpos($sAccept, 'text/html') !== false ) || ( strpos($sFancybox, 'true') !== false ) ) {
+					$viewHelperManager = $this->getServiceLocator()->get('ViewHelperManager');
+					$flashMessenger = $viewHelperManager->get('flashmessenger');
+					$messages = $flashMessenger()->renderCurrent('warning', array('warning alert flashmessages'));
+					$messages .= $flashMessenger()->renderCurrent('success', array('success alert flashmessages'));
+					$this->flashMessenger()->clearCurrentMessagesFromContainer();
+					return array_merge_recursive($response, array("content" => preg_replace('/<button(.*)<\/button>/i', "", $messages)));
+					
+				} else {
+					$messages = $this->flashMessenger()->getCurrentErrorMessages();
+					return array_merge_recursive($response, array("content" => json_encode(array_merge_recursive(
+						$this->flashMessenger()->getCurrentWarningMessages(),
+						$this->flashMessenger()->getCurrentSuccessMessages()
+					))));
+				}
+			} else {
+				return $this->redirect()->toRoute('zfcuser');
+			}
 				
 		}
 		
@@ -541,15 +566,11 @@ class ZfcuserController extends UserController
 					
 				} else {
 					$messages = $this->flashMessenger()->getCurrentErrorMessages();
-					//return new ViewModel(
 					return array_merge_recursive($response, array("content" => json_encode(array_merge_recursive(
-						$this->flashMessenger()->getCurrentErrorMessages(), // $messages,
 						$this->flashMessenger()->getCurrentWarningMessages(),
-						$this->flashMessenger()->getCurrentSuccessMessages(),
-						$this->flashMessenger()->getCurrentInfoMessages()
+						$this->flashMessenger()->getCurrentSuccessMessages()
 					))));
 				}
-				exit();
 			} else {
 				return $this->redirect()->toRoute('zfcuser');
 			}

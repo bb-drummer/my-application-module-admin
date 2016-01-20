@@ -1,3 +1,6 @@
+<?php if (!$showForm) {
+	echo $content;
+} else { ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<span class="panel-title"><?php echo $this->translate("edit user"); ?></span>
@@ -13,6 +16,7 @@
 			        'user_id'		=> $this->user_id,
 			    )
 			));
+			$form->setAttribute('class', 'form-xhr');
 			$form->prepare();
 		
 			echo $this->form()->openTag($form); ?>
@@ -72,3 +76,4 @@
 		<?php echo $this->form()->closeTag($form); ?>
 	</div>
 </div>
+<?php } ?>
