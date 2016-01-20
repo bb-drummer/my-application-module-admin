@@ -537,7 +537,7 @@ class ZfcuserController extends UserController
 					$messages = $flashMessenger()->renderCurrent('warning', array('warning alert flashmessages'));
 					$messages .= $flashMessenger()->renderCurrent('success', array('success alert flashmessages'));
 					$this->flashMessenger()->clearCurrentMessagesFromContainer();
-					return array_merge_recursive($response, array("content" => $messages));
+					return array_merge_recursive($response, array("content" => preg_replace('/<button(.*)<\/button>/ig', "", $messages)));
 					
 				} else {
 					$messages = $this->flashMessenger()->getCurrentErrorMessages();
