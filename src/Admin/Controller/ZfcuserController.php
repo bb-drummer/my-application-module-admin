@@ -527,8 +527,8 @@ class ZfcuserController extends UserController
 				$sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
 				$sFancybox = $this->getRequest()->getHeaders()->get('X-Fancybox')->toString();
 				print_r($sAccept); print_r($sFancybox);
-				//if ( strpos($sAccept, 'text/html') !== false ) {
-				if ( strpos($sFancybox, 'true') !== false ) {
+				if ( strpos($sAccept, 'text/html') !== false ) {
+				//if ( strpos($sFancybox, 'true') !== false ) {
 					$this->layout('layout/ajax');
 					$view = new ViewModel();
 					$viewHelperManager = $this->getServiceLocator()->get('ViewHelperManager');
@@ -540,11 +540,16 @@ class ZfcuserController extends UserController
 					echo $flashMessenger()->render('info', array('info alert flashmessages'));
 				} else {
 					$this->layout('layout/json');
-					echo json_encode($this->flashMessenger()->getMessages());
+					$messages = $this->flashMessenger()->getErrorMessages();
+					echo json_encode(array_merge_recursive(
+						$messages,
+						$this->flashMessenger()->getWarningMessages(),
+						$this->flashMessenger()->getSuccessMessages(),
+						$this->flashMessenger()->getInfoMessages()
+					));
 				}
 				exit();
 			} else {
-				//$oController->layout('layout/layout');
 				return $this->redirect()->toRoute('zfcuser');
 			}
 				
