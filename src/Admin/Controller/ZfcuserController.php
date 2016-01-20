@@ -22,7 +22,7 @@ use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Stdlib\Parameters;
 
 use ZfcUser\Controller\UserController;
-use Zend\View\Helper\ViewModel;
+use Zend\View\Model\ViewModel;
 
 class ZfcuserController extends UserController
 {
@@ -539,6 +539,8 @@ class ZfcuserController extends UserController
 					$messages .= $flashMessenger()->renderCurrent('info', array('info alert flashmessages'));
 					
 					$this->flashMessenger()->clearCurrentMessagesFromContainer();
+					return new ViewModel($messages);
+					//$oVM->setTemplate($template)
 					return (array("content" => $messages));
 					
 				} else {
