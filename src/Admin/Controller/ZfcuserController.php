@@ -504,7 +504,7 @@ class ZfcuserController extends UserController
 		if ( !$form->isValid() ) {
 			
 			return array(
-				'isXHR' => $this->getRequest()->isXmlHttpRequest(),
+				//'isXHR' => $this->getRequest()->isXmlHttpRequest(),
 				'user' => $user,
 				'userId' => $userId,
 				'userprofileForm'  => $form,
@@ -526,6 +526,9 @@ class ZfcuserController extends UserController
 			}
 			
 			if ( $this->getRequest()->isXmlHttpRequest() ) {
+				$response = array(
+					"isXHR" => true,
+				);
 				$sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
 				$sFancybox = $this->getRequest()->getHeaders()->get('X-Fancybox')->toString();
 				if ( ( strpos($sAccept, 'text/html') !== false ) || ( strpos($sFancybox, 'true') !== false ) ) {
@@ -534,11 +537,12 @@ class ZfcuserController extends UserController
 					$messages = $flashMessenger()->renderCurrent('warning', array('warning alert flashmessages'));
 					$messages .= $flashMessenger()->renderCurrent('success', array('success alert flashmessages'));
 					$this->flashMessenger()->clearCurrentMessagesFromContainer();
-					return new ViewModel(array("content" => $messages));
+					return array_merge_recursive($response, array("content" => $messages));
 					
 				} else {
 					$messages = $this->flashMessenger()->getCurrentErrorMessages();
-					return new ViewModel(array("content" => json_encode(array_merge_recursive(
+					//return new ViewModel(
+					return array_merge_recursive($response, array("content" => json_encode(array_merge_recursive(
 						$this->flashMessenger()->getCurrentErrorMessages(), // $messages,
 						$this->flashMessenger()->getCurrentWarningMessages(),
 						$this->flashMessenger()->getCurrentSuccessMessages(),
