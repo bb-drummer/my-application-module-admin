@@ -533,29 +533,28 @@ class ZfcuserController extends UserController
 				//if ( strpos($sFancybox, 'true') !== false ) {
 					$this->layout('layout/ajax');
 					
-					/*$view = new ViewModel();
 					$viewHelperManager = $this->getServiceLocator()->get('ViewHelperManager');
 					$flashMessenger = $viewHelperManager->get('flashMessenger'); // $escapeHtml can be called as function because of its __invoke method
-					$messages = $flashMessenger()->getErrorMessages();
+					/*$messages = $flashMessenger()->getErrorMessages();
 					print_r(array_merge_recursive(
 						$messages,
 						$flashMessenger()->getWarningMessages(),
 						$flashMessenger()->getSuccessMessages(),
 						$flashMessenger()->getInfoMessages()
-					));
+					));*/
 					echo $flashMessenger()->render('error', array('error alert flashmessages'));
 					echo $flashMessenger()->render('warning', array('warning alert flashmessages'));
 					echo $flashMessenger()->render('success', array('success alert flashmessages'));
 					echo $flashMessenger()->render('info', array('info alert flashmessages'));
-					*/
+					
+					$this->flashMessenger()->clearCurrentMessagesFromContainer();
 
-
-					return array(
+					/* return array(
 							'isXHR' => true,
 							'user' => $user,
 							'userId' => $userId,
 							'userprofileForm'  => $form,
-					);
+					); */
 					
 				} else {
 					$this->layout('layout/json');
