@@ -530,7 +530,8 @@ class ZfcuserController extends UserController
 				if ( strpos($sAccept, 'text/html') !== false ) {
 				//if ( strpos($sFancybox, 'true') !== false ) {
 					$this->layout('layout/ajax');
-					$view = new ViewModel();
+					
+					/*$view = new ViewModel();
 					$viewHelperManager = $this->getServiceLocator()->get('ViewHelperManager');
 					$flashMessenger = $viewHelperManager->get('flashMessenger'); // $escapeHtml can be called as function because of its __invoke method
 					$messages = $flashMessenger()->getErrorMessages();
@@ -544,14 +545,24 @@ class ZfcuserController extends UserController
 					echo $flashMessenger()->render('warning', array('warning alert flashmessages'));
 					echo $flashMessenger()->render('success', array('success alert flashmessages'));
 					echo $flashMessenger()->render('info', array('info alert flashmessages'));
+					*/
+
+
+					return array(
+							'isXHR' => true,
+							'user' => $user,
+							'userId' => $userId,
+							'userprofileForm'  => $form,
+					);
+					
 				} else {
 					$this->layout('layout/json');
-					$messages = $this->flashMessenger()->getErrorMessages();
+					$messages = $this->flashMessenger()->getCurrentErrorMessages();
 					echo json_encode(array_merge_recursive(
 						$messages,
-						$this->flashMessenger()->getWarningMessages(),
-						$this->flashMessenger()->getSuccessMessages(),
-						$this->flashMessenger()->getInfoMessages()
+						$this->flashMessenger()->getCurrentWarningMessages(),
+						$this->flashMessenger()->getCurrentSuccessMessages(),
+						$this->flashMessenger()->getCurrentInfoMessages()
 					));
 				}
 				exit();
