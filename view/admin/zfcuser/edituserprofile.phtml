@@ -8,6 +8,7 @@
 			$form->prepare();
 			$form->setAttribute('action', $this->url('zfcuser/edituserprofile'));
 			$form->setAttribute('method', 'post');
+			$form->setAttribute('class', 'form-xhr');
 			
 			echo $this->form()->openTag($form) ?>
 			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('street')))) ? ' has-error' : '' ?>">
