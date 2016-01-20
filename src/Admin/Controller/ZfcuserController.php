@@ -511,16 +511,33 @@ class ZfcuserController extends UserController
 		
 			$profile->exchangeArray( $data );
 			$result = $profile->save();
-			if ( $result === true ) {
-				$this->flashMessenger()->addSuccessMessage(
-					$translator->translate("user profile data has been changed")
-				);
+			if ( $oController->getRequest()->isXmlHttpRequest() ) {
+				if ( strpos($sAccept, 'text/html') !== false ) {
+					$oController->layout('layout/ajax');
+					echo $this->flashMessenger()->render('error', array('error alert flashmessages'));
+					echo $this->flashMessenger()->render('warning', array('warning alert flashmessages'));
+					echo $this->flashMessenger()->render('success', array('success alert flashmessages'));
+					echo $this->flashMessenger()->render('info', array('info alert flashmessages'));
+				} else {
+					$oController->layout('layout/json');
+					echo json_encode($this->flashMessenger()->getMessages());
+				}
+				exit();
 			} else {
-				$this->flashMessenger()->addSuccessMessage(
-					$translator->translate("user profile data could not be changed")
-				);
+				//$oController->layout('layout/layout');
+				if ( $result === true ) {
+					$this->flashMessenger()->addSuccessMessage(
+						$translator->translate("user profile data has been changed")
+					);
+				} else {
+					$this->flashMessenger()->addSuccessMessage(
+						$translator->translate("user profile data could not be changed")
+					);
+				}
+				return $this->redirect()->toRoute('zfcuser');
 			}
-			return $this->redirect()->toRoute('zfcuser');
+				
+			
 				
 		}
 		
