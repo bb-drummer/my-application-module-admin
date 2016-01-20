@@ -539,17 +539,17 @@ class ZfcuserController extends UserController
 					$messages .= $flashMessenger()->renderCurrent('info', array('info alert flashmessages'));
 					
 					$this->flashMessenger()->clearCurrentMessagesFromContainer();
-					return ($messages);
+					return (array("content" => $messages));
 					
 				} else {
 					//$this->layout('layout/json');
 					$messages = $this->flashMessenger()->getCurrentErrorMessages();
-					return (json_encode(array_merge_recursive(
+					return (array("content" => json_encode(array_merge_recursive(
 						$messages,
 						$this->flashMessenger()->getCurrentWarningMessages(),
 						$this->flashMessenger()->getCurrentSuccessMessages(),
 						$this->flashMessenger()->getCurrentInfoMessages()
-					)));
+					))));
 				}
 				exit();
 			} else {
