@@ -49,10 +49,29 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 
 	protected $appobj;
 	protected $appconfig;
+	/** @var $serviceLocator \Zend\Di\ServiceLocator */
 	protected static $serviceLocator;
 
 	/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
 	protected static $serviceManager;
+	
+	public function init(ModuleManager $mm)
+	{
+		$mm->getEventManager()->getSharedManager()->attach(__NAMESPACE__, 'dispatch', function($e) {
+			$oController = $e->getTarget();
+			$sAccept = $oController->getRequest()->getHeaders()->get('Accept')->toString();
+			if ( $oController->getRequest()->isXmlHttpRequest() ) {
+				if ( strpos($sAccept, 'text/html') !== false ) {
+					$oController->layout('layout/ajax');
+				} else {
+					$oController->layout('layout/json');
+				}
+			} else {
+				$oController->layout('layout/layout');
+			}
+		});
+
+	}	
 	
 	public function getAutoloaderConfig()
 	{
