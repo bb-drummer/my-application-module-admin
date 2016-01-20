@@ -490,7 +490,7 @@ class ZfcuserController extends UserController
 		if ( !$this->getRequest()->isPost() ) {
 			
 			return array(
-				'isXHR' => $this->getRequest()->isXmlHttpRequest(),
+				'showForm' => true,
 				'user' => $user,
 				'userId' => $userId,
 				'userprofileForm'  => $form,
@@ -504,7 +504,7 @@ class ZfcuserController extends UserController
 		if ( !$form->isValid() ) {
 			
 			return array(
-				//'isXHR' => $this->getRequest()->isXmlHttpRequest(),
+				'showForm' => true,
 				'user' => $user,
 				'userId' => $userId,
 				'userprofileForm'  => $form,
@@ -527,7 +527,7 @@ class ZfcuserController extends UserController
 			
 			if ( $this->getRequest()->isXmlHttpRequest() ) {
 				$response = array(
-					"isXHR" => true,
+					'showForm' => false,
 				);
 				$sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
 				$sFancybox = $this->getRequest()->getHeaders()->get('X-Fancybox')->toString();
