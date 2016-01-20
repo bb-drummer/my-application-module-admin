@@ -528,7 +528,7 @@ class ZfcuserController extends UserController
 			if ( $this->getRequest()->isXmlHttpRequest() ) {
 				$sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
 				$sFancybox = $this->getRequest()->getHeaders()->get('X-Fancybox')->toString();
-				print_r($sAccept); print_r($sFancybox);
+				// print_r($sAccept); print_r($sFancybox);
 				if ( strpos($sAccept, 'text/html') !== false ) {
 				//if ( strpos($sFancybox, 'true') !== false ) {
 					$this->layout('layout/ajax');
