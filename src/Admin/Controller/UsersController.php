@@ -40,7 +40,8 @@ class UsersController extends BaseActionController
         $roles = $this->getAclroleTable()->fetchAll()->toArray();
         $valueoptions = array();
         foreach ($roles as $role) {
-        	$valueoptions[$role["aclroles_id"]] = $role["rolename"];
+        	//$valueoptions[$role["aclroles_id"]] = $role["rolename"];
+        	$valueoptions[$role["roleslug"]] = $role["rolename"];
         }
         $form->get('aclrole')->setValueOptions($valueoptions);
                
@@ -86,7 +87,8 @@ class UsersController extends BaseActionController
         $roles = $this->getAclroleTable()->fetchAll()->toArray();
         $valueoptions = array();
         foreach ($roles as $role) {
-        	$valueoptions[$role["aclroles_id"]] = $role["rolename"];
+        	//$valueoptions[$role["aclroles_id"]] = $role["rolename"];
+        	$valueoptions[$role["roleslug"]] = $role["rolename"];
         }
         $form->get('aclrole')->setValueOptions($valueoptions);
                
