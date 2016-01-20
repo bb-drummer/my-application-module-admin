@@ -539,9 +539,9 @@ class ZfcuserController extends UserController
 					$messages .= $flashMessenger()->renderCurrent('info', array('info alert flashmessages'));
 					
 					$this->flashMessenger()->clearCurrentMessagesFromContainer();
-					return new ViewModel($messages);
+					//return new ViewModel($messages);
 					//$oVM->setTemplate($template)
-					return (array("content" => $messages));
+					return new ViewModel(array("content" => $messages));
 					
 				} else {
 					//$this->layout('layout/json');
