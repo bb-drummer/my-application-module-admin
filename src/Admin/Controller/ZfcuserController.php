@@ -503,6 +503,7 @@ class ZfcuserController extends UserController
 		if ( !$form->isValid() ) {
 			
 			return array(
+				'isXHR' => $this->getRequest()->isXmlHttpRequest(),
 				'user' => $user,
 				'userId' => $userId,
 				'userprofileForm'  => $form,
