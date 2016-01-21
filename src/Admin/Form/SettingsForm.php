@@ -22,6 +22,24 @@ class SettingsForm extends Form
             ),
         ));
         $this->add(array(
+            'name' => 'scope',
+            'attributes' => array(
+                'type'  => 'text',
+            ),
+            'options' => array(
+                'label' => 'scope',
+            ),
+        ));
+        $this->add(array(
+            'name' => 'ref_id',
+            'attributes' => array(
+                'type'  => 'text',
+            ),
+            'options' => array(
+                'label' => 'reference',
+            ),
+        ));
+        $this->add(array(
             'name' => 'type',
             'attributes' => array(
                 'type'  => 'text',
