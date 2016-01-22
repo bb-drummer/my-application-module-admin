@@ -23,8 +23,17 @@ class UsersController extends BaseActionController
 
 	public function indexAction()
 	{
+		$tmplVars = array_merge( 
+			$this->params()->fromRoute(), 
+			$this->params()->fromPost(),
+			array()
+		);
+		$aUserlist = $this->getUserTable()->fetchAll();
+		if ( $this->getRequest()->isXmlHttpRequest() ) {
+			return array_merge_recursive($tmplVars, array("content" => json_encode($aUserlist)));
+		}
 		return new ViewModel(array(
-			'userdata' => $this->getUserTable()->fetchAll(),
+			'userdata' => $aUserlist,
 		));
 	}
 
@@ -70,10 +79,6 @@ class UsersController extends BaseActionController
 						
 					} else {
 						$messages = $this->flashMessenger()->getCurrentErrorMessages();
-						return array_merge_recursive($tmplVars, array("content" => json_encode(array_merge_recursive(
-							$this->flashMessenger()->getCurrentWarningMessages(),
-							$this->flashMessenger()->getCurrentSuccessMessages()
-						))));
 					}
 				} else {
 					return $this->redirect()->toRoute('admin/default', array('controller' => 'users'));
