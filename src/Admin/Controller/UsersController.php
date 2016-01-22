@@ -30,6 +30,7 @@ class UsersController extends BaseActionController
 		);
 		$aUserlist = $this->getUserTable()->fetchAll();
 		if ( $this->getRequest()->isXmlHttpRequest() ) {
+			$this->layout('layout/json');
 			return array_merge_recursive($tmplVars, array("content" => json_encode($aUserlist)));
 		}
 		return new ViewModel(array(
