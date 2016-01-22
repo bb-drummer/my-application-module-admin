@@ -12,7 +12,6 @@
 			<table id="usertable" class="table table-striped table-hover datatable" data-src="<?php echo $this->url('admin/default', array('controller'=>'users', 'action'=>'index'));?>">
 				<thead>
 					<tr>
-					    <!-- th data-column="user_id" class="hidden"><?php echo $this->translate("id")?></th -->
 					    <th data-column="username"><?php echo $this->translate("user name")?></th>
 					    <th data-column="email"><?php echo $this->translate("email")?></th>
 					    <th data-column="aclrole"><?php echo $this->translate("role")?></th>
@@ -22,7 +21,6 @@
 				<tbody>
 					<?php foreach ($userdata as $user) : ?>
 					<tr>
-					    <!-- td class="hidden"><?php echo $this->escapeHtml($user->user_id);?></td -->
 					    <td><?php echo $this->escapeHtml($user->username);?></td>
 					    <td><?php echo $this->escapeHtml($user->email);?></td>
 					    <td><?php echo $this->escapeHtml($user->aclrole);?></td>
