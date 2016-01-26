@@ -48,11 +48,10 @@ class UsersController extends BaseActionController
 
 	public function addAction()
 	{
-		$tmplVars = array_merge( 
-			$this->params()->fromRoute(), 
-			$this->params()->fromPost(),
+		$tmplVars = $this->getTemplateVars( 
 			array('showForm' => true,)
 		);
+		
 		$form = new UserForm();
 
 		$roles = $this->getAclroleTable()->fetchAll()->toArray();
