@@ -1,10 +1,16 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
+ * BB's Zend Framework 2 Components
+ * 
+ * AdminModule
  *
- * @link	  http://github.com/zendframework/Admin for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package		[MyApplication]
+ * @package		BB's Zend Framework 2 Components
+ * @package		AdminModule
+ * @author		Björn Bartels [dragon-projects.net] <info@dragon-projects.net>
+ * @link		http://gitlab.dragon-projects.de:81/groups/zf2
+ * @license		http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @copyright	copyright (c) 2016 Björn Bartels [dragon-projects.net] <info@dragon-projects.net>
  */
 
 namespace Admin;
