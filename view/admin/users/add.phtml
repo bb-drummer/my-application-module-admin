@@ -6,8 +6,33 @@ $oComponents = $this->Components();
 /** @var \Admin\Entity\User $user **/
 $oUser = $this->zfcUserIdentity();
 
+$messages = $this->flashMessenger()->render('error', array('error alert alert-error _flashmessages'));
+$messages .= $this->flashMessenger()->render('warning', array('warning alert alert-warning _flashmessages'));
+$messages .= $this->flashMessenger()->render('success', array('success alert alert-success _flashmessages'));
+$messages .= $this->flashMessenger()->render('info', array('info alert alert-info _flashmessages'));
+	
 if (!$showForm) {
-	echo $content;
+	//echo $messages . $content;
+	
+	if ($isXHR) {
+		$html = $oComponents->Modal()
+			->setHeader( $this->translate("add user") )
+			->setContent(
+				array(
+					'tagname' => 'div',
+					'classname' => 'alert-wrap',
+					'content' => $messages,
+				)
+			);
+	} else {
+		$html = $oComponents->Panel()
+			->setHeader( $this->translate("add user") )
+			->setContent(
+				$messages
+			);
+	}
+	echo $html;
+	
 } else { 
 
 	$form->setAttribute('action', $this->url('admin/default', array('controller' => 'users', 'action' => 'add')));
@@ -15,11 +40,13 @@ if (!$showForm) {
 	$form->prepare();
 		
 	$formHTML = $this->form()->openTag($form);
-	$formHTML .= '<div class="form-group'.(!empty($this->formElementErrors($form->get('username'))) ? ' has-error' : '') .'">';
+	/*$formHTML .= '<div class="form-group'.(!empty($this->formElementErrors($form->get('username'))) ? ' has-error' : '') .'">';
 	$formHTML .= $this->formLabel($form->get('username'));
 	$formHTML .= $this->formInput($form->get('username')->setAttributes(array('class' => 'form-control')));
 	$formHTML .= $this->formElementErrors($form->get('username'));
-	$formHTML .= '</div>';
+	$formHTML .= '</div>';*/
+	$formHTML .= $this->formgroup(array("form" => $form, "field" => "username"));
+	
 	$formHTML .= '<div class="form-group'.(!empty($this->formElementErrors($form->get('email'))) ? ' has-error' : '') .'">';
 	$formHTML .= $this->formLabel($form->get('email'));
 	$formHTML .= $this->formInput($form->get('email')->setAttributes(array('class' => 'form-control')));
@@ -75,7 +102,7 @@ if (!$showForm) {
 		$html = $oComponents->Modal()
 			->setHeader( $this->translate("add user") )
 			->setContent(
-				$formHTML
+				$messages . $formHTML
 			);
 	} else {
 		$html = $oComponents->Panel()

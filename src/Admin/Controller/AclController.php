@@ -68,13 +68,12 @@ class AclController extends BaseActionController
 	// acl actions 
     public function addaclAction()
     {
-        $tmplVars = array_merge( 
-			$this->params()->fromRoute(), 
-			$this->params()->fromPost(),
+		$tmplVars = $this->getTemplateVars( 
 			array(
 	            'acldata'	=> $this->getAclTable()->fetchAll(),
 	            'roles'		=> $this->getAclroleTable()->fetchAll(),
 	            'resources'	=> $this->getAclresourceTable()->fetchAll(),
+				'showForm'	=> true,
 	        )
 		);
         //if (!class_exists('\Admin\Form\AclForm')) { require_once __DIR__ . '/../Form/AclForm.php'; }
@@ -115,13 +114,12 @@ class AclController extends BaseActionController
 
     public function editaclAction()
     {
-		$tmplVars = array_merge( 
-			$this->params()->fromRoute(), 
-			$this->params()->fromPost(),
+		$tmplVars = $this->getTemplateVars( 
 			array(
 	            'acldata'	=> $this->getAclTable()->fetchAll(),
 	            'roles'		=> $this->getAclroleTable()->fetchAll(),
 	            'resources'	=> $this->getAclresourceTable()->fetchAll(),
+				'showForm'	=> true,
 	        )
 		);
         $id = (int) $this->params()->fromRoute('acl_id', 0);
@@ -172,13 +170,12 @@ class AclController extends BaseActionController
 
     public function deleteaclAction()
     {
-		$tmplVars = array_merge( 
-			$this->params()->fromRoute(), 
-			$this->params()->fromPost(),
+		$tmplVars = $this->getTemplateVars( 
 			array(
 	            'acldata'	=> $this->getAclTable()->fetchAll(),
 	            'roles'		=> $this->getAclroleTable()->fetchAll(),
 	            'resources'	=> $this->getAclresourceTable()->fetchAll(),
+				'showForm'	=> true,
 	        )
 		);
         $id = (int) $this->params()->fromRoute('acl_id', 0);
@@ -210,13 +207,12 @@ class AclController extends BaseActionController
 	// role actions 
     public function addroleAction()
     {
-        $tmplVars = array_merge( 
-			$this->params()->fromRoute(), 
-			$this->params()->fromPost(),
+		$tmplVars = $this->getTemplateVars( 
 			array(
 	            'acldata'	=> $this->getAclTable()->fetchAll(),
 	            'roles'		=> $this->getAclroleTable()->fetchAll(),
 	            'resources'	=> $this->getAclresourceTable()->fetchAll(),
+				'showForm'	=> true,
 	        )
 		);
         $form = new AclroleForm();
@@ -243,13 +239,12 @@ class AclController extends BaseActionController
 
     public function editroleAction()
     {
-		$tmplVars = array_merge( 
-			$this->params()->fromRoute(), 
-			$this->params()->fromPost(),
+		$tmplVars = $this->getTemplateVars( 
 			array(
 	            'acldata'	=> $this->getAclTable()->fetchAll(),
 	            'roles'		=> $this->getAclroleTable()->fetchAll(),
 	            'resources'	=> $this->getAclresourceTable()->fetchAll(),
+				'showForm'	=> true,
 	        )
 		);
         $id = (int) $this->params()->fromRoute('acl_id', 0);
@@ -287,13 +282,12 @@ class AclController extends BaseActionController
 
     public function deleteroleAction()
     {
-		$tmplVars = array_merge( 
-			$this->params()->fromRoute(), 
-			$this->params()->fromPost(),
+		$tmplVars = $this->getTemplateVars( 
 			array(
 	            'acldata'	=> $this->getAclTable()->fetchAll(),
 	            'roles'		=> $this->getAclroleTable()->fetchAll(),
 	            'resources'	=> $this->getAclresourceTable()->fetchAll(),
+				'showForm'	=> true,
 	        )
 		);
         $id = (int) $this->params()->fromRoute('acl_id', 0);
@@ -326,13 +320,12 @@ class AclController extends BaseActionController
 	// resource actions 
     public function addresourceAction()
     {
-        $tmplVars = array_merge( 
-			$this->params()->fromRoute(), 
-			$this->params()->fromPost(),
+		$tmplVars = $this->getTemplateVars( 
 			array(
 	            'acldata'	=> $this->getAclTable()->fetchAll(),
 	            'roles'		=> $this->getAclroleTable()->fetchAll(),
 	            'resources'	=> $this->getAclresourceTable()->fetchAll(),
+				'showForm'	=> true,
 	        )
 		);
         //if (!class_exists('\Admin\Form\AclForm')) { require_once __DIR__ . '/../Form/AclForm.php'; }
@@ -360,13 +353,12 @@ class AclController extends BaseActionController
 
     public function editresourceAction()
     {
-		$tmplVars = array_merge( 
-			$this->params()->fromRoute(), 
-			$this->params()->fromPost(),
+		$tmplVars = $this->getTemplateVars( 
 			array(
 	            'acldata'	=> $this->getAclTable()->fetchAll(),
 	            'roles'		=> $this->getAclroleTable()->fetchAll(),
 	            'resources'	=> $this->getAclresourceTable()->fetchAll(),
+				'showForm'	=> true,
 	        )
 		);
         $id = (int) $this->params()->fromRoute('acl_id', 0);
@@ -405,13 +397,12 @@ class AclController extends BaseActionController
 
     public function deleteresourceAction()
     {
-		$tmplVars = array_merge( 
-			$this->params()->fromRoute(), 
-			$this->params()->fromPost(),
+		$tmplVars = $this->getTemplateVars( 
 			array(
 	            'acldata'	=> $this->getAclTable()->fetchAll(),
 	            'roles'		=> $this->getAclroleTable()->fetchAll(),
 	            'resources'	=> $this->getAclresourceTable()->fetchAll(),
+				'showForm'	=> true,
 	        )
 		);
         $id = (int) $this->params()->fromRoute('acl_id', 0);

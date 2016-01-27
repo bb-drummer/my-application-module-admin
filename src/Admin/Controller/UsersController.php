@@ -29,11 +29,7 @@ class UsersController extends BaseActionController
 
 	public function indexAction()
 	{
-		$tmplVars = array_merge( 
-			$this->params()->fromRoute(), 
-			$this->params()->fromPost(),
-			array()
-		);
+		$tmplVars = $this->getTemplateVars();
 		$aUserlist = $this->getUserTable()->fetchAll();
 		if ( $this->getRequest()->isXmlHttpRequest() ) {
 			$this->layout('layout/json');
@@ -101,9 +97,7 @@ class UsersController extends BaseActionController
 
 	public function editAction()
 	{
-		$tmplVars = array_merge( 
-			$this->params()->fromRoute(), 
-			$this->params()->fromPost(),
+		$tmplVars = $this->getTemplateVars( 
 			array('showForm' => true,)
 		);
 		$id = (int) $this->params()->fromRoute('user_id', 0);
@@ -171,9 +165,7 @@ class UsersController extends BaseActionController
 
 	public function deleteAction()
 	{
-		$tmplVars = array_merge( 
-			$this->params()->fromRoute(), 
-			$this->params()->fromPost(),
+		$tmplVars = $this->getTemplateVars( 
 			array('showForm' => true,)
 		);
 		$id = (int) $this->params()->fromRoute('user_id', 0);
