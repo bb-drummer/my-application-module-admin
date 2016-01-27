@@ -65,14 +65,22 @@ if (!$showForm) {
 		$html = $oComponents->Modal()
 			->setHeader( $this->translate("delete user") )
 			->setContent(
-				array_merge(array($messages), $deleteForm)
+				array(
+					'tagname' => 'div',
+					'classnames' => 'modal-body',
+					'content' => array_merge(array($messages), $deleteForm),
+				)
 			)
 		;
 	} else {
 		$html = $oComponents->Panel()
 			->setHeader( $this->translate("delete user") )
 			->setContent(
-				$deleteForm
+				array(
+					'tagname' => 'div',
+					'classnames' => 'modal-body',
+					'content' => $deleteForm,
+				)
 			)
 		;
 	}
