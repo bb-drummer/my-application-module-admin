@@ -35,11 +35,12 @@ class UsersController extends BaseActionController
 			$this->layout('layout/json');
 			$datatablesData = array('data' => $aUserlist->toArray());
 			$datatablesData = array_map( function ($row) {
+				print_r($row);
 				$actions = '<div class="btn-group btn-group-xs">'.
-					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr" href="'.$this->url('admin/default',
-						array('controller'=>'users', 'action'=>'edit', 'user_id' => $row["user_id"])).'"><span class="fa fa-pencil"></span> '.$this->translate("edit").'</a>'.
-					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr" href="'.$this->url('admin/default',
-						array('controller'=>'users', 'action'=>'delete', 'user_id' => $row["user_id"])).'"><span class="fa fa-trash-o"></span> '.$this->translate("delete").'</a>'.
+			//		'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr" href="'.$this->url('admin/default',
+			//			array('controller'=>'users', 'action'=>'edit', 'user_id' => $row["user_id"])).'"><span class="fa fa-pencil"></span> '.$this->translate("edit").'</a>'.
+			//		'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr" href="'.$this->url('admin/default',
+			//			array('controller'=>'users', 'action'=>'delete', 'user_id' => $row["user_id"])).'"><span class="fa fa-trash-o"></span> '.$this->translate("delete").'</a>'.
 				'</div>';
 				$row->_actions_ = $actions;
 			}, $datatablesData );
