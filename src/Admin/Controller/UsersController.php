@@ -34,7 +34,7 @@ class UsersController extends BaseActionController
 		if ( $this->getRequest()->isXmlHttpRequest() ) {
 			$this->layout('layout/json');
 			$datatablesData = array('data' => $aUserlist->toArray());
-			array_walk(&$datatablesData, function (&$row, $idx) {
+			$datatablesData = array_map( function ($row) {
 				$actions = '<div class="btn-group btn-group-xs">'.
 					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr" href="'.$this->url('admin/default',
 						array('controller'=>'users', 'action'=>'edit', 'user_id' => $user->user_id)).'"><span class="fa fa-pencil"></span> '.$this->translate("edit").'</a>'.
@@ -42,7 +42,7 @@ class UsersController extends BaseActionController
 						array('controller'=>'users', 'action'=>'delete', 'user_id' => $user->user_id)).'"><span class="fa fa-trash-o"></span> '.$this->translate("delete").'</a>'.
 				'</div>';
 				$row->_actions_ = $actions;
-			});
+			}, $datatablesData );
 			echo json_encode($datatablesData); die();
 			return array_merge_recursive($tmplVars, array("content" => json_encode($datatablesData)));
 		}
