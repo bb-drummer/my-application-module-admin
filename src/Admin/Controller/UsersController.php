@@ -71,7 +71,7 @@ class UsersController extends BaseActionController
 				$this->flashMessenger()->addSuccessMessage($this->translate("user has been saved"));
 				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
-					$sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
+					/* $sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
 					$sFancybox = $this->getRequest()->getHeaders()->get('X-Fancybox')->toString();
 					if ( ( strpos($sAccept, 'text/html') !== false ) || ( strpos($sFancybox, 'true') !== false ) ) {
 						$viewHelperManager = $this->getServiceLocator()->get('ViewHelperManager');
@@ -83,7 +83,7 @@ class UsersController extends BaseActionController
 						
 					} else {
 						$messages = $this->flashMessenger()->getCurrentErrorMessages();
-					}
+					} */
 				} else {
 					return $this->redirect()->toRoute('admin/default', array('controller' => 'users'));
 				}
