@@ -45,7 +45,7 @@ if (!$showForm) {
 	$formHTML .= $this->formInput($form->get('username')->setAttributes(array('class' => 'form-control')));
 	$formHTML .= $this->formElementErrors($form->get('username'));
 	$formHTML .= '</div>';*/
-	$formHTML .= $this->formgroup(array("form" => $form, "field" => "username"));
+	$formHTML .= $oComponents->formgroup(array("form" => $form, "field" => "username"));
 	
 	$formHTML .= '<div class="form-group'.(!empty($this->formElementErrors($form->get('email'))) ? ' has-error' : '') .'">';
 	$formHTML .= $this->formLabel($form->get('email'));
