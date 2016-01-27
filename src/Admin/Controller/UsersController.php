@@ -35,7 +35,7 @@ class UsersController extends BaseActionController
 			$this->layout('layout/json');
 			$datatablesData = array('data' => $aUserlist->toArray());
 			$_this = $this;
-			$datatablesData['data'] = array_map( function ($row, $idx) use ($_this) {
+			$datatablesData['data'] = array_map( function ($row) use ($_this) {
 				//print_r($row);
 				$actions = '<div class="btn-group btn-group-xs">'.
 					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr" href="'.$_this->url()->fromRoute('admin/default',
