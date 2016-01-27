@@ -1,79 +1,86 @@
-<?php if (!$showForm) {
-	echo $content;
-} else { ?>
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<span class="panel-title"><?php echo $this->translate("edit user"); ?></span>
-	</div>
-	<div class="panel-body">
-		<?php 
-			$form = $this->form;
-			$form->setAttribute('action', $this->url(
-			    'admin/default',
-			    array(
-			        'controller'	=> 'users',
-			        'action'		=> 'edit',
-			        'user_id'		=> $this->user_id,
-			    )
-			));
-			$form->setAttribute('class', 'form-xhr');
-			$form->prepare();
+<?php
+/** @var \TwitterBootstrapAPI\View\Helper\Bootstrap $user **/
+$oBootstrap = $this->Bootstrap();
+/** @var \TwitterBootstrapAPI\View\Helper\Components $user **/
+$oComponents = $this->Components();
+/** @var \Admin\Entity\User $user **/
+$oUser = $this->zfcUserIdentity();
+
+$messages = $this->flashMessenger()->renderCurrent('error', array('error alert alert-error'));
+$messages .= $this->flashMessenger()->renderCurrent('warning', array('warning alert alert-warning'));
+$messages .= $this->flashMessenger()->renderCurrent('success', array('success alert alert-success'));
+$messages .= $this->flashMessenger()->renderCurrent('info', array('info alert alert-info'));
+$this->flashMessenger()->getPluginFlashMessenger()->clearCurrentMessagesFromContainer();
+
+if (!$showForm) {
+	//echo $messages . $content;
+	
+	if ($isXHR) {
+		$html = $oComponents->Modal()
+			->setHeader( $this->translate("edit user") )
+			->setContent(
+				array(
+					'tagname' => 'div',
+					'classnames' => 'modal-body alert-wrap',
+					'content' => $messages,
+				)
+			);
+	} else {
+		$html = $oComponents->Panel()
+			->setHeader( $this->translate("edit user") )
+			->setContent(
+				array(
+					'tagname' => 'div',
+					'classnames' => 'panel-body alert-wrap',
+					'content' => $messages,
+				)
+			);
+	}
+	echo $html;
+	
+} else { 
+	
+	$form = $this->form;
+	$form->setAttribute('action', $this->url(
+	    'admin/default',
+	    array(
+	        'controller'	=> 'users',
+	        'action'		=> 'edit',
+	        'user_id'		=> $this->user_id,
+	    )
+	));
+	$form->setAttribute('class', 'form-xhr');
+	$form->prepare();
 		
-			echo $this->form()->openTag($form); ?>
-			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('username')))) ? ' has-error' : '' ?>">
-				<?php echo $this->formLabel($form->get('username')); ?>
-				<?php echo $this->formInput($form->get('username')->setAttributes(array('class' => 'form-control'))); ?>
-				<?php echo $this->formElementErrors($form->get('username')); ?>
-			</div>
-			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('email')))) ? ' has-error' : '' ?>">
-				<?php echo $this->formLabel($form->get('email')); ?>
-				<?php echo $this->formInput($form->get('email')->setAttributes(array('class' => 'form-control'))); ?>
-				<?php echo $this->formElementErrors($form->get('email')); ?>
-			</div>
-			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('display_name')))) ? ' has-error' : '' ?>">
-				<?php echo $this->formLabel($form->get('display_name')); ?>
-				<?php echo $this->formInput($form->get('display_name')->setAttributes(array('class' => 'form-control'))); ?>
-				<?php echo $this->formElementErrors($form->get('display_name')); ?>
-			</div>
-			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('password')))) ? ' has-error' : '' ?>">
-				<?php echo $this->formLabel($form->get('password')); ?>
-				<?php echo $this->formInput($form->get('password')->setAttributes(array('class' => 'form-control'))); ?>
-				<?php echo $this->formElementErrors($form->get('password')); ?>
-			</div>
-			<hr />
-			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('street')))) ? ' has-error' : '' ?>">
-				<?php echo $this->formLabel($form->get('street')); ?>
-				<?php echo $this->formInput($form->get('street')->setAttributes(array('class' => 'form-control'))); ?>
-				<?php echo $this->formElementErrors($form->get('street')); ?>
-			</div>
-			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('city')))) ? ' has-error' : '' ?>">
-				<?php echo $this->formLabel($form->get('city')); ?>
-				<?php echo $this->formInput($form->get('city')->setAttributes(array('class' => 'form-control'))); ?>
-				<?php echo $this->formElementErrors($form->get('city')); ?>
-			</div>
-			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('phone')))) ? ' has-error' : '' ?>">
-				<?php echo $this->formLabel($form->get('phone')); ?>
-				<?php echo $this->formInput($form->get('phone')->setAttributes(array('class' => 'form-control'))); ?>
-				<?php echo $this->formElementErrors($form->get('phone')); ?>
-			</div>
-			<hr />
-			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('aclrole')))) ? ' has-error' : '' ?>">
-				<?php echo $this->formLabel($form->get('aclrole')); ?>
-				<?php echo $this->formSelect($form->get('aclrole')->setAttributes(array('class' => 'form-control'))); ?>
-				<?php echo $this->formElementErrors($form->get('aclrole')); ?>
-			</div>
-			<hr />
-			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('state')))) ? ' has-error' : '' ?>">
-				<?php echo $this->formLabel($form->get('state')); ?>
-				<?php echo $this->formSelect($form->get('state')->setAttributes(array('class' => 'form-control'))); ?>
-				<?php echo $this->formElementErrors($form->get('state')); ?>
-			</div>
-			<hr />
-			<?php echo $this->formHidden($form->get('user_id')); ?>
-			<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary'))); ?>
-			<?php echo $this->formReset($form->get('reset')->setAttributes(array('class' =>'btn btn-default'))); ?>
-			<a class="btn btn-danger btn-cta-xhr-close" href="<?php echo $this->url('admin/default'); ?>"><?php echo $this->translate("cancel"); ?></a>
-		<?php echo $this->form()->closeTag($form); ?>
-	</div>
-</div>
-<?php } ?>
+	$formHTML = $this->form()->openTag($form);
+	$formHTML .= $oComponents->formGroup($form, "username");
+	$formHTML .= $oComponents->formGroup($form, "email");
+	$formHTML .= $oComponents->formGroup($form, "display_name");
+	$formHTML .= '<hr />';
+	$formHTML .= $oComponents->formGroup($form, "aclrole");
+	$formHTML .= $oComponents->formGroup($form, "state");
+	$formHTML .= '<hr />';
+	$formHTML .= $oComponents->formGroup($form, "password");
+	$formHTML .= '<hr />'; 
+	$formHTML .= $this->formHidden($form->get('user_id'));
+	$formHTML .= $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary')));
+	$formHTML .= $this->formReset($form->get('reset')->setAttributes(array('class' =>'btn btn-default')));
+	$formHTML .= '<a class="btn btn-danger btn-cta-xhr-close" href="'. $this->url('admin/default') .'">'. $this->translate("cancel") .'</a>';
+	$formHTML .=  $this->form()->closeTag($form);
+			
+	if ($isXHR) {
+		$html = $oComponents->Modal()
+			->setHeader( $this->translate("edit user") )
+			->setContent(
+				$messages . $formHTML
+			);
+	} else {
+		$html = $oComponents->Panel()
+			->setHeader( $this->translate("edit user") )
+			->setContent(
+				$formHTML
+			);
+	}
+	echo $html;
+} 
+

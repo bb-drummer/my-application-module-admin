@@ -67,23 +67,9 @@ class UsersController extends BaseActionController
 			if ($form->isValid()) {
 				$user->exchangeArray($form->getData());
 				$this->getUserTable()->saveUser($user);
-				// Redirect to list of users
 				$this->flashMessenger()->addSuccessMessage($this->translate("user has been saved"));
 				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
-					/* $sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
-					$sFancybox = $this->getRequest()->getHeaders()->get('X-Fancybox')->toString();
-					if ( ( strpos($sAccept, 'text/html') !== false ) || ( strpos($sFancybox, 'true') !== false ) ) {
-						$viewHelperManager = $this->getServiceLocator()->get('ViewHelperManager');
-						$flashMessenger = $viewHelperManager->get('flashmessenger');
-						$messages = $flashMessenger()->renderCurrent('warning', array('warning alert flashmessages'));
-						$messages .= $flashMessenger()->renderCurrent('success', array('success alert flashmessages'));
-						$this->flashMessenger()->clearCurrentMessagesFromContainer();
-						return array_merge_recursive($tmplVars, array("content" => preg_replace('/<button(.*)<\/button>/i', "", $messages)));
-						
-					} else {
-						$messages = $this->flashMessenger()->getCurrentErrorMessages();
-					} */
 				} else {
 					return $this->redirect()->toRoute('admin/default', array('controller' => 'users'));
 				}
@@ -105,7 +91,6 @@ class UsersController extends BaseActionController
 			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
 			return $this->redirect()->toRoute('admin/default', array(
 				'controller' => 'users',
-				'action' => 'add'
 			));
 		}
 		$user = $this->getUserTable()->getUser($id);
@@ -134,23 +119,6 @@ class UsersController extends BaseActionController
 				$this->flashMessenger()->addSuccessMessage($this->translate("user has been saved"));
 				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
-					$sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
-					$sFancybox = $this->getRequest()->getHeaders()->get('X-Fancybox')->toString();
-					if ( ( strpos($sAccept, 'text/html') !== false ) || ( strpos($sFancybox, 'true') !== false ) ) {
-						$viewHelperManager = $this->getServiceLocator()->get('ViewHelperManager');
-						$flashMessenger = $viewHelperManager->get('flashmessenger');
-						$messages = $flashMessenger()->renderCurrent('warning', array('warning alert flashmessages'));
-						$messages .= $flashMessenger()->renderCurrent('success', array('success alert flashmessages'));
-						$this->flashMessenger()->clearCurrentMessagesFromContainer();
-						return array_merge_recursive($tmplVars, array("content" => preg_replace('/<button(.*)<\/button>/i', "", $messages)));
-						
-					} else {
-						$messages = $this->flashMessenger()->getCurrentErrorMessages();
-						return array_merge_recursive($tmplVars, array("content" => json_encode(array_merge_recursive(
-							$this->flashMessenger()->getCurrentWarningMessages(),
-							$this->flashMessenger()->getCurrentSuccessMessages()
-						))));
-					}
 				} else {
 					return $this->redirect()->toRoute('admin/default', array('controller' => 'users'));
 				}
@@ -184,23 +152,6 @@ class UsersController extends BaseActionController
 				$this->flashMessenger()->addSuccessMessage($this->translate("user has been deleted"));
 				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
-					$sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
-					$sFancybox = $this->getRequest()->getHeaders()->get('X-Fancybox')->toString();
-					if ( ( strpos($sAccept, 'text/html') !== false ) || ( strpos($sFancybox, 'true') !== false ) ) {
-						$viewHelperManager = $this->getServiceLocator()->get('ViewHelperManager');
-						$flashMessenger = $viewHelperManager->get('flashmessenger');
-						$messages = $flashMessenger()->renderCurrent('warning', array('warning alert flashmessages'));
-						$messages .= $flashMessenger()->renderCurrent('success', array('success alert flashmessages'));
-						$this->flashMessenger()->clearCurrentMessagesFromContainer();
-						return array_merge_recursive($tmplVars, array("content" => preg_replace('/<button(.*)<\/button>/i', "", $messages)));
-						
-					} else {
-						$messages = $this->flashMessenger()->getCurrentErrorMessages();
-						return array_merge_recursive($tmplVars, array("content" => json_encode(array_merge_recursive(
-							$this->flashMessenger()->getCurrentWarningMessages(),
-							$this->flashMessenger()->getCurrentSuccessMessages()
-						))));
-					}
 				} else {
 					return $this->redirect()->toRoute('admin/default', array('controller' => 'users'));
 				}

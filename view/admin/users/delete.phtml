@@ -1,6 +1,84 @@
-<?php if (!$showForm) {
-	echo $content;
-} else { ?>
+<?php
+/** @var \TwitterBootstrapAPI\View\Helper\Bootstrap $user **/
+$oBootstrap = $this->Bootstrap();
+/** @var \TwitterBootstrapAPI\View\Helper\Components $user **/
+$oComponents = $this->Components();
+/** @var \Admin\Entity\User $user **/
+$oUser = $this->zfcUserIdentity();
+
+$messages = $this->flashMessenger()->renderCurrent('error', array('error alert alert-error'));
+$messages .= $this->flashMessenger()->renderCurrent('warning', array('warning alert alert-warning'));
+$messages .= $this->flashMessenger()->renderCurrent('success', array('success alert alert-success'));
+$messages .= $this->flashMessenger()->renderCurrent('info', array('info alert alert-info'));
+$this->flashMessenger()->getPluginFlashMessenger()->clearCurrentMessagesFromContainer();
+
+$url = $this->url('admin/default', array(
+	'controller' => 'users',
+	'action'     => 'delete',
+	'user_id'    => $user->user_id,
+));
+
+if (!$showForm) {
+	//echo $messages . $content;
+	
+	if ($isXHR) {
+		$html = $oComponents->Modal()
+			->setHeader( $this->translate("delete user") )
+			->setContent(
+				array(
+					'tagname' => 'div',
+					'classnames' => 'modal-body alert-wrap',
+					'content' => $messages,
+				)
+			);
+	} else {
+		$html = $oComponents->Panel()
+			->setHeader( $this->translate("delete user") )
+			->setContent(
+				array(
+					'tagname' => 'div',
+					'classnames' => 'panel-body alert-wrap',
+					'content' => $messages,
+				)
+			);
+	}
+	echo $html;
+
+} else { 
+
+	$deleteForm = array(
+		'<p>'.$this->translate("Do you really want to delete this user?").'</p>',
+		'<p>'.
+			'&quot;'.$this->escapeHtml($user->username).'&quot; - '.
+			'&quot;'.$this->escapeHtml($user->display_name).'&quot; - '.
+			'&quot;'.$this->escapeHtml($user->username).'&quot;'.
+		'</p>',
+		'<form action="'.$url.'" method="post" class="form-xhr">'.
+			'<div>'.
+				'<input type="hidden" name="id" value="'.((int) $user->user_id).'" />'.
+				'<input class="btn btn-primary" type="submit" name="del" value="'.$this->translate("delete").'" />'.
+				'<a class="btn btn-danger btn-cta-xhr-close" href="'.$this->url('admin/default').'">'.$this->translate("cancel").'</a>'.
+			'</div>'.
+		'</form>'
+	);
+	if ($isXHR) {
+		$html = $oComponents->Modal()
+			->setHeader( $this->translate("delete user") )
+			->setContent(
+				array_merge(array($messages), $deleteForm)
+			)
+		;
+	} else {
+		$html = $oComponents->Panel()
+			->setHeader( $this->translate("delete user") )
+			->setContent(
+				$deleteForm
+			)
+		;
+	}
+	echo $html;
+	
+/* ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<span class="panel-title"><?php echo $this->translate("delete user"); ?></span>
@@ -28,4 +106,5 @@
 		</form>
 	</div>
 </div>
-<?php } ?>
+<?php*/
+} 
