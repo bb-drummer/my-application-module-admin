@@ -44,14 +44,14 @@ if (!$showForm) {
 	$form->prepare();
 		
 	$formHTML = $this->form()->openTag($form);
-	$formHTML .= $oComponents->formgroup(array("form" => $form, "field" => "username"));
-	$formHTML .= $oComponents->formgroup(array("form" => $form, "field" => "email"));
-	$formHTML .= $oComponents->formgroup(array("form" => $form, "field" => "display_name"));
+	$formHTML .= $oComponents->formGroup($form, "username");
+	$formHTML .= $oComponents->formGroup($form, "email");
+	$formHTML .= $oComponents->formGroup($form, "display_name");
 	$formHTML .= '<hr />';
-	$formHTML .= $oComponents->formgroup(array("form" => $form, "field" => "aclrole"));
-	$formHTML .= $oComponents->formgroup(array("form" => $form, "field" => "state"));
+	$formHTML .= $oComponents->formGroup($form, "aclrole");
+	$formHTML .= $oComponents->formGroup($form, "state");
 	$formHTML .= '<hr />';
-	$formHTML .= $oComponents->formgroup(array("form" => $form, "field" => "password"));
+	$formHTML .= $oComponents->formGroup($form, "password");
 	$formHTML .= '<hr />'; 
 	$formHTML .= $this->formHidden($form->get('user_id'));
 	$formHTML .= $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary')));
