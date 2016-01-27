@@ -6,10 +6,10 @@ $oComponents = $this->Components();
 /** @var \Admin\Entity\User $user **/
 $oUser = $this->zfcUserIdentity();
 
-$messages = $this->flashMessenger()->renderCurrent('error', array('error alert alert-error _flashmessages'));
-$messages .= $this->flashMessenger()->renderCurrent('warning', array('warning alert alert-warning _flashmessages'));
-$messages .= $this->flashMessenger()->renderCurrent('success', array('success alert alert-success _flashmessages'));
-$messages .= $this->flashMessenger()->renderCurrent('info', array('info alert alert-info _flashmessages'));
+$messages = $this->flashMessenger()->renderCurrent('error', array('error alert alert-error'));
+$messages .= $this->flashMessenger()->renderCurrent('warning', array('warning alert alert-warning'));
+$messages .= $this->flashMessenger()->renderCurrent('success', array('success alert alert-success'));
+$messages .= $this->flashMessenger()->renderCurrent('info', array('info alert alert-info'));
 	
 if (!$showForm) {
 	//echo $messages . $content;
@@ -20,7 +20,7 @@ if (!$showForm) {
 			->setContent(
 				array(
 					'tagname' => 'div',
-					'classname' => 'alert-wrap',
+					'classname' => 'modal-body alert-wrap',
 					'content' => $messages,
 				)
 			);
@@ -28,7 +28,11 @@ if (!$showForm) {
 		$html = $oComponents->Panel()
 			->setHeader( $this->translate("add user") )
 			->setContent(
-				$messages
+				array(
+					'tagname' => 'div',
+					'classname' => 'panel-body alert-wrap',
+					'content' => $messages,
+				)
 			);
 	}
 	echo $html;
@@ -48,61 +52,6 @@ if (!$showForm) {
 	$formHTML .= $oComponents->formgroup(array("form" => $form, "field" => "state"));
 	$formHTML .= '<hr />';
 	$formHTML .= $oComponents->formgroup(array("form" => $form, "field" => "password"));
-	
-	/* $formHTML .= '<hr />';
-	$formHTML .= $oComponents->formgroup(array("form" => $form, "field" => "street"));
-	$formHTML .= $oComponents->formgroup(array("form" => $form, "field" => "city"));
-	$formHTML .= $oComponents->formgroup(array("form" => $form, "field" => "phone")); */
-	
-	/* $formHTML .= '<div class="form-group'.(!empty($this->formElementErrors($form->get('username'))) ? ' has-error' : '') .'">';
-	$formHTML .= $this->formLabel($form->get('username'));
-	$formHTML .= $this->formInput($form->get('username')->setAttributes(array('class' => 'form-control')));
-	$formHTML .= $this->formElementErrors($form->get('username'));
-	$formHTML .= '</div>';
-	$formHTML .= '<div class="form-group'.(!empty($this->formElementErrors($form->get('email'))) ? ' has-error' : '') .'">';
-	$formHTML .= $this->formLabel($form->get('email'));
-	$formHTML .= $this->formInput($form->get('email')->setAttributes(array('class' => 'form-control')));
-	$formHTML .= $this->formElementErrors($form->get('email'));
-	$formHTML .= '</div>';
-	$formHTML .= '<div class="form-group'.(!empty($this->formElementErrors($form->get('display_name'))) ? ' has-error' : '') .'">';
-	$formHTML .= $this->formLabel($form->get('display_name'));
-	$formHTML .= $this->formInput($form->get('display_name')->setAttributes(array('class' => 'form-control')));
-	$formHTML .= $this->formElementErrors($form->get('display_name'));
-	$formHTML .= '</div>';
-	$formHTML .= '<div class="form-group'.(!empty($this->formElementErrors($form->get('password'))) ? ' has-error' : '') .'">';
-	$formHTML .= $this->formLabel($form->get('password'));
-	$formHTML .= $this->formInput($form->get('password')->setAttributes(array('class' => 'form-control')));
-	$formHTML .= $this->formElementErrors($form->get('password'));
-	$formHTML .= '</div>';
-	$formHTML .= '<hr />';
-	$formHTML .= '<div class="form-group'.(!empty($this->formElementErrors($form->get('street'))) ? ' has-error' : '') .'">';
-	$formHTML .= $this->formLabel($form->get('street'));
-	$formHTML .= $this->formInput($form->get('street')->setAttributes(array('class' => 'form-control')));
-	$formHTML .= $this->formElementErrors($form->get('street'));
-	$formHTML .= '</div>';
-	$formHTML .= '<div class="form-group'.(!empty($this->formElementErrors($form->get('city'))) ? ' has-error' : '') .'">';
-	$formHTML .= $this->formLabel($form->get('city'));
-	$formHTML .= $this->formInput($form->get('city')->setAttributes(array('class' => 'form-control')));
-	$formHTML .= $this->formElementErrors($form->get('city'));
-	$formHTML .= '</div>';
-	$formHTML .= '<div class="form-group'.(!empty($this->formElementErrors($form->get('phone'))) ? ' has-error' : '') .'">';
-	$formHTML .= $this->formLabel($form->get('phone'));
-	$formHTML .= $this->formInput($form->get('phone')->setAttributes(array('class' => 'form-control')));
-	$formHTML .= $this->formElementErrors($form->get('phone'));
-	$formHTML .= '</div>';
-	$formHTML .= '<hr />';
-	$formHTML .= '<div class="form-group'.(!empty($this->formElementErrors($form->get('aclrole'))) ? ' has-error' : '') .'">';
-	$formHTML .= $this->formLabel($form->get('aclrole'));
-	$formHTML .= $this->formSelect($form->get('aclrole')->setAttributes(array('class' => 'form-control')));
-	$formHTML .= $this->formElementErrors($form->get('aclrole'));
-	$formHTML .= '</div>';
-	$formHTML .= '<hr />';
-	$formHTML .= '<div class="form-group'.(!empty($this->formElementErrors($form->get('state'))) ? ' has-error' : '') .'">';
-	$formHTML .= $this->formLabel($form->get('state'));
-	$formHTML .= $this->formSelect($form->get('state')->setAttributes(array('class' => 'form-control')));
-	$formHTML .= $this->formElementErrors($form->get('state'));
-	$formHTML .= '</div>'; */
-	
 	$formHTML .= '<hr />'; 
 	$formHTML .= $this->formHidden($form->get('user_id'));
 	$formHTML .= $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary')));
