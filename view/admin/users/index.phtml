@@ -4,7 +4,7 @@
 	</div>
 	<div class="panel-body panel-toolbar">
 		<div class="btn-group btn-group-sm">
-			<a class="btn btn-default btn-clean btn-sm btn-cta-xhr" data-actioncontext="usertable" href="<?php echo $this->url('admin/default', array('controller'=>'users', 'action'=>'add'));?>"><span class="fa fa-plus"></span> <?php echo $this->translate("add user")?></a>
+			<button class="btn btn-default btn-clean btn-sm btn-cta-xhr" data-toggle="modal" data-actioncontext="usertable" data-src="<?php echo $this->url('admin/default', array('controller'=>'users', 'action'=>'add'));?>"><span class="fa fa-plus"></span> <?php echo $this->translate("add user")?></a>
 		</div>
 	</div>
 	<div class="panel-body">
