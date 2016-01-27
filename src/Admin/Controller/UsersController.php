@@ -35,19 +35,18 @@ class UsersController extends BaseActionController
 			$this->layout('layout/json');
 			$datatablesData = array('data' => $aUserlist->toArray());
 			$_this = $this;
-			$_url = $this->getView()->url;
-			$datatablesData['data'] = array_map( function ($row, $idx) use ($_this, $_url) {
+			$datatablesData['data'] = array_map( function ($row, $idx) use ($_this) {
 				//print_r($row);
 				$actions = '<div class="btn-group btn-group-xs">'.
-					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr" href="'.$_url('admin/default',
+					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr" href="'.$_this->url()->fromRoute('admin/default',
 						array('controller'=>'users', 'action'=>'edit', 'user_id' => $row["user_id"])).'"><span class="fa fa-pencil"></span> '.$_this->translate("edit").'</a>'.
-					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr" href="'.$_url('admin/default',
+					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr" href="'.$_this->url()->fromRoute('admin/default',
 						array('controller'=>'users', 'action'=>'delete', 'user_id' => $row["user_id"])).'"><span class="fa fa-trash-o"></span> '.$_this->translate("delete").'</a>'.
 				'</div>';
-				$row["password"] = "**********";
+				$row["password"] = "*********";
 				$row["_actions_"] = $actions;
 				return $row;
-			}, $datatablesData['data'], array_keys($datatablesData['data']) );
+			}, $datatablesData['data'] );
 			echo json_encode($datatablesData); die();
 			return array_merge_recursive($tmplVars, array("content" => json_encode($datatablesData)));
 		}
