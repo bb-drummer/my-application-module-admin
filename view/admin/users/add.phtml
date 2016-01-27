@@ -14,7 +14,7 @@ if (!$showForm) {
 	$form->setAttribute('class', 'form-xhr');
 	$form->prepare();
 		
-	$formHTML = $this->form()->openTag($form);
+	$formHTML = ''; // $this->form()->openTag($form);
 	$formHTML .= '<div class="form-group'.(!empty($this->formElementErrors($form->get('username'))) ? ' has-error' : '') .'">';
 	$formHTML .= $this->formLabel($form->get('username'));
 	$formHTML .= $this->formInput($form->get('username')->setAttributes(array('class' => 'form-control')));
@@ -68,21 +68,26 @@ if (!$showForm) {
 	$formHTML .= $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary')));
 	$formHTML .= $this->formReset($form->get('reset')->setAttributes(array('class' =>'btn btn-default')));
 	$formHTML .= '<a class="btn btn-danger btn-cta-xhr-close" href="'. $this->url('admin/default') .'">'. $this->translate("cancel") .'</a>';
-	$formHTML .=  $this->form()->closeTag($form);
+	//$formHTML .=  $this->form()->closeTag($form);
 		
 		
 	if ($isXHR) {
-		$html = $oComponents->Modal()
+		$html = $this->form()->openTag($form) . $oComponents->Modal()
 			->setHeader( $this->translate("add user") )
 			->setContent(
 				$formHTML
-			);
+			)
+			. $this->form()->closeTag($form)
+		;
 	} else {
-		$html = $oComponents->Panel()
+		$html = $this->form()->openTag($form) . $oComponents->Panel()
 			->setHeader( $this->translate("add user") )
 			->setContent(
 				$formHTML
-			);
+			)
+			->setFooter()
+			. $this->form()->closeTag($form)
+		;
 	}
 	echo $html;
  /* ?>
