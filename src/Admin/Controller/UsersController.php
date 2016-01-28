@@ -162,6 +162,9 @@ class UsersController extends BaseActionController
 			return $this->redirect()->toRoute('admin/default', array('controller' => 'users', 'action' => 'index'));
 		}
 
+		$tmplVars["user_id"] = $id;
+		$tmplVars["user"] = $this->getUserTable()->getUser($id);
+
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 			$del = $request->getPost('del', '');
@@ -178,9 +181,6 @@ class UsersController extends BaseActionController
 			}
 
 		}
-
-		$tmplVars["user_id"] = $id;
-		$tmplVars["user"] = $this->getUserTable()->getUser($id);
 		return new ViewModel($tmplVars);
 	}
 
