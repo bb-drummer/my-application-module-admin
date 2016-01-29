@@ -7,6 +7,7 @@ $oComponents = $this->Components();
 $oUser = $this->zfcUserIdentity();
 
 if ($showForm) {
+	$form = $this->form;
 	$form->setAttribute('action', $this->url('admin/default', array('controller' => 'users', 'action' => 'add')));
 	$form->setAttribute('class', 'form-xhr');
 	$form->prepare();

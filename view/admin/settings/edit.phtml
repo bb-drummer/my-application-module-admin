@@ -1,3 +1,39 @@
+<?php 
+/** @var \TwitterBootstrapAPI\View\Helper\Bootstrap $user **/
+$oBootstrap = $this->Bootstrap();
+/** @var \TwitterBootstrapAPI\View\Helper\Components $user **/
+$oComponents = $this->Components();
+/** @var \Admin\Entity\User $user **/
+$oUser = $this->zfcUserIdentity();
+
+if ($showForm) {
+	$form = $this->form;
+	$form->setAttribute('action', $this->url(
+	    'admin/settingsedit',
+	    array(
+	        'action'		=> 'edit',
+	        'set_id'		=> $this->settings_id,
+	    )
+	));
+	$form->setAttribute('class', 'form-xhr');
+	$form->prepare();
+		
+	$formHTML = $this->form()->openTag($form);
+	$formHTML .= $oComponents->formGroup($form, "scope");
+	$formHTML .= $oComponents->formGroup($form, "ref_id");
+	$formHTML .= $oComponents->formGroup($form, "type");
+	$formHTML .= $oComponents->formGroup($form, "name");
+	$formHTML .= $oComponents->formGroup($form, "value");
+	$formHTML .= '<hr />'; 
+	$formHTML .= $this->formHidden($form->get('user_id'));
+	$formHTML .= $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary')));
+	$formHTML .= $this->formReset($form->get('reset')->setAttributes(array('class' =>'btn btn-default')));
+	$formHTML .= '<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'. $this->url('admin/settingsedit') .'">'. $this->translate("cancel") .'</a>';
+	$formHTML .=  $this->form()->closeTag($form);
+		
+	echo $formHTML;
+}
+/* ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<label>
@@ -50,3 +86,4 @@
 		<?php echo $this->form()->closeTag($form); ?>
 	</div>
 </div>
+*/
