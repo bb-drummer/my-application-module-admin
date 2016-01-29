@@ -46,6 +46,7 @@ class UsersController extends BaseActionController
 				$row["_actions_"] = $actions;
 				return $row;
 			}, $datatablesData['data'] );
+			return $this->getResponse()->setContent(json_encode($datatablesData));
 			//echo json_encode($datatablesData); die();
 			return array_merge_recursive($tmplVars, array("content" => json_encode($datatablesData)));
 		}
