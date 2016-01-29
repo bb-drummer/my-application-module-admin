@@ -333,44 +333,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	
 	public function initAcl(MvcEvent $e) {
 		$sm = $e->getApplication()->getServiceManager();
-		$acl = \Application\Model\Callbacks::initACL($sm); /*new ZendAcl();
-		$oAcls = $sm->get('\Admin\Model\AclTable');
-		$oRoles = $sm->get('Admin\Model\AclroleTable');
-		$oResources = $sm->get('\Admin\Model\AclresourceTable');
-		
-		$aRoles = $oRoles->fetchAll()->toArray();
-		foreach ($aRoles as $key => $role) {
-			$acl->addRole(new GenericRole($role['roleslug']));
-		}
-		$aResources = $oResources->fetchAll()->toArray();
-		foreach ($aResources as $key => $resource) {
-			$acl->addResource(new GenericResource($resource['resourceslug']));
-		}
-
-		foreach ($aRoles as $key => $role) {
-			foreach ($aResources as $key => $resource) {
-				$oAcl = $oAcls->getAclByRoleResource($role['aclroles_id'], $resource['aclresources_id']);
-				if ( $oAcl && !empty($oAcl->state) ) {
-					if ( ($oAcl->state == 'allow') ) {
-						$acl->allow(
-							$role['roleslug'], 
-							array($resource['resourceslug'])
-						);
-					} else if ( ($oAcl->state == 'deny') ) {
-						$acl->deny(
-							$role['roleslug'], 
-							array($resource['resourceslug'])
-						);
-					}
-				}
-			}
-		}
-		
-		// whatever happens before, allow all actions to 'admin'
-		$acl->allow('admin', null);
-		$acl->deny('admin', array(
-			'mvc:nouser',
-		));*/
+		$acl = \Application\Model\Callbacks::initACL($sm);
 		
 		$e->getViewModel()->acl = $acl;
 	}
