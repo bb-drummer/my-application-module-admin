@@ -35,6 +35,8 @@ use Zend\View\HelperPluginManager;
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer;
 
+use Application\Model\Callbacks;
+
 use Admin\Controller\RedirectCallback;
 use Admin\Controller\ZfcuserController;
 use Admin\Model\UserProfile;
@@ -49,7 +51,6 @@ use Admin\Model\Aclrole;
 use Admin\Model\AclroleTable;
 use Admin\Model\Aclresource;
 use Admin\Model\AclresourceTable;
-
 
 class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterface
 {
@@ -116,16 +117,21 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		/** @var $application \Zend\Mvc\Application */
 		$application = $e->getApplication();
 		$this->appobj = $application;
+		
 		/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
 		$serviceManager = $application->getServiceManager();
 		$this->setServiceManager( $serviceManager );
+		
 		/** @var $pluginManagerViewHelper \Zend\View\HelperPluginManager */
 		$viewHelperManager = $serviceManager->get('ViewHelperManager');
+		
 		/** @var $eventManager \Zend\EventManager\EventManager */
 		$eventManager		= $application->getEventManager();
+		
 		/** @var $staticEventManager \Zend\EventManager\StaticEventManager */
 		$staticEventManager		= \Zend\EventManager\StaticEventManager::getInstance();
 		
+		/** @var $moduleRouteListener \Zend\Mvc\ModuleRouteListener */
 		$moduleRouteListener = new ModuleRouteListener();
 		$moduleRouteListener->attach($eventManager);
 		
@@ -327,7 +333,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	
 	public function initAcl(MvcEvent $e) {
 		$sm = $e->getApplication()->getServiceManager();
-		$acl = new ZendAcl();
+		$acl = \Application\Model\Callbacks::initACL($sm); /*new ZendAcl();
 		$oAcls = $sm->get('\Admin\Model\AclTable');
 		$oRoles = $sm->get('Admin\Model\AclroleTable');
 		$oResources = $sm->get('\Admin\Model\AclresourceTable');
@@ -364,7 +370,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		$acl->allow('admin', null);
 		$acl->deny('admin', array(
 			'mvc:nouser',
-		));
+		));*/
 		
 		$e->getViewModel()->acl = $acl;
 	}
