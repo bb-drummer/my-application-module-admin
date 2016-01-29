@@ -29,35 +29,3 @@ if ($showForm) {
 	);
 	echo implode("", $formHTML);
 } 
-/* ?>
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<label>
-			<span class="panel-title"><?php echo $this->translate("delete setting"); ?></span>
-		</label>
-	</div>
-	<div class="panel-body">
-		<p><?php echo $this->translate("Do you really want to delete this setting?"); ?>:</p>
-		<p><strong>
-			'<?php echo $this->escapeHtml($settings->scope); ?>, <?php echo $this->escapeHtml($settings->ref_id); ?>' - 
-			'<?php echo $this->escapeHtml($settings->type); ?>' - 
-			'<?php echo $this->escapeHtml($settings->name); ?>'?
-		</strong></p>
-		
-		<?php
-		$url = $this->url('admin/settingsedit', array(
-		    'action'     => 'delete',
-		    'set_id'         => $settings->settings_id,
-		));
-		?>
-		<form action="<?php echo $url; ?>" method="post">
-			<div class="form-group">
-				<input type="hidden" name="id" value="<?php echo (int) $settings->settings_id; ?>" />
-				<input class="btn btn-primary" type="submit" name="del" value="<?php echo $this->translate("delete"); ?>" />
-				<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="<?php echo $this->url('admin/settingsedit'); ?>"><?php echo $this->translate("cancel"); ?></a>
-			</div>
-		</form>
-	</div>
-</div>
-	
-*/
