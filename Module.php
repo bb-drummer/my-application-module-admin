@@ -50,6 +50,8 @@ use Admin\Model\AclroleTable;
 use Admin\Model\Aclresource;
 use Admin\Model\AclresourceTable;
 
+use Application\Model\Callbacks as AppCallbacks;
+
 
 class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterface
 {
@@ -62,9 +64,18 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
 	protected static $serviceManager;
 	
-	/*public function init(ModuleManager $mm)
+	public function init(ModuleManager $mm)
 	{
-		$mm->getEventManager()->getSharedManager()->attach(__NAMESPACE__, 'dispatch', function($e) {
+		$AppCallbacks = new AppCallbacks();
+		$mm->getEventManager()
+			->getSharedManager()
+			->attach(
+				__NAMESPACE__, 
+				'dispatch', 
+				('Application\Model\Callbacks::initLayout') 
+			)
+		;
+		/*$mm->getEventManager()->getSharedManager()->attach(__NAMESPACE__, 'dispatch', function($e) {
 			$oController = $e->getTarget();
 			$sAccept = $oController->getRequest()->getHeaders()->get('Accept')->toString();
 			if ( $oController->getRequest()->isXmlHttpRequest() ) {
@@ -76,9 +87,9 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 			} else {
 				$oController->layout('layout/layout');
 			}
-		});
+		});*/
 
-	}	*/
+	}
 	
 	public function getAutoloaderConfig()
 	{
