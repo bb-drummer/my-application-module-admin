@@ -97,7 +97,7 @@ class SettingsController extends BaseActionController
         if (!$id) {
         	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
             return $this->redirect()->toRoute('admin/settingsedit', array(
-                'action' => 'add'
+                'action' => 'index'
             ));
         }
         $settings = $this->getSettingsTable()->getSettings($id);
