@@ -50,8 +50,6 @@ use Admin\Model\AclroleTable;
 use Admin\Model\Aclresource;
 use Admin\Model\AclresourceTable;
 
-use Application\Model\Callbacks as AppCallbacks;
-
 
 class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterface
 {
@@ -64,10 +62,11 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
 	protected static $serviceManager;
 	
-	public function init(ModuleManager $mm)
+	public function init(ModuleManager $oModuleManager)
 	{
-		$AppCallbacks = new AppCallbacks();
-		$mm->getEventManager()
+		// init layout
+		$oModuleManager
+			->getEventManager()
 			->getSharedManager()
 			->attach(
 				__NAMESPACE__, 
@@ -75,20 +74,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 				('Application\Model\Callbacks::initLayout') 
 			)
 		;
-		/*$mm->getEventManager()->getSharedManager()->attach(__NAMESPACE__, 'dispatch', function($e) {
-			$oController = $e->getTarget();
-			$sAccept = $oController->getRequest()->getHeaders()->get('Accept')->toString();
-			if ( $oController->getRequest()->isXmlHttpRequest() ) {
-				if ( strpos($sAccept, 'text/html') !== false ) {
-					$oController->layout('layout/ajax');
-				} else {
-					$oController->layout('layout/json');
-				}
-			} else {
-				$oController->layout('layout/layout');
-			}
-		});*/
-
+		
 	}
 	
 	public function getAutoloaderConfig()
@@ -147,7 +133,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		
 		// setup acl
 		$this->initAcl($e);
-		$eventManager->attach('dispatch', array($this, 'checkAcl'));
+		$eventManager->getSharedManager()->attach(__NAMESPACE__, 'dispatch', array($this, 'checkAcl'));
 		
 		// setup user registration mails
 		$staticEventManager->attach('ZfcUser\Service\User', 'register', array($this, 'userRegisterBeforeInsert'));
