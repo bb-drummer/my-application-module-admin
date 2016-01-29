@@ -6,16 +6,17 @@ $oComponents = $this->Components();
 /** @var \Admin\Entity\User $user **/
 $oUser = $this->zfcUserIdentity();
 
-$messages = $this->flashMessenger()->renderCurrent('error', array('error alert alert-error'));
+/*$messages = $this->flashMessenger()->renderCurrent('error', array('error alert alert-error'));
 $messages .= $this->flashMessenger()->renderCurrent('warning', array('warning alert alert-warning'));
 $messages .= $this->flashMessenger()->renderCurrent('success', array('success alert alert-success'));
 $messages .= $this->flashMessenger()->renderCurrent('info', array('info alert alert-info'));
 $this->flashMessenger()->getPluginFlashMessenger()->clearCurrentMessagesFromContainer();
+*/
 
 if (!$showForm) {
 	//echo $messages . $content;
 	
-	if ($isXHR) {
+	/*if ($isXHR) {
 		$html = $oComponents->Modal()
 			->setHeader( $this->translate("edit user") )
 			->setContent(
@@ -36,7 +37,7 @@ if (!$showForm) {
 				)
 			);
 	}
-	echo $html;
+	echo $html;*/
 	
 } else { 
 	
@@ -68,7 +69,7 @@ if (!$showForm) {
 	$formHTML .= '<a class="btn btn-danger btn-cta-xhr-close" href="'. $this->url('admin/default') .'">'. $this->translate("cancel") .'</a>';
 	$formHTML .=  $this->form()->closeTag($form);
 			
-	if ($isXHR) {
+	/*if ($isXHR) {
 		$html = $oComponents->Modal()
 			->setHeader( $this->translate("edit user") )
 			->setContent(
@@ -80,7 +81,7 @@ if (!$showForm) {
 			->setContent(
 				$formHTML
 			);
-	}
-	echo $html;
+	}*/
+	echo $formHTML;
 } 
 

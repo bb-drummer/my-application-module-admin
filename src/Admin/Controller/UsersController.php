@@ -159,7 +159,7 @@ class UsersController extends BaseActionController
 		$id = (int) $this->params()->fromRoute('user_id', 0);
 		if (!$id) {
 			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
-			return $this->redirect()->toRoute('admin/default', array('controller' => 'users', 'action' => 'index'));
+			return $this->redirect()->toRoute('admin/default', array('controller' => 'users'));
 		}
 
 		$tmplVars["user_id"] = $id;
