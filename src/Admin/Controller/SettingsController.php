@@ -138,8 +138,7 @@ class SettingsController extends BaseActionController
 			)
 		);
 		$this->layout()->setVariable('title', $this->translate("delete setting"));
-    	$tmplVars = $this->getTemplateVars();
-        $id = (int) $this->params()->fromRoute('set_id', 0);
+    	$id = (int) $this->params()->fromRoute('set_id', 0);
         if (!$id) {
         	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
             return $this->redirect()->toRoute('admin/settingsedit', array('action' => 'index'));
