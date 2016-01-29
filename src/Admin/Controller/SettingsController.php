@@ -34,9 +34,9 @@ class SettingsController extends BaseActionController
 			$datatablesData['data'] = array_map( function ($row) use ($oController) {
 				$actions = '<div class="btn-group btn-group-xs">'.
 					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/settingsedit',
-							array('action'=>'edit', 'settings_id' => $row["settings_id"])).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
+							array('action'=>'edit', 'set_id' => $row["settings_id"])).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
 					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/settingsedit',
-							array('action'=>'delete', 'settings_id' => $row["settings_id"])).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'.
+							array('action'=>'delete', 'set_id' => $row["settings_id"])).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'.
 				'</div>';
 				$row["_actions_"] = $actions;
 				return $row;
