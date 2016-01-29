@@ -58,7 +58,7 @@ if (!$showForm) {
 	$formHTML .= $this->formHidden($form->get('user_id'));
 	$formHTML .= $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary')));
 	$formHTML .= $this->formReset($form->get('reset')->setAttributes(array('class' =>'btn btn-default')));
-	$formHTML .= '<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'. $this->url('admin/default') .'">'. $this->translate("cancel") .'</a>';
+	$formHTML .= '<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'. $this->url('admin/default', array("controller" => "users")) .'">'. $this->translate("cancel") .'</a>';
 	$formHTML .=  $this->form()->closeTag($form);
 		
 		
