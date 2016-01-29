@@ -32,22 +32,21 @@ class UsersController extends BaseActionController
 		$tmplVars = $this->getTemplateVars();
 		$aUserlist = $this->getUserTable()->fetchAll();
 		if ( $this->getRequest()->isXmlHttpRequest() ) {
-			//$this->layout('layout/json');
 			$datatablesData = array('data' => $aUserlist->toArray());
-			$_this = $this;
-			$datatablesData['data'] = array_map( function ($row) use ($_this) {
+			$oController = $this;
+			$datatablesData['data'] = array_map( function ($row) use ($oController) {
 				//print_r($row);
 				$actions = '<div class="btn-group btn-group-xs">'.
-					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$_this->url()->fromRoute('admin/default',
-						array('controller'=>'users', 'action'=>'edit', 'user_id' => $row["user_id"])).'"><span class="fa fa-pencil"></span> '.$_this->translate("edit").'</a>'.
-					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$_this->url()->fromRoute('admin/default',
-						array('controller'=>'users', 'action'=>'delete', 'user_id' => $row["user_id"])).'"><span class="fa fa-trash-o"></span> '.$_this->translate("delete").'</a>'.
+					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/default',
+						array('controller'=>'users', 'action'=>'edit', 'user_id' => $row["user_id"])).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
+					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/default',
+						array('controller'=>'users', 'action'=>'delete', 'user_id' => $row["user_id"])).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'.
 				'</div>';
 				$row["password"] = "*********";
 				$row["_actions_"] = $actions;
 				return $row;
 			}, $datatablesData['data'] );
-			echo json_encode($datatablesData); die();
+			//echo json_encode($datatablesData); die();
 			return array_merge_recursive($tmplVars, array("content" => json_encode($datatablesData)));
 		}
 		return new ViewModel(array(
