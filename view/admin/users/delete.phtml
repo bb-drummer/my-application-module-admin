@@ -6,46 +6,12 @@ $oComponents = $this->Components();
 /** @var \Admin\Entity\User $user **/
 $oUser = $this->zfcUserIdentity();
 
-/*$messages = $this->flashMessenger()->renderCurrent('error', array('error alert alert-error'));
-$messages .= $this->flashMessenger()->renderCurrent('warning', array('warning alert alert-warning'));
-$messages .= $this->flashMessenger()->renderCurrent('success', array('success alert alert-success'));
-$messages .= $this->flashMessenger()->renderCurrent('info', array('info alert alert-info'));
-$this->flashMessenger()->getPluginFlashMessenger()->clearCurrentMessagesFromContainer();
-*/
-$url = $this->url('admin/default', array(
-	'controller' => 'users',
-	'action'     => 'delete',
-	'user_id'    => $user->user_id,
-));
-
-if (!$showForm) {
-	//echo $messages . $content;
-	
-	/*if ($isXHR) {
-		$html = $oComponents->Modal()
-			->setHeader( $this->translate("delete user") )
-			->setContent(
-				array(
-					'tagname' => 'div',
-					'classnames' => 'modal-body alert-wrap',
-					'content' => $messages,
-				)
-			);
-	} else {
-		$html = $oComponents->Panel()
-			->setHeader( $this->translate("delete user") )
-			->setContent(
-				array(
-					'tagname' => 'div',
-					'classnames' => 'panel-body alert-wrap',
-					'content' => $messages,
-				)
-			);
-	}
-	echo $html;*/
-
-} else { 
-
+if ($showForm) {
+	$url = $this->url('admin/default', array(
+		'controller' => 'users',
+		'action'     => 'delete',
+		'user_id'    => $user->user_id,
+	));
 	$formHTML = array(
 		'<p>'.$this->translate("Do you really want to delete this user?").'</p>',
 		'<p>'.
@@ -61,59 +27,5 @@ if (!$showForm) {
 			'</div>'.
 		'</form>'
 	);
-	
-	/*if ($isXHR) {
-		$html = $oComponents->Modal()
-			->setHeader( $this->translate("delete user") )
-			->setContent(
-				array(
-					'tagname' => 'div',
-					'classnames' => 'modal-body',
-					'content' => array_merge(array($messages), $formHTML),
-				)
-			)
-		;
-	} else {
-		$html = $oComponents->Panel()
-			->setHeader( $this->translate("delete user") )
-			->setContent(
-				array(
-					'tagname' => 'div',
-					'classnames' => 'modal-body',
-					'content' => $formHTML,
-				)
-			)
-		;
-	} */
 	echo implode("", $formHTML);
-	
-/* ?>
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<span class="panel-title"><?php echo $this->translate("delete user"); ?></span>
-	</div>
-	<div class="panel-body">
-		<p><?php echo $this->translate("Do you really want to delete this user?"); ?></p>
-		<p>
-			'<?php echo $this->escapeHtml($user->username); ?>' - 
-			'<?php echo $this->escapeHtml($user->display_name); ?>' - 
-			'<?php echo $this->escapeHtml($user->email); ?>'?
-		</p>
-		<?php
-		$url = $this->url('admin/default', array(
-		    'controller' => 'users',
-		    'action'     => 'delete',
-		    'user_id'    => $user->user_id,
-		));
-		?>
-		<form action="<?php echo $url; ?>" method="post" class="form-xhr">
-			<div>
-				<input type="hidden" name="id" value="<?php echo (int) $user->user_id; ?>" />
-				<input class="btn btn-primary" type="submit" name="del" value="<?php echo $this->translate("delete"); ?>" />
-				<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="<?php echo $this->url('admin/default'); ?>"><?php echo $this->translate("cancel"); ?></a>
-			</div>
-		</form>
-	</div>
-</div>
-<?php*/
 } 

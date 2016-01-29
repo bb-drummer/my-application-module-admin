@@ -6,41 +6,7 @@ $oComponents = $this->Components();
 /** @var \Admin\Entity\User $user **/
 $oUser = $this->zfcUserIdentity();
 
-/*$messages = $this->flashMessenger()->renderCurrent('error', array('error alert alert-error'));
-$messages .= $this->flashMessenger()->renderCurrent('warning', array('warning alert alert-warning'));
-$messages .= $this->flashMessenger()->renderCurrent('success', array('success alert alert-success'));
-$messages .= $this->flashMessenger()->renderCurrent('info', array('info alert alert-info'));
-$this->flashMessenger()->getPluginFlashMessenger()->clearCurrentMessagesFromContainer();
-*/
-
-if (!$showForm) {
-	//echo $messages . $content;
-	
-	/* if ($isXHR) {
-		$html = $oComponents->Modal()
-			->setHeader( $this->translate("add user") )
-			->setContent(
-				array(
-					'tagname' => 'div',
-					'classnames' => 'modal-body alert-wrap',
-					'content' => $messages,
-				)
-			);
-	} else {
-		$html = $oComponents->Panel()
-			->setHeader( $this->translate("add user") )
-			->setContent(
-				array(
-					'tagname' => 'div',
-					'classnames' => 'panel-body alert-wrap',
-					'content' => $messages,
-				)
-			);
-	}
-	echo $html; */
-	
-} else { 
-
+if ($showForm) {
 	$form->setAttribute('action', $this->url('admin/default', array('controller' => 'users', 'action' => 'add')));
 	$form->setAttribute('class', 'form-xhr');
 	$form->prepare();
@@ -61,20 +27,5 @@ if (!$showForm) {
 	$formHTML .= '<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'. $this->url('admin/default', array("controller" => "users")) .'">'. $this->translate("cancel") .'</a>';
 	$formHTML .=  $this->form()->closeTag($form);
 		
-		
-	/*if ($isXHR) {
-		$html = $oComponents->Modal()
-			->setHeader( $this->translate("add user") )
-			->setContent(
-				$messages . $formHTML
-			);
-	} else {
-		$html = $oComponents->Panel()
-			->setHeader( $this->translate("add user") )
-			->setContent(
-				$formHTML
-			);
-	}*/
 	echo $formHTML;
 }
-
