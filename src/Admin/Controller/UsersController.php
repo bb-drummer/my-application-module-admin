@@ -65,7 +65,10 @@ class UsersController extends BaseActionController
 	public function addAction()
 	{
 		$tmplVars = $this->getTemplateVars( 
-			array('showForm' => true,)
+			array(
+				'showForm'	=> true,
+				'title'		=> $this->translate("add user")
+			)
 		);
 		
 		$form = new UserForm();
@@ -104,7 +107,10 @@ class UsersController extends BaseActionController
 	public function editAction()
 	{
 		$tmplVars = $this->getTemplateVars( 
-			array('showForm' => true,)
+			array(
+				'showForm'	=> true,
+				'title'		=> $this->translate("edit user")
+			)
 		);
 		$id = (int) $this->params()->fromRoute('user_id', 0);
 		if (!$id) {
@@ -154,7 +160,10 @@ class UsersController extends BaseActionController
 	public function deleteAction()
 	{
 		$tmplVars = $this->getTemplateVars( 
-			array('showForm' => true,)
+			array(
+				'showForm'	=> true,
+				'title'		=> $this->translate("delete user")
+			)
 		);
 		$id = (int) $this->params()->fromRoute('user_id', 0);
 		if (!$id) {
