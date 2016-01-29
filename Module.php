@@ -138,8 +138,14 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		$this->setAppConfig($e->getApplication()->getConfig());
 		
 		// setup acl
-		$this->initAcl($e);
-		$eventManager->getSharedManager()->attach(__NAMESPACE__, 'dispatch', array($this, 'checkAcl'));
+		//\Application\Model\Callbacks::initACL($e);
+		//$this->initAcl($e); ('Application\Model\Callbacks::initLayout')
+		//$eventManager->getSharedManager()->attach(__NAMESPACE__, 'dispatch', array($this, 'checkAcl'));
+		$eventManager->getSharedManager()->attach(
+			__NAMESPACE__, 
+			'dispatch', 
+			('Application\Model\Callbacks::checkACL')
+		);
 		
 		// setup user registration mails
 		$staticEventManager->attach('ZfcUser\Service\User', 'register', array($this, 'userRegisterBeforeInsert'));
