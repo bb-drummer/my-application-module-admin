@@ -32,7 +32,7 @@ class UsersController extends BaseActionController
 		$tmplVars = $this->getTemplateVars();
 		$aUserlist = $this->getUserTable()->fetchAll();
 		if ( $this->getRequest()->isXmlHttpRequest() ) {
-			$this->layout('layout/json');
+			//$this->layout('layout/json');
 			$datatablesData = array('data' => $aUserlist->toArray());
 			$_this = $this;
 			$datatablesData['data'] = array_map( function ($row) use ($_this) {

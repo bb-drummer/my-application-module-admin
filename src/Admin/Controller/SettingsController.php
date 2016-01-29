@@ -37,6 +37,8 @@ class SettingsController extends BaseActionController {
 	 */
 	public function indexAction() 
 	{
+		$tmplVars = $this->getTemplateVars();
+		
         return new ViewModel(array(
             'settingsdata' => $this->getSettingsTable()->fetchAll(),
         ));
@@ -44,11 +46,8 @@ class SettingsController extends BaseActionController {
 	
     public function addAction()
     {
-        $tmplVars = array_merge( 
-			$this->params()->fromRoute(), 
-			$this->params()->fromPost(),
-			array()
-		);
+        $tmplVars = $this->getTemplateVars();
+        
         //if (!class_exists('\Admin\Form\SettingsForm')) { require_once __DIR__ . '/../Form/SettingsForm.php'; }
         $form = new SettingsForm();
 
@@ -73,11 +72,7 @@ class SettingsController extends BaseActionController {
 
     public function editAction()
     {
-		$tmplVars = array_merge( 
-			$this->params()->fromRoute(), 
-			$this->params()->fromPost(),
-			array()
-		);
+		$tmplVars = $this->getTemplateVars();
         $id = (int) $this->params()->fromRoute('set_id', 0);
         if (!$id) {
         	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -112,6 +107,7 @@ class SettingsController extends BaseActionController {
 
     public function deleteAction()
     {
+    	$tmplVars = $this->getTemplateVars();
         $id = (int) $this->params()->fromRoute('set_id', 0);
         if (!$id) {
         	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
