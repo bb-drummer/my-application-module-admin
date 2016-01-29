@@ -38,9 +38,9 @@ class UsersController extends BaseActionController
 			$datatablesData['data'] = array_map( function ($row) use ($_this) {
 				//print_r($row);
 				$actions = '<div class="btn-group btn-group-xs">'.
-					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr" href="'.$_this->url()->fromRoute('admin/default',
+					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$_this->url()->fromRoute('admin/default',
 						array('controller'=>'users', 'action'=>'edit', 'user_id' => $row["user_id"])).'"><span class="fa fa-pencil"></span> '.$_this->translate("edit").'</a>'.
-					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr" href="'.$_this->url()->fromRoute('admin/default',
+					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$_this->url()->fromRoute('admin/default',
 						array('controller'=>'users', 'action'=>'delete', 'user_id' => $row["user_id"])).'"><span class="fa fa-trash-o"></span> '.$_this->translate("delete").'</a>'.
 				'</div>';
 				$row["password"] = "*********";

@@ -22,8 +22,8 @@
 						    <td><?php echo (!empty($acl->state) ? $this->escapehtml($acl->state) : '---') ?></td>
 						    <td>
 					    		<div class="btn-group btn-group-xs">
-						        	<a class="btn btn-default btn-xs btn-clean btn-cta-xhr" href="<?php echo $this->url('admin/acledit', array('action'=>'edit', 'acl_id' => $acl->acl_id));?>"><span class="fa fa-pencil"></span> <?php echo $this->translate("edit"); ?></a>
-						        	<a class="btn btn-default btn-xs btn-clean btn-cta-xhr" href="<?php echo $this->url('admin/acledit', array('action'=>'delete', 'acl_id' => $acl->acl_id));?>"><span class="fa fa-trash-o"></span> <?php echo $this->translate("delete"); ?></a>
+						        	<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/acledit', array('action'=>'edit', 'acl_id' => $acl->acl_id));?>"><span class="fa fa-pencil"></span> <?php echo $this->translate("edit"); ?></a>
+						        	<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/acledit', array('action'=>'delete', 'acl_id' => $acl->acl_id));?>"><span class="fa fa-trash-o"></span> <?php echo $this->translate("delete"); ?></a>
 						        </div>
 						    </td>
 						</tr>

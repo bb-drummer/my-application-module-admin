@@ -57,7 +57,7 @@ if (!$showForm) {
 			'<div>'.
 				'<input type="hidden" name="id" value="'.((int) $user->user_id).'" />'.
 				'<input class="btn btn-primary" type="submit" name="del" value="'.$this->translate("delete").'" />'.
-				'<a class="btn btn-danger btn-cta-xhr-close" href="'.$this->url('admin/default').'">'.$this->translate("cancel").'</a>'.
+				'<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'.$this->url('admin/default').'">'.$this->translate("cancel").'</a>'.
 			'</div>'.
 		'</form>'
 	);
@@ -110,7 +110,7 @@ if (!$showForm) {
 			<div>
 				<input type="hidden" name="id" value="<?php echo (int) $user->user_id; ?>" />
 				<input class="btn btn-primary" type="submit" name="del" value="<?php echo $this->translate("delete"); ?>" />
-				<a class="btn btn-danger btn-cta-xhr-close" href="<?php echo $this->url('admin/default'); ?>"><?php echo $this->translate("cancel"); ?></a>
+				<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="<?php echo $this->url('admin/default'); ?>"><?php echo $this->translate("cancel"); ?></a>
 			</div>
 		</form>
 	</div>

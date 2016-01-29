@@ -6,11 +6,11 @@
 	</div>
 	<div class="panel-body panel-toolbar">
 		<div class="btn-group btn-group-sm">
-			<a class="btn btn-default btn-clean btn-cta-xhr btn-sm" href="<?php echo $this->url('admin/acledit', array('action'=>'addresource'));?>"><span class="fa fa-plus"></span> <?php echo $this->translate("add resource")?></a>
+			<a class="btn btn-default btn-clean btn-cta-xhr cta-xhr-modal btn-sm" href="<?php echo $this->url('admin/acledit', array('action'=>'addresource'));?>"><span class="fa fa-plus"></span> <?php echo $this->translate("add resource")?></a>
 		</div>
 		<div class="btn-group btn-group-sm">
-			<a class="btn btn-default btn-clean btn-cta-xhr btn-sm" href="<?php echo $this->url('admin/acledit');?>"><span class="fa fa-plus"></span> <?php echo $this->translate("ACL")?></a>
-			<a class="btn btn-default btn-clean btn-cta-xhr btn-sm" href="<?php echo $this->url('admin/acledit', array('action'=>'roles'));?>"><span class="fa fa-plus"></span> <?php echo $this->translate("manage roles")?></a>
+			<a class="btn btn-default btn-clean btn-cta-xhr cta-xhr-modal btn-sm" href="<?php echo $this->url('admin/acledit');?>"><span class="fa fa-plus"></span> <?php echo $this->translate("ACL")?></a>
+			<a class="btn btn-default btn-clean btn-cta-xhr cta-xhr-modal btn-sm" href="<?php echo $this->url('admin/acledit', array('action'=>'roles'));?>"><span class="fa fa-plus"></span> <?php echo $this->translate("manage roles")?></a>
 		</div>
 	</div>
 	<div class="panel-body">
@@ -30,9 +30,9 @@
 					    <td><?php echo $this->escapeHtml($resource->resourcename);?></td>
 					    <td>
 						    <div class="btn-group btn-group-xs">
-						        <a class="btn btn-default btn-xs btn-clean btn-cta-xhr" href="<?php echo $this->url('admin/acledit',
+						        <a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/acledit',
 						            array('action'=>'editresource', 'acl_id' => $resource->aclresources_id));?>"><span class="fa fa-pencil"></span> <?php echo $this->translate("edit"); ?></a>
-						        <a class="btn btn-default btn-xs btn-clean btn-cta-xhr" href="<?php echo $this->url('admin/acledit',
+						        <a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/acledit',
 						            array('action'=>'deleteresource', 'acl_id' => $resource->aclresources_id));?>"><span class="fa fa-trash-o"></span> <?php echo $this->translate("delete"); ?></a>
 						    </div>
 					    </td>
