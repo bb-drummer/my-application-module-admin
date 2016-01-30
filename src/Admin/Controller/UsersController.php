@@ -126,7 +126,6 @@ class UsersController extends BaseActionController
 		$roles = $this->getAclroleTable()->fetchAll()->toArray();
 		$valueoptions = array();
 		foreach ($roles as $role) {
-			//$valueoptions[$role["aclroles_id"]] = $role["rolename"];
 			$valueoptions[$role["roleslug"]] = $role["rolename"];
 		}
 		$form->get('aclrole')->setValueOptions($valueoptions);
@@ -135,12 +134,8 @@ class UsersController extends BaseActionController
 		if ($request->isPost()) {
 			$form->setInputFilter($user->getInputFilter());
 			$form->setData($request->getPost());
-
 			if ($form->isValid()) {
-				
 				$this->getUserTable()->saveUser($user);
-
-				// Redirect to list of users
 				$this->flashMessenger()->addSuccessMessage($this->translate("user has been saved"));
 				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;

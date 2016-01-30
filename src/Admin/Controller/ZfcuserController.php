@@ -30,7 +30,7 @@ use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Stdlib\Parameters;
 
 use ZfcUser\Controller\UserController;
-use Zend\View\Model\ViewModel;
+//use Zend\View\Model\ViewModel;
 
 class ZfcuserController extends UserController
 {

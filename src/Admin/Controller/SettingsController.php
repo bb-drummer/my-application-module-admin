@@ -58,7 +58,6 @@ class SettingsController extends BaseActionController
 		);
 		$this->layout()->setVariable('title', $this->translate("add setting"));
     	
-        //if (!class_exists('\Admin\Form\SettingsForm')) { require_once __DIR__ . '/../Form/SettingsForm.php'; }
         $form = new SettingsForm();
 
         $request = $this->getRequest();
@@ -70,8 +69,7 @@ class SettingsController extends BaseActionController
             if ($form->isValid()) {
                 $settings->exchangeArray($form->getData());
                 $this->getSettingsTable()->saveSettings($settings);
-                // Redirect to list of settings
-        		$this->flashMessenger()->addSuccessMessage($this->translate('setting has been saved'));
+                $this->flashMessenger()->addSuccessMessage($this->translate('setting has been saved'));
 				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
 				} else {
@@ -112,9 +110,7 @@ class SettingsController extends BaseActionController
 
             if ($form->isValid()) {
                 $this->getSettingsTable()->saveSettings($settings);
-
-                // Redirect to list of settings
-        		$this->flashMessenger()->addSuccessMessage($this->translate("setting has been saved"));
+				$this->flashMessenger()->addSuccessMessage($this->translate("setting has been saved"));
         		if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
 				} else {
@@ -122,7 +118,7 @@ class SettingsController extends BaseActionController
 				}
             }
         } else {
-       		$form->bind($settings); //->getArrayCopy());
+       		$form->bind($settings);
         }
         $tmplVars["settings_id"] = $id;
         $tmplVars["form"] = $form;
