@@ -71,9 +71,10 @@ class AclController extends BaseActionController
 					$aclstate = $this->getAclTable()
 						->getAclByRoleResource($role['aclroles_id'],$resource['aclresources_id']);
 					$acls[] = array( 
+						'acl_id' => ($aclstate && !empty($aclstate->acl_id) ? ($aclstate->acl_id) : ''), 
 						'roleslug' => $role['roleslug'], 
 						'resourceslug' => $resource['resourceslug'], 
-						'status' => (!empty($aclstate->state) ? ($aclstate->state) : '---')
+						'status' => ($aclstate && !empty($aclstate->state) ? ($aclstate->state) : 'allow')
 					);
 				}
 			}
@@ -82,9 +83,9 @@ class AclController extends BaseActionController
 			$datatablesData['data'] = array_map( function ($row) use ($oController) {
 				$actions = '<div class="btn-group btn-group-xs">'.
 					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/acledit',
-						array('action'=>'editrole', 'acl_id' => $row["aclroles_id"])).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
+						array('action'=>'editacl', 'acl_id' => $row["acl_id"])).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
 					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/acledit',
-						array('action'=>'deleterole', 'acl_id' => $row["aclroles_id"])).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'.
+						array('action'=>'deleteacl', 'acl_id' => $row["acl_id"])).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'.
 					'</div>';
 				$row["_actions_"] = $actions;
 				return $row;
