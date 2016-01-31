@@ -1,11 +1,11 @@
 		<h4 class="hide"><?php echo $this->translate("list view")?></h4>
 		
 		<div class="table-responsive">
-			<table class="table table-striped table-hover list datatable" data-src="<?php echo $this->url('admin/acledit', array('action'=>'roles')) ?>">
+			<table class="table table-striped table-hover list datatable crud" data-src="<?php echo $this->url('admin/acledit', array('action'=>'acllist')) ?>">
 				<thead>
 					<tr>
-					    <th data-column="role"><?php echo $this->translate("role")?></th>
-					    <th data-column="resource"><?php echo $this->translate("resource")?></th>
+					    <th data-column="roleslug"><?php echo $this->translate("role")?></th>
+					    <th data-column="resourceslug"><?php echo $this->translate("resource")?></th>
 					    <th data-column="status"><?php echo $this->translate("status")?></th>
 					    <th class="actions">&nbsp;</th>
 					</tr>

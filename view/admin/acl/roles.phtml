@@ -15,11 +15,11 @@
 	</div>
 	<div class="panel-body">
 		<div class="table-responsive">
-			<table class="table table-striped table-hover datatable" data-src="<?php echo $this->url('admin/acledit', array('action'=>'roles')) ?>">
+			<table class="table table-striped table-hover datatable crud" data-src="<?php echo $this->url('admin/acledit', array('action'=>'roles')) ?>">
 				<thead>
 					<tr>
-					    <th data-column="slug"><?php echo $this->translate("role slug")?></th>
-					    <th data-column="name"><?php echo $this->translate("role name")?></th>
+					    <th data-column="roleslug"><?php echo $this->translate("role slug")?></th>
+					    <th data-column="rolename"><?php echo $this->translate("role name")?></th>
 					    <th class="actions">&nbsp;</th>
 					</tr>
 				</thead>
