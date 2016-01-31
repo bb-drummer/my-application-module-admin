@@ -68,22 +68,18 @@ class AclController extends BaseActionController
 			foreach ($resources as $resource) {
 				$resourceacl = [];
 				foreach ($roles as $role) {
+					$aclstate = $this->getAclTable()
+						->getAclByRoleResource($role['aclroles_id'],$resource['aclresources_id']);
 					$acls[] = array( 
 						'roleslug' => $role['roleslug'], 
 						'resourceslug' => $resource['resourceslug'], 
-						'status' => $this->getAclTable()
-							->getAclByRoleResource($role['aclroles_id'],$resouce['aclresources_id'])
+						'status' => (!empty($aclstate->state) ? ($aclstate->state) : '---')
 					);
 				}
 			}
 			$datatablesData = array('data' => $acl); // $this->getAclTable()->fetchAll()->toArray());
 			$oController = $this;
 			$datatablesData['data'] = array_map( function ($row) use ($oController) {
-				$acl = $oController
-					->getAclTable()
-					->getAclByRoleResource($row['aclroles_id'],$row['aclresources_id'])
-				;
-				$row["status"] = (!empty($acl->state) ? ($acl->state) : '---');
 				$actions = '<div class="btn-group btn-group-xs">'.
 					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/acledit',
 						array('action'=>'editrole', 'acl_id' => $row["aclroles_id"])).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
