@@ -77,7 +77,7 @@ class AclController extends BaseActionController
 					);
 				}
 			}
-			$datatablesData = array('data' => $acl); // $this->getAclTable()->fetchAll()->toArray());
+			$datatablesData = array('data' => $acls); // $this->getAclTable()->fetchAll()->toArray());
 			$oController = $this;
 			$datatablesData['data'] = array_map( function ($row) use ($oController) {
 				$actions = '<div class="btn-group btn-group-xs">'.
