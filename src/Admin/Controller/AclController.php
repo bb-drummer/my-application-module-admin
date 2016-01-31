@@ -50,7 +50,7 @@ class AclController extends BaseActionController
 	{
 
 		if ( $this->getRequest()->isXmlHttpRequest() ) {
-			$datatablesData = array('data' => $this->getAclroleTable()->fetchAll());
+			$datatablesData = array('data' => $this->getAclroleTable()->fetchAll()->toArray());
 			$oController = $this;
 			$datatablesData['data'] = array_map( function ($row) use ($oController) {
 				$actions = '<div class="btn-group btn-group-xs">'.
@@ -74,7 +74,7 @@ class AclController extends BaseActionController
 	public function resourcesAction()
 	{
 		if ( $this->getRequest()->isXmlHttpRequest() ) {
-			$datatablesData = array('data' => $this->getAclresourceTable()->fetchAll());
+			$datatablesData = array('data' => $this->getAclresourceTable()->fetchAll()->toArray());
 			$oController = $this;
 			$datatablesData['data'] = array_map( function ($row) use ($oController) {
 				$actions = '<div class="btn-group btn-group-xs">'.
