@@ -78,14 +78,22 @@ class AclController extends BaseActionController
 					);
 				}
 			}
-			$datatablesData = array('data' => $acls); // $this->getAclTable()->fetchAll()->toArray());
+			$datatablesData = array(
+				'tableid'	=> 'acltable',
+				'data'		=> $acls
+			);
 			$oController = $this;
 			$datatablesData['data'] = array_map( function ($row) use ($oController) {
 				$actions = '<div class="btn-group btn-group-xs">'.
-					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/acledit',
-						array('action'=>'editacl', 'acl_id' => $row["acl_id"])).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
-					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/acledit',
-						array('action'=>'deleteacl', 'acl_id' => $row["acl_id"])).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'.
+					(empty($row["acl_id"]) ? 
+						'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/acledit',
+							array('action'=>'addacl', 'acl_id' => '')).'"><span class="fa fa-pencil"></span> '.$oController->translate("add acl").'</a>'
+					:
+						'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/acledit',
+							array('action'=>'editacl', 'acl_id' => $row["acl_id"])).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
+						'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/acledit',
+							array('action'=>'deleteacl', 'acl_id' => $row["acl_id"])).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'
+					).							
 					'</div>';
 				$row["_actions_"] = $actions;
 				return $row;
