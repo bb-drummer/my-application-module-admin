@@ -56,7 +56,7 @@ class AclController extends BaseActionController
 				$actions = '<div class="btn-group btn-group-xs">'.
 					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/acledit',
 						array('action'=>'editrole', 'acl_id' => $row["aclroles_id"])).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
-					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/ecledit',
+					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/acledit',
 						array('action'=>'deleterole', 'acl_id' => $row["aclroles_id"])).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'.
 					'</div>';
 				$row["_actions_"] = $actions;
