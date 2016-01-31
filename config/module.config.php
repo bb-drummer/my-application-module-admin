@@ -217,5 +217,8 @@ return array(
         'template_path_stack' => array(
             'admin' => __DIR__ . '/../view',
         ),
+    	'strategies' => array(
+    		'ViewJsonStrategy'
+    	)
     ),
 );
