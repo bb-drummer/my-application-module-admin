@@ -41,7 +41,7 @@ class ClientsForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'scope',
+                'label' => 'name',
             ),
         ));
         $this->add(array(
@@ -50,7 +50,7 @@ class ClientsForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'reference',
+                'label' => 'extraname',
             ),
         ));
         $this->add(array(
@@ -60,7 +60,7 @@ class ClientsForm extends Form
                 'type'  => 'url',
             ),
             'options' => array(
-                'label' => 'type',
+                'label' => 'homepage',
             ),
         ));
         $this->add(array(
@@ -70,7 +70,7 @@ class ClientsForm extends Form
                 'type'  => 'email',
             ),
             'options' => array(
-                'label' => 'name',
+                'label' => 'email',
             ),
         ));
         $this->add(array(
@@ -79,7 +79,7 @@ class ClientsForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'value',
+                'label' => 'contact',
             ),
         ));
         $this->add(array(
@@ -88,7 +88,7 @@ class ClientsForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'value',
+                'label' => 'phone',
             ),
         ));
         $this->add(array(
@@ -97,7 +97,7 @@ class ClientsForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'value',
+                'label' => 'statistics',
             ),
         ));
         
