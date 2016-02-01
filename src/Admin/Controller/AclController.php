@@ -283,6 +283,8 @@ class AclController extends BaseActionController
 			return $this->redirect()->toRoute('admin/acledit', array());
 		}
 
+		$tmplVars["acl_id"] = $id;
+		$tmplVars["acl"] = $this->getAclTable()->getAcl($id);
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 			$del = $request->getPost('del', 'No');
@@ -301,8 +303,6 @@ class AclController extends BaseActionController
 			}
 		}
 
-		$tmplVars["acl_id"] = $id;
-		$tmplVars["acl"] = $this->getAclTable()->getAcl($id);
 		return new ViewModel($tmplVars);
 	}
 
@@ -408,6 +408,8 @@ class AclController extends BaseActionController
 			return $this->redirect()->toRoute('admin/acledit', array('action' => 'roles'));
 		}
 
+		$tmplVars["acl_id"] = $id;
+		$tmplVars["aclrole"] = $this->getAclroleTable()->getAclrole($id);
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 			$del = $request->getPost('del', '');
@@ -427,8 +429,6 @@ class AclController extends BaseActionController
 			
 		}
 
-		$tmplVars["acl_id"] = $id;
-		$tmplVars["aclrole"] = $this->getAclroleTable()->getAclrole($id);
 		$tmplVars["roles"] = $this->getAclroleTable()->fetchAll();
 		return new ViewModel($tmplVars);
 	}
@@ -539,6 +539,8 @@ class AclController extends BaseActionController
 			return $this->redirect()->toRoute('admin/acledit', array('action' => 'resources'));
 		}
 
+		$tmplVars["acl_id"] = $id;
+		$tmplVars["aclresource"] = $this->getAclresourceTable()->getAclresource($id);
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 			$del = $request->getPost('del', '');
@@ -557,8 +559,6 @@ class AclController extends BaseActionController
 			}
 		}
 
-		$tmplVars["acl_id"] = $id;
-		$tmplVars["aclresource"] = $this->getAclresourceTable()->getAclresource($id);
 		$tmplVars["resources"] = $this->getAclresourceTable()->fetchAll();
 		return new ViewModel($tmplVars);
 	}
