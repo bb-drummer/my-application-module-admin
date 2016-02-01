@@ -164,6 +164,7 @@ class AclController extends BaseActionController
 				'showForm'	=> true,
 			)
 		);
+		$this->layout()->setVariable('title', $this->translate("add permission"));
 		//if (!class_exists('\Admin\Form\AclForm')) { require_once __DIR__ . '/../Form/AclForm.php'; }
 		$form = new AclForm();
 
@@ -214,6 +215,7 @@ class AclController extends BaseActionController
 				'showForm'	=> true,
 			)
 		);
+		$this->layout()->setVariable('title', $this->translate("change permission"));
 		$id = (int) $this->params()->fromRoute('acl_id', 0);
 		if (!$id) {
 			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -274,6 +276,7 @@ class AclController extends BaseActionController
 				'showForm'	=> true,
 			)
 		);
+		$this->layout()->setVariable('title', $this->translate("delete permission"));
 		$id = (int) $this->params()->fromRoute('acl_id', 0);
 		if (!$id) {
 			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -315,6 +318,7 @@ class AclController extends BaseActionController
 				'showForm'	=> true,
 			)
 		);
+		$this->layout()->setVariable('title', $this->translate("add role"));
 		$form = new AclroleForm();
 
 		$request = $this->getRequest();
@@ -331,7 +335,7 @@ class AclController extends BaseActionController
 				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
 				} else {
-					return $this->redirect()->toRoute('admin/acledit', array());
+					return $this->redirect()->toRoute('admin/acledit', array('action' => 'roles'));
 				}
 			}
 			$tmplVars["acl"] = $Aclrole;
@@ -343,6 +347,7 @@ class AclController extends BaseActionController
 
 	public function editroleAction()
 	{
+		$this->layout()->setVariable('title', $this->translate("edit role"));
 		$tmplVars = $this->getTemplateVars( 
 			array(
 				'acldata'	=> $this->getAclTable()->fetchAll(),
@@ -354,9 +359,7 @@ class AclController extends BaseActionController
 		$id = (int) $this->params()->fromRoute('acl_id', 0);
 		if (!$id) {
 			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
-			return $this->redirect()->toRoute('admin/acledit', array(
-				'action' => 'addrole'
-			));
+			return $this->redirect()->toRoute('admin/acledit', array('action' => 'roles'));
 		}
 		$Aclrole = $this->getAclroleTable()->getAclrole($id);
 
@@ -398,6 +401,7 @@ class AclController extends BaseActionController
 				'showForm'	=> true,
 			)
 		);
+		$this->layout()->setVariable('title', $this->translate("delete role"));
 		$id = (int) $this->params()->fromRoute('acl_id', 0);
 		if (!$id) {
 			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -441,6 +445,7 @@ class AclController extends BaseActionController
 				'showForm'	=> true,
 			)
 		);
+		$this->layout()->setVariable('title', $this->translate("add resource"));
 		//if (!class_exists('\Admin\Form\AclForm')) { require_once __DIR__ . '/../Form/AclForm.php'; }
 		$form = new AclresourceForm();
 
@@ -478,6 +483,7 @@ class AclController extends BaseActionController
 				'showForm'	=> true,
 			)
 		);
+		$this->layout()->setVariable('title', $this->translate("edit resource"));
 		$id = (int) $this->params()->fromRoute('acl_id', 0);
 		if (!$id) {
 			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -526,6 +532,7 @@ class AclController extends BaseActionController
 				'showForm'	=> true,
 			)
 		);
+		$this->layout()->setVariable('title', $this->translate("delete resource"));
 		$id = (int) $this->params()->fromRoute('acl_id', 0);
 		if (!$id) {
 			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));

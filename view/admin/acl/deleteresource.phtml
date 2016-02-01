@@ -1,3 +1,32 @@
+<?php
+/** @var \TwitterBootstrapAPI\View\Helper\Bootstrap $user **/
+$oBootstrap = $this->Bootstrap();
+/** @var \TwitterBootstrapAPI\View\Helper\Components $user **/
+$oComponents = $this->Components();
+/** @var \Admin\Entity\User $user **/
+$oUser = $this->zfcUserIdentity();
+
+if ($showForm) {
+	$url = $this->url('admin/acledit', array(
+	    'action'     => 'deleteresource',
+	    'acl_id'     => $acl_id,
+	));
+	$formHTML = array(
+		'<p>'.$this->translate("Do you really want to delete this resource?").'</p>',
+		'<p>'.
+			'&quot;'.$this->escapeHtml($aclresource->resourcename).'&quot; - '.
+			'&quot;'.$this->escapeHtml($aclresource->resourceslug).'&quot;'.
+		'</p>',
+		'<form action="'.$url.'" method="post" class="form-xhr">'.
+			'<div>'.
+				'<input type="hidden" name="id" value="'.((int) $acl_id).'" />'.
+				'<input class="btn btn-primary" type="submit" name="del" value="'.$this->translate("delete").'" />'.
+				'<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'.$this->url('admin/acledit').'">'.$this->translate("cancel").'</a>'.
+			'</div>'.
+		'</form>'
+	);
+	echo implode("", $formHTML);
+} /*
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<label>
@@ -26,3 +55,4 @@
 	</div>
 </div>
 	
+*/
