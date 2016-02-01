@@ -17,7 +17,7 @@
 			<tr>
 			    <th style="text-align: left;" data-search="<?php echo $this->escapeHtml($resource['resourcename']." ".$resource['resourceslug']);?>"><?php echo $this->escapeHtml($resource['resourcename']);?></th>
 				<?php foreach ($roles as $role) : ?>
-				<td>
+				<td class="aclswitch">
 				<?php
 					$oAcl = $acltable->getAclByRoleResource($role['aclroles_id'],$resource['aclresources_id']);
 					
