@@ -1,0 +1,31 @@
+<?php 
+/** @var \TwitterBootstrapAPI\View\Helper\Bootstrap $user **/
+$oBootstrap = $this->Bootstrap();
+/** @var \TwitterBootstrapAPI\View\Helper\Components $user **/
+$oComponents = $this->Components();
+/** @var \Admin\Entity\User $user **/
+$oUser = $this->zfcUserIdentity();
+
+if ($showForm) {
+	$form = $this->form;
+	$form->setAttribute('action', $this->url('admin/clientsedit', array('action' => 'add')));
+	$form->setAttribute('class', 'form-xhr');
+	$form->prepare();
+		
+	$formHTML = $this->form()->openTag($form);
+	$formHTML .= $oComponents->formGroup($form, "name");
+	$formHTML .= $oComponents->formGroup($form, "extraname");
+	$formHTML .= $oComponents->formGroup($form, "homepage");
+	$formHTML .= $oComponents->formGroup($form, "email");
+	$formHTML .= $oComponents->formGroup($form, "contact");
+	$formHTML .= $oComponents->formGroup($form, "phone");
+	$formHTML .= $oComponents->formGroup($form, "statistics");
+	$formHTML .= '<hr />'; 
+	$formHTML .= $this->formHidden($form->get('clients_id'));
+	$formHTML .= $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary')));
+	$formHTML .= $this->formReset($form->get('reset')->setAttributes(array('class' =>'btn btn-default')));
+	$formHTML .= '<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'. $this->url('admin/clientsedit') .'">'. $this->translate("cancel") .'</a>';
+	$formHTML .=  $this->form()->closeTag($form);
+		
+	echo $formHTML;
+}

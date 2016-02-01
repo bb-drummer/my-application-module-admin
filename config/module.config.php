@@ -106,6 +106,19 @@ return array(
                             ),
                         ),
                     ),
+                    'clientsedit' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/clients[/:action[/:client_id]]',
+                            'constraints' => array(
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'client_id'     => '[0-9]*',
+                            ),
+                            'defaults' => array(
+                            	'controller' => 'Admin\Controller\Clients',
+                            ),
+                        ),
+                    ),
                 ),
             ),
 

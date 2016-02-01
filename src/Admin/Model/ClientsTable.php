@@ -16,10 +16,10 @@
 namespace Admin\Model;
 
 use Zend\Db\TableGateway\TableGateway;
-use Admin\Model\Settings;
+use Admin\Model\Clients;
 use Zend\Db\Sql\Select;
 
-class SettingsTable
+class ClientsTable
 {
     protected $tableGateway;
 
@@ -34,7 +34,7 @@ class SettingsTable
         	if (!empty($scope)) {
 				$select->where('scope = \''.$scope.'\'')->order('type, name ASC');
         	} else {
-				$select->order('type, name ASC');
+				$select->order('name ASC');
         	}
 		});
         return $resultSet;
@@ -58,10 +58,10 @@ class SettingsTable
         return $resultSet;
     }
 
-    public function getSettings($id)
+    public function getClients($id)
     {
         $id  = (int) $id;
-        $rowset = $this->tableGateway->select(array('settings_id' => $id));
+        $rowset = $this->tableGateway->select(array('clients_id' => $id));
         $row = $rowset->current();
         if (!$row) {
             throw new \Exception("Could not find row $id");
@@ -69,30 +69,32 @@ class SettingsTable
         return $row;
     }
 
-    public function saveSettings(Settings $settings)
+    public function saveClients(Clients $clients)
     {
         $data = array(
-            'scope'		=> $settings->scope,
-            'ref_id'	=> $settings->ref_id,
-            'type'		=> $settings->type,
-            'name'		=> $settings->name,
-            'value'		=> $settings->value,
+            'name'			=> $clients->name,
+            'extraname'		=> $clients->extraname,
+            'homepage'		=> $clients->homepage,
+            'email'			=> $clients->email,
+            'contact'		=> $clients->contact,
+        	'phone'			=> $clients->phone,
+        	'statistics'	=> $clients->statistics,
         );
 
-        $id = (int)$settings->settings_id;
+        $id = (int)$clients->clients_id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
         } else {
-            if ($this->getSettings($id)) {
-                $this->tableGateway->update($data, array('settings_id' => $id));
+            if ($this->getClients($id)) {
+                $this->tableGateway->update($data, array('clients_id' => $id));
             } else {
                 throw new \Exception('Form id does not exist');
             }
         }
     }
 
-    public function deleteSettings($id)
+    public function deleteClients($id)
     {
-        $this->tableGateway->delete(array('settings_id' => $id));
+        $this->tableGateway->delete(array('clients_id' => $id));
     }
 }
