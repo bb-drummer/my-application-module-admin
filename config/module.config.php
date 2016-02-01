@@ -33,6 +33,7 @@ return array(
             'Admin\Controller\Users'	=> 'Admin\Controller\UsersController',
             'Admin\Controller\Zfcuser'	=> 'Admin\Controller\ZfcuserController',
             'Admin\Controller\Acl'		=> 'Admin\Controller\AclController',
+            'Admin\Controller\Clients'	=> 'Admin\Controller\ClientsController',
             'Admin\Controller\Settings' => 'Admin\Controller\SettingsController',
         ),
     ),
