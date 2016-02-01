@@ -22,6 +22,7 @@
 					$oAcl = $acltable->getAclByRoleResource($role['aclroles_id'],$resource['aclresources_id']);
 					
 					// allow button
+					$form->setAttribute('class', 'allow');
 					$form->setName('aclallow_'.$role['aclroles_id'].'_'.$resource['aclresources_id']);
 					if ($oAcl) {
 						$form->setAttribute('action', $this->url('admin/acledit', array('action' => 'editacl','acl_id' => $oAcl->acl_id)));
@@ -51,6 +52,7 @@
 					echo $this->form()->closeTag();
 					
 					// deny button
+					$form->setAttribute('class', 'deny');
 					$form->setName('acldeny_'.$role['aclroles_id'].'_'.$resource['aclresources_id']);
 					if ($oAcl) {
 						$form->setAttribute('action', $this->url('admin/acledit', array('action' => 'editacl','acl_id' => $oAcl->acl_id)));
