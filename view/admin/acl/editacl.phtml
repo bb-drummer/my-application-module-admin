@@ -21,12 +21,14 @@ if ($showForm) {
 	foreach ($roles as $role) {
 		$valueoptions[$role->aclroles_id] = $role->rolename;
 	}
+	$oRoles->setAttribute('disabled', false);
 	$oRoles->setValueOptions($valueoptions);
 	$oResources = $form->get('aclresources_id');
 	$valueoptions = array();
 	foreach ($resources as $resource) {
 		$valueoptions[$resource->aclresources_id] = $resource->resourcename;
 	}
+	$oResources->setAttribute('disabled', false);
 	$oResources->setValueOptions($valueoptions);
 	$form->prepare();
 		
