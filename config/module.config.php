@@ -27,106 +27,106 @@ return array(
 			'user'			=> 'user',
 		)
 	),
-    'controllers' => array(
-        'invokables' => array(
-            'Admin\Controller\Index'	=> 'Admin\Controller\IndexController',
-            'Admin\Controller\Users'	=> 'Admin\Controller\UsersController',
-            'Admin\Controller\Zfcuser'	=> 'Admin\Controller\ZfcuserController',
-            'Admin\Controller\Acl'		=> 'Admin\Controller\AclController',
-            'Admin\Controller\Clients'	=> 'Admin\Controller\ClientsController',
-            'Admin\Controller\Settings' => 'Admin\Controller\SettingsController',
-        ),
-    ),
+	'controllers' => array(
+		'invokables' => array(
+			'Admin\Controller\Index'	=> 'Admin\Controller\IndexController',
+			'Admin\Controller\Users'	=> 'Admin\Controller\UsersController',
+			'Admin\Controller\Zfcuser'	=> 'Admin\Controller\ZfcuserController',
+			'Admin\Controller\Acl'		=> 'Admin\Controller\AclController',
+			'Admin\Controller\Clients'	=> 'Admin\Controller\ClientsController',
+			'Admin\Controller\Settings' => 'Admin\Controller\SettingsController',
+		),
+	),
 	'navigation_helpers' => array (
-	    'invokables' => array(
-	    	// override or add a view helper
-	        'isallowed' => 'Admin\View\Helper\Isallowed',
-	        'isdenied' => 'Admin\View\Helper\Isdenied',
-	    ),
+		'invokables' => array(
+			// override or add a view helper
+			'isallowed' => 'Admin\View\Helper\Isallowed',
+			'isdenied' => 'Admin\View\Helper\Isdenied',
+		),
 	),
 		
 	'router' => array(
-        'routes' => array(
-            'admin' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    // Change this to something specific to your module
-                    'route'    => '/admin',
-                    'defaults' => array(
-                        // Change this value to reflect the namespace in which
-                        // the controllers for your module are found
-                        '__NAMESPACE__' => 'Admin\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    // This route is a sane default when developing a module;
-                    // as you solidify the routes for your module, however,
-                    // you may want to remove it and replace it with more
-                    // specific routes.
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action[/:user_id[/:token]]]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'user_id'    => '[0-9]*',
-                                'token'      => '.*',
-                            ),
-                            'defaults' => array(
-                            	'action'	 => 'index'
-                            ),
-                        ),
-                    ),
-                    'acledit' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/acl[/:action[/:acl_id]]',
-                            'constraints' => array(
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'acl_id'    => '[0-9]*',
-                            ),
-                            'defaults' => array(
-                            	'controller' => 'Admin\Controller\Acl',
-                            ),
-                        ),
-                    ),
-                    'settingsedit' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/settings[/:action[/:set_id]]',
-                            'constraints' => array(
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'set_id'     => '[0-9]*',
-                            ),
-                            'defaults' => array(
-                            	'controller' => 'Admin\Controller\Settings',
-                            ),
-                        ),
-                    ),
-                    'clientsedit' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/clients[/:action[/:client_id]]',
-                            'constraints' => array(
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'client_id'     => '[0-9]*',
-                            ),
-                            'defaults' => array(
-                            	'controller' => 'Admin\Controller\Clients',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
+		'routes' => array(
+			'admin' => array(
+				'type'	=> 'Literal',
+				'options' => array(
+					// Change this to something specific to your module
+					'route'	=> '/admin',
+					'defaults' => array(
+						// Change this value to reflect the namespace in which
+						// the controllers for your module are found
+						'__NAMESPACE__' => 'Admin\Controller',
+						'controller'	=> 'Index',
+						'action'		=> 'index',
+					),
+				),
+				'may_terminate' => true,
+				'child_routes' => array(
+					// This route is a sane default when developing a module;
+					// as you solidify the routes for your module, however,
+					// you may want to remove it and replace it with more
+					// specific routes.
+					'default' => array(
+						'type'	=> 'Segment',
+						'options' => array(
+							'route'	=> '/[:controller[/:action[/:user_id[/:token]]]]',
+							'constraints' => array(
+								'controller'	=> '[a-zA-Z][a-zA-Z0-9_-]*',
+								'action'		=> '[a-zA-Z][a-zA-Z0-9_-]*',
+								'user_id'		=> '[0-9]*',
+								'token'			=> '.*',
+							),
+							'defaults' => array(
+								'action'	 	=> 'index'
+							),
+						),
+					),
+					'acledit' => array(
+						'type'	=> 'Segment',
+						'options' => array(
+							'route'	=> '/acl[/:action[/:acl_id]]',
+							'constraints' => array(
+								'action'		=> '[a-zA-Z][a-zA-Z0-9_-]*',
+								'acl_id'		=> '[0-9]*',
+							),
+							'defaults' => array(
+								'controller'	=> 'Admin\Controller\Acl',
+							),
+						),
+					),
+					'settingsedit' => array(
+						'type'	=> 'Segment',
+						'options' => array(
+							'route'	=> '/settings[/:action[/:set_id]]',
+							'constraints' => array(
+								'action'	 => '[a-zA-Z][a-zA-Z0-9_-]*',
+								'set_id'	 => '[0-9]*',
+							),
+							'defaults' => array(
+								'controller' => 'Admin\Controller\Settings',
+							),
+						),
+					),
+					'clientsedit' => array(
+						'type'	=> 'Segment',
+						'options' => array(
+							'route'	=> '/clients[/:action[/:client_id]]',
+							'constraints' => array(
+								'action'	 => '[a-zA-Z][a-zA-Z0-9_-]*',
+								'client_id'	 => '[0-9]*',
+							),
+							'defaults' => array(
+								'controller' => 'Admin\Controller\Clients',
+							),
+						),
+					),
+				),
+			),
 
 			'userconfirmation' => array(
-				'type'    => 'Segment',
+				'type'	=> 'Segment',
 				'options' => array(
-					'route'    => '/confirmuserregistration[/:user_id[/:confirmtoken]]',
+					'route'	=> '/confirmuserregistration[/:user_id[/:confirmtoken]]',
 					'constraints' => array(
 						'user_id'		=> '[a-zA-Z0-9_-]*',
 						'confirmtoken'	=> '.*',
@@ -136,13 +136,13 @@ return array(
 						'action'		=> 'confirm'
 					),
 				),
-                'may_terminate' => true,
-                'child_routes' => array(),
+				'may_terminate' => true,
+				'child_routes' => array(),
 			),
-        	'useractivation' => array(
-				'type'    => 'Segment',
+			'useractivation' => array(
+				'type'	=> 'Segment',
 				'options' => array(
-					'route'    => '/activateuser[/:user_id[/:activatetoken]]',
+					'route'	=> '/activateuser[/:user_id[/:activatetoken]]',
 					'constraints' => array(
 						'user_id'		=> '[a-zA-Z0-9_-]*',
 						'activatetoken'	=> '.*',
@@ -152,13 +152,13 @@ return array(
 						'action'		=> 'activate'
 					),
 				),
-                'may_terminate' => true,
-                'child_routes' => array(),
+				'may_terminate' => true,
+				'child_routes' => array(),
 			),
-        	'userrequestpasswordreset' => array(
-				'type'    => 'Literal',
+			'userrequestpasswordreset' => array(
+				'type'	=> 'Literal',
 				'options' => array(
-					'route'    => '/requestpasswordreset',
+					'route'	=> '/requestpasswordreset',
 					'constraints' => array(
 					),
 					'defaults' => array(
@@ -166,13 +166,13 @@ return array(
 						'action'		=> 'requestpasswordreset'
 					),
 				),
-                'may_terminate' => true,
-                'child_routes' => array(),
+				'may_terminate' => true,
+				'child_routes' => array(),
 			),
-        	'userresetpassword' => array(
-				'type'    => 'Segment',
+			'userresetpassword' => array(
+				'type'	=> 'Segment',
 				'options' => array(
-					'route'    => '/resetpassword[/:user_id[/:resettoken]]',
+					'route'	=> '/resetpassword[/:user_id[/:resettoken]]',
 					'constraints' => array(
 						'user_id'		=> '[a-zA-Z0-9_-]*',
 						'resettoken'	=> '.*',
@@ -182,77 +182,77 @@ return array(
 						'action'		=> 'resetpassword'
 					),
 				),
-                'may_terminate' => true,
-                'child_routes' => array(),
+				'may_terminate' => true,
+				'child_routes' => array(),
 			),
-            'zfcuser' => array(
-                'child_routes' => array(
-                    'userprofile' => array(
-                        'type' => 'Literal',
-                        'options' => array(
-                            'route' => '/profile',
-                            'defaults' => array(
-                                'controller' => 'zfcuser',
-                                'action'     => 'index',
-                            ),
-                        ),
-                    ),
-                    'edituserdata' => array(
-                        'type' => 'Literal',
-                        'options' => array(
-                            'route' => '/edit-userdata',
-                            'defaults' => array(
-                                'controller' => 'zfcuser',
-                                'action'     => 'edituserdata',
-                            ),
-                        ),
-                    ),
-                    'edituserprofile' => array(
-                        'type' => 'Literal',
-                        'options' => array(
-                            'route' => '/edit-profile',
-                            'defaults' => array(
-                                'controller' => 'zfcuser',
-                                'action'     => 'edituserprofile',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-    'view_manager' => array(
+			'zfcuser' => array(
+				'child_routes' => array(
+					'userprofile' => array(
+						'type' => 'Literal',
+						'options' => array(
+							'route' => '/profile',
+							'defaults' => array(
+								'controller' => 'zfcuser',
+								'action'	 => 'index',
+							),
+						),
+					),
+					'edituserdata' => array(
+						'type' => 'Literal',
+						'options' => array(
+							'route' => '/edit-userdata',
+							'defaults' => array(
+								'controller' => 'zfcuser',
+								'action'	 => 'edituserdata',
+							),
+						),
+					),
+					'edituserprofile' => array(
+						'type' => 'Literal',
+						'options' => array(
+							'route' => '/edit-profile',
+							'defaults' => array(
+								'controller' => 'zfcuser',
+								'action'	 => 'edituserprofile',
+							),
+						),
+					),
+				),
+			),
+		),
+	),
+	'view_manager' => array(
 		'template_map' => array(
 			'mails/userconfirm_html'	=> __DIR__ . '/../view/mails/userconfirm_html.phtml',
 			'mails/userconfirm_txt'		=> __DIR__ . '/../view/mails/userconfirm_txt.phtml',
 			'mails/useractivate_html'	=> __DIR__ . '/../view/mails/useractivate_html.phtml',
 			'mails/useractivate_txt'	=> __DIR__ . '/../view/mails/useractivate_txt.phtml',
 		),
-        'template_path_stack' => array(
-            'admin' => __DIR__ . '/../view',
-        ),
-    	'strategies' => array(
-    		'ViewJsonStrategy'
-    	)
-    ),
+		'template_path_stack' => array(
+			'admin' => __DIR__ . '/../view',
+		),
+		'strategies' => array(
+			'ViewJsonStrategy'
+		)
+	),
 	'navigation' => array(
 		'default' => array(
-			array(
-					'label' => 'home',
-					'icon'	=> 'home',
-					'route' => 'home',
-					'pages'			=> array(
-							'testpage' => array(
-									'label'			=> 'test page',
-									'icon'			=> 'exclamation-triangle',
-									'route'			=> 'application/default',
-									'controller' 	=> 'index',
-									'action' 		=> 'test',
-									'resource'		=> 'mvc:admin',
-							),
-					),
-			),
 			/*array(
+				'label' => 'home',
+				'icon'	=> 'home',
+				'route' => 'home',
+				'pages'			=> array(
+					'testpage' => array(
+						'label'			=> 'test page',
+						'icon'			=> 'exclamation-triangle',
+						'route'			=> 'application/default',
+						'controller' 	=> 'index',
+						'action' 		=> 'test',
+						'resource'		=> 'mvc:admin',
+					),
+				),
+			),
+			array(
 			 'label'			=> 'YourModule',
 					'route' 		=> 'yourmodule/route',
 					'controller'	=> 'your_index_controller_or_other',
@@ -272,6 +272,7 @@ return array(
 				'label' => 'account',
 				'icon'	=> 'user',
 				'route' => 'zfcuser',
+				'order'	=> 99901,
 				'badge' => array('type' => 'warning', 'value' => '!!!', 'title' => 'Remember to change your password after registration!'),
 				'pages'			=> array(
 					array(
@@ -346,6 +347,230 @@ return array(
 							'route'			=> 'useractivation',
 							'resource'		=> 'mvc:admin',
 							'visible'		=> false,
+					),
+				),
+			),
+			array(
+				'label'			=> 'admin',
+				'icon'			=> 'cogs',
+				'route'			=> 'admin',
+				'resource'		=> 'mvc:admin',
+				'order'			=> 99902,
+				'pages'			=> array(
+					array(
+						'label'			=> 'users',
+						'icon'			=> 'user',
+						'route'			=> 'admin/default',
+						'controller'	=> 'users',
+						'resource'		=> 'mvc:admin',
+						'pages'			=> array(
+							array(
+								'label'			=> 'add',
+								'route'			=> 'admin/default',
+								'controller'	=> 'users',
+								'action' 		=> 'add',
+								'resource'		=> 'mvc:admin',
+								'visible'		=> true,
+							),
+							array(
+								'label'			=> 'edit',
+								'route'			=> 'admin/default',
+								'controller'	=> 'users',
+								'action' 		=> 'edit',
+								'resource'		=> 'mvc:admin',
+								'visible'		=> true,
+							),
+							array(
+								'label'			=> 'delete',
+								'route'			=> 'admin/default',
+								'controller'	=> 'users',
+								'action' 		=> 'delete',
+								'resource'		=> 'mvc:admin',
+								'visible'		=> true,
+							),
+						),
+					),
+					array(
+						'label'			=> 'clients',
+						'icon'			=> 'building-o',
+						'route'			=> 'admin/clientsedit',
+						'action'		=> 'index',
+						'resource'		=> 'mvc:admin',
+						'pages'			=> array(
+							array(
+								'label'			=> 'add',
+								'route'			=> 'admin/clientsedit',
+								'action' 		=> 'add',
+								'resource'		=> 'mvc:admin',
+								'visible'		=> true,
+							),
+							array(
+								'label'			=> 'edit',
+								'route'			=> 'admin/clientsedit',
+								'action' 		=> 'edit',
+								'resource'		=> 'mvc:admin',
+								'visible'		=> true,
+							),
+							array(
+								'label'			=> 'delete',
+								'route'			=> 'admin/clientsedit',
+								'action' 		=> 'delete',
+								'resource'		=> 'mvc:admin',
+								'visible'		=> true,
+							),
+						),
+					),
+					array(
+						'label' 		=> 'permissions',
+						'icon'			=> 'lock',
+						'route'			=> 'admin/acledit',
+						'action' 		=> 'index',
+						'resource'		=> 'mvc:admin',
+						'pages'			=> array(
+							array(
+								'label'			=> 'ACL',
+								'icon'			=> 'asterisk',
+								'route'			=> 'admin/acledit',
+								'action' 		=> 'index',
+								'resource'		=> 'mvc:admin',
+								'visible'		=> true,
+							),
+							array(
+								'label'			=> 'roles',
+								'icon'			=> 'user',
+								'route'			=> 'admin/acledit',
+								'action' 		=> 'roles',
+								'resource'		=> 'mvc:admin',
+								'visible'		=> true,
+								'pages' => array(
+									array(
+										'label' 		=> 'add',
+										'route' 		=> 'admin/acledit',
+										'resource'		=> 'mvc:admin',
+										'action' 		=> 'addrole',
+									),
+									array(
+										'label' 		=> 'edit',
+										'route' 		=> 'admin/acledit',
+										'resource'		=> 'mvc:admin',
+										'action' 		=> 'editrole',
+									),
+									array(
+										'label' 		=> 'delete',
+										'route' 		=> 'admin/acledit',
+										'resource'		=> 'mvc:admin',
+										'action' 		=> 'deleterole',
+									),
+								),
+							),
+							array(
+								'label'			=> 'resources',
+								'icon'			=> 'list-alt',
+								'route'			=> 'admin/acledit',
+								'action' 		=> 'resources',
+								'resource'		=> 'mvc:admin',
+								'visible'		=> true,
+								'pages' => array(
+									array(
+										'label' 		=> 'add',
+										'route' 		=> 'admin/acledit',
+										'resource'		=> 'mvc:admin',
+										'action' 		=> 'addresource',
+									),
+									array(
+										'label' 		=> 'edit',
+										'route' 		=> 'admin/acledit',
+										'resource'		=> 'mvc:admin',
+										'action' 		=> 'editresource',
+									),
+									array(
+										'label' 		=> 'delete',
+										'route' 		=> 'admin/acledit',
+										'resource'		=> 'mvc:admin',
+										'action' 		=> 'deleteresource',
+									),
+								),
+							),
+						),
+					),
+					array(
+						'label' 		=> 'settings',
+						'icon'			=> 'cog',
+						'route'			=> 'admin/settingsedit',
+						'action' 		=> 'index',
+						'resource'		=> 'mvc:user',
+						'pages'			=> array(
+							array(
+								'label'			=> 'add',
+								'route'			=> 'admin/settingsedit',
+								'action' 		=> 'add',
+								'resource'		=> 'mvc:user',
+								'visible'		=> true,
+							),
+							array(
+								'label'			=> 'edit',
+								'route'			=> 'admin/settingsedit',
+								'action' 		=> 'edit',
+								'resource'		=> 'mvc:user',
+								'visible'		=> true,
+							),
+							array(
+								'label'			=> 'delete',
+								'route'			=> 'admin/settingsedit',
+								'action' 		=> 'delete',
+								'resource'		=> 'mvc:user',
+								'visible'		=> true,
+							),
+						),
+					),
+					array(
+						'label'			=> 'system',
+						'icon'			=> 'desktop',
+						'route'			=> 'system',
+						'action'		=> 'index',
+						'resource'		=> 'mvc:admin',
+						'pages'			=> array(
+							array(
+								'label'			=> 'info',
+								'icon'			=> 'info-circle',
+								'route'			=> 'system',
+								'action' 		=> 'info',
+								'resource'		=> 'mvc:admin',
+								'visible'		=> true,
+							),
+							array(
+								'label'			=> 'backup',
+								'icon'			=> 'copy',
+								'route'			=> 'system',
+								'action' 		=> 'backup',
+								'resource'		=> 'mvc:admin',
+								'visible'		=> true,
+							),
+							array(
+								'label'			=> 'setup',
+								'icon'			=> 'wrench',
+								'route'			=> 'setup',
+								'action' 		=> 'index',
+								//'resource'		=> 'mvc:admin',
+								'visible'		=> true,
+								'pages' => array(
+									array(
+										'label' 		=> 'install',
+										'icon'			=> 'magic',
+										'route' 		=> 'setup',
+										//'resource'		=> 'mvc:admin',
+										'action' 		=> 'install',
+									),
+									array(
+										'label' 		=> 'update',
+										'icon'			=> 'refresh',
+										'route' 		=> 'setup',
+										'resource'		=> 'mvc:admin',
+										'action' 		=> 'update',
+									),
+								),
+							),
+						),
 					),
 				),
 			),
