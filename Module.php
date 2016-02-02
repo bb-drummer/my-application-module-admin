@@ -335,7 +335,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		
 	}
 	
-	public function initAcl(MvcEvent $e) {
+	/* public function initAcl(MvcEvent $e) {
 		$sm = $e->getApplication()->getServiceManager();
 		$acl = \Admin\Module::initACL($sm);
 		
@@ -366,7 +366,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 				}
 			}
 		}
-	}
+	} */
 	
 	/**
 	 * fetch user's profile data
