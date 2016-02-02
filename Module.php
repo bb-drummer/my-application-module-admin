@@ -74,7 +74,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 			->attach(
 				__NAMESPACE__, 
 				'dispatch', 
-				('Application\Model\Callbacks::initLayout') 
+				('Application\Module::initLayout') 
 			)
 		;
 		
@@ -139,14 +139,10 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 		
 		$this->setAppConfig($e->getApplication()->getConfig());
 		
-		// setup acl
-		//\Application\Model\Callbacks::initACL($e);
-		//$this->initAcl($e); ('Application\Model\Callbacks::initLayout')
-		//$eventManager->getSharedManager()->attach(__NAMESPACE__, 'dispatch', array($this, 'checkAcl'));
 		$eventManager->getSharedManager()->attach(
 			__NAMESPACE__, 
 			'dispatch', 
-			('Application\Model\Callbacks::checkACL')
+			('Admin\Module::checkACL')
 		);
 		
 		// setup user registration mails
@@ -341,7 +337,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	
 	public function initAcl(MvcEvent $e) {
 		$sm = $e->getApplication()->getServiceManager();
-		$acl = \Application\Model\Callbacks::initACL($sm);
+		$acl = \Admin\Module::initACL($sm);
 		
 		$e->getViewModel()->acl = $acl;
 	}
@@ -585,4 +581,93 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
             ),
 		);
 	}
+
+	/**
+	 * load and initialize (global) ACL
+	 * 
+	 * @param	$oEvent	\Zend\Mvc\Mvcevent
+	 * @return	\Zend\Permissions\Acl\Acl
+	 */
+	public static function initACL ( $oServiceManager ) // \Zend\Mvc\Mvcevent $oEvent )
+	{
+		//$oServiceManager	= $oEvent->getApplication()->getServiceManager();
+		$oACL				= new ZendAcl();
+		$oAcls				= $oServiceManager->get('\Admin\Model\AclTable');
+		$oRoles				= $oServiceManager->get('Admin\Model\AclroleTable');
+		$oResources			= $oServiceManager->get('\Admin\Model\AclresourceTable');
+		
+		$aRoles = $oRoles->fetchAll()->toArray();
+		foreach ($aRoles as $key => $role) {
+			$oACL->addRole(new GenericRole($role['roleslug']));
+		}
+		$aResources = $oResources->fetchAll()->toArray();
+		foreach ($aResources as $key => $resource) {
+			$oACL->addResource(new GenericResource($resource['resourceslug']));
+		}
+		
+		foreach ($aRoles as $key => $role) {
+			foreach ($aResources as $key => $resource) {
+				$oAclItem = $oAcls->getAclByRoleResource($role['aclroles_id'], $resource['aclresources_id']);
+				if ( $oAclItem && !empty($oAclItem->state) ) {
+					if ( ($oAclItem->state == 'allow') ) {
+						$oACL->allow(
+							$role['roleslug'],
+							array($resource['resourceslug'])
+						);
+					} else if ( ($oAclItem->state == 'deny') ) {
+						$oACL->deny(
+							$role['roleslug'],
+							array($resource['resourceslug'])
+						);
+					}
+				}
+			}
+		}
+		
+		// whatever happens before, allow all actions to 'admin'
+		$oACL->allow('admin', null);
+		$oACL->deny('admin', array(
+				'mvc:nouser',
+		));
+		
+		return ($oACL);
+	}
+	
+	/**
+	 * check request/route for ACL permit or denial
+	 * adjust response(-code) on denial
+	 * 
+	 * @param	\Zend\Mvc\MvcEvent $oEvent
+	 * @return	void
+	 */
+	public static function checkACL (\Zend\Mvc\Mvcevent $oEvent ) {
+		$oServiceManager = $oEvent->getApplication()->getServiceManager();
+		$oAcl = $oEvent->getViewModel()->acl;
+		if (!$oAcl) {
+			$oAcl = self::initACL($oServiceManager);
+			$oEvent->getViewModel()->acl = $oAcl;
+		}
+		
+		$sAclRole = 'public';
+		$oAuth = $oServiceManager->get('zfcuser_auth_service');
+		if ( $oAuth->hasIdentity() ) {
+			$oUser = $oAuth->getIdentity();
+			$sAclRole = $oUser->getAclrole();
+		}
+
+		$oNavigation = $oServiceManager->get('navigation');
+		$activePage = $oNavigation->findBy('active', 1);
+		if ($activePage) {
+			$sAclResource = $activePage->getResource();
+			if (!empty($sAclResource) && $oAcl->hasResource($sAclResource)) {
+				if ( !$oAcl->isAllowed($sAclRole, $sAclResource) ) {
+					$response = $oEvent->getResponse();
+					//location to page or what ever
+					$response->getHeaders()->addHeaderLine('Location', $oEvent->getRequest()->getBaseUrl() . '/user/login?redirect=' . $oEvent->getRequest()->getRequestUri() );
+					$response->setStatusCode(301);
+				}
+			}
+		}
+	}
+
 }
