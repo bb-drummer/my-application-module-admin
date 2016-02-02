@@ -236,7 +236,7 @@ return array(
     	)
     ),
 	'navigation' => array(
-		'default' => array(
+		'admin_menu' => array(
 			array(
 					'label' => 'home',
 					'icon'	=> 'home',
