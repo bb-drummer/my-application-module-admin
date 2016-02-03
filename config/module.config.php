@@ -339,7 +339,7 @@ return array(
 				
 			array(
 				'label'			=> 'system',
-				'icon'			=> 'cogs',
+				'icon'			=> 'desktop',
 				'route'			=> 'admin',
 				'resource'		=> 'mvc:admin',
 				'order'			=> 99903,
@@ -453,6 +453,37 @@ return array(
 							array(
 								'label'			=> 'delete',
 								'route'			=> 'admin/clientsedit',
+								'action' 		=> 'delete',
+								'resource'		=> 'mvc:admin',
+								'visible'		=> true,
+							),
+						),
+					), // admin > clients
+					
+					array(
+						'label'			=> 'applications',
+						'icon'			=> 'building-o',
+						'route'			=> 'admin/applicationsedit',
+						'action'		=> 'index',
+						'resource'		=> 'mvc:admin',
+						'pages'			=> array(
+							array(
+								'label'			=> 'add',
+								'route'			=> 'admin/applicationsedit',
+								'action' 		=> 'add',
+								'resource'		=> 'mvc:admin',
+								'visible'		=> true,
+							),
+							array(
+								'label'			=> 'edit',
+								'route'			=> 'admin/applicationsedit',
+								'action' 		=> 'edit',
+								'resource'		=> 'mvc:admin',
+								'visible'		=> true,
+							),
+							array(
+								'label'			=> 'delete',
+								'route'			=> 'admin/applicationsedit',
 								'action' 		=> 'delete',
 								'resource'		=> 'mvc:admin',
 								'visible'		=> true,
