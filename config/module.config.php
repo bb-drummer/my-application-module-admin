@@ -37,7 +37,8 @@ return array(
 			'Admin\Controller\Settings' => 'Admin\Controller\SettingsController',
 		),
 	),
-	'navigation_helpers' => array (
+		
+	'acl_helpers' => array (
 		'invokables' => array(
 			// override or add a view helper
 			'isallowed' => 'Admin\View\Helper\Isallowed',
@@ -221,6 +222,7 @@ return array(
 			),
 		),
 	),
+		
 	'view_manager' => array(
 		'template_map' => array(
 			'mails/userconfirm_html'	=> __DIR__ . '/../view/mails/userconfirm_html.phtml',
@@ -235,39 +237,9 @@ return array(
 			'ViewJsonStrategy'
 		)
 	),
+		
 	'navigation' => array(
 		'default' => array(
-			/*array(
-				'label' => 'home',
-				'icon'	=> 'home',
-				'route' => 'home',
-				'pages'			=> array(
-					'testpage' => array(
-						'label'			=> 'test page',
-						'icon'			=> 'exclamation-triangle',
-						'route'			=> 'application/default',
-						'controller' 	=> 'index',
-						'action' 		=> 'test',
-						'resource'		=> 'mvc:admin',
-					),
-				),
-			),
-			array(
-			 'label'			=> 'YourModule',
-					'route' 		=> 'yourmodule/route',
-					'controller'	=> 'your_index_controller_or_other',
-					'action' 		=> 'your_index_action_or_other',
-					'resource'		=> 'mvc:yourmodule.resource',
-					'pages' => array(
-							array(
-									'label' 		=> 'YourModule Action/Item',
-									'route' 		=> 'yourmodule/route',
-									'resource'		=> 'mvc:yourmodule.resource',
-									'controller'	=> 'your_controller',
-									'action' 		=> 'your_action',
-							),
-					),
-			),*/
 			array(
 				'label' => 'account',
 				'icon'	=> 'user',
@@ -276,77 +248,74 @@ return array(
 				'badge' => array('type' => 'warning', 'value' => '!!!', 'title' => 'Remember to change your password after registration!'),
 				'pages'			=> array(
 					array(
-							'label'			=> 'login',
-							'icon'			=> 'power-off',
-							'route'			=> 'zfcuser/login',
-							'resource'		=> 'mvc:nouser',
+						'label'			=> 'login',
+						'icon'			=> 'power-off',
+						'route'			=> 'zfcuser/login',
+						'resource'		=> 'mvc:nouser',
 					),
 					array(
-							'label'			=> 'register',
-							'icon'			=> 'link',
-							'route'			=> 'zfcuser/register',
-							'resource'		=> 'mvc:nouser',
+						'label'			=> 'register',
+						'icon'			=> 'link',
+						'route'			=> 'zfcuser/register',
+						'resource'		=> 'mvc:nouser',
 					),
 					array(
-							'label'			=> 'user profile',
-							'icon'			=> 'photo',
-							'route'			=> 'zfcuser',
-							'resource'		=> 'mvc:user',
+						'label'			=> 'user profile',
+						'icon'			=> 'photo',
+						'route'			=> 'zfcuser',
+						'resource'		=> 'mvc:user',
 					),
 					array(
-							'label'			=> 'edit profile',
-							'icon'			=> 'edit',
-							'route'			=> 'zfcuser/edituserprofile',
-							'resource'		=> 'mvc:user',
+						'label'			=> 'edit profile',
+						'icon'			=> 'edit',
+						'route'			=> 'zfcuser/edituserprofile',
+						'resource'		=> 'mvc:user',
 					),
 					array(
-							'label'			=> 'edit userdata',
-							'icon'			=> 'user',
-							'route'			=> 'zfcuser/edituserdata',
-							'resource'		=> 'mvc:user',
+						'label'			=> 'edit userdata',
+						'icon'			=> 'user',
+						'route'			=> 'zfcuser/edituserdata',
+						'resource'		=> 'mvc:user',
 					),
 					array(
-							'label'			=> 'change email',
-							'icon'			=> 'envelope',
-							'route'			=> 'zfcuser/changeemail',
-							'resource'		=> 'mvc:user',
+						'label'			=> 'change email',
+						'icon'			=> 'envelope',
+						'route'			=> 'zfcuser/changeemail',
+						'resource'		=> 'mvc:user',
 					),
 					array(
-							'label'			=> 'change password',
-							'icon'			=> 'lock',
-							'route'			=> 'zfcuser/changepassword',
-							'resource'		=> 'mvc:user',
+						'label'			=> 'change password',
+						'icon'			=> 'lock',
+						'route'			=> 'zfcuser/changepassword',
+						'resource'		=> 'mvc:user',
 					),
 					array(
-							'label'			=> 'logout',
-							'icon'			=> 'power-off',
-							'route'			=> 'zfcuser/logout',
-							'resource'		=> 'mvc:user',
-					),
-
-					array(
-							'label'			=> 'reset password',
-							'icon'			=> 'life-ring',
-							'route'			=> 'userrequestpasswordreset',
-							'resource'		=> 'mvc:nouser',
-					),
-
-					array(
-							'label'			=> 'reset password',
-							'route'			=> 'userresetpassword',
-							'visible'		=> false,
-					),
-
-					array(
-							'label'			=> 'user confirmation',
-							'route'			=> 'userconfirmation',
-							'visible'		=> false,
+						'label'			=> 'logout',
+						'icon'			=> 'power-off',
+						'route'			=> 'zfcuser/logout',
+						'resource'		=> 'mvc:user',
 					),
 					array(
-							'label'			=> 'user activation',
-							'route'			=> 'useractivation',
-							'resource'		=> 'mvc:admin',
-							'visible'		=> false,
+						'label'			=> 'reset password',
+						'icon'			=> 'life-ring',
+						'route'			=> 'userrequestpasswordreset',
+						'resource'		=> 'mvc:nouser',
+					),
+					array(
+						'label'			=> 'reset password',
+						'route'			=> 'userresetpassword',
+						'visible'		=> false,
+					),
+					array(
+						'label'			=> 'user confirmation',
+						'route'			=> 'userconfirmation',
+						'visible'		=> false,
+					),
+					array(
+						'label'			=> 'user activation',
+						'route'			=> 'useractivation',
+						'resource'		=> 'mvc:admin',
+						'visible'		=> false,
 					),
 				),
 			),
