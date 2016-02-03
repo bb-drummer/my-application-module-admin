@@ -482,6 +482,19 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 			'factories' => array(
 					
 				
+				'Admin\Model\ApplicationsTable' =>  function($sm) {
+					$tableGateway = $sm->get('AdminApplicationsTableGateway');
+					$table = new ApplicationsTable($tableGateway);
+					return $table;
+				},
+				'AdminApplicationsTableGateway' => function ($sm) {
+					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+					$resultSetPrototype = new ResultSet();
+					$resultSetPrototype->setArrayObjectPrototype(new Applications());
+					return new TableGateway('applications', $dbAdapter, null, $resultSetPrototype);
+				},
+					
+						
 				'Admin\Model\ClientsTable' =>  function($sm) {
 					$tableGateway = $sm->get('AdminClientsTableGateway');
 					$table = new ClientsTable($tableGateway);
