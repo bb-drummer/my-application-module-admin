@@ -43,6 +43,8 @@ use Admin\Model\UserProfile;
 use Admin\Model\UserProfileTable;
 use Admin\Model\Clients;
 use Admin\Model\ClientsTable;
+use Admin\Model\Applications;
+use Admin\Model\ApplicationsTable;
 use Admin\Model\Settings;
 use Admin\Model\SettingsTable;
 use Admin\Model\User;
