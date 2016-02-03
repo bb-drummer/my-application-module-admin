@@ -17,32 +17,36 @@ return array(
 	'settings' => array(
 		'scopes' => array(
 			'system'		=> 'system',
-			'application'	=> 'application',
 			'user'			=> 'user',
+			'client'		=> 'client',
+			'application'	=> 'application',
 		),
+		// ???
 		'types' => array(
 			'system'		=> 'system',
+			'user'			=> 'user',
+			'client'		=> 'client',
 			'application'	=> 'application',
 			'module'		=> 'module',
-			'user'			=> 'user',
 		)
 	),
 	'controllers' => array(
 		'invokables' => array(
-			'Admin\Controller\Index'	=> 'Admin\Controller\IndexController',
-			'Admin\Controller\Users'	=> 'Admin\Controller\UsersController',
-			'Admin\Controller\Zfcuser'	=> 'Admin\Controller\ZfcuserController',
-			'Admin\Controller\Acl'		=> 'Admin\Controller\AclController',
-			'Admin\Controller\Clients'	=> 'Admin\Controller\ClientsController',
-			'Admin\Controller\Settings' => 'Admin\Controller\SettingsController',
+			'Admin\Controller\Index'		=> 'Admin\Controller\IndexController',
+			'Admin\Controller\Users'		=> 'Admin\Controller\UsersController',
+			'Admin\Controller\Zfcuser'		=> 'Admin\Controller\ZfcuserController',
+			'Admin\Controller\Acl'			=> 'Admin\Controller\AclController',
+			'Admin\Controller\Applications'	=> 'Admin\Controller\ApplicationsController',
+			'Admin\Controller\Clients'		=> 'Admin\Controller\ClientsController',
+			'Admin\Controller\Settings' 	=> 'Admin\Controller\SettingsController',
 		),
 	),
 		
 	'acl_helpers' => array (
 		'invokables' => array(
 			// override or add a view helper
-			'isallowed' => 'Admin\View\Helper\Isallowed',
-			'isdenied' => 'Admin\View\Helper\Isdenied',
+			'isallowed'	=> 'Admin\View\Helper\Isallowed',
+			'isdenied'	=> 'Admin\View\Helper\Isdenied',
 		),
 	),
 		
@@ -118,6 +122,19 @@ return array(
 							),
 							'defaults' => array(
 								'controller' => 'Admin\Controller\Clients',
+							),
+						),
+					),
+					'applicationsedit' => array(
+						'type'	=> 'Segment',
+						'options' => array(
+							'route'	=> '/apps[/:action[/:application_id]]',
+							'constraints' => array(
+								'action'	 => '[a-zA-Z][a-zA-Z0-9_-]*',
+								'client_id'	 => '[0-9]*',
+							),
+							'defaults' => array(
+								'controller' => 'Admin\Controller\Applications',
 							),
 						),
 					),
@@ -318,7 +335,59 @@ return array(
 						'visible'		=> false,
 					),
 				),
-			),
+			), // user/profile
+				
+			array(
+				'label'			=> 'system',
+				'icon'			=> 'cogs',
+				'route'			=> 'admin',
+				'resource'		=> 'mvc:admin',
+				'order'			=> 99903,
+				'pages'			=> array(
+					array(
+						'label'			=> 'info',
+						'icon'			=> 'info-circle',
+						'route'			=> 'system',
+						'action' 		=> 'info',
+						'resource'		=> 'mvc:admin',
+						'visible'		=> true,
+					),
+					array(
+						'label'			=> 'backup',
+						'icon'			=> 'copy',
+						'route'			=> 'system',
+						'action' 		=> 'backup',
+						'resource'		=> 'mvc:admin',
+						'visible'		=> true,
+					),
+					array(
+						'label'			=> 'setup',
+						'icon'			=> 'wrench',
+						'route'			=> 'setup',
+						'action' 		=> 'index',
+						//'resource'		=> 'mvc:admin',
+						'visible'		=> true,
+						'pages' => array(
+							array(
+								'label' 		=> 'install',
+								'icon'			=> 'magic',
+								'route' 		=> 'setup',
+								//'resource'		=> 'mvc:admin',
+								'action' 		=> 'install',
+							),
+							array(
+								'label' 		=> 'update',
+								'icon'			=> 'refresh',
+								'route' 		=> 'setup',
+								'resource'		=> 'mvc:admin',
+								'action' 		=> 'update',
+							),
+						),
+					),
+						
+				),
+			), // user/profile
+				
 			array(
 				'label'			=> 'admin',
 				'icon'			=> 'cogs',
@@ -358,7 +427,8 @@ return array(
 								'visible'		=> true,
 							),
 						),
-					),
+					), // admin > users
+					
 					array(
 						'label'			=> 'clients',
 						'icon'			=> 'building-o',
@@ -388,7 +458,8 @@ return array(
 								'visible'		=> true,
 							),
 						),
-					),
+					), // admin > clients
+					
 					array(
 						'label' 		=> 'permissions',
 						'icon'			=> 'lock',
@@ -462,6 +533,7 @@ return array(
 							),
 						),
 					),
+						
 					array(
 						'label' 		=> 'settings',
 						'icon'			=> 'cog',
@@ -489,55 +561,6 @@ return array(
 								'action' 		=> 'delete',
 								'resource'		=> 'mvc:user',
 								'visible'		=> true,
-							),
-						),
-					),
-					array(
-						'label'			=> 'system',
-						'icon'			=> 'desktop',
-						'route'			=> 'system',
-						'action'		=> 'index',
-						'resource'		=> 'mvc:admin',
-						'pages'			=> array(
-							array(
-								'label'			=> 'info',
-								'icon'			=> 'info-circle',
-								'route'			=> 'system',
-								'action' 		=> 'info',
-								'resource'		=> 'mvc:admin',
-								'visible'		=> true,
-							),
-							array(
-								'label'			=> 'backup',
-								'icon'			=> 'copy',
-								'route'			=> 'system',
-								'action' 		=> 'backup',
-								'resource'		=> 'mvc:admin',
-								'visible'		=> true,
-							),
-							array(
-								'label'			=> 'setup',
-								'icon'			=> 'wrench',
-								'route'			=> 'setup',
-								'action' 		=> 'index',
-								//'resource'		=> 'mvc:admin',
-								'visible'		=> true,
-								'pages' => array(
-									array(
-										'label' 		=> 'install',
-										'icon'			=> 'magic',
-										'route' 		=> 'setup',
-										//'resource'		=> 'mvc:admin',
-										'action' 		=> 'install',
-									),
-									array(
-										'label' 		=> 'update',
-										'icon'			=> 'refresh',
-										'route' 		=> 'setup',
-										'resource'		=> 'mvc:admin',
-										'action' 		=> 'update',
-									),
-								),
 							),
 						),
 					),

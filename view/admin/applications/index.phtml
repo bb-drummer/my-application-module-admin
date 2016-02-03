@@ -1,0 +1,42 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="panel-title"><?php echo $this->translate("manage applications"); ?></span>
+	</div>
+	<div class="panel-body panel-toolbar">
+		<div class="btn-group btn-group-sm">
+			<a class="btn btn-default btn-clean btn-cta-xhr cta-xhr-modal btn-sm" data-actioncontext="applicationstable" href="<?php echo $this->url('admin/applicationsedit', array('action'=>'add'));?>"><span class="fa fa-plus"></span> <?php echo $this->translate("add application")?></a>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="table-responsive">
+			<table id="applicationstable" class="table table-striped table-hover datatable crud" data-src="<?php echo $this->url('admin/applicationsedit') ?>">
+				<thead>
+					<tr>
+					    <th data-column="name" data-search="name,extraname"><?php echo $this->translate("name")?></th>
+					    <th data-column="email"><?php echo $this->translate("email")?></th>
+					    <th data-column="contact"><?php echo $this->translate("contact")?></th>
+					    <th class="actions">&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($applicationsdata as $applications) : ?>
+					<tr>
+					    <td><?php echo $this->escapeHtml($applications->name).(!empty($applications->extraname) ? ', '.$this->escapeHtml($applications->extraname) : '' ); ?></td>
+					    <td><?php echo $this->escapeHtml($applications->email); ?></td>
+					    <td><?php echo $this->escapeHtml($applications->contact); ?></td>
+					    <td>
+						    <div class="btn-group btn-group-xs">
+						        <a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/applicationsedit',
+						            array('action'=>'edit', 'application_id' => $applications->applications_id));?>"><span class="fa fa-pencil"></span> <?php echo $this->translate("edit"); ?></a>
+						        <a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/applicationsedit',
+						            array('action'=>'delete', 'application_id' => $applications->applications_id));?>"><span class="fa fa-trash-o"></span> <?php echo $this->translate("delete"); ?></a>
+						    </div>
+					    </td>
+					</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+		</div>
+		<?php echo $this->output ?>
+	</div>
+</div>

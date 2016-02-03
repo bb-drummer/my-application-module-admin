@@ -1,0 +1,29 @@
+<?php
+/** @var \TwitterBootstrapAPI\View\Helper\Bootstrap $user **/
+$oBootstrap = $this->Bootstrap();
+/** @var \TwitterBootstrapAPI\View\Helper\Components $user **/
+$oComponents = $this->Components();
+/** @var \Admin\Entity\User $user **/
+$oUser = $this->zfcUserIdentity();
+
+if ($showForm) {
+	$url = $this->url('admin/applicationsedit', array(
+	    'action'     => 'delete',
+	    'application_id'     => $applications->applications_id,
+	));
+	$formHTML = array(
+		'<p>'.$this->translate("Do you really want to delete this application?").'</p>',
+		'<p>'.
+			'&quot;'.$this->escapeHtml($applications->name).'&quot;, '.
+				'&quot;'.$this->escapeHtml($applications->extraname).'&quot;'.
+		'</p>',
+		'<form action="'.$url.'" method="post" class="form-xhr">'.
+			'<div>'.
+				'<input type="hidden" name="id" value="'.((int) $applications->applications_id).'" />'.
+				'<input class="btn btn-primary" type="submit" name="del" value="'.$this->translate("delete").'" />'.
+				'<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'.$this->url('admin/applicationsedit').'">'.$this->translate("cancel").'</a>'.
+			'</div>'.
+		'</form>'
+	);
+	echo implode("", $formHTML);
+} 
