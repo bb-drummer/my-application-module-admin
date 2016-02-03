@@ -257,7 +257,7 @@ return array(
 		
 	'navigation' => array(
 		'default' => array(
-			array(
+			'account' => array(
 				'label' => 'account',
 				'icon'	=> 'user',
 				'route' => 'zfcuser',
@@ -337,7 +337,7 @@ return array(
 				),
 			), // user/profile
 				
-			array(
+			'system' => array(
 				'label'			=> 'system',
 				'icon'			=> 'desktop',
 				'route'			=> 'admin',
@@ -388,7 +388,7 @@ return array(
 				),
 			), // user/profile
 				
-			array(
+			'admin' => array(
 				'label'			=> 'admin',
 				'icon'			=> 'cogs',
 				'route'			=> 'admin',
