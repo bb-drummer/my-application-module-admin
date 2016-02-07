@@ -35,10 +35,10 @@ class AclController extends BaseActionController
 	protected $AclroleTable;
 	protected $AclresourceTable;
 
-    public function onDispatch(MvcEvent $e)
+    public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
     	$this->setActionTitles(array(
-    		'index' => $this->translate("manage acl"),
+    		'index' => $this->translate("manage permissions"),
     		'roles' => $this->translate("manage roles"),
     		'resources' => $this->translate("manage resources"),
     		'addacl' => $this->translate("add permission"),

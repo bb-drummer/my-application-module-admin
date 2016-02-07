@@ -27,6 +27,17 @@ class UsersController extends BaseActionController
 	protected $userTable;
 	protected $AclroleTable;
 
+    public function onDispatch(\Zend\Mvc\MvcEvent $e)
+    {
+    	$this->setActionTitles(array(
+    		'index' => $this->translate("manage users"),
+    		'add' => $this->translate("add user"),
+    		'edit' => $this->translate("edit user"),
+    		'delete' => $this->translate("delete user"),
+    	));
+    	return parent::onDispatch($e);
+    }
+
 	public function indexAction()
 	{
 		$tmplVars = $this->getTemplateVars();

@@ -36,7 +36,31 @@ class ZfcuserController extends UserController
 {
 	
 	protected $translator;
+
+	protected $actionTitles = array();
 	
+    public function onDispatch(MvcEvent $e)
+    {
+    	$this->setActionTitles(array(
+    		'login'					=> $this->translate("login"),
+    		'authenticate'			=> $this->translate("login"),
+    		'logout'				=> $this->translate("logout"),
+    		'register'				=> $this->translate("register user"),
+    		'requestpasswordreset'	=> $this->translate("reset password"),
+    		'changeemail'			=> $this->translate("change email"),
+    		'changepassword'		=> $this->translate("change password"),
+    		'resetpassword'			=> $this->translate("reset password"),
+    		'userdata'				=> $this->translate("user data"),
+    		'userprofile'			=> $this->translate("user profile"),
+    		'index'					=> $this->translate("user profile"),
+    		'edituserprofile'		=> $this->translate("edit user profile"),
+    	));
+    	$action = $e->getRouteMatch()->getParam('action'); // $this->get->getParam('action', 'index');
+    	$this->layout()->setVariable("title", $this->getActionTitle($action));
+    	$result = parent::onDispatch($e);
+    	return $result;
+    }
+
 	/**
 	 * General-purpose authentication action
 	 */
@@ -602,6 +626,37 @@ class ZfcuserController extends UserController
 	 */
 	public function setTranslator($translator) {
 		$this->translator = $translator;
+	}
+    
+	/**
+	 * @return the $actionTitles
+	 */
+	public function getActionTitles() {
+		return $this->actionTitles ;
+	}
+
+	/**
+	 * @param array $actionTitles
+	 */
+	public function setActionTitles($actionTitles = array()) {
+		$this->actionTitles = $actionTitles;
+		return $this;
+	}
+
+	/**
+	 * @return the $actionTitles
+	 */
+	public function getActionTitle($action) {
+		return ($this->actionTitles[$action] ?: '');
+	}
+	
+	/**
+	 * @param string $action
+	 * @param string $title
+	 */
+	public function setActionTitle($action, $title) {
+		$this->actionTitles[$action] = $title;
+		return $this;
 	}
 
 

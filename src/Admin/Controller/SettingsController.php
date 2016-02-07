@@ -24,6 +24,17 @@ class SettingsController extends BaseActionController
 {
 	protected $settingsTable;
 	
+    public function onDispatch(\Zend\Mvc\MvcEvent $e)
+    {
+    	$this->setActionTitles(array(
+    		'index' => $this->translate("manage settings"),
+    		'add' => $this->translate("add setting"),
+    		'edit' => $this->translate("edit setting"),
+    		'delete' => $this->translate("delete setting"),
+    	));
+    	return parent::onDispatch($e);
+    }
+
 	public function indexAction() 
 	{
 		$tmplVars = $this->getTemplateVars();

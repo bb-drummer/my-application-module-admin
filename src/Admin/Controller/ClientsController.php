@@ -24,6 +24,17 @@ class ClientsController extends BaseActionController
 {
 	protected $clientsTable;
 	
+    public function onDispatch(\Zend\Mvc\MvcEvent $e)
+    {
+    	$this->setActionTitles(array(
+    		'index' => $this->translate("manage clients"),
+    		'add' => $this->translate("add client"),
+    		'edit' => $this->translate("edit client"),
+    		'delete' => $this->translate("delete client"),
+    	));
+    	return parent::onDispatch($e);
+    }
+
 	public function indexAction() 
 	{
 		$tmplVars = $this->getTemplateVars();

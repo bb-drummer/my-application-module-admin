@@ -24,6 +24,17 @@ class ApplicationsController extends BaseActionController
 {
 	protected $applicationsTable;
 	
+    public function onDispatch(\Zend\Mvc\MvcEvent $e)
+    {
+    	$this->setActionTitles(array(
+    		'index' => $this->translate("manage applications"),
+    		'add' => $this->translate("add application"),
+    		'edit' => $this->translate("edit application"),
+    		'delete' => $this->translate("delete application"),
+    	));
+    	return parent::onDispatch($e);
+    }
+
 	public function indexAction() 
 	{
 		$tmplVars = $this->getTemplateVars();
