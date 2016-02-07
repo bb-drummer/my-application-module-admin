@@ -35,61 +35,64 @@
 		
 		<div class="panel-group container-fluid" id="accordion" role="tablist" aria-multiselectable="true">
 			<div class="row">
-				<div class="panel panel-default col-md-6 col-xs-12">
-					<div class="panel-heading" role="tab" id="h1">
-						<h4 class="panel-title">
-							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#p1" aria-expanded="true" aria-controls="p1">
-								<?php echo $this->escapeHtml($this->translate('messengers')); ?>
-							</a>
-						</h4>
-					</div>
-					<div id="p1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="h1">
-						<div class="panel-body">
-							<div class="row">
-								<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('Twitter')); ?>:</span>
-								<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getTwitter()); ?></span>
-							</div>
-							<div class="row">
-								<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('Facebook')); ?>:</span>
-								<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getFacebook()); ?></span>
-							</div>
-							<div class="row">
-								<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('Skype')); ?>:</span>
-								<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getSkype()); ?></span>
-							</div>
-							<div class="row">
-								<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('ICQ')); ?>:</span>
-								<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getIcq()); ?></span>
+		        <div class=" col-md-6 col-xs-12">
+					<div class="panel panel-default col-md-6 col-xs-12">
+						<div class="panel-heading" role="tab" id="h1">
+							<h4 class="panel-title">
+								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#p1" aria-expanded="true" aria-controls="p1">
+									<?php echo $this->escapeHtml($this->translate('messengers')); ?>
+								</a>
+							</h4>
+						</div>
+						<div id="p1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="h1">
+							<div class="panel-body">
+								<div class="row">
+									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('Twitter')); ?>:</span>
+									<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getTwitter()); ?></span>
+								</div>
+								<div class="row">
+									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('Facebook')); ?>:</span>
+									<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getFacebook()); ?></span>
+								</div>
+								<div class="row">
+									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('Skype')); ?>:</span>
+									<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getSkype()); ?></span>
+								</div>
+								<div class="row">
+									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('ICQ')); ?>:</span>
+									<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getIcq()); ?></span>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-		      
-				<div class="panel panel-default col-md-6 col-xs-12">
-					<div class="panel-heading" role="tab" id="h2">
-						<h4 class="panel-title">
-							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#p2" aria-expanded="true" aria-controls="p2">
-								<?php echo $this->escapeHtml($this->translate('address')); ?>
-							</a>
-						</h4>
-					</div>
-					<div id="p2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="h2">
-						<div class="panel-body">
-							<div class="row">
-								<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('street')); ?>:</span>
-								<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getStreet()); ?></span>
-							</div>
-							<div class="row">
-								<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('city')); ?>:</span>
-								<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getCity()); ?></span>
-							</div>
-							<div class="row">
-								<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('phone')); ?>:</span>
-								<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getPhone()); ?></span>
-							</div>
-							<div class="row">
-								<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('mobile')); ?>:</span>
-								<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getCell()); ?></span>
+		        <div class=" col-md-6 col-xs-12">
+					<div class="panel panel-default">
+						<div class="panel-heading" role="tab" id="h2">
+							<h4 class="panel-title">
+								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#p2" aria-expanded="true" aria-controls="p2">
+									<?php echo $this->escapeHtml($this->translate('address')); ?>
+								</a>
+							</h4>
+						</div>
+						<div id="p2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="h2">
+							<div class="panel-body">
+								<div class="row">
+									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('street')); ?>:</span>
+									<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getStreet()); ?></span>
+								</div>
+								<div class="row">
+									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('city')); ?>:</span>
+									<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getCity()); ?></span>
+								</div>
+								<div class="row">
+									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('phone')); ?>:</span>
+									<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getPhone()); ?></span>
+								</div>
+								<div class="row">
+									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('mobile')); ?>:</span>
+									<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getCell()); ?></span>
+								</div>
 							</div>
 						</div>
 					</div>
