@@ -39,7 +39,7 @@ class ZfcuserController extends UserController
 
 	protected $actionTitles = array();
 	
-    public function onDispatch(MvcEvent $e)
+    public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
     	$this->setActionTitles(array(
     		'login'					=> $this->translate("login"),
