@@ -34,6 +34,25 @@ class AclController extends BaseActionController
 	protected $AclroleTable;
 	protected $AclresourceTable;
 
+    public function onDispatch(MvcEvent $e)
+    {
+    	$this->setActionTitles(array(
+    		'index' => $this->translate("manage acl"),
+    		'roles' => $this->translate("manage roles"),
+    		'resources' => $this->translate("manage resources"),
+    		'addacl' => $this->translate("add permission"),
+    		'addrole' => $this->translate("add role"),
+    		'addresource' => $this->translate("add resource"),
+    		'editacl' => $this->translate("edit acl"),
+    		'editrole' => $this->translate("edit role"),
+    		'editresource' => $this->translate("edit resource"),
+    		'deleteacl' => $this->translate("delete acl"),
+    		'deleterole' => $this->translate("delete role"),
+    		'deleteresource' => $this->translate("delete resource"),
+    	));
+    	return parent::onDispatch($e);
+    }
+
 	// list actions 
 	public function indexAction()
 	{
