@@ -39,7 +39,7 @@ class ZfcuserController extends UserController
 
 	protected $actionTitles = array();
 	
-    public function onDispatch(\Zend\Mvc\MvcEvent $e)
+	public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
     	$this->setActionTitles(array(
     		'login'					=> $this->translate("login"),
@@ -611,6 +611,15 @@ class ZfcuserController extends UserController
 		
 	}
 	
+	/**
+	 * @param string $translator
+	 * @param string $textdomain
+	 * @param string $locale
+	 */
+	public function translate($message, $textdomain = 'default', $locale = null) {
+		return ( $this->getTranslator()->translate($message, $textdomain, $locale) );
+	}
+    
 	/**
 	 * @return the $translator
 	 */
