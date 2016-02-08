@@ -30,7 +30,7 @@
 	</div>
 	<?php 
 		$oProfile = new Admin\Model\UserProfile();
-		$res = $oProfile->load($this->getId());
+		$res = $oProfile->load($this->zfcUserIdentity()->getId());
 		if ($res) {
 	?>
 	<div class="panel-body panel-user-profile">
