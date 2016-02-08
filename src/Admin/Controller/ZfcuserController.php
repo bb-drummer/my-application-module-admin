@@ -227,8 +227,8 @@ class ZfcuserController extends UserController
 		$oModule->setAppConfig($config);
 		$identity = $this->params()->fromPost('identity');
 
-		/** @var \Admin\Model\User $user **/
-		/** @var \Admin\Model\User $selectedUser **/
+		/** @var \Admin\Entity\User $user **/
+		/** @var \Admin\Entity\User $selectedUser **/
 		$user = false;
 		try {
 			/** @var \Admin\Model\UserTable $userTable **/
@@ -255,7 +255,9 @@ class ZfcuserController extends UserController
 		// user found, create token and send link via email
 		
 		$user->setToken($oModule->createUserToken($user));
+		print_r($user);
 		$service->getUserMapper()->update($user);
+		$userTable->
 		
 		$oModule->sendPasswordResetMail($user);
 		$this->flashMessenger()->addSuccessMessage(
