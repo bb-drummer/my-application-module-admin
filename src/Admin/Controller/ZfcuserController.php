@@ -51,9 +51,10 @@ class ZfcuserController extends UserController
     		'changepassword'		=> $this->translate("change password"),
     		'resetpassword'			=> $this->translate("reset password"),
     		'userdata'				=> $this->translate("user data"),
+    		'edituserdata'			=> $this->translate("edit user data"),
     		'userprofile'			=> $this->translate("user profile"),
     		'index'					=> $this->translate("user profile"),
-    		'edituserprofile'		=> $this->translate("edit user profile"),
+    		'edituserprofile'		=> $this->translate("edit profile"),
     	));
     	$action = $e->getRouteMatch()->getParam('action'); // $this->get->getParam('action', 'index');
     	$this->layout()->setVariable("title", $this->getActionTitle($action));
