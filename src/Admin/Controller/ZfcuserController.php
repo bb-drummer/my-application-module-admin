@@ -64,35 +64,47 @@ class ZfcuserController extends UserController
 
     public function defineToolbarItems () {
 		$this->setToolbarItems(array(
-			"userprofile" => array(
+			"index" => array(
 				array(
-						'label'			=> 'edit profile',
-						'icon'			=> 'edit',
-						'route'			=> 'zfcuser/edituserprofile',
+					'label'			=> 'edit profile',
+					'icon'			=> 'edit',
+					'classnames'	=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'zfcuser/edituserprofile',
+					'resource'		=> 'mvc:user',
 				),
 				array(
-						'label'			=> 'edit userdata',
-						'icon'			=> 'user',
-						'route'			=> 'zfcuser/edituserdata',
+					'label'			=> 'edit userdata',
+					'icon'			=> 'user',
+					'classnames'	=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'zfcuser/edituserdata',
+					'resource'		=> 'mvc:user',
 				),
 				array(
-						'label' 		=> 'change email',
-						'icon'			=> 'envelope',
-						'route'			=> 'zfcuser/changeemail',
+					'label' 		=> 'change email',
+					'icon'			=> 'envelope',
+					'classnames'	=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'zfcuser/changeemail',
+					'resource'		=> 'mvc:user',
 				),
 				array(
-						'label' 		=> 'change password',
-						'icon'			=> 'lock',
-						'route'			=> 'zfcuser/changepassword',
+					'label' 		=> 'change password',
+					'icon'			=> 'lock',
+					'classnames'	=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'zfcuser/changepassword',
+					'resource'		=> 'mvc:admin',
 				),
 				array(
-						'label'			=> "&bnsp;",
-						'url'			=> "#",
+					'label'			=> "",
+					'classnames'	=> 'btn btn-default btn-sm',
+					'uri'			=> "#",
+					'active'		=> false,
 				),
 				array(
-						'label' 		=> 'logout',
-						'icon'			=> 'power-off',
-						'route'			=> 'zfcuser/logout',
+					'label' 		=> 'logout',
+					'icon'			=> 'power-off',
+					'classnames'	=> 'btn btn-default btn-sm',
+					'route'			=> 'zfcuser/logout',
+					'resource'		=> 'mvc:nouser',
 				),
 			)	
 		));
@@ -101,16 +113,38 @@ class ZfcuserController extends UserController
 
     public function onDispatch(MvcEvent $e)
     {
+    	\Zend\Navigation\Page\Mvc::setDefaultRouter($this->getServiceLocator()->get('router'));
     	$this->defineActionTitles();
     	$this->defineToolbarItems();
     	
 		$action = $e->getRouteMatch()->getParam('action'); // $this->get->getParam('action', 'index');
 		$this->layout()->setVariable("title", $this->getActionTitle($action));
-		$this->layout()->setVariable("toolbar", $this->getToolbarItem($action));
+		
+		$serviceManager = $this->getServiceLocator();
+		$toolbarNav = $serviceManager->get('toolbarnavigation');
+		$toolbarNav->setConfig($this->getToolbarItem($action));
+		// $toolbarNav = new \Zend\Navigation\Navigation($this->getToolbarItem($action));
+		// $toolbarNav->
+		$this->layout()->setVariable("toolbar", $toolbarNav->getPages($serviceManager));
 		
 		$result = parent::onDispatch($e);
 		return $result;
 	}
+
+    /**
+     * User page
+     */
+    public function indexAction()
+    {
+        if (!$this->zfcUserAuthentication()->hasIdentity()) {
+            return $this->redirect()->toRoute(static::ROUTE_LOGIN);
+        }
+		return new ViewModel(array(
+			"toolbarItems" => $this->getToolbarItems(),
+		));
+        return $this->redirect()->toRoute("admin/userprofile");
+        return new ViewModel();
+    }
 
 	/**
 	 * General-purpose authentication action
@@ -475,6 +509,7 @@ class ZfcuserController extends UserController
 			// ...redirect to the login redirect route
 			return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
 		}
+        return $this->redirect()->toRoute("zfcuser/userprofile");
 		
 		$config		= $this->getServiceLocator()->get('Config');
 		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
@@ -482,8 +517,8 @@ class ZfcuserController extends UserController
 		$service	= $this->getUserService();
 		$translator	= $this->getTranslator();
 		
-		return (array(
-			"toolbarItems" => $this->getToolbarItem('userprofile'),
+		return new ViewModel(array(
+			"toolbarItems" => $this->getToolbarItems(),
 		));
 	}
 
