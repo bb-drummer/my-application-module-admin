@@ -9,7 +9,7 @@
 		$form->setAttribute('method', 'post');
 		$form->setAttribute('class', 'form-xhr');
 		
-		echo $this->form()->openTag($form) ?>
+		echo $this->form()->openTag($form); ?>
 		<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('display_name')))) ? ' has-error' : '' ?>">
 			<?php echo $this->formLabel($form->get('display_name')); ?>
 			<?php echo $this->formInput($form->get('display_name')->setAttributes(array('class' => 'form-control'))); ?>
@@ -20,6 +20,6 @@
 		<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="<?php echo $this->url('zfcuser'); ?>"><?php echo $this->translate("cancel"); ?></a>
 	    <?php if ($this->redirect): ?><input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" /><?php endif ?>
 	    <input type="hidden" name="user_id" value="<?php echo $this->escapeHtml($this->userId) ?>" />
-	<?php echo $this->form()->closeTag() ?>
+	<?php echo $this->form()->closeTag(); ?>
 </section>
 <?php } ?>

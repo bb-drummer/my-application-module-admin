@@ -15,7 +15,7 @@
 		$form->setAttribute('action', $this->url('zfcuser/register'));
 		$form->setAttribute('method', 'post');
 		
-		echo $this->form()->openTag($form) ?>
+		echo $this->form()->openTag($form); ?>
 		<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('username')))) ? ' has-error' : '' ?>">
 			<?php echo $this->formLabel($form->get('username')); ?>
 			<?php echo $this->formInput($form->get('username')->setAttributes(array('class' => 'form-control'))); ?>
@@ -53,6 +53,6 @@
 		<input class="btn btn-default" type="reset" value="<?php echo $this->translate("reset"); ?>" />
 		<a class="btn btn-danger" href="<?php echo $this->url('home'); ?>"><?php echo $this->translate("cancel"); ?></a>
 	    <?php if ($this->redirect): ?><input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" /><?php endif ?>
-	<?php echo $this->form()->closeTag() ?>
+	<?php echo $this->form()->closeTag(); ?>
 </section>
 <?php } ?>

@@ -13,7 +13,7 @@
 	$form->setAttribute('method', 'post');
 	
 	?>
-	<?php echo $this->form()->openTag($form) ?>
+	<?php echo $this->form()->openTag($form); ?>
 		<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('newIdentity')))) ? ' has-error' : '' ?>">
 			<?php echo $this->formLabel($form->get('newIdentity')->setAttributes(array('class' => 'control-label'))); ?>
 			<?php echo $this->formInput($form->get('newIdentity')->setAttributes(array('class' => 'form-control'))); ?>
@@ -38,5 +38,5 @@
 		<input class="btn btn-primary" type="submit" value="<?php echo $this->translate("save"); ?>" />
 		<input class="btn btn-default" type="reset" value="<?php echo $this->translate("reset"); ?>" />
 		<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="<?php echo $this->url('zfcuser'); ?>"><?php echo $this->translate("cancel"); ?></a>
-	<?php echo $this->form()->closeTag() ?>
+	<?php echo $this->form()->closeTag(); ?>
 </section>
