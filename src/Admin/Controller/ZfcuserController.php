@@ -113,9 +113,9 @@ class ZfcuserController extends UserController
 
     public function onDispatch(MvcEvent $e)
     {
-		$application = $e->getApplication();
+		//$application = $e->getApplication();
 		/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
-		$serviceManager = $application->getServiceManager();
+		$serviceManager = $this->getServiceLocator(); // $application->getServiceManager();
     	\Zend\Navigation\Page\Mvc::setDefaultRouter($serviceManager->get('router'));
     	$this->defineActionTitles();
     	$this->defineToolbarItems();
@@ -126,14 +126,14 @@ class ZfcuserController extends UserController
 		$action = $oController->getParam('action', 'index'); // $e->getRouteMatch()->getParam('action'); // $oRequest->getParam('action', 'index'); // 
 		$this->layout()->setVariable("title", $this->getActionTitle($action));
 
-		echo '<pre>';var_export($action);echo '</pre>';
-		echo '<pre>';var_export($this->toolbarItems);echo '</pre>';
-		echo '<pre>';var_export($this->getToolbarItem($action));echo '</pre>';
+		echo '<pre>';print_r($action);echo '</pre>';
+		echo '<pre>';print_r($this->toolbarItems);echo '</pre>';
+		echo '<pre>';print_r($this->getToolbarItem($action));echo '</pre>';
 		//$toolbarNav = $serviceManager->get('toolbarnavigation');
 		$toolbarNav = new \TwitterBootstrapAPI\Navigation\Service\ToolbarNavigationFactory(
 			$this->getToolbarItem($action)
 		);
-							echo '<pre>';var_export($toolbarNav);echo '</pre>'; die;
+							echo '<pre>';print_r($toolbarNav);echo '</pre>'; die;
 		$this->layout()->setVariable("toolbar", $toolbarNav->getPages($serviceManager));
 		
 		$result = parent::onDispatch($e);
