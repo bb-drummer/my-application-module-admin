@@ -8,7 +8,7 @@
 				$oComponents = $this->Components();
 				/** @var \Admin\Entity\User $user **/
 				$oUser = $this->zfcUserIdentity();
-				$oBootstrap->Navbar( new \Zend\Navigation\Navigation($this->toolbarItems) )->render();
+				$this->navigation( new \Zend\Navigation\Navigation($this->toolbarItems) )->render();
 			?>
 		</div>
 	</div>
