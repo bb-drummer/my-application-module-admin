@@ -120,13 +120,17 @@ class ZfcuserController extends UserController
     	$this->defineActionTitles();
     	$this->defineToolbarItems();
     	
-		$action = $e->getRouteMatch()->getParam('action'); // $this->get->getParam('action', 'index');
+    	$oController = $e->getTarget();
+    	$oRequest = $oController->getRequest();
+    	 
+		$action = $oRequest->getParam('action', 'index'); // $e->getRouteMatch()->getParam('action'); // $oRequest->getParam('action', 'index'); // 
 		$this->layout()->setVariable("title", $this->getActionTitle($action));
 		
 		//$toolbarNav = $serviceManager->get('toolbarnavigation');
 		$toolbarNav = new \TwitterBootstrapAPI\Navigation\Service\ToolbarNavigationFactory(
 			$this->getToolbarItem($action)
 		);
+							echo '<pre>';var_dump($action);echo '</pre>'; 
 							echo '<pre>';var_dump($this->toolbarItems);echo '</pre>'; 
 							echo '<pre>';var_dump($this->getToolbarItem($action));echo '</pre>'; 
 							echo '<pre>';var_dump($toolbarNav);echo '</pre>'; die;
