@@ -130,7 +130,7 @@ class ZfcuserController extends UserController
 			);
 			//echo '<pre>';print_r($toolbarNav);echo '</pre>'; //die;
 			//$toolbarNav = $serviceManager->get('toolbarnavigation'); $toolbarNav->addPages($this->getToolbarItem($action));
-			$this->layout()->setVariable("toolbar", $toolbarNav->getPages($serviceManager)); 
+			$this->layout()->setVariable("toolbar", $toolbarNav); //->getPages($serviceManager)); 
 		}
 		echo '<pre>';print_r($action);echo '</pre>';
 		echo '<pre>';print_r($this->toolbarItems);echo '</pre>';
