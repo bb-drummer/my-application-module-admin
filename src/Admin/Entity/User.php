@@ -213,7 +213,7 @@ class User extends ZfcUser
     /*public function getArrayCopy()
     {
     	return $this->__getArrayCopy();
-    }
+    }*/
     
     
     
@@ -234,6 +234,6 @@ class User extends ZfcUser
         	"city"			=> $this->getCity(),
         	"phone"			=> $this->getPhone(),
         );
-    }*/
+    }
     
 }
