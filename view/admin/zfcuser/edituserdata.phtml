@@ -1,30 +1,25 @@
 <?php if (!$showForm) {
 	echo $content;
 } else { ?>
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<span class="panel-title"><strong><?php echo $this->translate('edit userdata'); ?></strong></span>
-	</div>
-	<div class="panel-body">
-		<?php
-			$form = $this->userdataForm;
-			$form->prepare();
-			$form->setAttribute('action', $this->url('zfcuser/edituserdata'));
-			$form->setAttribute('method', 'post');
-			$form->setAttribute('class', 'form-xhr');
-			
-			echo $this->form()->openTag($form) ?>
-			<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('display_name')))) ? ' has-error' : '' ?>">
-				<?php echo $this->formLabel($form->get('display_name')); ?>
-				<?php echo $this->formInput($form->get('display_name')->setAttributes(array('class' => 'form-control'))); ?>
-				<?php echo $this->formElementErrors($form->get('display_name')); ?>
-			</div>
-			<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary'))); ?>
-			<input class="btn btn-default" type="reset" value="<?php echo $this->translate("reset"); ?>" />
-			<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="<?php echo $this->url('zfcuser'); ?>"><?php echo $this->translate("cancel"); ?></a>
-	        <?php if ($this->redirect): ?><input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" /><?php endif ?>
-	        <input type="hidden" name="user_id" value="<?php echo $this->escapeHtml($this->userId) ?>" />
-		<?php echo $this->form()->closeTag() ?>
-	</div>
-</div>
+<section>
+	<?php
+		$form = $this->userdataForm;
+		$form->prepare();
+		$form->setAttribute('action', $this->url('zfcuser/edituserdata'));
+		$form->setAttribute('method', 'post');
+		$form->setAttribute('class', 'form-xhr');
+		
+		echo $this->form()->openTag($form) ?>
+		<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('display_name')))) ? ' has-error' : '' ?>">
+			<?php echo $this->formLabel($form->get('display_name')); ?>
+			<?php echo $this->formInput($form->get('display_name')->setAttributes(array('class' => 'form-control'))); ?>
+			<?php echo $this->formElementErrors($form->get('display_name')); ?>
+		</div>
+		<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary'))); ?>
+		<input class="btn btn-default" type="reset" value="<?php echo $this->translate("reset"); ?>" />
+		<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="<?php echo $this->url('zfcuser'); ?>"><?php echo $this->translate("cancel"); ?></a>
+	    <?php if ($this->redirect): ?><input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" /><?php endif ?>
+	    <input type="hidden" name="user_id" value="<?php echo $this->escapeHtml($this->userId) ?>" />
+	<?php echo $this->form()->closeTag() ?>
+</section>
 <?php } ?>

@@ -1,7 +1,4 @@
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<span class="panel-title"><?php echo $this->translate("manage users"); ?></span>
-	</div>
+<section>
 	<div class="panel-body panel-toolbar">
 		<div class="btn-group btn-group-sm">
 			<a class="btn btn-default btn-clean btn-sm btn-cta-xhr cta-xhr-modal" data-actioncontext="usertable" href="<?php echo $this->url('admin/default', array('controller'=>'users', 'action'=>'add'));?>"><span class="fa fa-plus"></span> <?php echo $this->translate("add user")?></a>
@@ -39,4 +36,4 @@
 		</div>
 		<?php echo $this->output ?>
 	</div>
-</div>
+</section>
