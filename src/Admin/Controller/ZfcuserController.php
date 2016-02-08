@@ -32,7 +32,6 @@ use Zend\Stdlib\Parameters;
 
 use ZfcUser\Controller\UserController;
 use Zend\View\Model\ViewModel;
-//use Zend\View\Model\ViewModel;
 
 class ZfcuserController extends UserController
 {
@@ -99,7 +98,7 @@ class ZfcuserController extends UserController
     	return $this;
     }
 
-    public function onDispatch(MvcEvent $e)
+    public function onDispatch(Zend\Mvc\MvcEvent $e)
     {
     	$this->defineActionTitles();
     	$this->defineToolbarItems();
