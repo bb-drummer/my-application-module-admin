@@ -199,7 +199,7 @@ class User extends ZfcUser
      * Get user's (basic) profile data.
      *
      * @return STRING
-     */
+     * /
     public function getProfile()
     {
 		$oProfile = new UserProfile();
