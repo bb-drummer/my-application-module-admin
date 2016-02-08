@@ -128,7 +128,7 @@ class ZfcuserController extends UserController
 			$toolbarNav = new \TwitterBootstrapAPI\Navigation\Service\ToolbarNavigationFactory(
 				$toolbarItems
 			);
-			echo '<pre>';print_r($toolbarNav);echo '</pre>'; //die;
+			//echo '<pre>';print_r($toolbarNav);echo '</pre>'; //die;
 			//$toolbarNav = $serviceManager->get('toolbarnavigation'); $toolbarNav->addPages($this->getToolbarItem($action));
 			$this->layout()->setVariable("toolbar", $toolbarNav->getPages($serviceManager)); 
 		}
