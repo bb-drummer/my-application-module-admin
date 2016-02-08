@@ -8,6 +8,8 @@
 				$oComponents = $this->Components();
 				/** @var \Admin\Entity\User $user **/
 				$oUser = $this->zfcUserIdentity();
+				$nav = new \Zend\Navigation\Navigation($this->toolbarItems);
+				print_r($nav);
 				$this->navigation( new \Zend\Navigation\Navigation($this->toolbarItems) )->render();
 			?>
 		</div>
