@@ -752,7 +752,7 @@ class ZfcuserController extends UserController
 	/**
 	 * @return the $actionTitles
 	 */
-	public function getToolbarItem($name) {
+	public function getToolbarItem($action) {
 		return (isset($this->toolbarItems[$action]) ? $this->toolbarItems[$action] : '');
 	}
 	
@@ -760,8 +760,8 @@ class ZfcuserController extends UserController
 	 * @param string $action
 	 * @param string $title
 	 */
-	public function setToolbarItem($name, $item) {
-		$this->toolbarItems[$action] = $title;
+	public function setToolbarItem($action, $item) {
+		$this->toolbarItems[$action] = $item;
 		return $this;
 	}
 
