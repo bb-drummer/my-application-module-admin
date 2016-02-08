@@ -85,6 +85,7 @@ class UserTable
             $this->tableGateway->insert($data);
         } else {
             if ($this->getUser($id)) {
+            	print_r($data);
                 $this->tableGateway->update($data, array('user_id' => $id));
             } else {
                 throw new \Exception('Form id does not exist');

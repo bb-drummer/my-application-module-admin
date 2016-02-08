@@ -255,7 +255,7 @@ class ZfcuserController extends UserController
 		// user found, create token and send link via email
 		
 		$user->setToken($oModule->createUserToken($user));
-		$service->getUserMapper()->update($user->getArrayCopy());
+		$service->getUserMapper()->update($user);
 		
 		$oModule->sendPasswordResetMail($user);
 		$this->flashMessenger()->addSuccessMessage(
