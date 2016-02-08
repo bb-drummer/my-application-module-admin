@@ -24,6 +24,7 @@ use Admin\Form\RequestPasswordResetForm;
 use Admin\Form\ResetPasswordForm;
 use Admin\Form\UserDataForm;
 use Admin\Form\UserProfileForm;
+use Admin\Model\UserProfile;
 
 use Zend\Crypt\Password\Bcrypt;
 use Zend\Stdlib\ResponseInterface as Response;
@@ -547,7 +548,7 @@ class ZfcuserController extends UserController
 		
 		$user = $this->zfcUserAuthentication()->getIdentity();
 		$userId = (int) $user->getId();
-		$profile = new Admin\Model\UserProfile;
+		$profile = new UserProfile;
 		$profile->load($userId);
 		//$profile = $user->getProfile();
 		$form->bind( $profile );
