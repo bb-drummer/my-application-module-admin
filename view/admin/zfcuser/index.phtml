@@ -1,6 +1,19 @@
 <section>
 	<div class="panel-body panel-toolbar">
 		<div class="btn-group btn-group-sm" role="group" aria-label="<?php echo $this->translate('user profile actions'); ?>">
+			<?php 
+				/** @var \TwitterBootstrapAPI\View\Helper\Bootstrap $user **/
+				$oBootstrap = $this->Bootstrap();
+				/** @var \TwitterBootstrapAPI\View\Helper\Components $user **/
+				$oComponents = $this->Components();
+				/** @var \Admin\Entity\User $user **/
+				$oUser = $this->zfcUserIdentity();
+				$oBootstrap->Navbar( new \Zend\Navigation\Navigation($this->toolbarItems) )->render();
+			?>
+		</div>
+	</div>
+	<div class="panel-body panel-toolbar">
+		<div class="btn-group btn-group-sm" role="group" aria-label="<?php echo $this->translate('user profile actions'); ?>">
 			<a class="btn btn-default btn-clean btn-sm btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('zfcuser/edituserprofile') ?>"><span class="fa fa-edit"></span> <?php echo $this->translate('edit profile'); ?></a>
 			<a class="btn btn-default btn-clean btn-sm btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('zfcuser/edituserdata') ?>"><span class="fa fa-user"></span> <?php echo $this->translate('edit userdata'); ?></a>
 			<a class="btn btn-default btn-clean btn-sm btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('zfcuser/changeemail') ?>"><span class="fa fa-envelope"></span> <?php echo $this->translate('change email'); ?></a>

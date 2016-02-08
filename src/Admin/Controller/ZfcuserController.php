@@ -31,6 +31,7 @@ use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Stdlib\Parameters;
 
 use ZfcUser\Controller\UserController;
+use Zend\View\Model\ViewModel;
 //use Zend\View\Model\ViewModel;
 
 class ZfcuserController extends UserController
@@ -39,29 +40,77 @@ class ZfcuserController extends UserController
 	protected $translator;
 
 	protected $actionTitles = array();
+
+	protected $toolbarItems = array();
 	
-	public function onDispatch(\Zend\Mvc\MvcEvent $e)
-    {
-    	$this->setActionTitles(array(
-    		'login'					=> $this->translate("login"),
-    		'authenticate'			=> $this->translate("login"),
-    		'logout'				=> $this->translate("logout"),
-    		'register'				=> $this->translate("register user"),
-    		'requestpasswordreset'	=> $this->translate("reset password"),
-    		'changeemail'			=> $this->translate("change email"),
-    		'changepassword'		=> $this->translate("change password"),
-    		'resetpassword'			=> $this->translate("reset password"),
-    		'userdata'				=> $this->translate("userdata"),
-    		'edituserdata'			=> $this->translate("edit userdata"),
-    		'userprofile'			=> $this->translate("user profile"),
-    		'index'					=> $this->translate("user profile"),
-    		'edituserprofile'		=> $this->translate("edit profile"),
-    	));
-    	$action = $e->getRouteMatch()->getParam('action'); // $this->get->getParam('action', 'index');
-    	$this->layout()->setVariable("title", $this->getActionTitle($action));
-    	$result = parent::onDispatch($e);
-    	return $result;
+    public function defineActionTitles () {
+		$this->setActionTitles(array(
+			'login'					=> $this->translate("login"),
+			'authenticate'			=> $this->translate("login"),
+			'logout'				=> $this->translate("logout"),
+			'register'				=> $this->translate("register user"),
+			'requestpasswordreset'	=> $this->translate("reset password"),
+			'changeemail'			=> $this->translate("change email"),
+			'changepassword'		=> $this->translate("change password"),
+			'resetpassword'			=> $this->translate("reset password"),
+			'userdata'				=> $this->translate("userdata"),
+			'edituserdata'			=> $this->translate("edit userdata"),
+			'userprofile'			=> $this->translate("user profile"),
+			'index'					=> $this->translate("user profile"),
+			'edituserprofile'		=> $this->translate("edit profile"),
+		));
+    	return $this;
     }
+
+    public function defineToolbarItems () {
+		$this->setToolbarItems(array(
+			"userprofile" => array(
+				array(
+						'label'			=> 'edit profile',
+						'icon'			=> 'edit',
+						'route'			=> 'zfcuser/edituserprofile',
+				),
+				array(
+						'label'			=> 'edit userdata',
+						'icon'			=> 'user',
+						'route'			=> 'zfcuser/edituserdata',
+				),
+				array(
+						'label' 		=> 'change email',
+						'icon'			=> 'envelope',
+						'route'			=> 'zfcuser/changeemail',
+				),
+				array(
+						'label' 		=> 'change password',
+						'icon'			=> 'lock',
+						'route'			=> 'zfcuser/changepassword',
+				),
+				array(
+						'label'			=> "&bnsp;",
+						'url'			=> "#",
+				),
+				array(
+						'label' 		=> 'logout',
+						'icon'			=> 'power-off',
+						'route'			=> 'zfcuser/logout',
+				),
+			)	
+		));
+    	return $this;
+    }
+
+    public function onDispatch(MvcEvent $e)
+    {
+    	$this->defineActionTitles();
+    	$this->defineToolbarItems();
+    	
+		$action = $e->getRouteMatch()->getParam('action'); // $this->get->getParam('action', 'index');
+		$this->layout()->setVariable("title", $this->getActionTitle($action));
+		$this->layout()->setVariable("toolbar", $this->getToolbarItem($action));
+		
+		$result = parent::onDispatch($e);
+		return $result;
+	}
 
 	/**
 	 * General-purpose authentication action
@@ -233,16 +282,16 @@ class ZfcuserController extends UserController
 		$user = false;
 		try {
 			/** @var \Admin\Model\UserTable $userTable **/
-    		$userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
-    		$selectedUser = $userTable->getUserByEmailOrUsername($identity);
-    		if ($selectedUser) {
+			$userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
+			$selectedUser = $userTable->getUserByEmailOrUsername($identity);
+			if ($selectedUser) {
 				/** @var \ZfcUser\Mapper\User $userTable **/
-    			$userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
-    			$user = $userTable->findByUsername($selectedUser->username);
-    			if (!$user) {
-    				$user = $userTable->findByEmail($selectedUser->email);
-    			}
-    		}
+				$userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
+				$user = $userTable->findByUsername($selectedUser->username);
+				if (!$user) {
+					$user = $userTable->findByEmail($selectedUser->email);
+				}
+			}
 		} catch (\Exception $e) {
 		}
 		
@@ -433,6 +482,9 @@ class ZfcuserController extends UserController
 		$service	= $this->getUserService();
 		$translator	= $this->getTranslator();
 		
+		return (array(
+			"toolbarItems" => $this->getToolbarItem('userprofile'),
+		));
 	}
 
 	/**
@@ -454,20 +506,20 @@ class ZfcuserController extends UserController
 		$form		= new UserDataForm();
 		$translator	= $this->getTranslator();
 		
-		$user = $this->zfcUserAuthentication()->getIdentity();
-		$oUser = new \Admin\Model\User();
+		$user		= $this->zfcUserAuthentication()->getIdentity();
+		$oUser		= new \Admin\Model\User();
 		$oUser->exchangeArray($user->__getArrayCopy());
-		$userId = (int) $user->getId();
+		$userId		= (int) $user->getId();
 
 		$form->bind( $oUser );
 		
 		if ( !$this->getRequest()->isPost() ) {
 			
 			return array(
-				'showForm' => true,
-				'user' => $user,
-				'userId' => $userId,
-				'userdataForm'  => $form,
+				'showForm'		=> true,
+				'user'			=> $user,
+				'userId'		=> $userId,
+				'userdataForm'	=> $form,
 			);
 			
 		}
@@ -478,10 +530,10 @@ class ZfcuserController extends UserController
 		if ( !$form->isValid() ) {
 			
 			return array(
-				'showForm' => true,
-				'user' => $user,
-				'userId' => $userId,
-				'userdataForm'  => $form,
+				'showForm'		=> true,
+				'user'			=> $user,
+				'userId'		=> $userId,
+				'userdataForm'	=> $form,
 			);
 				
 		} else {
@@ -546,11 +598,10 @@ class ZfcuserController extends UserController
 		$form		= new UserProfileForm();
 		$translator	= $this->getTranslator();
 		
-		$user = $this->zfcUserAuthentication()->getIdentity();
-		$userId = (int) $user->getId();
-		$profile = new UserProfile;
+		$user		= $this->zfcUserAuthentication()->getIdentity();
+		$userId		= (int) $user->getId();
+		$profile	= new UserProfile;
 		$profile->load($userId);
-		//$profile = $user->getProfile();
 		$form->bind( $profile );
 		
 		if ( !$this->getRequest()->isPost() ) {
@@ -559,7 +610,7 @@ class ZfcuserController extends UserController
 				'showForm' => true,
 				'user' => $user,
 				'userId' => $userId,
-				'userprofileForm'  => $form,
+				'userprofileForm'	=> $form,
 			);
 			
 		}
@@ -570,10 +621,10 @@ class ZfcuserController extends UserController
 		if ( !$form->isValid() ) {
 			
 			return array(
-				'showForm' => true,
-				'user' => $user,
-				'userId' => $userId,
-				'userprofileForm'  => $form,
+				'showForm'			=> true,
+				'user'				=> $user,
+				'userId'			=> $userId,
+				'userprofileForm'	=> $form,
 			);
 				
 		} else {
@@ -628,7 +679,7 @@ class ZfcuserController extends UserController
 	public function translate($message, $textdomain = 'default', $locale = null) {
 		return ( $this->getTranslator()->translate($message, $textdomain, $locale) );
 	}
-    
+	
 	/**
 	 * @return the $translator
 	 */
@@ -645,7 +696,10 @@ class ZfcuserController extends UserController
 	public function setTranslator($translator) {
 		$this->translator = $translator;
 	}
-    
+	
+	
+	// //	action titles
+	
 	/**
 	 * @return the $actionTitles
 	 */
@@ -674,6 +728,40 @@ class ZfcuserController extends UserController
 	 */
 	public function setActionTitle($action, $title) {
 		$this->actionTitles[$action] = $title;
+		return $this;
+	}
+	
+	
+	// //	toolbar items
+
+	/**
+	 * @return the $toolbarItems
+	 */
+	public function getToolbarItems() {
+		return $this->toolbarItems ;
+	}
+	
+	/**
+	 * @param array $toolbarItems
+	 */
+	public function setToolbarItems($toolbarItems = array()) {
+		$this->toolbarItems = $toolbarItems;
+		return $this;
+	}
+	
+	/**
+	 * @return the $actionTitles
+	 */
+	public function getToolbarItem($name) {
+		return (isset($this->toolbarItems[$action]) ? $this->toolbarItems[$action] : '');
+	}
+	
+	/**
+	 * @param string $action
+	 * @param string $title
+	 */
+	public function setToolbarItem($name, $item) {
+		$this->toolbarItems[$action] = $title;
 		return $this;
 	}
 
