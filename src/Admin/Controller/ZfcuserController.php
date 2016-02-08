@@ -226,12 +226,16 @@ class ZfcuserController extends UserController
 		$oModule = new AdminModule();
 		$oModule->setAppConfig($config);
 		$identity = $this->params()->fromPost('identity');
+
+		/** @var \Admin\Model\User $user **/
+		/** @var \Admin\Model\User $selectedUser **/
 		$user = false;
-		
 		try {
+			/** @var \Admin\Model\UserTable $userTable **/
     		$userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
     		$selectedUser = $userTable->getUserByEmailOrUsername($identity);
     		if ($selectedUser) {
+				/** @var \ZfcUser\Mapper\User $user **/
     			$userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
     			$user = $userTable->findByUsername($selectedUser->username);
     			if (!user) {
@@ -240,7 +244,7 @@ class ZfcuserController extends UserController
     		}
 		} catch (\Exception $e) {
 		}
-
+		
 		if (!$user) {
 			$this->flashMessenger()->addWarningMessage(
 				sprintf($translator->translate("user '%s' not found"), $identity)
@@ -251,7 +255,7 @@ class ZfcuserController extends UserController
 		// user found, create token and send link via email
 		
 		$user->setToken($oModule->createUserToken($user));
-		$service->getUserMapper()->update($user);
+		$service->getUserMapper()->update($user->getArrayCopy());
 		
 		$oModule->sendPasswordResetMail($user);
 		$this->flashMessenger()->addSuccessMessage(
