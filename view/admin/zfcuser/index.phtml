@@ -28,6 +28,11 @@
 			</div>
 		</section>
 	</div>
+	<?php 
+		$oProfile = new Admin\Model\UserProfile();
+		$res = $oProfile->load($this->getId());
+		if ($res) {
+	?>
 	<div class="panel-body panel-user-profile">
 		
 		<div class="panel-group container-fluid" id="accordion" role="tablist" aria-multiselectable="false">
@@ -45,19 +50,19 @@
 							<div class="panel-body">
 								<div class="row">
 									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('Twitter')); ?>:</span>
-									<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getTwitter()); ?></span>
+									<span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getTwitter()); ?></span>
 								</div>
 								<div class="row">
 									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('Facebook')); ?>:</span>
-									<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getFacebook()); ?></span>
+									<span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getFacebook()); ?></span>
 								</div>
 								<div class="row">
 									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('Skype')); ?>:</span>
-									<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getSkype()); ?></span>
+									<span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getSkype()); ?></span>
 								</div>
 								<div class="row">
 									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('ICQ')); ?>:</span>
-									<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getIcq()); ?></span>
+									<span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getIcq()); ?></span>
 								</div>
 							</div>
 						</div>
@@ -76,19 +81,19 @@
 							<div class="panel-body">
 								<div class="row">
 									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('street')); ?>:</span>
-									<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getStreet()); ?></span>
+									<span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getStreet()); ?></span>
 								</div>
 								<div class="row">
 									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('city')); ?>:</span>
-									<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getCity()); ?></span>
+									<span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getCity()); ?></span>
 								</div>
 								<div class="row">
 									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('phone')); ?>:</span>
-									<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getPhone()); ?></span>
+									<span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getPhone()); ?></span>
 								</div>
 								<div class="row">
 									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('mobile')); ?>:</span>
-									<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getProfile()->getCell()); ?></span>
+									<span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getCell()); ?></span>
 								</div>
 							</div>
 						</div>
@@ -99,5 +104,6 @@
 		</div>
 
 	</div>
+	<?php } ?>
 </section>
 

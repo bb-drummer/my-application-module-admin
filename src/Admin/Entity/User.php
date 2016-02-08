@@ -15,7 +15,6 @@
 
 namespace Admin\Entity;
 
-use \Admin\Model\UserProfile;
 use \ZfcUser\Entity\User as ZfcUser;
 
 class User extends ZfcUser
@@ -192,21 +191,6 @@ class User extends ZfcUser
     	$this->phone = $phone;
     	return $this;
     }
-    
-    
-    
-    /**
-     * Get user's (basic) profile data.
-     *
-     * @return STRING
-     * /
-    public function getProfile()
-    {
-		$oProfile = new UserProfile();
-		$oProfile->load($this->getId());
-		return $oProfile;
-    }
-    
     
     
     

@@ -55,7 +55,9 @@ class UserProfile implements InputFilterAwareInterface
     		if ($profile) {
     			$this->exchangeArray( $profile->getArrayCopy() );
     		}
-    	} catch (\Exception $ex) { }
+    	} catch (\Exception $ex) {
+    		return (false);
+    	}
     	
         return $this;
     }
