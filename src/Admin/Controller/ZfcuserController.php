@@ -125,7 +125,7 @@ class ZfcuserController extends UserController
 		$toolbarNav->setConfig($this->getToolbarItem($action));
 		// $toolbarNav = new \Zend\Navigation\Navigation($this->getToolbarItem($action));
 		// $toolbarNav->
-		$this->layout()->setVariable("toolbar", $toolbarNav->getPages($serviceManager));
+		$this->layout()->setVariable("toolbar", $toolbarNav); // ->getPages($serviceManager));
 		
 		$result = parent::onDispatch($e);
 		return $result;
