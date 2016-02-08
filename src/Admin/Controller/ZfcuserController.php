@@ -545,7 +545,7 @@ class ZfcuserController extends UserController
 		$form		= new UserProfileForm();
 		$translator	= $this->getTranslator();
 		
-		$user = $this->zfcUserIdentity();
+		$user = $this->zfcUserAuthentication()->getIdentity();
 		$userId = (int) $user->getId();
 		$profile = new Admin\Model\UserProfile;
 		$profile->load($userId);
