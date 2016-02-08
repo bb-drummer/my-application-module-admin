@@ -113,7 +113,9 @@ class ZfcuserController extends UserController
 
     public function onDispatch(MvcEvent $e)
     {
-		$serviceManager = $this->getServiceLocator();
+		$application = $e->getApplication();
+		/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
+		$serviceManager = $application->getServiceManager();
     	\Zend\Navigation\Page\Mvc::setDefaultRouter($serviceManager->get('router'));
     	$this->defineActionTitles();
     	$this->defineToolbarItems();
@@ -125,8 +127,7 @@ class ZfcuserController extends UserController
 		$toolbarNav = new \TwitterBootstrapAPI\Navigation\Service\ToolbarNavigationFactory(
 			$this->getToolbarItem($action)
 		);
-		//$toolbarNav->setConfig($this->getToolbarItem($action));
-		$this->layout()->setVariable("toolbar", $toolbarNav); // ->getPages($serviceManager));
+		$this->layout()->setVariable("toolbar", $toolbarNav->getPages($serviceManager));
 		
 		$result = parent::onDispatch($e);
 		return $result;
