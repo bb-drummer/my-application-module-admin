@@ -455,7 +455,7 @@ class ZfcuserController extends UserController
 		
 		$user = $this->zfcUserAuthentication()->getIdentity();
 		$oUser = new \Admin\Model\User();
-		$oUser->exchangeArray($user->getArrayCopy());
+		$oUser->exchangeArray($user->__getArrayCopy());
 		$userId = (int) $user->getId();
 
 		$form->bind( $oUser );
@@ -545,10 +545,11 @@ class ZfcuserController extends UserController
 		$form		= new UserProfileForm();
 		$translator	= $this->getTranslator();
 		
-		$user = $this->zfcUserAuthentication()->getIdentity();
+		$user = $this->zfcUserIdentity();
 		$userId = (int) $user->getId();
-
-		$profile = $user->getProfile();
+		$profile = new Admin\Model\UserProfile;
+		$profile->load($userId);
+		//$profile = $user->getProfile();
 		$form->bind( $profile );
 		
 		if ( !$this->getRequest()->isPost() ) {
