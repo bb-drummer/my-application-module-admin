@@ -257,7 +257,7 @@ class ZfcuserController extends UserController
 		$user->setToken($oModule->createUserToken($user));
 		print_r($user);
 		$service->getUserMapper()->update($user);
-		$userTable->
+		
 		
 		$oModule->sendPasswordResetMail($user);
 		$this->flashMessenger()->addSuccessMessage(
