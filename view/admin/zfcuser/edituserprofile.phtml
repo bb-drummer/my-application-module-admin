@@ -1,11 +1,11 @@
 <?php if (!$showForm) {
 	echo $content;
 } else { ?>
-<div class="panel panel-default">
+<!-- div class="panel panel-default">
 	<div class="panel-heading hide hidden">
 		<span class="panel-title"><strong><?php echo $this->translate('edit profile'); ?></strong></span>
 	</div>
-	<div class="panel-body">
+	<div class="panel-body" -->
 		<?php
 			$form = $this->userprofileForm;
 			$form->prepare();
@@ -62,6 +62,6 @@
 	        <?php if ($this->redirect): ?><input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" /><?php endif ?>
 	        <input type="hidden" name="user_id" value="<?php echo $this->escapeHtml($this->userId) ?>" />
 		<?php echo $this->form()->closeTag() ?>
-	</div>
-</div>
+	<!-- /div>
+</div -->
 <?php } ?>
