@@ -123,7 +123,7 @@ class ZfcuserController extends UserController
     	$oController = $e->getTarget();
     	$oRequest = $oController->getRequest();
     	 
-		$action = $oRequest->getParam('action', 'index'); // $e->getRouteMatch()->getParam('action'); // $oRequest->getParam('action', 'index'); // 
+		$action = $oController->getParam('action', 'index'); // $e->getRouteMatch()->getParam('action'); // $oRequest->getParam('action', 'index'); // 
 		$this->layout()->setVariable("title", $this->getActionTitle($action));
 		
 		//$toolbarNav = $serviceManager->get('toolbarnavigation');
