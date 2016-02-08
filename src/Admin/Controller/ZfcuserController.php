@@ -106,7 +106,7 @@ class ZfcuserController extends UserController
 					'route'			=> 'zfcuser/logout',
 					'resource'		=> 'mvc:nouser',
 				),
-			)	
+			),
 		));
     	return $this;
     }
@@ -127,6 +127,8 @@ class ZfcuserController extends UserController
 		$toolbarNav = new \TwitterBootstrapAPI\Navigation\Service\ToolbarNavigationFactory(
 			$this->getToolbarItem($action)
 		);
+							echo '<pre>';var_dump($this);echo '</pre>'; 
+							echo '<pre>';var_dump($this->getToolbarItem($action));echo '</pre>'; 
 							echo '<pre>';var_dump($toolbarNav);echo '</pre>'; die;
 		$this->layout()->setVariable("toolbar", $toolbarNav->getPages($serviceManager));
 		
@@ -791,7 +793,7 @@ class ZfcuserController extends UserController
 	 * @return the $actionTitles
 	 */
 	public function getToolbarItem($action) {
-		return (isset($this->toolbarItems[$action]) ? $this->toolbarItems[$action] : '');
+		return (isset($this->toolbarItems[$action]) ? $this->toolbarItems[$action] : null);
 	}
 	
 	/**
