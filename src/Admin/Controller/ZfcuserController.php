@@ -125,17 +125,43 @@ class ZfcuserController extends UserController
 
 		$toolbarItems = $this->getToolbarItem($action);
 		if ($toolbarItems) {
-			$toolbarNav = new \TwitterBootstrapAPI\Navigation\Service\ToolbarNavigationFactory( $toolbarItems );
-			//$toolbarNav = $serviceManager->get('toolbarnavigation'); $toolbarNav->addPages($toolbarItems);
-			//echo '<pre>';var_dump($toolbarNav);echo '</pre>'; //die;
-			$this->layout()->setVariable("toolbar", $toolbarNav->getPages($serviceManager)); 
+			//$toolbarNav = new \TwitterBootstrapAPI\Navigation\Service\ToolbarNavigationFactory( $toolbarItems );
+			$toolbarNav = $serviceManager->get('toolbarnavigation'); $toolbarNav->addPages($toolbarItems);
+			//echo '<pre>';var_dump($toolbarNav);echo '</pre>'; die;
+			//$toolbarPages = $toolbarNav->getPages($serviceManager);
+			//$toolbarContainer = new \Zend\Navigation\Navigation($toolbarPages); //Page\Mvc;
+			//$toolbarContainer->addPages($toolbarPages);
+			$this->layout()->setVariable("toolbarContainer", $toolbarNav); 
 		}
 		
 		$result = parent::onDispatch($e);
 		return $result;
 	}
-
-    /**
+    
+	/**
+	 * view user's profile data
+	 */
+	public function userprofileAction()
+	{
+		// if the user is logged in...
+		if (!$this->zfcUserAuthentication()->hasIdentity()) {
+			// ...redirect to the login redirect route
+			return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
+		}
+        return $this->redirect()->toRoute("zfcuser/userprofile");
+		
+		$config		= $this->getServiceLocator()->get('Config');
+		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
+		$request	= $this->getRequest();
+		$service	= $this->getUserService();
+		$translator	= $this->getTranslator();
+		
+		return new ViewModel(array(
+			"toolbarItems" => $this->getToolbarItems(),
+		));
+	}
+	
+	/**
      * User page
      */
     public function indexAction()
@@ -503,29 +529,6 @@ class ZfcuserController extends UserController
 		
 	}
 	
-	/**
-	 * view user's profile data
-	 */
-	public function userprofileAction()
-	{
-		// if the user is logged in...
-		if (!$this->zfcUserAuthentication()->hasIdentity()) {
-			// ...redirect to the login redirect route
-			return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
-		}
-        return $this->redirect()->toRoute("zfcuser/userprofile");
-		
-		$config		= $this->getServiceLocator()->get('Config');
-		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
-		$request	= $this->getRequest();
-		$service	= $this->getUserService();
-		$translator	= $this->getTranslator();
-		
-		return new ViewModel(array(
-			"toolbarItems" => $this->getToolbarItems(),
-		));
-	}
-
 	/**
 	 * edit user's basic data
 	 */
