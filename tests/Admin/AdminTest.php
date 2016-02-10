@@ -9,7 +9,7 @@
 
 namespace AdminTest;
 
-class SampleTest extends Framework\TestCase
+class AdminTest extends Framework\TestCase
 {
 
     public function testSample()
