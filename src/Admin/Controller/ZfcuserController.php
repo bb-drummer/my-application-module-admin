@@ -68,41 +68,41 @@ class ZfcuserController extends UserController
 				array(
 					'label'			=> 'edit profile',
 					'icon'			=> 'edit',
-					'classnames'	=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
 					'route'			=> 'zfcuser/edituserprofile',
 					'resource'		=> 'mvc:user',
 				),
 				array(
 					'label'			=> 'edit userdata',
 					'icon'			=> 'user',
-					'classnames'	=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
 					'route'			=> 'zfcuser/edituserdata',
 					'resource'		=> 'mvc:user',
 				),
 				array(
 					'label' 		=> 'change email',
 					'icon'			=> 'envelope',
-					'classnames'	=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
 					'route'			=> 'zfcuser/changeemail',
 					'resource'		=> 'mvc:user',
 				),
 				array(
 					'label' 		=> 'change password',
 					'icon'			=> 'lock',
-					'classnames'	=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
 					'route'			=> 'zfcuser/changepassword',
 					'resource'		=> 'mvc:admin',
 				),
 				array(
 					'label'			=> "",
-					'classnames'	=> 'btn btn-default btn-sm',
+					'class'			=> 'btn btn-none btn-sm',
 					'uri'			=> "#",
 					'active'		=> false,
 				),
 				array(
 					'label' 		=> 'logout',
 					'icon'			=> 'power-off',
-					'classnames'	=> 'btn btn-default btn-sm',
+					'class'			=> 'btn btn-default btn-sm',
 					'route'			=> 'zfcuser/logout',
 					'resource'		=> 'mvc:nouser',
 				),
@@ -125,14 +125,8 @@ class ZfcuserController extends UserController
 
 		$toolbarItems = $this->getToolbarItem($action);
 		if ($toolbarItems) {
-			//$toolbarNav = new \TwitterBootstrapAPI\Navigation\Service\ToolbarNavigationFactory( $toolbarItems );
 			$toolbarNav = $serviceManager->get('toolbarnavigation');
 			$toolbarNav->addPages($toolbarItems);
-			//echo '<pre>';var_dump($toolbarNav);echo '</pre>'; die;
-			//$toolbarPages = $toolbarNav->getPages($serviceManager);
-			//$toolbarContainer = new \Zend\Navigation\Navigation($toolbarPages); //Page\Mvc;
-			//$toolbarContainer->addPages($toolbarPages);
-			//$this->layout()->setVariable("toolbarContainer", $toolbarNav); 
 		}
 		
 		$result = parent::onDispatch($e);
