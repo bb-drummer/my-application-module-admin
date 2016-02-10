@@ -91,7 +91,7 @@ class ZfcuserController extends UserController
 					'icon'			=> 'lock',
 					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
 					'route'			=> 'zfcuser/changepassword',
-					'resource'		=> 'mvc:admin',
+					'resource'		=> 'mvc:user',
 				),
 				array(
 					'label'			=> "",
