@@ -104,7 +104,7 @@ class ZfcuserController extends UserController
 					'icon'			=> 'power-off',
 					'class'			=> 'btn btn-default btn-sm',
 					'route'			=> 'zfcuser/logout',
-					'resource'		=> 'mvc:nouser',
+					'resource'		=> 'mvc:user',
 				),
 			),
 		));
