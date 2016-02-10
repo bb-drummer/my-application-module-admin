@@ -116,7 +116,6 @@ class ZfcuserController extends UserController
 		/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
 		$serviceManager = $this->getServiceLocator();
 		
-    	\Zend\Navigation\Page\Mvc::setDefaultRouter($serviceManager->get('router'));
     	$this->defineActionTitles();
     	$this->defineToolbarItems();
     	
