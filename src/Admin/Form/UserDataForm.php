@@ -37,7 +37,7 @@ class UserDataForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'display name',
+                'label' => 'Display name',
             ),
         ));
         
