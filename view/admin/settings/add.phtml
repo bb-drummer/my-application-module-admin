@@ -7,6 +7,9 @@ $oComponents = $this->Components();
 $oUser = $this->zfcUserIdentity();
 
 if ($showForm) {
+	/**
+	 * @var \Zend\Form\Form $form
+	 */
 	$form = $this->form;
 	$form->setAttribute('action', $this->url('admin/settingsedit', array('action' => 'add')));
 	$form->setAttribute('class', 'form-xhr');
@@ -20,8 +23,14 @@ if ($showForm) {
 	$formHTML .= $oComponents->formGroup($form, "value");
 	$formHTML .= '<hr />'; 
 	$formHTML .= $this->formHidden($form->get('settings_id'));
-	$formHTML .= $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary')));
-	$formHTML .= $this->formReset($form->get('reset')->setAttributes(array('class' =>'btn btn-default')));
+	$formHTML .= $this->formSubmit($form->get('submit')
+			->setAttributes(array('class' =>'btn btn-primary'))
+			->setOption('type', 'button')
+	);
+	$formHTML .= $this->formReset($form->get('reset')
+			->setAttributes(array('class' =>'btn btn-default'))
+			->setOption('type', 'button')
+	);
 	$formHTML .= '<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'. $this->url('admin/settingsedit') .'">'. $this->translate("cancel") .'</a>';
 	$formHTML .=  $this->form()->closeTag($form);
 		
