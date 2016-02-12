@@ -53,7 +53,7 @@
 	<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary'))); ?>
 	<input class="btn btn-default" type="reset" value="<?php echo $this->translate("reset"); ?>" />
 	<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="<?php echo $this->url('zfcuser'); ?>"><?php echo $this->translate("cancel"); ?></a>
-    <?php if ($this->redirect): ?><input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" /><?php endif ?>
-    <input type="hidden" name="user_id" value="<?php echo $this->escapeHtml($this->userId) ?>" />
+	<?php if ($this->redirect): ?><input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" /><?php endif ?>
+	<input type="hidden" name="user_id" value="<?php echo $this->escapeHtml($this->userId) ?>" />
 <?php echo $this->form()->closeTag();
 } ?>

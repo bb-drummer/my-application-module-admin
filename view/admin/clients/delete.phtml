@@ -8,8 +8,8 @@ $oUser = $this->zfcUserIdentity();
 
 if ($showForm) {
 	$url = $this->url('admin/clientsedit', array(
-	    'action'     => 'delete',
-	    'client_id'     => $clients->clients_id,
+		'action'	 => 'delete',
+		'client_id'	 => $clients->clients_id,
 	));
 	$formHTML = array(
 		'<p>'.$this->translate("Do you really want to delete this client?").'</p>',

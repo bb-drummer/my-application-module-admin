@@ -8,8 +8,8 @@ $oUser = $this->zfcUserIdentity();
 
 if ($showForm) {
 	$url = $this->url('admin/acledit', array(
-	    'action'     => 'deleteresource',
-	    'acl_id'     => $acl_id,
+		'action'	 => 'deleteresource',
+		'acl_id'	 => $acl_id,
 	));
 	$formHTML = array(
 		'<p>'.$this->translate("Do you really want to delete this resource?").'</p>',
@@ -41,8 +41,8 @@ if ($showForm) {
 		</p>
 		<?php
 		$url = $this->url('admin/acledit', array(
-		    'action'	=> 'deleteresource',
-		    'acl_id'	=> (int)$acl_id,
+			'action'	=> 'deleteresource',
+			'acl_id'	=> (int)$acl_id,
 		));
 		?>
 		<form action="<?php echo $url; ?>" method="post">

@@ -24,16 +24,16 @@ class ApplicationsController extends BaseActionController
 {
 	protected $applicationsTable;
 	
-    public function onDispatch(\Zend\Mvc\MvcEvent $e)
-    {
-    	$this->setActionTitles(array(
-    		'index' => $this->translate("manage applications"),
-    		'add' => $this->translate("add application"),
-    		'edit' => $this->translate("edit application"),
-    		'delete' => $this->translate("delete application"),
-    	));
-    	return parent::onDispatch($e);
-    }
+	public function onDispatch(\Zend\Mvc\MvcEvent $e)
+	{
+		$this->setActionTitles(array(
+			'index' => $this->translate("manage applications"),
+			'add' => $this->translate("add application"),
+			'edit' => $this->translate("edit application"),
+			'delete' => $this->translate("delete application"),
+		));
+		return parent::onDispatch($e);
+	}
 
 	public function indexAction() 
 	{
@@ -54,13 +54,13 @@ class ApplicationsController extends BaseActionController
 			}, $datatablesData['data'] );
 			return $this->getResponse()->setContent(json_encode($datatablesData));
 		}
-        return new ViewModel(array(
-            'applicationsdata' => $aApplicationslist,
-        ));
+		return new ViewModel(array(
+			'applicationsdata' => $aApplicationslist,
+		));
 	}
 	
-    public function addAction()
-    {
+	public function addAction()
+	{
 		$tmplVars = $this->getTemplateVars( 
 			array(
 				'showForm'	=> true,
@@ -68,33 +68,33 @@ class ApplicationsController extends BaseActionController
 			)
 		);
 		$this->layout()->setVariable('title', $this->translate("add application"));
-    	
-        $form = new ApplicationsForm();
+		
+		$form = new ApplicationsForm();
 
-        $request = $this->getRequest();
-        $applications = new Applications();
-        if ($request->isPost()) {
-            $form->setInputFilter($applications->getInputFilter());
-            $form->setData($request->getPost());
+		$request = $this->getRequest();
+		$applications = new Applications();
+		if ($request->isPost()) {
+			$form->setInputFilter($applications->getInputFilter());
+			$form->setData($request->getPost());
 
-            if ($form->isValid()) {
-                $applications->exchangeArray($form->getData());
-                $this->getApplicationsTable()->saveApplications($applications);
-                $this->flashMessenger()->addSuccessMessage($this->translate('application has been saved'));
+			if ($form->isValid()) {
+				$applications->exchangeArray($form->getData());
+				$this->getApplicationsTable()->saveApplications($applications);
+				$this->flashMessenger()->addSuccessMessage($this->translate('application has been saved'));
 				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
 				} else {
-                	return $this->redirect()->toRoute('admin/applicationsedit', array('action' => 'index'));
+					return $this->redirect()->toRoute('admin/applicationsedit', array('action' => 'index'));
 				}
-            }
-	        $tmplVars["applications"] = $applications;
-        }
-        $tmplVars["form"] = $form;
-        return new ViewModel($tmplVars);
-    }
+			}
+			$tmplVars["applications"] = $applications;
+		}
+		$tmplVars["form"] = $form;
+		return new ViewModel($tmplVars);
+	}
 
-    public function editAction()
-    {
+	public function editAction()
+	{
 		$tmplVars = $this->getTemplateVars( 
 			array(
 				'showForm'	=> true,
@@ -102,42 +102,42 @@ class ApplicationsController extends BaseActionController
 			)
 		);
 		$this->layout()->setVariable('title', $this->translate("edit application"));
-    	$id = (int) $this->params()->fromRoute('application_id', 0);
-        if (!$id) {
-        	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
-            return $this->redirect()->toRoute('admin/applicationsedit', array(
-                'action' => 'index'
-            ));
-        }
-        $applications = $this->getApplicationsTable()->getApplications($id);
+		$id = (int) $this->params()->fromRoute('application_id', 0);
+		if (!$id) {
+			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
+			return $this->redirect()->toRoute('admin/applicationsedit', array(
+				'action' => 'index'
+			));
+		}
+		$applications = $this->getApplicationsTable()->getApplications($id);
 
-        $form  = new ApplicationsForm();
-        $form->bind($applications);
+		$form  = new ApplicationsForm();
+		$form->bind($applications);
 
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $form->setInputFilter($applications->getInputFilter());
-            $form->setData($request->getPost());
+		$request = $this->getRequest();
+		if ($request->isPost()) {
+			$form->setInputFilter($applications->getInputFilter());
+			$form->setData($request->getPost());
 
-            if ($form->isValid()) {
-                $this->getApplicationsTable()->saveApplications($applications);
+			if ($form->isValid()) {
+				$this->getApplicationsTable()->saveApplications($applications);
 				$this->flashMessenger()->addSuccessMessage($this->translate("application has been saved"));
-        		if ( $this->getRequest()->isXmlHttpRequest() ) {
+				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
 				} else {
-                	return $this->redirect()->toRoute('admin/applicationsedit', array('action' => 'index'));
+					return $this->redirect()->toRoute('admin/applicationsedit', array('action' => 'index'));
 				}
-            }
-        } else {
-       		$form->bind($applications);
-        }
-        $tmplVars["applications_id"] = $id;
-        $tmplVars["form"] = $form;
-        return new ViewModel($tmplVars);
-    }
+			}
+		} else {
+	   		$form->bind($applications);
+		}
+		$tmplVars["applications_id"] = $id;
+		$tmplVars["form"] = $form;
+		return new ViewModel($tmplVars);
+	}
 
-    public function deleteAction()
-    {
+	public function deleteAction()
+	{
 		$tmplVars = $this->getTemplateVars( 
 			array(
 				'showForm'	=> true,
@@ -145,41 +145,41 @@ class ApplicationsController extends BaseActionController
 			)
 		);
 		$this->layout()->setVariable('title', $this->translate("delete application"));
-    	$id = (int) $this->params()->fromRoute('application_id', 0);
-        if (!$id) {
-        	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
-            return $this->redirect()->toRoute('admin/applicationsedit', array('action' => 'index'));
-        }
+		$id = (int) $this->params()->fromRoute('application_id', 0);
+		if (!$id) {
+			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
+			return $this->redirect()->toRoute('admin/applicationsedit', array('action' => 'index'));
+		}
 
-        $tmplVars["applications_id"] = $id;
-        $tmplVars["applications"] = $this->getApplicationsTable()->getApplications($id);
-        
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $del = $request->getPost('del', '');
+		$tmplVars["applications_id"] = $id;
+		$tmplVars["applications"] = $this->getApplicationsTable()->getApplications($id);
+		
+		$request = $this->getRequest();
+		if ($request->isPost()) {
+			$del = $request->getPost('del', '');
 
-            if (!empty($del)) {
-                $id = (int) $request->getPost('id');
-                $this->getApplicationsTable()->deleteApplications($id);
-        		$this->flashMessenger()->addSuccessMessage($this->translate("application has been deleted"));
+			if (!empty($del)) {
+				$id = (int) $request->getPost('id');
+				$this->getApplicationsTable()->deleteApplications($id);
+				$this->flashMessenger()->addSuccessMessage($this->translate("application has been deleted"));
 				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
 				} else {
-                	return $this->redirect()->toRoute('admin/applicationsedit', array('action' => 'index'));
+					return $this->redirect()->toRoute('admin/applicationsedit', array('action' => 'index'));
 				}
-            }
-        }
+			}
+		}
 
-        return new ViewModel($tmplVars);
-    }
+		return new ViewModel($tmplVars);
+	}
 
-    public function getApplicationsTable()
-    {
-        if (!$this->applicationsTable) {
-            $sm = $this->getServiceLocator();
-            $this->applicationsTable = $sm->get('Admin\Model\ApplicationsTable');
-        }
-        return $this->applicationsTable;
-    }
-    
+	public function getApplicationsTable()
+	{
+		if (!$this->applicationsTable) {
+			$sm = $this->getServiceLocator();
+			$this->applicationsTable = $sm->get('Admin\Model\ApplicationsTable');
+		}
+		return $this->applicationsTable;
+	}
+	
 }

@@ -8,8 +8,8 @@ $oUser = $this->zfcUserIdentity();
 
 if ($showForm) {
 	$url = $this->url('admin/applicationsedit', array(
-	    'action'     => 'delete',
-	    'application_id'     => $applications->applications_id,
+		'action'	 => 'delete',
+		'application_id'	 => $applications->applications_id,
 	));
 	$formHTML = array(
 		'<p>'.$this->translate("Do you really want to delete this application?").'</p>',

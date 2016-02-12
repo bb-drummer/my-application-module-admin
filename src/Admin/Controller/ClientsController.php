@@ -24,16 +24,16 @@ class ClientsController extends BaseActionController
 {
 	protected $clientsTable;
 	
-    public function onDispatch(\Zend\Mvc\MvcEvent $e)
-    {
-    	$this->setActionTitles(array(
-    		'index' => $this->translate("manage clients"),
-    		'add' => $this->translate("add client"),
-    		'edit' => $this->translate("edit client"),
-    		'delete' => $this->translate("delete client"),
-    	));
-    	return parent::onDispatch($e);
-    }
+	public function onDispatch(\Zend\Mvc\MvcEvent $e)
+	{
+		$this->setActionTitles(array(
+			'index' => $this->translate("manage clients"),
+			'add' => $this->translate("add client"),
+			'edit' => $this->translate("edit client"),
+			'delete' => $this->translate("delete client"),
+		));
+		return parent::onDispatch($e);
+	}
 
 	public function indexAction() 
 	{
@@ -54,13 +54,13 @@ class ClientsController extends BaseActionController
 			}, $datatablesData['data'] );
 			return $this->getResponse()->setContent(json_encode($datatablesData));
 		}
-        return new ViewModel(array(
-            'clientsdata' => $aClientslist,
-        ));
+		return new ViewModel(array(
+			'clientsdata' => $aClientslist,
+		));
 	}
 	
-    public function addAction()
-    {
+	public function addAction()
+	{
 		$tmplVars = $this->getTemplateVars( 
 			array(
 				'showForm'	=> true,
@@ -68,33 +68,33 @@ class ClientsController extends BaseActionController
 			)
 		);
 		$this->layout()->setVariable('title', $this->translate("add client"));
-    	
-        $form = new ClientsForm();
+		
+		$form = new ClientsForm();
 
-        $request = $this->getRequest();
-        $clients = new Clients();
-        if ($request->isPost()) {
-            $form->setInputFilter($clients->getInputFilter());
-            $form->setData($request->getPost());
+		$request = $this->getRequest();
+		$clients = new Clients();
+		if ($request->isPost()) {
+			$form->setInputFilter($clients->getInputFilter());
+			$form->setData($request->getPost());
 
-            if ($form->isValid()) {
-                $clients->exchangeArray($form->getData());
-                $this->getClientsTable()->saveClients($clients);
-                $this->flashMessenger()->addSuccessMessage($this->translate('client has been saved'));
+			if ($form->isValid()) {
+				$clients->exchangeArray($form->getData());
+				$this->getClientsTable()->saveClients($clients);
+				$this->flashMessenger()->addSuccessMessage($this->translate('client has been saved'));
 				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
 				} else {
-                	return $this->redirect()->toRoute('admin/clientsedit', array('action' => 'index'));
+					return $this->redirect()->toRoute('admin/clientsedit', array('action' => 'index'));
 				}
-            }
-	        $tmplVars["clients"] = $clients;
-        }
-        $tmplVars["form"] = $form;
-        return new ViewModel($tmplVars);
-    }
+			}
+			$tmplVars["clients"] = $clients;
+		}
+		$tmplVars["form"] = $form;
+		return new ViewModel($tmplVars);
+	}
 
-    public function editAction()
-    {
+	public function editAction()
+	{
 		$tmplVars = $this->getTemplateVars( 
 			array(
 				'showForm'	=> true,
@@ -102,42 +102,42 @@ class ClientsController extends BaseActionController
 			)
 		);
 		$this->layout()->setVariable('title', $this->translate("edit client"));
-    	$id = (int) $this->params()->fromRoute('client_id', 0);
-        if (!$id) {
-        	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
-            return $this->redirect()->toRoute('admin/clientsedit', array(
-                'action' => 'index'
-            ));
-        }
-        $clients = $this->getClientsTable()->getClients($id);
+		$id = (int) $this->params()->fromRoute('client_id', 0);
+		if (!$id) {
+			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
+			return $this->redirect()->toRoute('admin/clientsedit', array(
+				'action' => 'index'
+			));
+		}
+		$clients = $this->getClientsTable()->getClients($id);
 
-        $form  = new ClientsForm();
-        $form->bind($clients);
+		$form  = new ClientsForm();
+		$form->bind($clients);
 
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $form->setInputFilter($clients->getInputFilter());
-            $form->setData($request->getPost());
+		$request = $this->getRequest();
+		if ($request->isPost()) {
+			$form->setInputFilter($clients->getInputFilter());
+			$form->setData($request->getPost());
 
-            if ($form->isValid()) {
-                $this->getClientsTable()->saveClients($clients);
+			if ($form->isValid()) {
+				$this->getClientsTable()->saveClients($clients);
 				$this->flashMessenger()->addSuccessMessage($this->translate("client has been saved"));
-        		if ( $this->getRequest()->isXmlHttpRequest() ) {
+				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
 				} else {
-                	return $this->redirect()->toRoute('admin/clientsedit', array('action' => 'index'));
+					return $this->redirect()->toRoute('admin/clientsedit', array('action' => 'index'));
 				}
-            }
-        } else {
-       		$form->bind($clients);
-        }
-        $tmplVars["clients_id"] = $id;
-        $tmplVars["form"] = $form;
-        return new ViewModel($tmplVars);
-    }
+			}
+		} else {
+	   		$form->bind($clients);
+		}
+		$tmplVars["clients_id"] = $id;
+		$tmplVars["form"] = $form;
+		return new ViewModel($tmplVars);
+	}
 
-    public function deleteAction()
-    {
+	public function deleteAction()
+	{
 		$tmplVars = $this->getTemplateVars( 
 			array(
 				'showForm'	=> true,
@@ -145,41 +145,41 @@ class ClientsController extends BaseActionController
 			)
 		);
 		$this->layout()->setVariable('title', $this->translate("delete client"));
-    	$id = (int) $this->params()->fromRoute('client_id', 0);
-        if (!$id) {
-        	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
-            return $this->redirect()->toRoute('admin/clientsedit', array('action' => 'index'));
-        }
+		$id = (int) $this->params()->fromRoute('client_id', 0);
+		if (!$id) {
+			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
+			return $this->redirect()->toRoute('admin/clientsedit', array('action' => 'index'));
+		}
 
-        $tmplVars["clients_id"] = $id;
-        $tmplVars["clients"] = $this->getClientsTable()->getClients($id);
-        
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $del = $request->getPost('del', '');
+		$tmplVars["clients_id"] = $id;
+		$tmplVars["clients"] = $this->getClientsTable()->getClients($id);
+		
+		$request = $this->getRequest();
+		if ($request->isPost()) {
+			$del = $request->getPost('del', '');
 
-            if (!empty($del)) {
-                $id = (int) $request->getPost('id');
-                $this->getClientsTable()->deleteClients($id);
-        		$this->flashMessenger()->addSuccessMessage($this->translate("client has been deleted"));
+			if (!empty($del)) {
+				$id = (int) $request->getPost('id');
+				$this->getClientsTable()->deleteClients($id);
+				$this->flashMessenger()->addSuccessMessage($this->translate("client has been deleted"));
 				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
 				} else {
-                	return $this->redirect()->toRoute('admin/clientsedit', array('action' => 'index'));
+					return $this->redirect()->toRoute('admin/clientsedit', array('action' => 'index'));
 				}
-            }
-        }
+			}
+		}
 
-        return new ViewModel($tmplVars);
-    }
+		return new ViewModel($tmplVars);
+	}
 
-    public function getClientsTable()
-    {
-        if (!$this->clientsTable) {
-            $sm = $this->getServiceLocator();
-            $this->clientsTable = $sm->get('Admin\Model\ClientsTable');
-        }
-        return $this->clientsTable;
-    }
-    
+	public function getClientsTable()
+	{
+		if (!$this->clientsTable) {
+			$sm = $this->getServiceLocator();
+			$this->clientsTable = $sm->get('Admin\Model\ClientsTable');
+		}
+		return $this->clientsTable;
+	}
+	
 }

@@ -43,7 +43,7 @@ class ZfcuserController extends UserController
 
 	protected $toolbarItems = array();
 	
-    public function defineActionTitles () {
+	public function defineActionTitles () {
 		$this->setActionTitles(array(
 			'login'					=> $this->translate("login"),
 			'authenticate'			=> $this->translate("login"),
@@ -59,10 +59,10 @@ class ZfcuserController extends UserController
 			'index'					=> $this->translate("user profile"),
 			'edituserprofile'		=> $this->translate("edit profile"),
 		));
-    	return $this;
-    }
+		return $this;
+	}
 
-    public function defineToolbarItems () {
+	public function defineToolbarItems () {
 		$this->setToolbarItems(array(
 			"index" => array(
 				array(
@@ -108,19 +108,19 @@ class ZfcuserController extends UserController
 				),
 			),
 		));
-    	return $this;
-    }
+		return $this;
+	}
 
-    public function onDispatch(MvcEvent $e)
-    {
+	public function onDispatch(MvcEvent $e)
+	{
 		/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
 		$serviceManager = $this->getServiceLocator();
 		
-    	\Zend\Navigation\Page\Mvc::setDefaultRouter($serviceManager->get('router'));
-    	$this->defineActionTitles();
-    	$this->defineToolbarItems();
-    	
-    	$action = $e->getRouteMatch()->getParam('action');
+		\Zend\Navigation\Page\Mvc::setDefaultRouter($serviceManager->get('router'));
+		$this->defineActionTitles();
+		$this->defineToolbarItems();
+		
+		$action = $e->getRouteMatch()->getParam('action');
 		$this->layout()->setVariable("title", $this->getActionTitle($action));
 
 		$toolbarItems = $this->getToolbarItem($action);
@@ -132,7 +132,7 @@ class ZfcuserController extends UserController
 		$result = parent::onDispatch($e);
 		return $result;
 	}
-    
+	
 	/**
 	 * view user's profile data
 	 */
@@ -143,7 +143,7 @@ class ZfcuserController extends UserController
 			// ...redirect to the login redirect route
 			return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
 		}
-        return $this->redirect()->toRoute("zfcuser/userprofile");
+		return $this->redirect()->toRoute("zfcuser/userprofile");
 		
 		$config		= $this->getServiceLocator()->get('Config');
 		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
@@ -157,19 +157,19 @@ class ZfcuserController extends UserController
 	}
 	
 	/**
-     * User page
-     */
-    public function indexAction()
-    {
-        if (!$this->zfcUserAuthentication()->hasIdentity()) {
-            return $this->redirect()->toRoute(static::ROUTE_LOGIN);
-        }
+	 * User page
+	 */
+	public function indexAction()
+	{
+		if (!$this->zfcUserAuthentication()->hasIdentity()) {
+			return $this->redirect()->toRoute(static::ROUTE_LOGIN);
+		}
 		return new ViewModel(array(
 			"toolbarItems" => $this->getToolbarItems(),
 		));
-        return $this->redirect()->toRoute("admin/userprofile");
-        return new ViewModel();
-    }
+		return $this->redirect()->toRoute("admin/userprofile");
+		return new ViewModel();
+	}
 
 	/**
 	 * General-purpose authentication action

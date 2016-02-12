@@ -9,8 +9,8 @@ $oUser = $this->zfcUserIdentity();
 if ($showForm) {
 	$url = $this->url('admin/default', array(
 		'controller' => 'users',
-		'action'     => 'delete',
-		'user_id'    => $user->user_id,
+		'action'	 => 'delete',
+		'user_id'	=> $user->user_id,
 	));
 	$formHTML = array(
 		'<p>'.$this->translate("Do you really want to delete this user?").'</p>',

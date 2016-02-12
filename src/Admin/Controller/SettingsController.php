@@ -24,16 +24,16 @@ class SettingsController extends BaseActionController
 {
 	protected $settingsTable;
 	
-    public function onDispatch(\Zend\Mvc\MvcEvent $e)
-    {
-    	$this->setActionTitles(array(
-    		'index' => $this->translate("manage settings"),
-    		'add' => $this->translate("add setting"),
-    		'edit' => $this->translate("edit setting"),
-    		'delete' => $this->translate("delete setting"),
-    	));
-    	return parent::onDispatch($e);
-    }
+	public function onDispatch(\Zend\Mvc\MvcEvent $e)
+	{
+		$this->setActionTitles(array(
+			'index' => $this->translate("manage settings"),
+			'add' => $this->translate("add setting"),
+			'edit' => $this->translate("edit setting"),
+			'delete' => $this->translate("delete setting"),
+		));
+		return parent::onDispatch($e);
+	}
 
 	public function indexAction() 
 	{
@@ -54,13 +54,13 @@ class SettingsController extends BaseActionController
 			}, $datatablesData['data'] );
 			return $this->getResponse()->setContent(json_encode($datatablesData));
 		}
-        return new ViewModel(array(
-            'settingsdata' => $aSettingslist,
-        ));
+		return new ViewModel(array(
+			'settingsdata' => $aSettingslist,
+		));
 	}
 	
-    public function addAction()
-    {
+	public function addAction()
+	{
 		$tmplVars = $this->getTemplateVars( 
 			array(
 				'showForm'	=> true,
@@ -68,33 +68,33 @@ class SettingsController extends BaseActionController
 			)
 		);
 		$this->layout()->setVariable('title', $this->translate("add setting"));
-    	
-        $form = new SettingsForm();
+		
+		$form = new SettingsForm();
 
-        $request = $this->getRequest();
-        $settings = new Settings();
-        if ($request->isPost()) {
-            $form->setInputFilter($settings->getInputFilter());
-            $form->setData($request->getPost());
+		$request = $this->getRequest();
+		$settings = new Settings();
+		if ($request->isPost()) {
+			$form->setInputFilter($settings->getInputFilter());
+			$form->setData($request->getPost());
 
-            if ($form->isValid()) {
-                $settings->exchangeArray($form->getData());
-                $this->getSettingsTable()->saveSettings($settings);
-                $this->flashMessenger()->addSuccessMessage($this->translate('setting has been saved'));
+			if ($form->isValid()) {
+				$settings->exchangeArray($form->getData());
+				$this->getSettingsTable()->saveSettings($settings);
+				$this->flashMessenger()->addSuccessMessage($this->translate('setting has been saved'));
 				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
 				} else {
-                	return $this->redirect()->toRoute('admin/settingsedit', array('action' => 'index'));
+					return $this->redirect()->toRoute('admin/settingsedit', array('action' => 'index'));
 				}
-            }
-	        $tmplVars["settings"] = $settings;
-        }
-        $tmplVars["form"] = $form;
-        return new ViewModel($tmplVars);
-    }
+			}
+			$tmplVars["settings"] = $settings;
+		}
+		$tmplVars["form"] = $form;
+		return new ViewModel($tmplVars);
+	}
 
-    public function editAction()
-    {
+	public function editAction()
+	{
 		$tmplVars = $this->getTemplateVars( 
 			array(
 				'showForm'	=> true,
@@ -102,42 +102,42 @@ class SettingsController extends BaseActionController
 			)
 		);
 		$this->layout()->setVariable('title', $this->translate("edit setting"));
-    	$id = (int) $this->params()->fromRoute('set_id', 0);
-        if (!$id) {
-        	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
-            return $this->redirect()->toRoute('admin/settingsedit', array(
-                'action' => 'index'
-            ));
-        }
-        $settings = $this->getSettingsTable()->getSettings($id);
+		$id = (int) $this->params()->fromRoute('set_id', 0);
+		if (!$id) {
+			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
+			return $this->redirect()->toRoute('admin/settingsedit', array(
+				'action' => 'index'
+			));
+		}
+		$settings = $this->getSettingsTable()->getSettings($id);
 
-        $form  = new SettingsForm();
-        $form->bind($settings);
+		$form  = new SettingsForm();
+		$form->bind($settings);
 
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $form->setInputFilter($settings->getInputFilter());
-            $form->setData($request->getPost());
+		$request = $this->getRequest();
+		if ($request->isPost()) {
+			$form->setInputFilter($settings->getInputFilter());
+			$form->setData($request->getPost());
 
-            if ($form->isValid()) {
-                $this->getSettingsTable()->saveSettings($settings);
+			if ($form->isValid()) {
+				$this->getSettingsTable()->saveSettings($settings);
 				$this->flashMessenger()->addSuccessMessage($this->translate("setting has been saved"));
-        		if ( $this->getRequest()->isXmlHttpRequest() ) {
+				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
 				} else {
-                	return $this->redirect()->toRoute('admin/settingsedit', array('action' => 'index'));
+					return $this->redirect()->toRoute('admin/settingsedit', array('action' => 'index'));
 				}
-            }
-        } else {
-       		$form->bind($settings);
-        }
-        $tmplVars["settings_id"] = $id;
-        $tmplVars["form"] = $form;
-        return new ViewModel($tmplVars);
-    }
+			}
+		} else {
+	   		$form->bind($settings);
+		}
+		$tmplVars["settings_id"] = $id;
+		$tmplVars["form"] = $form;
+		return new ViewModel($tmplVars);
+	}
 
-    public function deleteAction()
-    {
+	public function deleteAction()
+	{
 		$tmplVars = $this->getTemplateVars( 
 			array(
 				'showForm'	=> true,
@@ -145,41 +145,41 @@ class SettingsController extends BaseActionController
 			)
 		);
 		$this->layout()->setVariable('title', $this->translate("delete setting"));
-    	$id = (int) $this->params()->fromRoute('set_id', 0);
-        if (!$id) {
-        	$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
-            return $this->redirect()->toRoute('admin/settingsedit', array('action' => 'index'));
-        }
+		$id = (int) $this->params()->fromRoute('set_id', 0);
+		if (!$id) {
+			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
+			return $this->redirect()->toRoute('admin/settingsedit', array('action' => 'index'));
+		}
 
-        $tmplVars["settings_id"] = $id;
-        $tmplVars["settings"] = $this->getSettingsTable()->getSettings($id);
-        
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $del = $request->getPost('del', '');
+		$tmplVars["settings_id"] = $id;
+		$tmplVars["settings"] = $this->getSettingsTable()->getSettings($id);
+		
+		$request = $this->getRequest();
+		if ($request->isPost()) {
+			$del = $request->getPost('del', '');
 
-            if (!empty($del)) {
-                $id = (int) $request->getPost('id');
-                $this->getSettingsTable()->deleteSettings($id);
-        		$this->flashMessenger()->addSuccessMessage($this->translate("setting has been deleted"));
+			if (!empty($del)) {
+				$id = (int) $request->getPost('id');
+				$this->getSettingsTable()->deleteSettings($id);
+				$this->flashMessenger()->addSuccessMessage($this->translate("setting has been deleted"));
 				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
 				} else {
-                	return $this->redirect()->toRoute('admin/settingsedit', array('action' => 'index'));
+					return $this->redirect()->toRoute('admin/settingsedit', array('action' => 'index'));
 				}
-            }
-        }
+			}
+		}
 
-        return new ViewModel($tmplVars);
-    }
+		return new ViewModel($tmplVars);
+	}
 
-    public function getSettingsTable()
-    {
-        if (!$this->settingsTable) {
-            $sm = $this->getServiceLocator();
-            $this->settingsTable = $sm->get('Admin\Model\SettingsTable');
-        }
-        return $this->settingsTable;
-    }
-    
+	public function getSettingsTable()
+	{
+		if (!$this->settingsTable) {
+			$sm = $this->getServiceLocator();
+			$this->settingsTable = $sm->get('Admin\Model\SettingsTable');
+		}
+		return $this->settingsTable;
+	}
+	
 }

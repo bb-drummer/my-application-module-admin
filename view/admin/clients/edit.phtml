@@ -9,11 +9,11 @@ $oUser = $this->zfcUserIdentity();
 if ($showForm) {
 	$form = $this->form;
 	$form->setAttribute('action', $this->url(
-	    'admin/clientsedit',
-	    array(
-	        'action'		=> 'edit',
-	        'client_id'		=> $this->clients_id,
-	    )
+		'admin/clientsedit',
+		array(
+			'action'		=> 'edit',
+			'client_id'		=> $this->clients_id,
+		)
 	));
 	$form->setAttribute('class', 'form-xhr');
 	$form->prepare();

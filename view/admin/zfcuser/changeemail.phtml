@@ -31,9 +31,9 @@
 			<?php echo $this->formElementErrors($form->get('credential')); ?>
 		</div>
 		<hr />
-	    <?php if ($this->redirect): ?>
-	    <input type="hidden" name="redirect" value="<?php echo $this->redirect ?>" />
-	    <?php endif ?>
+		<?php if ($this->redirect): ?>
+		<input type="hidden" name="redirect" value="<?php echo $this->redirect ?>" />
+		<?php endif ?>
 		<?php echo $this->formHidden($form->get('identity')); ?>
 		<input class="btn btn-primary" type="submit" value="<?php echo $this->translate("save"); ?>" />
 		<input class="btn btn-default" type="reset" value="<?php echo $this->translate("reset"); ?>" />

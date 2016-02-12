@@ -3,19 +3,19 @@
 		<table class="table table-striped table-hover datatable matrix" data-src="<?php echo $this->url('admin/acledit', array('action'=>'acldata')) ?>">
 			<thead>
 				<tr>
-				    <th style="text-align: right; border-bottom: none; vertical-align: top;"><?php echo $this->translate("role")?>:</th>
+					<th style="text-align: right; border-bottom: none; vertical-align: top;"><?php echo $this->translate("role")?>:</th>
 					<?php foreach ($roles as $role) : ?>
-				    <th rowspan="2" style="vertical-align: top;" data-orderable="false" data-searchable="false"><?php echo $this->escapehtml($role['rolename']) ?></th>
+					<th rowspan="2" style="vertical-align: top;" data-orderable="false" data-searchable="false"><?php echo $this->escapehtml($role['rolename']) ?></th>
 					<?php endforeach; ?>
 				</tr>
 				<tr>
-				    <th style="text-align: left; border-top: none; vertical-align: bottom;"><?php echo $this->translate("resource")?>:</th>
+					<th style="text-align: left; border-top: none; vertical-align: bottom;"><?php echo $this->translate("resource")?>:</th>
 				</tr>
 			</thead>
 			<tbody>
 			<?php foreach ($resources as $resource) : ?>
 			<tr>
-			    <th style="text-align: left;" data-search="<?php echo $this->escapeHtml($resource['resourcename']." ".$resource['resourceslug']);?>"><?php echo $this->escapeHtml($resource['resourcename']);?></th>
+				<th style="text-align: left;" data-search="<?php echo $this->escapeHtml($resource['resourcename']." ".$resource['resourceslug']);?>"><?php echo $this->escapeHtml($resource['resourcename']);?></th>
 				<?php foreach ($roles as $role) : ?>
 				<td class="aclswitch">
 				<?php
@@ -80,8 +80,8 @@
 					);
 					echo $this->form()->closeTag();
 				?>
-			    <!-- <?php echo $this->escapehtml($resource['resourceslug']) ?>,<?php echo $this->escapehtml($role['roleslug']) ?> -->
-			    </td>
+				<!-- <?php echo $this->escapehtml($resource['resourceslug']) ?>,<?php echo $this->escapehtml($role['roleslug']) ?> -->
+				</td>
 				<?php endforeach; ?>
 			</tr>
 			<?php endforeach; ?>

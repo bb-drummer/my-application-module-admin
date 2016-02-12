@@ -1,15 +1,15 @@
 <phpunit bootstrap="./bootstrap.php" colors="true">
-    <testsuites>
-        <testsuite name="[MyApplication] admin module - Test Suite">
-            <directory>./</directory>
-        </testsuite>
-    </testsuites>
-    <filter>
-    	<whitelist>
-    		<directory>./</directory>
-            <exclude>
-                <directory>./</directory>
-            </exclude>
-    	</whitelist>
-    </filter>
+	<testsuites>
+		<testsuite name="[MyApplication] admin module - Test Suite">
+			<directory>./</directory>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist>
+			<directory>./</directory>
+			<exclude>
+				<directory>./</directory>
+			</exclude>
+		</whitelist>
+	</filter>
 </phpunit>

@@ -21,80 +21,80 @@ use Zend\Db\Sql\Select;
 
 class ApplicationsTable
 {
-    protected $tableGateway;
+	protected $tableGateway;
 
-    public function __construct(TableGateway $tableGateway)
-    {
-        $this->tableGateway = $tableGateway;
-    }
+	public function __construct(TableGateway $tableGateway)
+	{
+		$this->tableGateway = $tableGateway;
+	}
 
-    public function fetchAll($scope = '')
-    {
-        $resultSet = $this->tableGateway->select(function (Select $select) use ($scope) {
-        	if (!empty($scope)) {
+	public function fetchAll($scope = '')
+	{
+		$resultSet = $this->tableGateway->select(function (Select $select) use ($scope) {
+			if (!empty($scope)) {
 				$select->where('scope = \''.$scope.'\'')->order('type, name ASC');
-        	} else {
+			} else {
 				$select->order('name ASC');
-        	}
+			}
 		});
-        return $resultSet;
-    }
+		return $resultSet;
+	}
 
-    public function fetchApplication()
-    {
-        return $this->fetchAll('application');
-    }
+	public function fetchApplication()
+	{
+		return $this->fetchAll('application');
+	}
 
-    public function fetchUser( $id )
-    {
-    	if (!$id) { return array(); }
-        $resultSet = $this->tableGateway->select(function (Select $select) use ($id) {
-        	if (!empty($id)) {
+	public function fetchUser( $id )
+	{
+		if (!$id) { return array(); }
+		$resultSet = $this->tableGateway->select(function (Select $select) use ($id) {
+			if (!empty($id)) {
 				$select->where(array( '(scope = \'user\') AND (ref_id = \''.((int)$id).'\')' ))->order('type, name ASC');
-        	} else {
+			} else {
 				$select->order('type, name ASC');
-        	}
+			}
 		});
-        return $resultSet;
-    }
+		return $resultSet;
+	}
 
-    public function getApplications($id)
-    {
-        $id  = (int) $id;
-        $rowset = $this->tableGateway->select(array('applications_id' => $id));
-        $row = $rowset->current();
-        if (!$row) {
-            throw new \Exception("Could not find row $id");
-        }
-        return $row;
-    }
+	public function getApplications($id)
+	{
+		$id  = (int) $id;
+		$rowset = $this->tableGateway->select(array('applications_id' => $id));
+		$row = $rowset->current();
+		if (!$row) {
+			throw new \Exception("Could not find row $id");
+		}
+		return $row;
+	}
 
-    public function saveApplications(Applications $applications)
-    {
-        $data = array(
-            'name'			=> $applications->name,
-            'extraname'		=> $applications->extraname,
-            'homepage'		=> $applications->homepage,
-            'email'			=> $applications->email,
-            'contact'		=> $applications->contact,
-        	'phone'			=> $applications->phone,
-        	'statistics'	=> $applications->statistics,
-        );
+	public function saveApplications(Applications $applications)
+	{
+		$data = array(
+			'name'			=> $applications->name,
+			'extraname'		=> $applications->extraname,
+			'homepage'		=> $applications->homepage,
+			'email'			=> $applications->email,
+			'contact'		=> $applications->contact,
+			'phone'			=> $applications->phone,
+			'statistics'	=> $applications->statistics,
+		);
 
-        $id = (int)$applications->applications_id;
-        if ($id == 0) {
-            $this->tableGateway->insert($data);
-        } else {
-            if ($this->getApplications($id)) {
-                $this->tableGateway->update($data, array('applications_id' => $id));
-            } else {
-                throw new \Exception('Form id does not exist');
-            }
-        }
-    }
+		$id = (int)$applications->applications_id;
+		if ($id == 0) {
+			$this->tableGateway->insert($data);
+		} else {
+			if ($this->getApplications($id)) {
+				$this->tableGateway->update($data, array('applications_id' => $id));
+			} else {
+				throw new \Exception('Form id does not exist');
+			}
+		}
+	}
 
-    public function deleteApplications($id)
-    {
-        $this->tableGateway->delete(array('applications_id' => $id));
-    }
+	public function deleteApplications($id)
+	{
+		$this->tableGateway->delete(array('applications_id' => $id));
+	}
 }

@@ -20,8 +20,8 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 class IndexController extends AbstractActionController
 {
-    public function indexAction()
-    {
-        return $this->redirect()->toRoute('admin/acledit', array());
-    }
+	public function indexAction()
+	{
+		return $this->redirect()->toRoute('admin/acledit', array());
+	}
 }

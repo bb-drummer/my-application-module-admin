@@ -8,8 +8,8 @@ $oUser = $this->zfcUserIdentity();
 
 if ($showForm) {
 	$url = $this->url('admin/settingsedit', array(
-	    'action'     => 'delete',
-	    'set_id'     => $settings->settings_id,
+		'action'	 => 'delete',
+		'set_id'	 => $settings->settings_id,
 	));
 	$formHTML = array(
 		'<p>'.$this->translate("Do you really want to delete this setting?").'</p>',
