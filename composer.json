@@ -1,9 +1,9 @@
 {
   "name" : "my-application/module-admin",
   "description" : "basic admin module",
-  "version" : "1.0",
+  "version" : "0.0.1",
   "require" : {
-    "php" : ">=5.3.3"
+    "php" : ">=5.5"
   },
   "license" : "BSD-3-Clause",
   "keywords" : [ "ZendFramework2", "zf2", "module", "admin", "user", "settings", "acl", "roles", "resources", "zfc-user" ],
