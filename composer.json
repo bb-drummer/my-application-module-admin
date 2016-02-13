@@ -33,6 +33,6 @@
     "homepage" : "http://dragon-projects.net"
   } ],
   "require-dev": {
-    "phpunit/phpunit": "^5.1",
+    "phpunit/phpunit": "^5.1"
   }
 }
