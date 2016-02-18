@@ -4,7 +4,7 @@
   "version" : "0.0.1",
   "require" : {
     "php" : ">=5.5",
-    "composer/installers": "~1.0"
+    "composer/installers": "^5.5 || ^7.0"
   },
   "license" : "BSD-3-Clause",
   "keywords" : [ "ZendFramework2", "zf2", "module", "admin", "user", "settings", "acl", "roles", "resources", "zfc-user" ],
