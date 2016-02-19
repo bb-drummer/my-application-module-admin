@@ -20,7 +20,7 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 
-class UserForm extends Form implements ServiceLocatorAwareInterface
+class UserForm extends Form // implements ServiceLocatorAwareInterface
 {
 	public function __construct($name = null)
 	{
