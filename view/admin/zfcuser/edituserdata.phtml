@@ -13,7 +13,7 @@ if ($showForm) {
 		$form->setAttribute('method', 'post');
 		$form->setAttribute('class', 'form-xhr');
 		$form->prepare();
-		echo '<pre>'.print_r($oUser, true).'</pre>';
+		
 		$formHTML = $this->form()->openTag($form);
 		$formHTML .= $oComponents->formGroup($form, "display_name");
 		
