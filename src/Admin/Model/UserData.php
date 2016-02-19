@@ -54,7 +54,7 @@ class UserData extends User
 									'name'	=> 'StringLength',
 									'options' => array(
 											'encoding' => 'UTF-8',
-											'min'	  => 1,
+											'min'	  => 6,
 											'max'	  => 255,
 									),
 							),

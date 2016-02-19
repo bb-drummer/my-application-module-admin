@@ -169,8 +169,7 @@ class ZfcuserController extends UserController
 		return new ViewModel(array(
 			"toolbarItems" => $this->getToolbarItems(),
 		));
-		return $this->redirect()->toRoute("admin/userprofile");
-		return new ViewModel();
+		//return $this->redirect()->toRoute("admin/userprofile");
 	}
 
 	/**
@@ -215,6 +214,7 @@ class ZfcuserController extends UserController
 	 */
 	public function registerAction()
 	{
+			
 		// if the user is logged in, we don't need to register
 		if ($this->zfcUserAuthentication()->hasIdentity()) {
 			// redirect to the login redirect route
@@ -224,7 +224,7 @@ class ZfcuserController extends UserController
 		if (!$this->getOptions()->getEnableRegistration()) {
 			return array('enableRegistration' => false);
 		}
-
+		
 		$request = $this->getRequest();
 		$service = $this->getUserService();
 		$form = $this->getRegisterForm();
@@ -235,36 +235,36 @@ class ZfcuserController extends UserController
 		} else {
 			$redirect = false;
 		}
-
+		
 		$redirectUrl = $this->url()->fromRoute(static::ROUTE_REGISTER)
-			. ($redirect ? '?redirect=' . rawurlencode($redirect) : '');
+		. ($redirect ? '?redirect=' . rawurlencode($redirect) : '');
 		$prg = $this->prg($redirectUrl, true);
-
+		
 		if ($prg instanceof Response) {
 			return $prg;
 		} elseif ($prg === false) {
 			return array(
-				'registerForm' => $form,
-				'enableRegistration' => $this->getOptions()->getEnableRegistration(),
-				'redirect' => $redirect,
+					'registerForm' => $form,
+					'enableRegistration' => $this->getOptions()->getEnableRegistration(),
+					'redirect' => $redirect,
 			);
 		}
-
+		
 		$post = $prg;
 		$user = $service->register($post);
-
+		
 		$redirect = isset($prg['redirect']) ? $prg['redirect'] : null;
-
+		
 		if (!$user) {
 			return array(
-				'registerForm' => $form,
-				'enableRegistration' => $this->getOptions()->getEnableRegistration(),
-				'redirect' => $redirect,
+					'registerForm' => $form,
+					'enableRegistration' => $this->getOptions()->getEnableRegistration(),
+					'redirect' => $redirect,
 			);
 		}
-
+		
 		// ... form input valid, do stuff...
-
+		
 		$config = $this->getServiceLocator()->get('Config');
 		$oModule = new AdminModule();
 		$oModule->setAppConfig($config);
@@ -293,6 +293,7 @@ class ZfcuserController extends UserController
 		}
 		
 		return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
+				
 	}
 
 	/**
@@ -341,6 +342,7 @@ class ZfcuserController extends UserController
 		/** @var \Admin\Entity\User $user **/
 		/** @var \Admin\Entity\User $selectedUser **/
 		$user = false;
+		
 		try {
 			/** @var \Admin\Model\UserTable $userTable **/
 			$userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
@@ -353,8 +355,7 @@ class ZfcuserController extends UserController
 					$user = $userTable->findByEmail($selectedUser->email);
 				}
 			}
-		} catch (\Exception $e) {
-		}
+		} catch (Exception $e) {}
 		
 		if (!$user) {
 			$this->flashMessenger()->addWarningMessage(
@@ -375,6 +376,7 @@ class ZfcuserController extends UserController
 		);
 		
 		return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
+			
 	}
 
 	/**
@@ -520,7 +522,8 @@ class ZfcuserController extends UserController
 		$request	= $this->getRequest();
 		$service	= $this->getUserService();
 		$translator	= $this->getTranslator();
-		
+
+		return $this->redirect()->toRoute("zfcuser");
 	}
 	
 	/**
@@ -535,10 +538,11 @@ class ZfcuserController extends UserController
 			return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
 		}
 		
-		$config		= $this->getServiceLocator()->get('Config');
+		/*$config		= $this->getServiceLocator()->get('Config');
 		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
 		$request	= $this->getRequest();
-		$service	= $this->getUserService();
+		$service	= $this->getUserService();*/
+		
 		$form		= new UserDataForm();
 		$translator	= $this->getTranslator();
 		
@@ -566,8 +570,11 @@ class ZfcuserController extends UserController
 		$data = (array)$this->params()->fromPost();
 		$form->setData( $data );
 		
-		
 		if ( !$form->isValid() ) {
+			
+			$this->flashMessenger()->addWarningMessage(
+				$translator->translate("user data could not be changed")
+			);
 			
 			return new ViewModel(array(
 				'showForm'		=> true,
@@ -580,33 +587,25 @@ class ZfcuserController extends UserController
 			
 			$oIdentity->exchangeArray( $data );
 			
-			$result = $this->getUserTable()->saveUser($oUser);
+			$this->getUserTable()->saveUser($oUser);
 			
-			// $result = $user->save();
-			if ( $result == true ) {
-				$this->flashMessenger()->addSuccessMessage(
-					$translator->translate("user data has been changed")
-				);
-			} else {
-				$this->flashMessenger()->addWarningMessage(
-					$translator->translate("user data could not be changed")
-				);
-			}
+			$this->flashMessenger()->addSuccessMessage(
+				$translator->translate("user data has been changed")
+			);
+
 			if ( $this->getRequest()->isXmlHttpRequest() ) {
-				$response = array(
+				return new ViewModel(array(
 					'showForm' => false,
-				);
+					'user'			=> $oIdentity,
+					'userId'		=> $userId,
+					'userdataForm'	=> $form,
+				));
 			} else {
 				return $this->redirect()->toRoute('zfcuser');
 			}
-			$response["user"] = $oIdentity;
-			$response["userId"] = $id;
-			$response["userdataForm"] = $form;
-			return new ViewModel($response);
-				
+	
 		}
-		
-		
+
 	}
 	
 	/**
@@ -621,10 +620,11 @@ class ZfcuserController extends UserController
 			return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
 		}
 		
-		$config		= $this->getServiceLocator()->get('Config');
+		/*$config		= $this->getServiceLocator()->get('Config');
 		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
 		$request	= $this->getRequest();
-		$service	= $this->getUserService();
+		$service	= $this->getUserService();*/
+		
 		$form		= new UserProfileForm();
 		$translator	= $this->getTranslator();
 		
@@ -637,10 +637,10 @@ class ZfcuserController extends UserController
 		if ( !$this->getRequest()->isPost() ) {
 			
 			return array(
-				'showForm' => true,
-				'user' => $user,
-				'userId' => $userId,
-				'userprofileForm'	=> $form,
+				'showForm'        => true,
+				'user'            => $user,
+				'userId'          => $userId,
+				'userprofileForm' => $form,
 			);
 			
 		}
@@ -650,49 +650,32 @@ class ZfcuserController extends UserController
 		
 		if ( !$form->isValid() ) {
 			
+			$this->flashMessenger()->addWarningMessage(
+				$translator->translate("user profile data could not be changed")
+			);
 			return array(
-				'showForm'			=> true,
-				'user'				=> $user,
-				'userId'			=> $userId,
-				'userprofileForm'	=> $form,
+				'showForm'        => true,
+				'user'            => $user,
+				'userId'          => $userId,
+				'userprofileForm' => $form,
 			);
 				
 		} else {
 		
 			$profile->exchangeArray( $data );
-			$result = $profile->save();
+			$profile->save();
 
-			if ( $result === true ) {
-				$this->flashMessenger()->addSuccessMessage(
-					$translator->translate("user profile data has been changed")
-				);
-			} else {
-				$this->flashMessenger()->addWarningMessage(
-					$translator->translate("user profile data could not be changed")
-				);
-			}
+			$this->flashMessenger()->addSuccessMessage(
+				$translator->translate("user profile data has been changed")
+			);
 			
 			if ( $this->getRequest()->isXmlHttpRequest() ) {
 				$response = array(
-					'showForm' => false,
+					'showForm'          => false,
+					'user'				=> $user,
+					'userId'			=> $userId,
+					'userprofileForm'	=> $form,
 				);
-				$sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
-				$sFancybox = $this->getRequest()->getHeaders()->get('X-Fancybox')->toString();
-				if ( ( strpos($sAccept, 'text/html') !== false ) || ( strpos($sFancybox, 'true') !== false ) ) {
-					$viewHelperManager = $this->getServiceLocator()->get('ViewHelperManager');
-					$flashMessenger = $viewHelperManager->get('flashmessenger');
-					$messages = $flashMessenger()->renderCurrent('warning', array('warning alert flashmessages'));
-					$messages .= $flashMessenger()->renderCurrent('success', array('success alert flashmessages'));
-					$this->flashMessenger()->clearCurrentMessagesFromContainer();
-					return array_merge_recursive($response, array("content" => preg_replace('/<button(.*)<\/button>/i', "", $messages)));
-					
-				} else {
-					$messages = $this->flashMessenger()->getCurrentErrorMessages();
-					return array_merge_recursive($response, array("content" => json_encode(array_merge_recursive(
-						$this->flashMessenger()->getCurrentWarningMessages(),
-						$this->flashMessenger()->getCurrentSuccessMessages()
-					))));
-				}
 			} else {
 				return $this->redirect()->toRoute('zfcuser');
 			}

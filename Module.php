@@ -607,9 +607,9 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 	{
 		//$oServiceManager	= $oEvent->getApplication()->getServiceManager();
 		$oACL				= new ZendAcl();
-		$oAcls				= $oServiceManager->get('\Admin\Model\AclTable');
+		$oAcls				= $oServiceManager->get('Admin\Model\AclTable');
 		$oRoles				= $oServiceManager->get('Admin\Model\AclroleTable');
-		$oResources			= $oServiceManager->get('\Admin\Model\AclresourceTable');
+		$oResources			= $oServiceManager->get('Admin\Model\AclresourceTable');
 		
 		$aRoles = $oRoles->fetchAll()->toArray();
 		foreach ($aRoles as $key => $role) {
