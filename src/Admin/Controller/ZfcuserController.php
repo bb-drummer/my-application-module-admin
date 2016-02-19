@@ -364,7 +364,6 @@ class ZfcuserController extends UserController
 		// user found, create token and send link via email
 		
 		$user->setToken($oModule->createUserToken($user));
-		print_r($user);
 		$service->getUserMapper()->update($user);
 		
 		
@@ -462,8 +461,6 @@ class ZfcuserController extends UserController
 			);
 			return $this->redirect()->toUrl($redirectUrl);
 		}
-
-		//print_r($userId); print_r($user); die;
 		
 		if ( empty($resetToken) || ($resetToken != $user->getToken()) ) {
 			$this->flashMessenger()->addWarningMessage(
@@ -554,7 +551,7 @@ class ZfcuserController extends UserController
 		$form->bind($oUser);
 	
 		if ( !$this->getRequest()->isPost() ) {
-			print_r($oUser);
+			
 			return array(
 				'showForm'		=> true,
 				'user'			=> $user,

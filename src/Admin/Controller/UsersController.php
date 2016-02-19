@@ -46,7 +46,6 @@ class UsersController extends BaseActionController
 			$datatablesData = array('data' => $aUserlist->toArray());
 			$oController = $this;
 			$datatablesData['data'] = array_map( function ($row) use ($oController) {
-				//print_r($row);
 				$actions = '<div class="btn-group btn-group-xs">'.
 					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/default',
 						array('controller'=>'users', 'action'=>'edit', 'user_id' => $row["user_id"])).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
