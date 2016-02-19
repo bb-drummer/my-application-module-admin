@@ -1,8 +1,13 @@
-<?php if (!$showForm) {
-	echo $content;
-} else { ?>
-<section>
-	<?php
+<?php
+/** @var \TwitterBootstrapAPI\View\Helper\Bootstrap $user **/
+$oBootstrap = $this->Bootstrap();
+/** @var \TwitterBootstrapAPI\View\Helper\Components $user **/
+$oComponents = $this->Components();
+/** @var \Admin\Entity\User $user **/
+$oUser = $this->zfcUserIdentity();
+
+if ($showForm) {
+
 		$form = $this->userdataForm;
 		$form->setAttribute('action', $this->url('zfcuser/edituserdata'));
 		$form->setAttribute('method', 'post');
@@ -15,8 +20,8 @@
 		$formHTML .= '<hr />';
 		$formHTML .= '<div class="form-group">';
 		$formHTML .= $this->formHidden($form->get('user_id'));
-		$formHTML .= $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary')));
-		$formHTML .= $this->formReset($form->get('reset')->setAttributes(array('class' =>'btn btn-default')));
+		$formHTML .= $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary'))->setOption('type', 'button'));
+		$formHTML .= $this->formReset($form->get('reset')->setAttributes(array('class' =>'btn btn-default'))->setOption('type', 'button'));
 		$formHTML .= '<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'. $this->url('admin/default', array("controller" => "users")) .'">'. $this->translate("cancel") .'</a>';
 		$formHTML .= '</div class="form-group">';
 		$formHTML .=  $this->form()->closeTag($form);
@@ -36,6 +41,4 @@
 		<input type="hidden" name="user_id" value="<?php echo $this->escapeHtml($this->userId) ?>" />
 	<?php echo $this->form()->closeTag(); */
 		
-	?>
-</section>
-<?php } ?>
+}
