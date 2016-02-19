@@ -572,7 +572,7 @@ class ZfcuserController extends UserController
 		if ( !$this->getRequest()->isPost() ) {
 			
 			return new ViewModel(array(
-				'showForm'		=> false,
+				'showForm'		=> true,
 				'user'			=> $oIdentity,
 				'userId'		=> $userId,
 				'userdataForm'	=> $form,
@@ -609,7 +609,7 @@ class ZfcuserController extends UserController
 
 			if ( $this->getRequest()->isXmlHttpRequest() ) {
 				return new ViewModel(array(
-					'showForm'      => true,
+					'showForm'      => false,
 					'user'			=> $oIdentity,
 					'userId'		=> $userId,
 					'userdataForm'	=> $form,
