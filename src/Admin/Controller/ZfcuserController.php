@@ -543,13 +543,16 @@ class ZfcuserController extends UserController
 		$form		= new UserDataForm();
 		$translator	= $this->getTranslator();
 		
+		/** @var \Admin\Entity\User $user */
 		$user		= $this->zfcUserAuthentication()->getIdentity();
+		/** @var \Admin\Model\User $oUser */
 		$oUser		= new \Admin\Model\User();
+		
 		$oUser->exchangeArray($user->__getArrayCopy());
 		$userId		= (int) $user->getId();
 
-		$form->bind( $oUser );
-		
+		$form->bind($oUser);
+	
 		if ( !$this->getRequest()->isPost() ) {
 			print_r($oUser);
 			return array(
@@ -566,7 +569,6 @@ class ZfcuserController extends UserController
 		
 		
 		if ( !$form->isValid() ) {
-			echo 'FORM DATA NOT VALID';
 			
 			return array(
 				'showForm'		=> true,
@@ -577,11 +579,12 @@ class ZfcuserController extends UserController
 				
 		} else {
 			
-			echo 'FORM DATA VALID';
-		
 			$user->exchangeArray( $data );
-			$result = $user->save();
-			if ( $result === true ) {
+			
+			$result = $this->getUserTable()->saveUser($oUser);
+			
+			// $result = $user->save();
+			if ( $result == true ) {
 				$this->flashMessenger()->addSuccessMessage(
 					$translator->translate("user data has been changed")
 				);
@@ -594,7 +597,7 @@ class ZfcuserController extends UserController
 				$response = array(
 					'showForm' => false,
 				);
-				$sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
+				/* $sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
 				$sFancybox = $this->getRequest()->getHeaders()->get('X-Fancybox')->toString();
 				if ( ( strpos($sAccept, 'text/html') !== false ) || ( strpos($sFancybox, 'true') !== false ) ) {
 					$viewHelperManager = $this->getServiceLocator()->get('ViewHelperManager');
@@ -610,7 +613,7 @@ class ZfcuserController extends UserController
 						$this->flashMessenger()->getCurrentWarningMessages(),
 						$this->flashMessenger()->getCurrentSuccessMessages()
 					))));
-				}
+				} */
 			} else {
 				return $this->redirect()->toRoute('zfcuser');
 			}
@@ -805,6 +808,35 @@ class ZfcuserController extends UserController
 		$this->toolbarItems[$action] = $item;
 		return $this;
 	}
+	
+	
+	// // db mappers
 
-
+	
+	/**
+	 * retrieve user table mapper
+	 * @return \Admin\Model\UserTable
+	 */
+	public function getUserTable()
+	{
+		if (!$this->userTable) {
+			$sm = $this->getServiceLocator();
+			$this->userTable = $sm->get('Admin\Model\UserTable');
+		}
+		return $this->userTable;
+	}
+	
+	/**
+	 * retrieve ACL roles table mapper
+	 * @return \Admin\Model\AclroleTable
+	 */
+	public function getAclroleTable()
+	{
+		if (!$this->AclroleTable) {
+			$sm = $this->getServiceLocator();
+			$this->AclroleTable = $sm->get('Admin\Model\AclroleTable');
+		}
+		return $this->AclroleTable;
+	}
+	
 }
