@@ -22,6 +22,8 @@ namespace Admin\Controller;
 use Admin\Module as AdminModule;
 use Admin\Form\RequestPasswordResetForm;
 use Admin\Form\ResetPasswordForm;
+use Admin\Form\User;
+use Admin\Form\UserData;
 use Admin\Form\UserDataForm;
 use Admin\Form\UserProfileForm;
 use Admin\Model\UserProfile;
@@ -543,7 +545,7 @@ class ZfcuserController extends UserController
 		/** @var \Admin\Entity\User $user */
 		$user		= $this->zfcUserAuthentication()->getIdentity();
 		/** @var \Admin\Model\User $oUser */
-		$oUser		= new \Admin\Model\User();
+		$oUser		= new \Admin\Model\UserData();
 		
 		$oUser->exchangeArray($user->__getArrayCopy());
 		$userId		= (int) $user->getId();
