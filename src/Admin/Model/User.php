@@ -27,6 +27,7 @@ use Zend\ServiceManager\ServiceManagerInterface;
 
 class User implements InputFilterAwareInterface
 {
+	public $id;
 	public $user_id;
 	public $display_name;
 	public $username;
@@ -46,6 +47,7 @@ class User implements InputFilterAwareInterface
 	
 	public function exchangeArray($data)
 	{
+		$this->id		    = (isset($data['id'])) ? $data['id'] : null;
 		$this->user_id		= (isset($data['user_id'])) ? $data['user_id'] : null;
 		$this->username		= (isset($data['username'])) ? $data['username'] : null;
 		$this->email		= (isset($data['email'])) ? $data['email'] : null;

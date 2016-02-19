@@ -109,6 +109,9 @@ class User extends ZfcUser
 	 */
 	public function getUserId()
 	{
+		if (null === $this->user_id) {
+			$this->setUserId($this->getId());
+		}
 		return $this->user_id;
 	}
 
@@ -206,6 +209,7 @@ class User extends ZfcUser
 	{
 		return array(
 			"id"			=> $this->getId(),
+			"user_id"	    => $this->getUserId(),
 			"username"		=> $this->getUsername(),
 			"email"			=> $this->getEmail(),
 			"display_name"	=> $this->getDisplayName(),
