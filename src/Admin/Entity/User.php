@@ -206,7 +206,7 @@ class User extends ZfcUser
 	 * @param boolean $forceEncryptPassword
 	 * @return \Admin\Entity\User
 	 */
-	public function exchangeArray($data = array(), $forceEncryptPassword = false)
+	public function exchangeArray ($data = array(), $forceEncryptPassword = false)
 	{
 		if ( isset($data['id']) && !empty($data["id"]) ) {
 			$this->id		    = ($data['id']);

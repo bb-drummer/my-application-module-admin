@@ -589,9 +589,9 @@ class ZfcuserController extends UserController
 				
 		} else {
 			
-			$oIdentity->exchangeArray( $data );
+			$oIdentity->setDisplayName( $data["display_name"] );
 			
-			$this->getUserTable()->saveUser($oUser);
+			$this->getUserTable()->saveUser($oIdentity);
 			
 			$this->flashMessenger()->addSuccessMessage(
 				$translator->translate("user data has been changed")
@@ -599,7 +599,7 @@ class ZfcuserController extends UserController
 
 			if ( $this->getRequest()->isXmlHttpRequest() ) {
 				return new ViewModel(array(
-					'showForm' => false,
+					'showForm'      => true,
 					'user'			=> $oIdentity,
 					'userId'		=> $userId,
 					'userdataForm'	=> $form,
