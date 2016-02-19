@@ -75,10 +75,10 @@ class UsersController extends BaseActionController
 		$tmplVars = $this->getTemplateVars( 
 			array(
 				'showForm'	=> true,
-				'title'		=> $this->translate("add user")
+				//'title'		=> $this->translate("add user")
 			)
 		);
-		$this->layout()->setVariable('title', $this->translate("add user"));
+		//$this->layout()->setVariable('title', $this->translate("add user"));
 		$form = new UserForm();
 
 		$roles = $this->getAclroleTable()->fetchAll()->toArray();
@@ -117,10 +117,10 @@ class UsersController extends BaseActionController
 		$tmplVars = $this->getTemplateVars( 
 			array(
 				'showForm'	=> true,
-				'title'		=> $this->translate("edit user")
+				//'title'		=> $this->translate("edit user")
 			)
 		);
-		$this->layout()->setVariable('title', $this->translate("edit user"));
+		//$this->layout()->setVariable('title', $this->translate("edit user"));
 		$id = (int) $this->params()->fromRoute('user_id', 0);
 		if (!$id) {
 			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -166,10 +166,10 @@ class UsersController extends BaseActionController
 		$tmplVars = $this->getTemplateVars( 
 			array(
 				'showForm'	=> true,
-				'title'		=> $this->translate("delete user")
+				//'title'		=> $this->translate("delete user")
 			)
 		);
-		$this->layout()->setVariable('title', $this->translate("delete user"));
+		//$this->layout()->setVariable('title', $this->translate("delete user"));
 		$id = (int) $this->params()->fromRoute('user_id', 0);
 		if (!$id) {
 			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
