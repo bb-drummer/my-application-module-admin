@@ -32,7 +32,8 @@ class UserForm extends Form implements ServiceLocatorAwareInterface
     public function getServiceLocator()
     {
     	if (null === $this->serviceLocator) {
-    		$this->setServiceLocator(new \Zend\ServiceManager\ServiceManager);
+    		$sm = new \Zend\ServiceManager\ServiceManager();
+    		$this->setServiceLocator($sm);
     	}
         return $this->services;
     }
@@ -42,7 +43,7 @@ class UserForm extends Form implements ServiceLocatorAwareInterface
 		// we want to ignore the name passed
 		parent::__construct('user');
 		
-		$oRolesTable = $this->getServiceLocator()->get("Admin\Model\AclroleTable");
+		$oRolesTable = $this->getServiceLocator()->get("\Admin\Model\AclroleTable");
 		$aRoles = $oRolesTable->fetchAll()->toArray();
 		$aRoleOptions = array();
 		foreach ($aRoles as $key => $role) {
