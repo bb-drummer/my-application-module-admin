@@ -65,6 +65,9 @@ class User extends ZfcUser
 	 */
 	public function getAclrole()
 	{
+		if (empty($this->aclrole)) {
+			$this->setAclrole('public');
+		}
 		return $this->aclrole;
 	}
 
@@ -72,7 +75,7 @@ class User extends ZfcUser
 	 * Set ACL role.
 	 *
 	 * @param STRING $aclrole
-	 * @return UserInterface
+	 * @return \Admin\Entity\User
 	 */
 	public function setAclrole($aclrole)
 	{
@@ -94,7 +97,7 @@ class User extends ZfcUser
 	 * Set token string.
 	 *
 	 * @param STRING $aclrole
-	 * @return UserInterface
+	 * @return \Admin\Entity\User
 	 */
 	public function setToken($token)
 	{
@@ -119,7 +122,7 @@ class User extends ZfcUser
 	 * Set user-id string.
 	 *
 	 * @param STRING $aclrole
-	 * @return UserInterface
+	 * @return \Admin\Entity\User
 	 */
 	public function setUserId($user_id)
 	{
@@ -143,7 +146,7 @@ class User extends ZfcUser
 	 * Set user's street string.
 	 *
 	 * @param STRING $street
-	 * @return UserInterface
+	 * @return \Admin\Entity\User
 	 */
 	public function setStreet($street)
 	{
@@ -165,7 +168,7 @@ class User extends ZfcUser
 	 * Set user's city string.
 	 *
 	 * @param STRING $city
-	 * @return UserInterface
+	 * @return \Admin\Entity\User
 	 */
 	public function setCity($city)
 	{
@@ -187,7 +190,7 @@ class User extends ZfcUser
 	 * Set user's phonenumber string.
 	 *
 	 * @param STRING $phone
-	 * @return UserInterface
+	 * @return \Admin\Entity\User
 	 */
 	public function setPhone($phone)
 	{
@@ -199,30 +202,41 @@ class User extends ZfcUser
 	/**
 	 * set user's object property data
 	 * @param array $data
+	 * @param boolean $forceEncryptPassword
+	 * @return \Admin\Entity\User
 	 */
-	public function exchangeArray($data = array())
+	public function exchangeArray($data = array(), $forceEncryptPassword = false)
 	{
 		if ( isset($data['id']) && !empty($data["id"]) ) {
-			$this->id		    = isset($data['id']);
-			$this->user_id		= isset($data['id']);
+			$this->id		    = ($data['id']);
+			$this->user_id		= ($data['id']);
 		} elseif ( isset($data['user_id']) && !empty($data["user_id"]) ) {
-			$this->id		    = isset($data['user_id']);
-			$this->user_id		= isset($data['user_id']);
+			$this->id		    = ($data['user_id']);
+			$this->user_id		= ($data['user_id']);
 		}
 		$this->username		= (isset($data['username'])) ? $data['username'] : $this->username;
 		$this->email		= (isset($data['email'])) ? $data['email'] : $this->email;
-		$this->street		= (isset($data['street'])) ? $data['street'] : $this->street;
-		$this->city			= (isset($data['city'])) ? $data['city'] : $this->city;
-		$this->phone		= (isset($data['phone'])) ? $data['phone'] : $this->phone;
-		/* $bcrypt = new Bcrypt;
-		$bcrypt->setCost(null); // @TODO $this->getUserService()->getOptions()->getPasswordCost());
-		$this->password		= (isset($data['password'])) ? $bcrypt->create($data['password']) : null; */
+		if ( isset($data['displayName']) ) {
+			$this->display_name	= $data['displayName'];
+			$this->displayName	= $data['displayName'];
+		} elseif ( isset($data['display_name']) ) {
+			$this->display_name	= $data['display_name'];
+			$this->displayName	= $data['display_name'];
+		}
+		if ( isset($data["password"]) && $forceEncryptPassword ) {
+			$bcrypt = new Bcrypt;
+			$bcrypt->setCost(null); // @TODO $this->getUserService()->getOptions()->getPasswordCost());
+			$data["password"] = $bcrypt->create($data['password']);
+		}
 		$this->password		= (isset($data['password'])) ? $data['password'] : $this->password;
-		$this->display_name	= (isset($data['display_name'])) ? $data['display_name'] : $this->display_name;
-		$this->displayName	= (isset($data['display_name'])) ? $data['display_name'] : $this->displayName;
 		$this->state		= (isset($data['state'])) ? $data['state'] : $this->state;
 		$this->aclrole		= (isset($data['aclrole'])) ? $data['aclrole'] : $this->aclrole;
 		$this->token		= (isset($data['token'])) ? $data['token'] : $this->token;
+
+		$this->street		= (isset($data['street'])) ? $data['street'] : $this->street;
+		$this->city			= (isset($data['city'])) ? $data['city'] : $this->city;
+		$this->phone		= (isset($data['phone'])) ? $data['phone'] : $this->phone;
+		
 		return $this;
 	}
 	
@@ -238,6 +252,7 @@ class User extends ZfcUser
 			"username"		=> $this->getUsername(),
 			"email"			=> $this->getEmail(),
 			"display_name"	=> $this->getDisplayName(),
+			"displayName"	=> $this->getDisplayName(),
 			"password"		=> $this->getPassword(),
 			"state"			=> $this->getState(),
 			"aclrole"		=> $this->getAclrole(),
