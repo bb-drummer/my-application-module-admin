@@ -16,11 +16,8 @@
 namespace Admin\Form;
 
 use Zend\Form\Form;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
-
-class UserForm extends Form // implements ServiceLocatorAwareInterface
+class UserForm extends Form
 {
 	public function __construct($name = null)
 	{
