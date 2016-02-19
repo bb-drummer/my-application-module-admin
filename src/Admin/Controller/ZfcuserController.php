@@ -546,10 +546,18 @@ class ZfcuserController extends UserController
 		$options	= $this->getServiceLocator()->get('zfcuser_module_options');
 		$request	= $this->getRequest();
 		$service	= $this->getUserService();*/
-		
-		$form		= new UserDataForm();
-		$form->setServiceLocator($this->getServiceLocator());
+
 		$translator	= $this->getTranslator();
+		$form		= new UserDataForm();
+		
+		$oRolesTable = $this->getServiceLocator()->get("Admin\Model\AclroleTable");
+		$aRoles = $oRolesTable->fetchAll()->toArray();
+		$aRoleOptions = array();
+		foreach ($aRoles as $key => $role) {
+			$aRoleOptions[$role['roleslug']] = $role['rolename'];
+		}
+		$form->get('aclrole')->setAttribute('options', $aRoleOptions);
+		
 		
 		/** @var \Admin\Entity\User $oIdentity */
 		$oIdentity		= $this->zfcUserAuthentication()->getIdentity();

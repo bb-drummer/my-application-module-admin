@@ -22,33 +22,10 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 class UserForm extends Form implements ServiceLocatorAwareInterface
 {
-	protected $serviceLocator;
-	
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-    }
-
-    public function getServiceLocator()
-    {
-    	if (null === $this->serviceLocator) {
-    		$this->serviceLocator = new \Zend\Di\ServiceLocator();
-    		//$this->serviceLocator = new \Zend\ServiceManager\ServiceManager();
-    	}
-        return $this->serviceLocator;
-    }
-
 	public function __construct($name = null)
 	{
 		// we want to ignore the name passed
 		parent::__construct('user');
-		
-		$oRolesTable = $this->getServiceLocator()->get("Admin\Model\AclroleTable");
-		$aRoles = $oRolesTable->fetchAll()->toArray();
-		$aRoleOptions = array();
-		foreach ($aRoles as $key => $role) {
-			$aRoleOptions[$role['roleslug']] = $role['rolename'];
-		}
 		
 		$this->setAttribute('method', 'post');
 		$this->add(array(
@@ -113,11 +90,7 @@ class UserForm extends Form implements ServiceLocatorAwareInterface
 			'type' => 'select',
 			'attributes' => array(
 				'type'  => 'select',
-				'options'	=> $aRoleOptions /*array(
-					'public'	=> 'no role',
-					'user'		=> 'user',
-					'admin'		=> 'administrator',
-				)*/,
+				'options'	=> array(),
 			),
 			'options' => array(
 				'label' => 'role',
