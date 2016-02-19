@@ -590,8 +590,9 @@ class ZfcuserController extends UserController
 		} else {
 			
 			$oIdentity->setDisplayName( $data["display_name"] );
+			$oUser->exchangeArray($oIdentity->__getArrayCopy());
 			
-			$this->getUserTable()->saveUser($oIdentity);
+			$this->getUserTable()->saveUser($oUser);
 			
 			$this->flashMessenger()->addSuccessMessage(
 				$translator->translate("user data has been changed")
