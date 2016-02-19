@@ -268,10 +268,10 @@ class User extends ZfcUser
 	/**
 	 * get copy of user's object properties in an assosiative array
 	 * @return array
-	 */
+	 * /
 	public function getArrayCopy() 
 	{
 		return $this->__getArrayCopy();
-	}
+	} // collides with some magic "__get" method in ZfcUser parent ?! */
 	
 }
