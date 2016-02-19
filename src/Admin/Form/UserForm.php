@@ -87,7 +87,11 @@ class UserForm extends Form
 			'type' => 'select',
 			'attributes' => array(
 				'type'  => 'select',
-				'options'	=> array(),
+				'options'	=> array(
+					'public' => 'no user',
+					'user' => 'user',
+					'admin' => 'admin',
+				),
 			),
 			'options' => array(
 				'label' => 'role',
