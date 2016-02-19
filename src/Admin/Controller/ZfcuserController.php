@@ -551,7 +551,7 @@ class ZfcuserController extends UserController
 		$form->bind( $oUser );
 		
 		if ( !$this->getRequest()->isPost() ) {
-			
+			print_r($oUser);
 			return array(
 				'showForm'		=> true,
 				'user'			=> $user,
@@ -567,6 +567,7 @@ class ZfcuserController extends UserController
 		
 		if ( !$form->isValid() ) {
 			echo 'FORM DATA NOT VALID';
+			
 			return array(
 				'showForm'		=> true,
 				'user'			=> $user,
