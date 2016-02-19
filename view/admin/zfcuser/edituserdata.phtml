@@ -7,13 +7,13 @@ $oComponents = $this->Components();
 $oUser = $this->zfcUserIdentity();
 
 if ($showForm) {
-
+		/** @var \Zend\Form\Form $form **/
 		$form = $this->userdataForm;
 		$form->setAttribute('action', $this->url('zfcuser/edituserdata'));
 		$form->setAttribute('method', 'post');
 		$form->setAttribute('class', 'form-xhr');
 		$form->prepare();
-		
+		print_r($form->getMessages());
 		$formHTML = $this->form()->openTag($form);
 		$formHTML .= $oComponents->formGroup($form, "display_name");
 		
