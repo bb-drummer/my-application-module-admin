@@ -39,6 +39,10 @@ use Zend\Mvc\MvcEvent;
 class ZfcuserController extends UserController
 {
 	
+	protected $aclroleTable;
+	
+	protected $userTable;
+	
 	protected $translator;
 
 	protected $actionTitles = array();
@@ -801,11 +805,11 @@ class ZfcuserController extends UserController
 	 */
 	public function getAclroleTable()
 	{
-		if (!$this->AclroleTable) {
+		if (!$this->aclroleTable) {
 			$sm = $this->getServiceLocator();
-			$this->AclroleTable = $sm->get('Admin\Model\AclroleTable');
+			$this->aclroleTable = $sm->get('Admin\Model\AclroleTable');
 		}
-		return $this->AclroleTable;
+		return $this->aclroleTable;
 	}
 	
 }
