@@ -16,6 +16,9 @@
 namespace Admin\Model;
 
 use \Admin\Model\User;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Factory as InputFilterFactory;
+use Zend\InputFilter\InputFilterInterface;
 
 class UserData extends User
 {
@@ -29,7 +32,7 @@ class UserData extends User
 	{
 		if (!$this->inputFilter) {
 			$inputFilter = new InputFilter();
-			$factory	 = new InputFactory();
+			$factory	 = new InputFilterFactory();
 	
 			$inputFilter->add($factory->createInput(array(
 					'name'	 => 'user_id',
