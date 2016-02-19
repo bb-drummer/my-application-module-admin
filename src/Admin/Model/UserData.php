@@ -43,7 +43,7 @@ class UserData extends User
 			)));
 	
 			$inputFilter->add($factory->createInput(array(
-					'name'	 => 'username',
+					'name'	 => 'display_name',
 					'required' => true,
 					'filters'  => array(
 							array('name' => 'StripTags'),
@@ -55,7 +55,7 @@ class UserData extends User
 									'options' => array(
 											'encoding' => 'UTF-8',
 											'min'	  => 1,
-											'max'	  => 100,
+											'max'	  => 255,
 									),
 							),
 					),
