@@ -26,7 +26,7 @@ class UserForm extends Form implements ServiceLocatorAwareInterface
 	
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {
-        $this->services = $serviceLocator;
+        $this->serviceLocator = $serviceLocator;
     }
 
     public function getServiceLocator()
@@ -34,7 +34,7 @@ class UserForm extends Form implements ServiceLocatorAwareInterface
     	if (null === $this->serviceLocator) {
     		$this->serviceLocator = new \Zend\Di\ServiceLocator();
     	}
-        return $this->services;
+        return $this->serviceLocator;
     }
 
 	public function __construct($name = null)
