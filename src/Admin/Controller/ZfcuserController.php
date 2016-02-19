@@ -548,6 +548,7 @@ class ZfcuserController extends UserController
 		$service	= $this->getUserService();*/
 		
 		$form		= new UserDataForm();
+		$form->setServiceLocator($this->getServiceLocator());
 		$translator	= $this->getTranslator();
 		
 		/** @var \Admin\Entity\User $oIdentity */

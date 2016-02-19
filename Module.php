@@ -35,8 +35,6 @@ use Zend\View\HelperPluginManager;
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer;
 
-use Application\Model\Callbacks;
-
 use Admin\Controller\RedirectCallback;
 use Admin\Controller\ZfcuserController;
 use Admin\Model\UserProfile;
