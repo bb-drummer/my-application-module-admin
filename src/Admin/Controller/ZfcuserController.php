@@ -564,8 +564,9 @@ class ZfcuserController extends UserController
 		$data = (array)$this->params()->fromPost();
 		$form->setData( $data );
 		
+		
 		if ( !$form->isValid() ) {
-			
+			echo 'FORM DATA NOT VALID';
 			return array(
 				'showForm'		=> true,
 				'user'			=> $user,
@@ -574,9 +575,11 @@ class ZfcuserController extends UserController
 			);
 				
 		} else {
+			
+			echo 'FORM DATA VALID';
 		
-			$profile->exchangeArray( $data );
-			$result = $profile->save();
+			$user->exchangeArray( $data );
+			$result = $user->save();
 			if ( $result === true ) {
 				$this->flashMessenger()->addSuccessMessage(
 					$translator->translate("user data has been changed")
