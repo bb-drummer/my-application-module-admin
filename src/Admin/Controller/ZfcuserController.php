@@ -542,13 +542,13 @@ class ZfcuserController extends UserController
 		$form		= new UserDataForm();
 		$translator	= $this->getTranslator();
 		
-		/** @var \Admin\Entity\User $user */
-		$user		= $this->zfcUserAuthentication()->getIdentity();
-		/** @var \Admin\Model\User $oUser */
+		/** @var \Admin\Entity\User $oIdentity */
+		$oIdentity		= $this->zfcUserAuthentication()->getIdentity();
+		/** @var \Admin\Model\UserData $oUser */
 		$oUser		= new \Admin\Model\UserData();
 		
-		$oUser->exchangeArray($user->__getArrayCopy());
-		$userId		= (int) $user->getId();
+		$oUser->exchangeArray($oIdentity->__getArrayCopy());
+		$userId		= (int) $oIdentity->getId();
 
 		$form->bind($oUser);
 	
@@ -556,7 +556,7 @@ class ZfcuserController extends UserController
 			
 			return new ViewModel(array(
 				'showForm'		=> true,
-				'user'			=> $user,
+				'user'			=> $oIdentity,
 				'userId'		=> $userId,
 				'userdataForm'	=> $form,
 			));
@@ -571,14 +571,14 @@ class ZfcuserController extends UserController
 			
 			return new ViewModel(array(
 				'showForm'		=> true,
-				'user'			=> $user,
+				'user'			=> $oIdentity,
 				'userId'		=> $userId,
 				'userdataForm'	=> $form,
 			));
 				
 		} else {
 			
-			$user->exchangeArray( $data );
+			$oIdentity->exchangeArray( $data );
 			
 			$result = $this->getUserTable()->saveUser($oUser);
 			
@@ -599,8 +599,8 @@ class ZfcuserController extends UserController
 			} else {
 				return $this->redirect()->toRoute('zfcuser');
 			}
-			$response["user"] = $id;
-			$response["user_id"] = $id;
+			$response["user"] = $oIdentity;
+			$response["userId"] = $id;
 			$response["userdataForm"] = $form;
 			return new ViewModel($response);
 				

@@ -16,6 +16,7 @@
 namespace Admin\Entity;
 
 use \ZfcUser\Entity\User as ZfcUser;
+use Zend\Crypt\Password\Bcrypt;
 
 class User extends ZfcUser
 {
@@ -262,6 +263,15 @@ class User extends ZfcUser
 			"city"			=> $this->getCity(),
 			"phone"			=> $this->getPhone(),
 		);
+	}
+	
+	/**
+	 * get copy of user's object properties in an assosiative array
+	 * @return array
+	 */
+	public function getArrayCopy() 
+	{
+		return $this->__getArrayCopy();
 	}
 	
 }
