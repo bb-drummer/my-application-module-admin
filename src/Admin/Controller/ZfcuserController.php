@@ -554,12 +554,12 @@ class ZfcuserController extends UserController
 	
 		if ( !$this->getRequest()->isPost() ) {
 			
-			return array(
+			return new ViewModel(array(
 				'showForm'		=> true,
 				'user'			=> $user,
 				'userId'		=> $userId,
 				'userdataForm'	=> $form,
-			);
+			));
 			
 		}
 		
@@ -569,12 +569,12 @@ class ZfcuserController extends UserController
 		
 		if ( !$form->isValid() ) {
 			
-			return array(
+			return new ViewModel(array(
 				'showForm'		=> true,
 				'user'			=> $user,
 				'userId'		=> $userId,
 				'userdataForm'	=> $form,
-			);
+			));
 				
 		} else {
 			
@@ -596,26 +596,13 @@ class ZfcuserController extends UserController
 				$response = array(
 					'showForm' => false,
 				);
-				/* $sAccept = $this->getRequest()->getHeaders()->get('Accept')->toString();
-				$sFancybox = $this->getRequest()->getHeaders()->get('X-Fancybox')->toString();
-				if ( ( strpos($sAccept, 'text/html') !== false ) || ( strpos($sFancybox, 'true') !== false ) ) {
-					$viewHelperManager = $this->getServiceLocator()->get('ViewHelperManager');
-					$flashMessenger = $viewHelperManager->get('flashmessenger');
-					$messages = $flashMessenger()->renderCurrent('warning', array('warning alert flashmessages'));
-					$messages .= $flashMessenger()->renderCurrent('success', array('success alert flashmessages'));
-					$this->flashMessenger()->clearCurrentMessagesFromContainer();
-					return array_merge_recursive($response, array("content" => preg_replace('/<button(.*)<\/button>/i', "", $messages)));
-					
-				} else {
-					$messages = $this->flashMessenger()->getCurrentErrorMessages();
-					return array_merge_recursive($response, array("content" => json_encode(array_merge_recursive(
-						$this->flashMessenger()->getCurrentWarningMessages(),
-						$this->flashMessenger()->getCurrentSuccessMessages()
-					))));
-				} */
 			} else {
 				return $this->redirect()->toRoute('zfcuser');
 			}
+			$response["user"] = $id;
+			$response["user_id"] = $id;
+			$response["userdataForm"] = $form;
+			return new ViewModel($response);
 				
 		}
 		
