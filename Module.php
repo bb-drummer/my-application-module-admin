@@ -23,6 +23,7 @@ use Zend\Mail\Transport\SmtpOptions;
 use Zend\Mime\Message as MimeMessage;
 use Zend\Mime\Part as MimePart;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\ModuleManager;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
@@ -54,7 +55,10 @@ use Admin\Model\AclroleTable;
 use Admin\Model\Aclresource;
 use Admin\Model\AclresourceTable;
 
-class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterface
+class Module implements 
+				AutoloaderProviderInterface, 
+				ServiceLocatorAwareInterface, 
+				ServiceProviderInterface
 {
 
 	protected $appobj;
