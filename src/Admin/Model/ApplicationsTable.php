@@ -46,7 +46,7 @@ class ApplicationsTable
 			$select->join(
 				'clients', 
 				'applications.client_id = clients.clients_id', 
-				'*', 
+				'clients.*', 
 				Select::JOIN_LEFT
 			);
 			if (!empty($scope)) {
