@@ -42,6 +42,13 @@ return array(
 		),
 	),
 		
+	'service_manager' => array(
+		'factories' => array(
+			'Admin\Model\ApplicationTable'	=> 'Admin\Factory\ApplicationTableFactory',
+			'Admin\Model\ClientsTable'		=> 'Admin\Factory\ClientsTableFactory',
+		)	
+	),
+		
 	'acl_helpers' => array (
 		'invokables' => array(
 			// override or add a view helper

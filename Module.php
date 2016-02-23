@@ -486,7 +486,7 @@ class Module implements
 			'factories' => array(
 					
 				
-				'Admin\Model\ApplicationsTable' =>  function($sm) {
+				/* 'Admin\Model\ApplicationsTable' =>  function($sm) {
 					$tableGateway = $sm->get('AdminApplicationsTableGateway');
 					$table = new ApplicationsTable($tableGateway);
 					return $table;
@@ -496,10 +496,10 @@ class Module implements
 					$resultSetPrototype = new ResultSet();
 					$resultSetPrototype->setArrayObjectPrototype(new Applications());
 					return new TableGateway('applications', $dbAdapter, null, $resultSetPrototype);
-				},
+				}, */
 					
 						
-				'Admin\Model\ClientsTable' =>  function($sm) {
+				/* 'Admin\Model\ClientsTable' =>  function($sm) {
 					$tableGateway = $sm->get('AdminClientsTableGateway');
 					$table = new ClientsTable($tableGateway);
 					return $table;
@@ -509,7 +509,7 @@ class Module implements
 					$resultSetPrototype = new ResultSet();
 					$resultSetPrototype->setArrayObjectPrototype(new Clients());
 					return new TableGateway('clients', $dbAdapter, null, $resultSetPrototype);
-				},
+				}, */
 					
 						
 				'Admin\Model\UserTable' =>  function($sm) {
