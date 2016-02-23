@@ -47,7 +47,7 @@ class ApplicationsTable
 			'clients',
 			'applications.client_id = clients.clients_id',
 			array(
-				'clientname' => 'clients.name',
+				'clientname' => 'name',
 			),
 			Select::JOIN_LEFT
 		);
