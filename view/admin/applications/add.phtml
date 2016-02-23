@@ -14,12 +14,11 @@ if ($showForm) {
 		
 	$formHTML = $this->form()->openTag($form);
 	$formHTML .= $oComponents->formGroup($form, "name");
-	$formHTML .= $oComponents->formGroup($form, "extraname");
-	$formHTML .= $oComponents->formGroup($form, "homepage");
+	$formHTML .= $oComponents->formGroup($form, "shortname");
+	$formHTML .= $oComponents->formGroup($form, "path");
+	$formHTML .= $oComponents->formGroup($form, "url");
 	$formHTML .= $oComponents->formGroup($form, "email");
-	$formHTML .= $oComponents->formGroup($form, "contact");
-	$formHTML .= $oComponents->formGroup($form, "phone");
-	$formHTML .= $oComponents->formGroup($form, "statistics");
+	$formHTML .= $oComponents->formGroup($form, "client_id");
 	$formHTML .= '<hr />'; 
 	$formHTML .= $this->formHidden($form->get('applications_id'));
 	$formHTML .= $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary')));

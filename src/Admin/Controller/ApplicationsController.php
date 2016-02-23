@@ -22,6 +22,7 @@ use Admin\Form\ApplicationsForm;
 
 class ApplicationsController extends BaseActionController 
 {
+	protected $clientsTable;
 	protected $applicationsTable;
 	
 	public function onDispatch(\Zend\Mvc\MvcEvent $e)
@@ -70,7 +71,15 @@ class ApplicationsController extends BaseActionController
 		$this->layout()->setVariable('title', $this->translate("add application"));
 		
 		$form = new ApplicationsForm();
-
+		
+		$clients = $this->getClientsTable()->fetchAll()->toArray();
+		$valueoptions = array();
+		foreach ($clients as $client) {
+			//$valueoptions[$role["aclroles_id"]] = $role["rolename"];
+			$valueoptions[$client["client_id"]] = $client["name"];
+		}
+		$form->get('client_id')->setValueOptions($valueoptions);
+		
 		$request = $this->getRequest();
 		$applications = new Applications();
 		if ($request->isPost()) {
@@ -183,6 +192,18 @@ class ApplicationsController extends BaseActionController
 			$this->applicationsTable = $sm->get('AdminApplicationsTable');
 		}
 		return $this->applicationsTable;
+	}
+
+	/**
+	 * @return Admin\Model\ClientsTable
+	 */
+	public function getClientsTable()
+	{
+		if (!$this->clientsTable) {
+			$sm = $this->getServiceLocator();
+			$this->clientsTable = $sm->get('AdminClientsTable');
+		}
+		return $this->clientsTable;
 	}
 	
 }
