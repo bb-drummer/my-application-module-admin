@@ -60,8 +60,8 @@ return array(
 				
 			// table aliases
 			'AdminAclTable'					=> 'Admin\Model\AclTable',
-			'AdminAclresourcesTable'		=> 'Admin\Model\AclresourceTable',
-			'AdminAclrolesTable'			=> 'Admin\Model\AclroleTable',
+			'AdminAclresourceTable'			=> 'Admin\Model\AclresourceTable',
+			'AdminAclroleTable'				=> 'Admin\Model\AclroleTable',
 			'AdminApplicationsTable'		=> 'Admin\Model\ApplicationsTable',
 			'AdminClientsTable'				=> 'Admin\Model\ClientsTable',
 			'AdminSettingsTable'			=> 'Admin\Model\SettingsTable',
