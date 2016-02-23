@@ -45,22 +45,32 @@ class ApplicationsForm extends Form
 			),
 		));
 		$this->add(array(
-			'name' => 'extraname',
+			'name' => 'shortname',
 			'attributes' => array(
 				'type'  => 'text',
 			),
 			'options' => array(
-				'label' => 'extraname',
+				'label' => 'shortname',
 			),
 		));
 		$this->add(array(
-			'name' => 'homepage',
+			'name' => 'path',
+			'type'  => 'text',
+			'attributes' => array(
+				'type'  => 'text',
+			),
+			'options' => array(
+				'label' => 'path',
+			),
+		));
+		$this->add(array(
+			'name' => 'url',
 			'type'  => 'url',
 			'attributes' => array(
 				'type'  => 'url',
 			),
 			'options' => array(
-				'label' => 'homepage',
+				'label' => 'url',
 			),
 		));
 		$this->add(array(
@@ -73,33 +83,18 @@ class ApplicationsForm extends Form
 				'label' => 'email',
 			),
 		));
+
 		$this->add(array(
-			'name' => 'contact',
-			'attributes' => array(
-				'type'  => 'text',
-			),
-			'options' => array(
-				'label' => 'contact',
-			),
+				'name' => 'client',
+				'type'  => 'client_id',
+				'attributes' => array(
+						'type'  => 'select',
+				),
+				'options' => array(
+						'label' => 'client',
+				),
 		));
-		$this->add(array(
-			'name' => 'phone',
-			'attributes' => array(
-				'type'  => 'text',
-			),
-			'options' => array(
-				'label' => 'phone',
-			),
-		));
-		$this->add(array(
-			'name' => 'statistics',
-			'attributes' => array(
-				'type'  => 'text',
-			),
-			'options' => array(
-				'label' => 'statistics',
-			),
-		));
+		
 		
 		$this->add(array(
 			'name' => 'submit',

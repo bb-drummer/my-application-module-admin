@@ -26,11 +26,12 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInterface
 {
 	public $applications_id;
-	public $scope;
-	public $ref_id;
-	public $type;
 	public $name;
-	public $value;
+	public $shortname;
+	public $path;
+	public $url;
+	public $email;
+	public $client_id;
 
 	protected $inputFilter;
 	protected $userService;
@@ -39,14 +40,13 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 	
 	public function exchangeArray($data)
 	{
-		$this->applications_id	= (isset($data['applications_id'])) ? $data['applications_id'] : null;
-		$this->name			= (isset($data['name'])) ? $data['name'] : null;
-		$this->extraname	= (isset($data['extraname'])) ? $data['extraname'] : null;
-		$this->homepage		= (isset($data['homepage'])) ? $data['homepage'] : null;
-		$this->email		= (isset($data['email'])) ? $data['email'] : null;
-		$this->contact		= (isset($data['contact'])) ? $data['contact'] : null;
-		$this->phone		= (isset($data['phone'])) ? $data['phone'] : null;
-		$this->statistics	= (isset($data['statistics'])) ? $data['statistics'] : null;
+		$this->applications_id	= (isset($data['applications_id'])) ? $data['applications_id'] : $this->applications_id;
+		$this->name				= (isset($data['name'])) ? $data['name'] : $this->name;
+		$this->shortname		= (isset($data['extraname'])) ? $data['extraname'] : $this->shortname;
+		$this->path				= (isset($data['homepage'])) ? $data['homepage'] : $this->path;
+		$this->url				= (isset($data['email'])) ? $data['email'] : $this->url;
+		$this->email			= (isset($data['contact'])) ? $data['contact'] : $this->email;
+		$this->client_id		= (isset($data['phone'])) ? $data['phone'] : $this->client_id;
 	}
 
 	public function getArrayCopy()
@@ -93,7 +93,7 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 			)));
 
 			$inputFilter->add($factory->createInput(array(
-				'name'	 => 'extraname',
+				'name'	 => 'shortname',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
@@ -112,7 +112,7 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 			)));
 
 			$inputFilter->add($factory->createInput(array(
-				'name'	 => 'homepage',
+				'name'	 => 'path',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
@@ -124,7 +124,26 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 						'options' => array(
 							'encoding' => 'UTF-8',
 							'min'	  => 1,
-							'max'	  => 255,
+							'max'	  => 1024,
+						),
+					),
+				),
+			)));
+
+			$inputFilter->add($factory->createInput(array(
+				'name'	 => 'url',
+				'required' => false,
+				'filters'  => array(
+					array('name' => 'StripTags'),
+					array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+					array(
+						'name'	=> 'StringLength',
+						'options' => array(
+							'encoding' => 'UTF-8',
+							'min'	  => 1,
+							'max'	  => 1024,
 						),
 					),
 				),
@@ -150,73 +169,13 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 			)));
 
 			$inputFilter->add($factory->createInput(array(
-				'name'	 => 'contact',
-				'required' => false,
+				'name'	 => 'client_id',
+				'required' => true,
 				'filters'  => array(
-					array('name' => 'StripTags'),
-					array('name' => 'StringTrim'),
-				),
-				'validators' => array(
-					array(
-						'name'	=> 'StringLength',
-						'options' => array(
-							'encoding' => 'UTF-8',
-							'min'	  => 1,
-							'max'	  => 255,
-						),
-					),
+					array('name' => 'Int'),
 				),
 			)));
-
-			$inputFilter->add($factory->createInput(array(
-				'name'	 => 'phone',
-				'required' => false,
-				'filters'  => array(
-					array('name' => 'StripTags'),
-					array('name' => 'StringTrim'),
-				),
-				'validators' => array(
-					array(
-						'name'	=> 'StringLength',
-						'options' => array(
-							'encoding' => 'UTF-8',
-							'min'	  => 1,
-							'max'	  => 255,
-						),
-					),
-				),
-			)));
-
-			$inputFilter->add($factory->createInput(array(
-				'name'	 => 'statistics',
-				'required' => false,
-				'filters'  => array(
-					array('name' => 'StripTags'),
-					array('name' => 'StringTrim'),
-				),
-				'validators' => array(
-					array(
-						'name'	=> 'StringLength',
-						'options' => array(
-							'encoding' => 'UTF-8',
-							'min'	  => 1,
-							'max'	  => 255,
-						),
-					),
-				),
-			)));
-
-			$inputFilter->add($factory->createInput(array(
-				'name'	 => 'value',
-				'required' => false,
-				'filters'  => array(
-					array('name' => 'StripTags'),
-					array('name' => 'StringTrim'),
-				),
-				'validators' => array(
-				),
-			)));
-
+			
 			$this->inputFilter = $inputFilter;
 		}
 

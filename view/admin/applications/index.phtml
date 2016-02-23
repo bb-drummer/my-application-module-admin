@@ -21,9 +21,9 @@
 				<tbody>
 					<?php foreach ($applicationsdata as $applications) : ?>
 					<tr>
-						<td><?php echo $this->escapeHtml($applications->name).(!empty($applications->extraname) ? ', '.$this->escapeHtml($applications->extraname) : '' ); ?></td>
-						<td><?php echo $this->escapeHtml($applications->email); ?></td>
-						<td><?php echo $this->escapeHtml($applications->contact); ?></td>
+						<td><?php echo $this->escapeHtml($applications->name).(!empty($applications->shortname) ? ', '.$this->escapeHtml($applications->shortname) : '' ); ?></td>
+						<td><?php echo $this->escapeHtml($applications->url); ?></td>
+						<td><?php echo $this->escapeHtml($applications->clients_name); ?></td>
 						<td>
 							<div class="btn-group btn-group-xs">
 								<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/applicationsedit',

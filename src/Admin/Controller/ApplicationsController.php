@@ -38,7 +38,7 @@ class ApplicationsController extends BaseActionController
 	public function indexAction() 
 	{
 		$tmplVars = $this->getTemplateVars();
-		$aApplicationslist = $this->getApplicationsTable()->fetchAll();
+		$aApplicationslist = $this->getApplicationsTable()->fetchAllFull();
 		if ( $this->getRequest()->isXmlHttpRequest() ) {
 			$datatablesData = array('data' => $aApplicationslist->toArray());
 			$oController = $this;

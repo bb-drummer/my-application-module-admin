@@ -40,6 +40,19 @@ class ApplicationsTable
 		return $resultSet;
 	}
 
+	public function fetchAllFull($scope = '')
+	{
+		$resultSet = $this->tableGateway->select(function (Select $select) use ($scope) {
+			if (!empty($scope)) {
+				$select->join('clients', 'applications.client_id = clients.client_id', '*', Select::JOIN_LEFT);
+				$select->where('scope = \''.$scope.'\'')->order('type, name ASC');
+			} else {
+				$select->order('name ASC');
+			}
+		});
+		return $resultSet;
+	}
+
 	public function fetchApplication()
 	{
 		return $this->fetchAll('application');
