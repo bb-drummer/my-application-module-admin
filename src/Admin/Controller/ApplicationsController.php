@@ -41,6 +41,7 @@ class ApplicationsController extends BaseActionController
 		$tmplVars = $this->getTemplateVars();
 		$aApplicationslist = $this->getApplicationsTable()->fetchAllFull();
 		if ( $this->getRequest()->isXmlHttpRequest() ) {
+			print_r($aApplicationslist);
 			$datatablesData = array('data' => $aApplicationslist);
 			$oController = $this;
 			$datatablesData['data'] = array_map( function ($row) use ($oController) {
