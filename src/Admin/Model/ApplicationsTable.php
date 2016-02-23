@@ -42,7 +42,7 @@ class ApplicationsTable
 
 	public function fetchAllFull($scope = '')
 	{
-		$resultSet = $this->tableGateway->select(function (Select $select) use ($scope) {
+		$resultSet = $this->tableGateway->selectWith(function (Select $select) use ($scope) {
 			$select->join(
 				'clients', 
 				'applications.client_id = clients.clients_id', 
