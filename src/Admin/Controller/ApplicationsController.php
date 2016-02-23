@@ -39,10 +39,10 @@ class ApplicationsController extends BaseActionController
 	public function indexAction() 
 	{
 		$tmplVars = $this->getTemplateVars();
+		/** @var \Zend\Db\Adapter\Driver\Pdo\Result $aApplicationslist */
 		$aApplicationslist = $this->getApplicationsTable()->fetchAllFull();
 		if ( $this->getRequest()->isXmlHttpRequest() ) {
-			print_r($aApplicationslist);
-			$datatablesData = array('data' => $aApplicationslist);
+			$datatablesData = array('data' => (array)$aApplicationslist);
 			$oController = $this;
 			$datatablesData['data'] = array_map( function ($row) use ($oController) {
 				$actions = '<div class="btn-group btn-group-xs">'.
