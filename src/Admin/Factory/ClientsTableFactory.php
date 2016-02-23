@@ -43,7 +43,6 @@ class ClientsTableFactory implements FactoryInterface
 		$resultSetPrototype	= new ResultSet();
 		$resultSetPrototype->setArrayObjectPrototype(new Clients());
 		$tableGateway		= new TableGateway('clients', $dbAdapter, null, $resultSetPrototype);
-		$tableGateway		= $sm->get('AdminClientsTableGateway');
 		$table				= new ClientsTable($tableGateway);
 		return $table;
 	}
