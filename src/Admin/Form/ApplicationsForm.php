@@ -80,7 +80,7 @@ class ApplicationsForm extends Form
 				'type'  => 'email',
 			),
 			'options' => array(
-				'label' => 'email',
+				'label' => 'admin email',
 			),
 		));
 
