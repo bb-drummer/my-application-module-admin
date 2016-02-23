@@ -85,7 +85,7 @@ class ApplicationsForm extends Form
 		));
 
 		$this->add(array(
-				'name' => 'clients_id',
+				'name' => 'client_id',
 				'type'  => 'select',
 				'attributes' => array(
 					'type'  => 'select',

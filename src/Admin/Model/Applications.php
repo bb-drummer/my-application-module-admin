@@ -42,11 +42,11 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 	{
 		$this->applications_id	= (isset($data['applications_id'])) ? $data['applications_id'] : $this->applications_id;
 		$this->name				= (isset($data['name'])) ? $data['name'] : $this->name;
-		$this->shortname		= (isset($data['extraname'])) ? $data['extraname'] : $this->shortname;
-		$this->path				= (isset($data['homepage'])) ? $data['homepage'] : $this->path;
-		$this->url				= (isset($data['email'])) ? $data['email'] : $this->url;
-		$this->email			= (isset($data['contact'])) ? $data['contact'] : $this->email;
-		$this->client_id		= (isset($data['phone'])) ? $data['phone'] : $this->client_id;
+		$this->shortname		= (isset($data['shortname'])) ? $data['shortname'] : $this->shortname;
+		$this->path				= (isset($data['path'])) ? $data['path'] : $this->path;
+		$this->url				= (isset($data['url'])) ? $data['url'] : $this->url;
+		$this->email			= (isset($data['email'])) ? $data['email'] : $this->email;
+		$this->client_id		= (isset($data['client_id'])) ? $data['client_id'] : $this->client_id;
 	}
 
 	public function getArrayCopy()
@@ -169,7 +169,7 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 			)));
 
 			$inputFilter->add($factory->createInput(array(
-				'name'	 => 'clients_id',
+				'name'	 => 'client_id',
 				'required' => true,
 				'filters'  => array(
 					array('name' => 'Int'),

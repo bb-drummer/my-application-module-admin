@@ -78,7 +78,7 @@ class ApplicationsController extends BaseActionController
 			//$valueoptions[$role["aclroles_id"]] = $role["rolename"];
 			$valueoptions[$client["clients_id"]] = $client["name"];
 		}
-		$form->get('clients_id')->setValueOptions($valueoptions);
+		$form->get('client_id')->setValueOptions($valueoptions);
 		
 		$request = $this->getRequest();
 		$applications = new Applications();
