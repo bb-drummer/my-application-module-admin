@@ -44,9 +44,15 @@ return array(
 		
 	'service_manager' => array(
 		'factories' => array(
-			'Admin\Model\ApplicationTable'	=> 'Admin\Factory\ApplicationTableFactory',
+			'Admin\Model\ApplicationsTable'	=> 'Admin\Factory\ApplicationsTableFactory',
 			'Admin\Model\ClientsTable'		=> 'Admin\Factory\ClientsTableFactory',
-		)	
+		),
+			
+		'aliases' => array(
+			'ApplicationsTable'				=> 'Admin\Model\ApplicationsTable',
+			'ClientsTable'					=> 'Admin\Model\ClientsTable',
+		),
+		
 	),
 		
 	'acl_helpers' => array (
