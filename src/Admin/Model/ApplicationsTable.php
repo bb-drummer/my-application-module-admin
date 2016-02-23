@@ -42,7 +42,17 @@ class ApplicationsTable
 
 	public function fetchAllFull($scope = '')
 	{
-		$resultSet = $this->tableGateway->selectWith(function (Select $select) use ($scope) {
+		$sqlSelect = $this->tableGateway->getSql()->select();
+		$sqlSelect->join(
+			'clients',
+			'applications.client_id = clients.clients_id',
+			array(
+				'clients.name' => 'clientname',
+			),
+			Select::JOIN_LEFT
+		);
+		
+		/*$resultSet = $this->tableGateway->selectWith(function (Select $select) use ($scope) {
 			$select->join(
 				'clients', 
 				'applications.client_id = clients.clients_id', 
@@ -57,7 +67,11 @@ class ApplicationsTable
 			} else {
 				$select->order('name ASC');
 			}
-		});
+		});*/
+		echo $sqlSelect->getSqlString();
+		$statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($sqlSelect);
+		$resultSet = $statement->execute();
+		
 		return $resultSet;
 	}
 
