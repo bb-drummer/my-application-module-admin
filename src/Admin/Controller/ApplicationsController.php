@@ -38,12 +38,18 @@ class ApplicationsController extends BaseActionController
 
 	public function indexAction() 
 	{
+		$oController = $this;
 		$tmplVars = $this->getTemplateVars();
 		/** @var \Zend\Db\Adapter\Driver\Pdo\Result $aApplicationslist */
 		$aApplicationslist = $this->getApplicationsTable()->fetchAllFull();
+		
 		if ( $this->getRequest()->isXmlHttpRequest() ) {
+			$data = array();
+			foreach ($aApplicationslist as $row) {
+				$data[] = $row;
+			}
+			$datatablesData = array('data' => $data);
 			$datatablesData = array('data' => (array)$aApplicationslist);
-			$oController = $this;
 			$datatablesData['data'] = array_map( function ($row) use ($oController) {
 				$actions = '<div class="btn-group btn-group-xs">'.
 					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/applicationsedit',
