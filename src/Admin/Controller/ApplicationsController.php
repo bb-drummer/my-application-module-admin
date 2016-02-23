@@ -123,6 +123,14 @@ class ApplicationsController extends BaseActionController
 		$form  = new ApplicationsForm();
 		$form->bind($applications);
 
+		$clients = $this->getClientsTable()->fetchAll()->toArray();
+		$valueoptions = array();
+		foreach ($clients as $client) {
+			//$valueoptions[$role["aclroles_id"]] = $role["rolename"];
+			$valueoptions[$client["clients_id"]] = $client["name"];
+		}
+		$form->get('client_id')->setValueOptions($valueoptions);
+		
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 			$form->setInputFilter($applications->getInputFilter());
