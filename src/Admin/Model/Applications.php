@@ -169,7 +169,7 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 			)));
 
 			$inputFilter->add($factory->createInput(array(
-				'name'	 => 'client_id',
+				'name'	 => 'clients_id',
 				'required' => true,
 				'filters'  => array(
 					array('name' => 'Int'),
