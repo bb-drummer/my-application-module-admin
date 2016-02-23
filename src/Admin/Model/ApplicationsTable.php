@@ -19,15 +19,30 @@ use Zend\Db\TableGateway\TableGateway;
 use Admin\Model\Applications;
 use Zend\Db\Sql\Select;
 
+/**
+ * class Admin\Model\ApplicationsTable
+ * 
+ * @author bba
+ * @package ApplicationsTable
+ */
 class ApplicationsTable
 {
 	protected $tableGateway;
 
+	/**
+	 * 
+	 * @param TableGateway $tableGateway
+	 */
 	public function __construct(TableGateway $tableGateway)
 	{
 		$this->tableGateway = $tableGateway;
 	}
 
+	/**
+	 * 
+	 * @param string $scope
+	 * @return \Zend\Db\ResultSet\ResultSet
+	 */
 	public function fetchAll($scope = '')
 	{
 		$resultSet = $this->tableGateway->select(function (Select $select) use ($scope) {
@@ -40,6 +55,11 @@ class ApplicationsTable
 		return $resultSet;
 	}
 
+	/**
+	 * 
+	 * @param string $scope
+	 * @return \Zend\Db\Adapter\Driver\ResultInterface
+	 */
 	public function fetchAllFull($scope = '')
 	{
 		$sqlSelect = $this->tableGateway->getSql()->select();
@@ -68,32 +88,14 @@ class ApplicationsTable
 				$select->order('name ASC');
 			}
 		});*/
-		echo $sqlSelect->getSqlString();
+		//echo $sqlSelect->getSqlString();
 		$statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($sqlSelect);
 		$resultSet = $statement->execute();
 		
 		return $resultSet;
 	}
 
-	public function fetchApplication()
-	{
-		return $this->fetchAll('application');
-	}
-
-	public function fetchUser( $id )
-	{
-		if (!$id) { return array(); }
-		$resultSet = $this->tableGateway->select(function (Select $select) use ($id) {
-			if (!empty($id)) {
-				$select->where(array( '(scope = \'user\') AND (ref_id = \''.((int)$id).'\')' ))->order('type, name ASC');
-			} else {
-				$select->order('type, name ASC');
-			}
-		});
-		return $resultSet;
-	}
-
-	public function getApplications($id)
+	public function getApplication($id)
 	{
 		$id  = (int) $id;
 		$rowset = $this->tableGateway->select(array('applications_id' => $id));
@@ -104,16 +106,15 @@ class ApplicationsTable
 		return $row;
 	}
 
-	public function saveApplications(Applications $applications)
+	public function saveApplication(Applications $applications)
 	{
 		$data = array(
-			'name'			=> $applications->name,
-			'extraname'		=> $applications->extraname,
-			'homepage'		=> $applications->homepage,
-			'email'			=> $applications->email,
-			'contact'		=> $applications->contact,
-			'phone'			=> $applications->phone,
-			'statistics'	=> $applications->statistics,
+			'name'		=> $applications->name,
+			'shortname'	=> $applications->shortname,
+			'path'		=> $applications->path,
+			'url'		=> $applications->url,
+			'email'		=> $applications->email,
+			'client_id'	=> $applications->client_id,
 		);
 
 		$id = (int)$applications->applications_id;
@@ -128,7 +129,7 @@ class ApplicationsTable
 		}
 	}
 
-	public function deleteApplications($id)
+	public function deleteApplication($id)
 	{
 		$this->tableGateway->delete(array('applications_id' => $id));
 	}

@@ -41,7 +41,7 @@ class ApplicationsController extends BaseActionController
 		$tmplVars = $this->getTemplateVars();
 		$aApplicationslist = $this->getApplicationsTable()->fetchAllFull();
 		if ( $this->getRequest()->isXmlHttpRequest() ) {
-			$datatablesData = array('data' => $aApplicationslist->toArray());
+			$datatablesData = array('data' => $aApplicationslist);
 			$oController = $this;
 			$datatablesData['data'] = array_map( function ($row) use ($oController) {
 				$actions = '<div class="btn-group btn-group-xs">'.
@@ -88,7 +88,7 @@ class ApplicationsController extends BaseActionController
 
 			if ($form->isValid()) {
 				$applications->exchangeArray($form->getData());
-				$this->getApplicationsTable()->saveApplications($applications);
+				$this->getApplicationsTable()->saveApplication($applications);
 				$this->flashMessenger()->addSuccessMessage($this->translate('application has been saved'));
 				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
@@ -118,7 +118,7 @@ class ApplicationsController extends BaseActionController
 				'action' => 'index'
 			));
 		}
-		$applications = $this->getApplicationsTable()->getApplications($id);
+		$applications = $this->getApplicationsTable()->getApplication($id);
 
 		$form  = new ApplicationsForm();
 		$form->bind($applications);
@@ -137,7 +137,7 @@ class ApplicationsController extends BaseActionController
 			$form->setData($request->getPost());
 
 			if ($form->isValid()) {
-				$this->getApplicationsTable()->saveApplications($applications);
+				$this->getApplicationsTable()->saveApplication($applications);
 				$this->flashMessenger()->addSuccessMessage($this->translate("application has been saved"));
 				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
@@ -169,7 +169,7 @@ class ApplicationsController extends BaseActionController
 		}
 
 		$tmplVars["applications_id"] = $id;
-		$tmplVars["applications"] = $this->getApplicationsTable()->getApplications($id);
+		$tmplVars["applications"] = $this->getApplicationsTable()->getApplication($id);
 		
 		$request = $this->getRequest();
 		if ($request->isPost()) {
@@ -177,7 +177,7 @@ class ApplicationsController extends BaseActionController
 
 			if (!empty($del)) {
 				$id = (int) $request->getPost('id');
-				$this->getApplicationsTable()->deleteApplications($id);
+				$this->getApplicationsTable()->deleteApplication($id);
 				$this->flashMessenger()->addSuccessMessage($this->translate("application has been deleted"));
 				if ( $this->getRequest()->isXmlHttpRequest() ) {
 					$tmplVars["showForm"] = false;
