@@ -173,11 +173,14 @@ class ClientsController extends BaseActionController
 		return new ViewModel($tmplVars);
 	}
 
+	/**
+	 * @return Admin\Model\ClientsTable
+	 */
 	public function getClientsTable()
 	{
 		if (!$this->clientsTable) {
 			$sm = $this->getServiceLocator();
-			$this->clientsTable = $sm->get('Admin\Model\ClientsTable');
+			$this->clientsTable = $sm->get('AdminClientsTable');
 		}
 		return $this->clientsTable;
 	}

@@ -44,13 +44,29 @@ return array(
 		
 	'service_manager' => array(
 		'factories' => array(
+			
+			// table services
+			'Admin\Model\AclTable'			=> 'Admin\Factory\AclTableFactory',
+			'Admin\Model\AclresourceTable'	=> 'Admin\Factory\AclresourceTableFactory',
+			'Admin\Model\AclroleTable'		=> 'Admin\Factory\AclroleTableFactory',
 			'Admin\Model\ApplicationsTable'	=> 'Admin\Factory\ApplicationsTableFactory',
 			'Admin\Model\ClientsTable'		=> 'Admin\Factory\ClientsTableFactory',
+			'Admin\Model\SettingsTable'		=> 'Admin\Factory\SettingsTableFactory',
+			'Admin\Model\UserTable'			=> 'Admin\Factory\UserTableFactory',
+			'Admin\Model\UserProfileTable'	=> 'Admin\Factory\UserProvileTableFactory',
 		),
 			
 		'aliases' => array(
-			'ApplicationsTable'				=> 'Admin\Model\ApplicationsTable',
-			'ClientsTable'					=> 'Admin\Model\ClientsTable',
+				
+			// table aliases
+			'AdminAclTable'					=> 'Admin\Model\AclTable',
+			'AdminAclresourcesTable'		=> 'Admin\Model\AclresourceTable',
+			'AdminAclrolesTable'			=> 'Admin\Model\AclroleTable',
+			'AdminApplicationsTable'		=> 'Admin\Model\ApplicationsTable',
+			'AdminClientsTable'				=> 'Admin\Model\ClientsTable',
+			'AdminSettingsTable'			=> 'Admin\Model\SettingsTable',
+			'AdminUserTable'				=> 'Admin\Model\UserTable',
+			'AdminUserProfileTable'			=> 'Admin\Model\UserProfileTable',
 		),
 		
 	),

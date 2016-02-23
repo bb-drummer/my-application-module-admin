@@ -20,30 +20,30 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-use Admin\Model\Applications;
-use Admin\Model\ApplicationsTable;
+use Admin\Model\Aclrole;
+use Admin\Model\AclroleTable;
 
 /**
- * Class Admin\Model\ApplicationsTableFactory
+ * Class Admin\Model\AclroleTableFactory
  *
- * @package Admin\Factory\ApplicationsTableFactory
+ * @package Admin\Factory\AclroleTableFactory
  */
-class ApplicationsTableFactory implements FactoryInterface
+class AclroleTableFactory implements FactoryInterface
 {
 	/**
 	 * Create service
 	 *
 	 * @param ServiceLocatorInterface $serviceLocator
 	 *
-	 * @return Admin\Model\ApplicationsTable
+	 * @return Admin\Model\AclroleTable
 	 */
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
 		$dbAdapter			= $serviceLocator->get('Zend\Db\Adapter\Adapter');
 		$resultSetPrototype	= new ResultSet();
-		$resultSetPrototype->setArrayObjectPrototype(new Applications());
-		$tableGateway		= new TableGateway('applications', $dbAdapter, null, $resultSetPrototype);
-		$table				= new ApplicationsTable($tableGateway);
+		$resultSetPrototype->setArrayObjectPrototype(new Aclrole());
+		$tableGateway		= new TableGateway('aclrole', $dbAdapter, null, $resultSetPrototype);
+		$table				= new AclroleTable($tableGateway);
 		return $table;
 	}
 }

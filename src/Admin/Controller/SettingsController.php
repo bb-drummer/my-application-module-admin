@@ -173,11 +173,14 @@ class SettingsController extends BaseActionController
 		return new ViewModel($tmplVars);
 	}
 
+	/**
+	 * @return Admin\Model\SettingsTable
+	 */
 	public function getSettingsTable()
 	{
 		if (!$this->settingsTable) {
 			$sm = $this->getServiceLocator();
-			$this->settingsTable = $sm->get('Admin\Model\SettingsTable');
+			$this->settingsTable = $sm->get('AdminSettingsTable');
 		}
 		return $this->settingsTable;
 	}

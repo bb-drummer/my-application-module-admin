@@ -173,11 +173,14 @@ class ApplicationsController extends BaseActionController
 		return new ViewModel($tmplVars);
 	}
 
+	/**
+	 * @return Admin\Model\ApplicationsTable
+	 */
 	public function getApplicationsTable()
 	{
 		if (!$this->applicationsTable) {
 			$sm = $this->getServiceLocator();
-			$this->applicationsTable = $sm->get('Admin\Model\ApplicationsTable');
+			$this->applicationsTable = $sm->get('AdminApplicationsTable');
 		}
 		return $this->applicationsTable;
 	}

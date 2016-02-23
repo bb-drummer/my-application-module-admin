@@ -21,6 +21,7 @@ use Admin\Module as AdminModule;
 use Admin\Model\User;
 use Admin\Form\UserForm;
 use Admin;
+use Admin\Model\AclroleTable;
 
 class UsersController extends BaseActionController
 {
@@ -299,20 +300,26 @@ class UsersController extends BaseActionController
 		
 	}
 
+	/**
+	 * @return Admin\Model\UserTable
+	 */
 	public function getUserTable()
 	{
 		if (!$this->userTable) {
 			$sm = $this->getServiceLocator();
-			$this->userTable = $sm->get('Admin\Model\UserTable');
+			$this->userTable = $sm->get('AdminUserTable');
 		}
 		return $this->userTable;
 	}
 	
+	/**
+	 * @return Admin\Model\AclroleTable
+	 */
 	public function getAclroleTable()
 	{
 		if (!$this->AclroleTable) {
 			$sm = $this->getServiceLocator();
-			$this->AclroleTable = $sm->get('Admin\Model\AclroleTable');
+			$this->AclroleTable = $sm->get('AdminAclroleTable');
 		}
 		return $this->AclroleTable;
 	}

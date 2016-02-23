@@ -586,29 +586,38 @@ class AclController extends BaseActionController
 	
 	// table getters
 	
+	/**
+	 * @return Admin\Model\AclTable
+	 */
 	public function getAclTable()
 	{
 		if (!$this->AclTable) {
 			$sm = $this->getServiceLocator();
-			$this->AclTable = $sm->get('Admin\Model\AclTable');
+			$this->AclTable = $sm->get('AdminAclTable');
 		}
 		return $this->AclTable;
 	}
 
+	/**
+	 * @return Admin\Model\AclroleTable
+	 */
 	public function getAclroleTable()
 	{
 		if (!$this->AclroleTable) {
 			$sm = $this->getServiceLocator();
-			$this->AclroleTable = $sm->get('Admin\Model\AclroleTable');
+			$this->AclroleTable = $sm->get('AdminAclroleTable');
 		}
 		return $this->AclroleTable;
 	}
 
+	/**
+	 * @return Admin\Model\AclresourceTable
+	 */
 	public function getAclresourceTable()
 	{
 		if (!$this->AclresourceTable) {
 			$sm = $this->getServiceLocator();
-			$this->AclresourceTable = $sm->get('Admin\Model\AclresourceTable');
+			$this->AclresourceTable = $sm->get('AdminAclresourceTable');
 		}
 		return $this->AclresourceTable;
 	}

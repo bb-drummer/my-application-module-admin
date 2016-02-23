@@ -20,30 +20,30 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-use Admin\Model\Applications;
-use Admin\Model\ApplicationsTable;
+use Admin\Model\User;
+use Admin\Model\UserTable;
 
 /**
- * Class Admin\Model\ApplicationsTableFactory
+ * Class Admin\Model\UserTableFactory
  *
- * @package Admin\Factory\ApplicationsTableFactory
+ * @package Admin\Factory\UserTableFactory
  */
-class ApplicationsTableFactory implements FactoryInterface
+class UserTableFactory implements FactoryInterface
 {
 	/**
 	 * Create service
 	 *
 	 * @param ServiceLocatorInterface $serviceLocator
 	 *
-	 * @return Admin\Model\ApplicationsTable
+	 * @return Admin\Model\UserTable
 	 */
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
 		$dbAdapter			= $serviceLocator->get('Zend\Db\Adapter\Adapter');
 		$resultSetPrototype	= new ResultSet();
-		$resultSetPrototype->setArrayObjectPrototype(new Applications());
-		$tableGateway		= new TableGateway('applications', $dbAdapter, null, $resultSetPrototype);
-		$table				= new ApplicationsTable($tableGateway);
+		$resultSetPrototype->setArrayObjectPrototype(new User());
+		$tableGateway		= new TableGateway('user', $dbAdapter, null, $resultSetPrototype);
+		$table				= new UserTable($tableGateway);
 		return $table;
 	}
 }
