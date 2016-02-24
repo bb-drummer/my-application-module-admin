@@ -71,24 +71,6 @@ class ApplicationsTable
 			),
 			Select::JOIN_LEFT
 		);
-		
-		/*$resultSet = $this->tableGateway->selectWith(function (Select $select) use ($scope) {
-			$select->join(
-				'clients', 
-				'applications.client_id = clients.clients_id', 
-				array(
-					'name' => 'clientname',
-					'extraname' => 'clientextraname',
-				), 
-				Select::JOIN_LEFT
-			);
-			if (!empty($scope)) {
-				$select->where('scope = \''.$scope.'\'')->order('type, name ASC');
-			} else {
-				$select->order('name ASC');
-			}
-		});*/
-		//echo $sqlSelect->getSqlString();
 		$statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($sqlSelect);
 		$resultSet = $statement->execute();
 		
@@ -98,7 +80,7 @@ class ApplicationsTable
 	public function getApplication($id)
 	{
 		$id  = (int) $id;
-		$rowset = $this->tableGateway->select(array('applications_id' => $id));
+		$rowset = $this->tableGateway->select(array('application_id' => $id));
 		$row = $rowset->current();
 		if (!$row) {
 			throw new \Exception("Could not find row $id");
@@ -122,7 +104,7 @@ class ApplicationsTable
 			$this->tableGateway->insert($data);
 		} else {
 			if ($this->getApplications($id)) {
-				$this->tableGateway->update($data, array('applications_id' => $id));
+				$this->tableGateway->update($data, array('application_id' => $id));
 			} else {
 				throw new \Exception('Form id does not exist');
 			}
@@ -131,6 +113,6 @@ class ApplicationsTable
 
 	public function deleteApplication($id)
 	{
-		$this->tableGateway->delete(array('applications_id' => $id));
+		$this->tableGateway->delete(array('application_id' => $id));
 	}
 }
