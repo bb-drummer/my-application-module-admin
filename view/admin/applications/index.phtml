@@ -19,17 +19,17 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($applicationsdata as $applications) : ?>
+					<?php foreach ($applicationsdata as $application) : ?>
 					<tr>
-						<td><?php echo $this->escapeHtml($applications->name).(!empty($applications->shortname) ? ', '.$this->escapeHtml($applications->shortname) : '' ); ?></td>
-						<td><?php echo $this->escapeHtml($applications->url); ?></td>
-						<td><?php echo $this->escapeHtml($applications->clientname); ?></td>
+						<td><?php echo $this->escapeHtml($application->name).(!empty($application->shortname) ? ', '.$this->escapeHtml($application->shortname) : '' ); ?></td>
+						<td><?php echo $this->escapeHtml($application->url); ?></td>
+						<td><?php echo $this->escapeHtml($application->clientname); ?></td>
 						<td>
 							<div class="btn-group btn-group-xs">
 								<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/applicationsedit',
-									array('action'=>'edit', 'application_id' => $applications->applications_id));?>"><span class="fa fa-pencil"></span> <?php echo $this->translate("edit"); ?></a>
+									array('action'=>'edit', 'application_id' => $application->applications_id));?>"><span class="fa fa-pencil"></span> <?php echo $this->translate("edit"); ?></a>
 								<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/applicationsedit',
-									array('action'=>'delete', 'application_id' => $applications->applications_id));?>"><span class="fa fa-trash-o"></span> <?php echo $this->translate("delete"); ?></a>
+									array('action'=>'delete', 'application_id' => $application->applications_id));?>"><span class="fa fa-trash-o"></span> <?php echo $this->translate("delete"); ?></a>
 							</div>
 						</td>
 					</tr>
