@@ -221,7 +221,7 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 	public function getServiceManager()
 	{
 		if (null === $this->serviceManager) {
-			$this->setServiceManager(new ServiceManager());
+			$this->serviceManager = new ServiceManager();
 		}
 		return $this->serviceManager;
 	}
@@ -258,7 +258,7 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 	public function getServiceLocator()
 	{
 		if (null === $this->serviceLocator) {
-			$this->setServiceLocator(new ServiceLocator());
+			$this->serviceLocator = new ServiceLocator();
 		}
 		return $this->serviceLocator;
 	}
