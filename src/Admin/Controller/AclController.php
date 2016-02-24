@@ -44,7 +44,7 @@ class AclController extends BaseActionController
 					'icon'			=> 'plus',
 					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
 					'route'			=> 'admin/acledit',
-					'action'		=> 'add',
+					'action'		=> 'addrole',
 					'resource'		=> 'mvc:user',
 				),
 				array(
