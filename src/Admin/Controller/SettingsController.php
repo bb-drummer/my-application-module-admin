@@ -26,6 +26,18 @@ class SettingsController extends BaseActionController
 	
 	public function onDispatch(\Zend\Mvc\MvcEvent $e)
 	{
+		$this->setToolbarItems(array(
+			"index" => array(
+				array(
+					'label'			=> 'add setting',
+					'icon'			=> 'plus',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'admin/settingsedit',
+					'action'		=> 'add',
+					'resource'		=> 'mvc:user',
+				),
+			),
+		));
 		$this->setActionTitles(array(
 			'index' => $this->translate("manage settings"),
 			'add' => $this->translate("add setting"),

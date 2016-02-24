@@ -37,6 +37,110 @@ class AclController extends BaseActionController
 
 	public function onDispatch(\Zend\Mvc\MvcEvent $e)
 	{
+		$this->setToolbarItems(array(
+			"index" => array(
+				array(
+					'label'			=> 'add role',
+					'icon'			=> 'plus',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'admin/acledit',
+					'action'		=> 'add',
+					'resource'		=> 'mvc:user',
+				),
+				array(
+					'label'			=> 'manage roles',
+					'icon'			=> 'user',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'admin/acledit',
+					'action'		=> 'roles',
+					'resource'		=> 'mvc:user',
+				),
+				array(
+					'label'			=> "",
+					'class'			=> 'btn btn-none btn-sm',
+					'uri'			=> "#",
+					'active'		=> false,
+				),
+				array(
+					'label'			=> 'add resource',
+					'icon'			=> 'plus',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'admin/acledit',
+					'action'		=> 'addresource',
+					'resource'		=> 'mvc:user',
+				),
+				array(
+					'label'			=> 'manage resouces',
+					'icon'			=> 'list-alt',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'admin/acledit',
+					'action'		=> 'roles',
+					'resource'		=> 'mvc:user',
+				),
+			),
+			"roles" => array(
+				array(
+					'label'			=> 'add role',
+					'icon'			=> 'plus',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'admin/acledit',
+					'action'		=> 'addrole',
+					'resource'		=> 'mvc:user',
+				),
+				array(
+					'label'			=> "",
+					'class'			=> 'btn btn-none btn-sm',
+					'uri'			=> "#",
+					'active'		=> false,
+				),
+				array(
+					'label'			=> 'ACL',
+					'icon'			=> 'asterisk',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'admin/acledit',
+					'resource'		=> 'mvc:user',
+				),
+				array(
+					'label'			=> 'manage resouces',
+					'icon'			=> 'list-alt',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'admin/acledit',
+					'action'		=> 'roles',
+					'resource'		=> 'mvc:user',
+				),
+			),
+			"resources" => array(
+				array(
+					'label'			=> 'add resource',
+					'icon'			=> 'plus',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'admin/acledit',
+					'action'		=> 'addresource',
+					'resource'		=> 'mvc:user',
+				),
+				array(
+					'label'			=> "",
+					'class'			=> 'btn btn-none btn-sm',
+					'uri'			=> "#",
+					'active'		=> false,
+				),
+				array(
+					'label'			=> 'ACL',
+					'icon'			=> 'asterisk',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'admin/acledit',
+					'resource'		=> 'mvc:user',
+				),
+				array(
+					'label'			=> 'manage roles',
+					'icon'			=> 'user',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'admin/acledit',
+					'action'		=> 'roles',
+					'resource'		=> 'mvc:user',
+				),
+			),
+		));
 		$this->setActionTitles(array(
 			'index' => $this->translate("manage permissions"),
 			'roles' => $this->translate("manage roles"),

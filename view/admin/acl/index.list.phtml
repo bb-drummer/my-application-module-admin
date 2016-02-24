@@ -1,35 +1,34 @@
-		<h4 class="hide"><?php echo $this->translate("list view")?></h4>
-		
-		<div class="table-responsive">
-			<table class="table table-striped table-hover datatable crud" data-src="<?php echo $this->url('admin/acledit', array('action'=>'acldata')) ?>">
-				<thead>
-					<tr>
-						<th data-column="roleslug"><?php echo $this->translate("role")?></th>
-						<th data-column="resourceslug"><?php echo $this->translate("resource")?></th>
-						<th data-column="status"><?php echo $this->translate("status")?></th>
-						<th class="actions">&nbsp;</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php foreach ($resources as $resource) : ?>
-						<?php foreach ($roles as $role) : ?>
-						<?php
-							$acl = $acltable->getAclByRoleResource($role['aclroles_id'],$resource['aclresources_id']);
-						?>
-						<tr>
-							<td><?php echo $this->escapehtml($role['roleslug']) ?></td>
-							<td><?php echo $this->escapehtml($resource['resourceslug']) ?></td>
-							<td><?php echo (!empty($acl->state) ? $this->escapehtml($acl->state) : '---') ?></td>
-							<td>
-								<div class="btn-group btn-group-xs">
-									<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/acledit', array('action'=>'editacl', 'acl_id' => $acl->acl_id));?>"><span class="fa fa-pencil"></span> <?php echo $this->translate("edit"); ?></a>
-									<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/acledit', array('action'=>'deleteacl', 'acl_id' => $acl->acl_id));?>"><span class="fa fa-trash-o"></span> <?php echo $this->translate("delete"); ?></a>
-								</div>
-							</td>
-						</tr>
-						<?php endforeach; ?>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
-		</div>
-		
+<h4 class="hide"><?php echo $this->translate("list view")?></h4>
+
+<div class="table-responsive">
+	<table class="table table-striped table-hover datatable crud" data-src="<?php echo $this->url('admin/acledit', array('action'=>'acldata')) ?>">
+		<thead>
+			<tr>
+				<th data-column="roleslug"><?php echo $this->translate("role")?></th>
+				<th data-column="resourceslug"><?php echo $this->translate("resource")?></th>
+				<th data-column="status"><?php echo $this->translate("status")?></th>
+				<th class="actions">&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($resources as $resource) : ?>
+				<?php foreach ($roles as $role) : ?>
+				<?php
+					$acl = $acltable->getAclByRoleResource($role['aclroles_id'],$resource['aclresources_id']);
+				?>
+				<tr>
+					<td><?php echo $this->escapehtml($role['roleslug']) ?></td>
+					<td><?php echo $this->escapehtml($resource['resourceslug']) ?></td>
+					<td><?php echo (!empty($acl->state) ? $this->escapehtml($acl->state) : '---') ?></td>
+					<td>
+						<div class="btn-group btn-group-xs">
+							<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/acledit', array('action'=>'editacl', 'acl_id' => $acl->acl_id));?>"><span class="fa fa-pencil"></span> <?php echo $this->translate("edit"); ?></a>
+							<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/acledit', array('action'=>'deleteacl', 'acl_id' => $acl->acl_id));?>"><span class="fa fa-trash-o"></span> <?php echo $this->translate("delete"); ?></a>
+						</div>
+					</td>
+				</tr>
+				<?php endforeach; ?>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+</div>

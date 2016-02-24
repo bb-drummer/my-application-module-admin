@@ -26,6 +26,18 @@ class ClientsController extends BaseActionController
 	
 	public function onDispatch(\Zend\Mvc\MvcEvent $e)
 	{
+		$this->setToolbarItems(array(
+			"index" => array(
+				array(
+					'label'			=> 'add client',
+					'icon'			=> 'plus',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'admin/clientsedit',
+					'action'		=> 'add',
+					'resource'		=> 'mvc:user',
+				),
+			),
+		));
 		$this->setActionTitles(array(
 			'index' => $this->translate("manage clients"),
 			'add' => $this->translate("add client"),

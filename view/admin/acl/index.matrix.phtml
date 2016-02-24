@@ -1,89 +1,89 @@
-		<h4 class="hide"><?php echo $this->translate("matrix view")?></h4>
+<h4 class="hide"><?php echo $this->translate("matrix view")?></h4>
 
-		<table class="table table-striped table-hover datatable matrix" data-src="<?php echo $this->url('admin/acledit', array('action'=>'acldata')) ?>">
-			<thead>
-				<tr>
-					<th style="text-align: right; border-bottom: none; vertical-align: top;"><?php echo $this->translate("role")?>:</th>
-					<?php foreach ($roles as $role) : ?>
-					<th rowspan="2" style="vertical-align: top;" data-orderable="false" data-searchable="false"><?php echo $this->escapehtml($role['rolename']) ?></th>
-					<?php endforeach; ?>
-				</tr>
-				<tr>
-					<th style="text-align: left; border-top: none; vertical-align: bottom;"><?php echo $this->translate("resource")?>:</th>
-				</tr>
-			</thead>
-			<tbody>
-			<?php foreach ($resources as $resource) : ?>
-			<tr>
-				<th style="text-align: left;" data-search="<?php echo $this->escapeHtml($resource['resourcename']." ".$resource['resourceslug']);?>"><?php echo $this->escapeHtml($resource['resourcename']);?></th>
-				<?php foreach ($roles as $role) : ?>
-				<td class="aclswitch">
-				<?php
-					$oAcl = $acltable->getAclByRoleResource($role['aclroles_id'],$resource['aclresources_id']);
-					
-					// allow button
-					$form->setAttribute('class', 'allow');
-					$form->setName('aclallow_'.$role['aclroles_id'].'_'.$resource['aclresources_id']);
-					if ($oAcl) {
-						$form->setAttribute('action', $this->url('admin/acledit', array('action' => 'editacl','acl_id' => $oAcl->acl_id)));
-						$form->get('acl_id')->setValue($oAcl->acl_id);
-					} else {
-						$form->setAttribute('action', $this->url('admin/acledit', array('action' => 'addacl')));
-						$form->get('acl_id')->setValue('');
-					}
-					$form->get('state')->setValue('allow');
-					$form->get('submit')->setAttribute('disabled', false);
-					if ($oAcl && $oAcl->state == 'allow') {
-						$form->get('submit')->setAttribute('disabled', 'disabled');
-					}
-						
-					$form->prepare();
-					echo $this->form()->openTag($form);
-					echo $this->formHidden($form->get('aclroles_id')->setValue($role['aclroles_id']));
-					echo $this->formHidden($form->get('aclresources_id')->setValue($resource['aclresources_id']));
-					echo $this->formHidden($form->get('state'));
-					echo $this->formHidden($form->get('acl_id'));
-					echo $this->formSubmit($form
-							->get('submit')
-							->setAttribute('class', 'btn btn-success btn-xs')
-							->setAttribute('value', 'allow')
-							->setAttribute('title', $this->translate("allow"))
-					);
-					echo $this->form()->closeTag();
-					
-					// deny button
-					$form->setAttribute('class', 'deny');
-					$form->setName('acldeny_'.$role['aclroles_id'].'_'.$resource['aclresources_id']);
-					if ($oAcl) {
-						$form->setAttribute('action', $this->url('admin/acledit', array('action' => 'editacl','acl_id' => $oAcl->acl_id)));
-						$form->get('acl_id')->setValue($oAcl->acl_id);
-					} else {
-						$form->setAttribute('action', $this->url('admin/acledit', array('action' => 'addacl')));
-						$form->get('acl_id')->setValue('');
-					}
-					$form->get('state')->setValue('deny');
-					$form->get('submit')->setAttribute('disabled', false);
-					if ($oAcl && $oAcl->state == 'deny') {
-						$form->get('submit')->setAttribute('disabled', 'disabled');
-					}
-					$form->prepare();
-					echo $this->form()->openTag($form);
-					echo $this->formHidden($form->get('aclroles_id')->setValue($role['aclroles_id']));
-					echo $this->formHidden($form->get('aclresources_id')->setValue($resource['aclresources_id']));
-					echo $this->formHidden($form->get('state'));
-					echo $this->formHidden($form->get('acl_id'));
-					echo $this->formSubmit($form
-							->get('submit')
-							->setAttribute('class', 'btn btn-danger btn-xs')
-							->setAttribute('value', 'deny')
-							->setAttribute('title', $this->translate("deny"))
-					);
-					echo $this->form()->closeTag();
-				?>
-				<!-- <?php echo $this->escapehtml($resource['resourceslug']) ?>,<?php echo $this->escapehtml($role['roleslug']) ?> -->
-				</td>
-				<?php endforeach; ?>
-			</tr>
+<table class="table table-striped table-hover datatable matrix" data-src="<?php echo $this->url('admin/acledit', array('action'=>'acldata')) ?>">
+	<thead>
+		<tr>
+			<th style="text-align: right; border-bottom: none; vertical-align: top;"><?php echo $this->translate("role")?>:</th>
+			<?php foreach ($roles as $role) : ?>
+			<th rowspan="2" style="vertical-align: top;" data-orderable="false" data-searchable="false"><?php echo $this->escapehtml($role['rolename']) ?></th>
 			<?php endforeach; ?>
-			</tbody>
-		</table>
+		</tr>
+		<tr>
+			<th style="text-align: left; border-top: none; vertical-align: bottom;"><?php echo $this->translate("resource")?>:</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach ($resources as $resource) : ?>
+	<tr>
+		<th style="text-align: left;" data-search="<?php echo $this->escapeHtml($resource['resourcename']." ".$resource['resourceslug']);?>"><?php echo $this->escapeHtml($resource['resourcename']);?></th>
+		<?php foreach ($roles as $role) : ?>
+		<td class="aclswitch">
+		<?php
+			$oAcl = $acltable->getAclByRoleResource($role['aclroles_id'],$resource['aclresources_id']);
+			
+			// allow button
+			$form->setAttribute('class', 'allow');
+			$form->setName('aclallow_'.$role['aclroles_id'].'_'.$resource['aclresources_id']);
+			if ($oAcl) {
+				$form->setAttribute('action', $this->url('admin/acledit', array('action' => 'editacl','acl_id' => $oAcl->acl_id)));
+				$form->get('acl_id')->setValue($oAcl->acl_id);
+			} else {
+				$form->setAttribute('action', $this->url('admin/acledit', array('action' => 'addacl')));
+				$form->get('acl_id')->setValue('');
+			}
+			$form->get('state')->setValue('allow');
+			$form->get('submit')->setAttribute('disabled', false);
+			if ($oAcl && $oAcl->state == 'allow') {
+				$form->get('submit')->setAttribute('disabled', 'disabled');
+			}
+				
+			$form->prepare();
+			echo $this->form()->openTag($form);
+			echo $this->formHidden($form->get('aclroles_id')->setValue($role['aclroles_id']));
+			echo $this->formHidden($form->get('aclresources_id')->setValue($resource['aclresources_id']));
+			echo $this->formHidden($form->get('state'));
+			echo $this->formHidden($form->get('acl_id'));
+			echo $this->formSubmit($form
+					->get('submit')
+					->setAttribute('class', 'btn btn-success btn-xs')
+					->setAttribute('value', 'allow')
+					->setAttribute('title', $this->translate("allow"))
+			);
+			echo $this->form()->closeTag();
+			
+			// deny button
+			$form->setAttribute('class', 'deny');
+			$form->setName('acldeny_'.$role['aclroles_id'].'_'.$resource['aclresources_id']);
+			if ($oAcl) {
+				$form->setAttribute('action', $this->url('admin/acledit', array('action' => 'editacl','acl_id' => $oAcl->acl_id)));
+				$form->get('acl_id')->setValue($oAcl->acl_id);
+			} else {
+				$form->setAttribute('action', $this->url('admin/acledit', array('action' => 'addacl')));
+				$form->get('acl_id')->setValue('');
+			}
+			$form->get('state')->setValue('deny');
+			$form->get('submit')->setAttribute('disabled', false);
+			if ($oAcl && $oAcl->state == 'deny') {
+				$form->get('submit')->setAttribute('disabled', 'disabled');
+			}
+			$form->prepare();
+			echo $this->form()->openTag($form);
+			echo $this->formHidden($form->get('aclroles_id')->setValue($role['aclroles_id']));
+			echo $this->formHidden($form->get('aclresources_id')->setValue($resource['aclresources_id']));
+			echo $this->formHidden($form->get('state'));
+			echo $this->formHidden($form->get('acl_id'));
+			echo $this->formSubmit($form
+					->get('submit')
+					->setAttribute('class', 'btn btn-danger btn-xs')
+					->setAttribute('value', 'deny')
+					->setAttribute('title', $this->translate("deny"))
+			);
+			echo $this->form()->closeTag();
+		?>
+		<!-- <?php echo $this->escapehtml($resource['resourceslug']) ?>,<?php echo $this->escapehtml($role['roleslug']) ?> -->
+		</td>
+		<?php endforeach; ?>
+	</tr>
+	<?php endforeach; ?>
+	</tbody>
+</table>
