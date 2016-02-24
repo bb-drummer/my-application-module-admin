@@ -15,7 +15,7 @@ if ($showForm) {
 		'<p>'.$this->translate("Do you really want to delete this application?").'</p>',
 		'<p>'.
 			'&quot;'.$this->escapeHtml($applications->name).'&quot;, '.
-				'&quot;'.$this->escapeHtml($applications->shortname).'&quot;'.
+				'&quot;'.$this->escapeHtml($applications->shortname).'&quot; - '.
 				'&quot;'.$this->escapeHtml($applications->getClient()->name).'&quot;'.
 		'</p>',
 		'<form action="'.$url.'" method="post" class="form-xhr">'.
