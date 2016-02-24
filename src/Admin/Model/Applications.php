@@ -230,7 +230,7 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 	 * Set service manager instance
 	 *
 	 * @param ServiceManager $serviceManager
-	 * @return User
+	 * @return void
 	 */
 	public function setServiceManager(ServiceManager $serviceManager)
 	{
@@ -239,7 +239,7 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 	}
 
 	/**
-	 * Set serviceManager instance
+	 * Set serviceLocator instance
 	 *
 	 * @param  ServiceLocatorInterface $serviceLocator
 	 * @return void
@@ -247,6 +247,7 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 	public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
 	{
 		$this->serviceLocator = $serviceLocator;
+		return $this;
 	}
 
 	/**
