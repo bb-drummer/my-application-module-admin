@@ -30,7 +30,7 @@ class ApplicationsForm extends Form
 		
 		$this->setAttribute('method', 'post');
 		$this->add(array(
-			'name' => 'applications_id',
+			'name' => 'application_id',
 			'attributes' => array(
 				'type'  => 'hidden',
 			),

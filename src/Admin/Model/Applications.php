@@ -27,7 +27,7 @@ use Zend\Di\ServiceLocator;
 
 class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInterface
 {
-	public $applications_id;
+	public $application_id;
 	public $name;
 	public $shortname;
 	public $path;
@@ -42,7 +42,7 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 	
 	public function exchangeArray($data)
 	{
-		$this->applications_id	= (isset($data['applications_id'])) ? $data['applications_id'] : $this->applications_id;
+		$this->application_id	= (isset($data['application_id'])) ? $data['application_id'] : $this->application_id;
 		$this->name				= (isset($data['name'])) ? $data['name'] : $this->name;
 		$this->shortname		= (isset($data['shortname'])) ? $data['shortname'] : $this->shortname;
 		$this->path				= (isset($data['path'])) ? $data['path'] : $this->path;
@@ -68,7 +68,7 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 			$factory	 = new InputFactory();
 
 			$inputFilter->add($factory->createInput(array(
-				'name'	 => 'applications_id',
+				'name'	 => 'application_id',
 				'required' => true,
 				'filters'  => array(
 					array('name' => 'Int'),

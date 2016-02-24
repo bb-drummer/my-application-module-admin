@@ -168,7 +168,7 @@ class ApplicationsController extends BaseActionController
 		} else {
 	   		$form->bind($applications);
 		}
-		$tmplVars["applications_id"] = $id;
+		$tmplVars["application_id"] = $id;
 		$tmplVars["form"] = $form;
 		return new ViewModel($tmplVars);
 	}
@@ -188,7 +188,7 @@ class ApplicationsController extends BaseActionController
 			return $this->redirect()->toRoute('admin/applicationsedit', array('action' => 'index'));
 		}
 
-		$tmplVars["applications_id"] = $id;
+		$tmplVars["application_id"] = $id;
 		$app = $this->getApplicationsTable()->getApplication($id);
 		$app->setServiceLocator($this->getServiceLocator());
 		$tmplVars["applications"] = $app;

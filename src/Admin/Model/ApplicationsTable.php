@@ -99,7 +99,7 @@ class ApplicationsTable
 			'client_id'	=> $applications->client_id,
 		);
 
-		$id = (int)$applications->applications_id;
+		$id = (int)$applications->application_id;
 		if ($id == 0) {
 			$this->tableGateway->insert($data);
 		} else {

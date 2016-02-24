@@ -22,7 +22,7 @@ if ($showForm) {
 	$formHTML .= $oComponents->formGroup($form, "client_id");
 	$formHTML .= $oComponents->formGroup($form, "email");
 	$formHTML .= '<hr />'; 
-	$formHTML .= $this->formHidden($form->get('applications_id'));
+	$formHTML .= $this->formHidden($form->get('application_id'));
 	$formHTML .= $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'btn btn-primary')));
 	$formHTML .= $this->formReset($form->get('reset')->setAttributes(array('class' =>'btn btn-default')));
 	$formHTML .= '<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'. $this->url('admin/applicationsedit') .'">'. $this->translate("cancel") .'</a>';
