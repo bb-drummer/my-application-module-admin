@@ -184,8 +184,12 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 	
 	public function getClient ($client_id) {
 		/** @var \Admin\Model\ClientsTable $clients */
-		$clients = $this->getServiceManager()->get('AdminClientsTable');
-		return $clients->getClients($client_id);
+		if ($this->client_id) {
+			$clients = $this->getServiceManager()->get('AdminClientsTable');
+			return $clients->getClients($this->client_id);
+		} else {
+			return null;
+		}
 	}
 	
 	
