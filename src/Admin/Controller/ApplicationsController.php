@@ -27,6 +27,18 @@ class ApplicationsController extends BaseActionController
 	
 	public function onDispatch(\Zend\Mvc\MvcEvent $e)
 	{
+		$this->setToolbarItems(array(
+			"index" => array(
+				array(
+					'label'			=> 'add application',
+					'icon'			=> 'plus',
+					'class'			=> 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+					'route'			=> 'admin/applicationsedit',
+					'action'		=> 'add',
+					'resource'		=> 'mvc:user',
+				),
+			),
+		));
 		$this->setActionTitles(array(
 			'index' => $this->translate("manage applications"),
 			'add' => $this->translate("add application"),
