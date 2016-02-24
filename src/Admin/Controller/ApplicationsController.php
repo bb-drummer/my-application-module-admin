@@ -42,20 +42,21 @@ class ApplicationsController extends BaseActionController
 		$tmplVars = $this->getTemplateVars();
 		/** @var \Zend\Db\Adapter\Driver\Pdo\Result $aApplicationslist */
 		$aApplicationslist = $this->getApplicationsTable()->fetchAllFull();
-		
+
+		$data = array();
+		$dataObj = array();
+		foreach ($aApplicationslist as $row) {
+			$data[] = $row;
+			$dataObj[] = (object)$row;
+		}
 		if ( $this->getRequest()->isXmlHttpRequest() ) {
-			$data = array();
-			foreach ($aApplicationslist as $row) {
-				$data[] = $row;
-			}
 			$datatablesData = array('data' => $data);
-			$datatablesData = array('data' => (array)$aApplicationslist);
 			$datatablesData['data'] = array_map( function ($row) use ($oController) {
 				$actions = '<div class="btn-group btn-group-xs">'.
 					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/applicationsedit',
-							array('action'=>'edit', 'application_id' => $row["applications_id"])).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
+							array('action'=>'edit', 'application_id' => $row["application_id"])).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
 					'<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute('admin/applicationsedit',
-							array('action'=>'delete', 'application_id' => $row["applications_id"])).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'.
+							array('action'=>'delete', 'application_id' => $row["application_id"])).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'.
 				'</div>';
 				$row["_actions_"] = $actions;
 				return $row;
@@ -63,7 +64,7 @@ class ApplicationsController extends BaseActionController
 			return $this->getResponse()->setContent(json_encode($datatablesData));
 		}
 		return new ViewModel(array(
-			'applicationsdata' => $aApplicationslist,
+			'applicationsdata' => $dataObj,
 		));
 	}
 	
