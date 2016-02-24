@@ -177,8 +177,9 @@ class ApplicationsController extends BaseActionController
 		}
 
 		$tmplVars["applications_id"] = $id;
-		$tmplVars["applications"] = $this->getApplicationsTable()->getApplication($id);
-		
+		$app = $this->getApplicationsTable()->getApplication($id);
+		$app->setServiceLocator($this->getServiceLocator());
+		$tmplVars["applications"] = $app;
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 			$del = $request->getPost('del', '');
