@@ -22,6 +22,8 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceManager;
+use Zend\Di\ServiceLocator;
 
 class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInterface
 {
@@ -218,6 +220,9 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 	 */
 	public function getServiceManager()
 	{
+		if (null === $this->serviceManager) {
+			$this->setServiceManager(new ServiceManager());
+		}
 		return $this->serviceManager;
 	}
 
@@ -251,6 +256,9 @@ class Applications implements InputFilterAwareInterface, ServiceLocatorAwareInte
 	 */
 	public function getServiceLocator()
 	{
+		if (null === $this->serviceLocator) {
+			$this->setServiceLocator(new ServiceLocator());
+		}
 		return $this->serviceLocator;
 	}
 
