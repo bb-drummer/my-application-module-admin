@@ -1,0 +1,870 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: my-application/module-admin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-02-25 16:49+0100\n"
+"PO-Revision-Date: 2016-02-25 17:14+0100\n"
+"Last-Translator: Björn Bartels, [dargon-projects.net] <bartels@dragon-"
+"projets.net>\n"
+"Language-Team: Björn Bartels, [dargon-projects.net] <bartels@dragon-projets."
+"net>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SearchPathExcluded-1: *.css\n"
+
+#: language/msgIds.php:8
+#, fuzzy
+msgid "admin"
+msgstr "Administrateur"
+
+#: language/msgIds.php:9
+#, fuzzy
+msgid "users"
+msgstr "Utilisateurs"
+
+#: language/msgIds.php:10
+#, fuzzy
+msgid "clients"
+msgstr "Clients"
+
+#: language/msgIds.php:11
+#, fuzzy
+msgid "applications"
+msgstr "applications"
+
+#: language/msgIds.php:12
+#, fuzzy
+msgid "permissions"
+msgstr "Autorisations"
+
+#: language/msgIds.php:13
+#, fuzzy
+msgid "ACL"
+msgstr "ACL"
+
+#: language/msgIds.php:14
+#, fuzzy
+msgid "roles"
+msgstr "Rôles d'utilisateur"
+
+#: language/msgIds.php:15
+#, fuzzy
+msgid "resources"
+msgstr "Ressources"
+
+#: language/msgIds.php:16
+#, fuzzy
+msgid "settings"
+msgstr "Réglages"
+
+#: src/Admin/Controller/AclController.php:145 view/admin/acl/acllist.phtml:3
+msgid "manage permissions"
+msgstr "gérer les autorisations"
+
+#: src/Admin/Controller/AclController.php:146 view/admin/acl/acllist.phtml:8
+msgid "manage roles"
+msgstr "gérer les rôles d’utilisateur"
+
+#: src/Admin/Controller/AclController.php:147 view/admin/acl/acllist.phtml:10
+msgid "manage resources"
+msgstr "gérer les ressources"
+
+#: src/Admin/Controller/AclController.php:148
+#: src/Admin/Controller/AclController.php:291
+msgid "add permission"
+msgstr "ajoutez l’autorisation"
+
+#: src/Admin/Controller/AclController.php:149
+#: src/Admin/Controller/AclController.php:445 view/admin/acl/acllist.phtml:7
+msgid "add role"
+msgstr "ajouter un rôle"
+
+#: src/Admin/Controller/AclController.php:150
+#: src/Admin/Controller/AclController.php:572 view/admin/acl/acllist.phtml:9
+msgid "add resource"
+msgstr "ajouter une ressource"
+
+#: src/Admin/Controller/AclController.php:151
+msgid "edit acl"
+msgstr "modifier les ACLs"
+
+#: src/Admin/Controller/AclController.php:152
+#: src/Admin/Controller/AclController.php:474
+msgid "edit role"
+msgstr "modifier la rôle"
+
+#: src/Admin/Controller/AclController.php:153
+#: src/Admin/Controller/AclController.php:610
+msgid "edit resource"
+msgstr "modifier la ressource"
+
+#: src/Admin/Controller/AclController.php:154
+msgid "delete acl"
+msgstr "supprimer les ACLs"
+
+#: src/Admin/Controller/AclController.php:155
+#: src/Admin/Controller/AclController.php:528
+msgid "delete role"
+msgstr "supprimer le rôle"
+
+#: src/Admin/Controller/AclController.php:156
+#: src/Admin/Controller/AclController.php:659
+msgid "delete resource"
+msgstr "supprimer la ressource"
+
+#: src/Admin/Controller/AclController.php:214
+msgid "add acl"
+msgstr "ajouter ACL"
+
+#: src/Admin/Controller/AclController.php:217
+#: src/Admin/Controller/AclController.php:239
+#: src/Admin/Controller/AclController.php:263
+#: src/Admin/Controller/ApplicationsController.php:69
+#: src/Admin/Controller/ClientsController.php:60
+#: src/Admin/Controller/SettingsController.php:60
+#: src/Admin/Controller/UsersController.php:65
+#: view/admin/acl/index.list.phtml:25 view/admin/acl/resources.phtml:18
+#: view/admin/acl/roles.phtml:18 view/admin/applications/index.phtml:20
+#: view/admin/clients/index.phtml:20 view/admin/settings/index.phtml:24
+#: view/admin/users/index.phtml:20
+#, fuzzy
+msgid "edit"
+msgstr "éditer"
+
+#: src/Admin/Controller/AclController.php:219
+#: src/Admin/Controller/AclController.php:241
+#: src/Admin/Controller/AclController.php:265
+#: src/Admin/Controller/ApplicationsController.php:71
+#: src/Admin/Controller/ClientsController.php:62
+#: src/Admin/Controller/SettingsController.php:62
+#: src/Admin/Controller/UsersController.php:67
+#: view/admin/acl/deleteresource.phtml:23 view/admin/acl/deleterole.phtml:23
+#: view/admin/acl/index.list.phtml:26 view/admin/acl/resources.phtml:20
+#: view/admin/acl/roles.phtml:20 view/admin/applications/delete.phtml:24
+#: view/admin/applications/index.phtml:22 view/admin/clients/delete.phtml:23
+#: view/admin/clients/index.phtml:22 view/admin/settings/delete.phtml:25
+#: view/admin/settings/index.phtml:26 view/admin/users/delete.phtml:25
+#: view/admin/users/index.phtml:22
+#, fuzzy
+msgid "delete"
+msgstr "supprimer"
+
+#: src/Admin/Controller/AclController.php:319
+#: src/Admin/Controller/AclController.php:378
+msgid "permission has been saved"
+msgstr "L’autorisation a été enregistrée."
+
+#: src/Admin/Controller/AclController.php:342
+msgid "change permission"
+msgstr "modifier d’autorisation"
+
+#: src/Admin/Controller/AclController.php:345
+#: src/Admin/Controller/AclController.php:406
+#: src/Admin/Controller/AclController.php:485
+#: src/Admin/Controller/AclController.php:531
+#: src/Admin/Controller/AclController.php:613
+#: src/Admin/Controller/AclController.php:662
+#: src/Admin/Controller/ApplicationsController.php:136
+#: src/Admin/Controller/ApplicationsController.php:187
+#: src/Admin/Controller/ClientsController.php:119
+#: src/Admin/Controller/ClientsController.php:162
+#: src/Admin/Controller/SettingsController.php:119
+#: src/Admin/Controller/SettingsController.php:162
+#: src/Admin/Controller/UsersController.php:140
+#: src/Admin/Controller/UsersController.php:189
+#: src/Admin/Controller/UsersController.php:228
+#: src/Admin/Controller/UsersController.php:281
+msgid "missing parameters"
+msgstr "Il existe des paramètres manquants."
+
+#: src/Admin/Controller/AclController.php:403
+msgid "delete permission"
+msgstr "supprimer l’autorisation"
+
+#: src/Admin/Controller/AclController.php:419
+msgid "permission has been deleted"
+msgstr "L’autorisation a été supprimée."
+
+#: src/Admin/Controller/AclController.php:458
+#: src/Admin/Controller/AclController.php:502
+msgid "role has been saved"
+msgstr "Ce rôle a été enregistré."
+
+#: src/Admin/Controller/AclController.php:544
+msgid "role has been deleted"
+msgstr "Ce rôle a été supprimé."
+
+#: src/Admin/Controller/AclController.php:586
+#: src/Admin/Controller/AclController.php:632
+msgid "resource has been saved"
+msgstr "La ressource a été enregistré."
+
+#: src/Admin/Controller/AclController.php:675
+msgid "resource has been deleted"
+msgstr "La ressource a été supprimée."
+
+#: src/Admin/Controller/ApplicationsController.php:43
+#, fuzzy
+msgid "manage applications"
+msgstr "Skeleton Application"
+
+#: src/Admin/Controller/ApplicationsController.php:44
+#: src/Admin/Controller/ApplicationsController.php:88
+#: src/Admin/Controller/ApplicationsController.php:91
+#, fuzzy
+msgid "add application"
+msgstr "Skeleton Application"
+
+#: src/Admin/Controller/ApplicationsController.php:45
+#: src/Admin/Controller/ApplicationsController.php:130
+#: src/Admin/Controller/ApplicationsController.php:133
+#, fuzzy
+msgid "edit application"
+msgstr "Skeleton Application"
+
+#: src/Admin/Controller/ApplicationsController.php:46
+#: src/Admin/Controller/ApplicationsController.php:181
+#: src/Admin/Controller/ApplicationsController.php:184
+#, fuzzy
+msgid "delete application"
+msgstr "Skeleton Application"
+
+#: src/Admin/Controller/ApplicationsController.php:112
+#: src/Admin/Controller/ApplicationsController.php:161
+msgid "application has been saved"
+msgstr "L’application a été enregistré."
+
+#: src/Admin/Controller/ApplicationsController.php:202
+msgid "application has been deleted"
+msgstr "L’application a été supprimée."
+
+#: src/Admin/Controller/ClientsController.php:42
+msgid "manage clients"
+msgstr "gérer les clients"
+
+#: src/Admin/Controller/ClientsController.php:43
+#: src/Admin/Controller/ClientsController.php:79
+#: src/Admin/Controller/ClientsController.php:82
+msgid "add client"
+msgstr "ajouter un client"
+
+#: src/Admin/Controller/ClientsController.php:44
+#: src/Admin/Controller/ClientsController.php:113
+#: src/Admin/Controller/ClientsController.php:116
+msgid "edit client"
+msgstr "modifier le client"
+
+#: src/Admin/Controller/ClientsController.php:45
+#: src/Admin/Controller/ClientsController.php:156
+#: src/Admin/Controller/ClientsController.php:159
+msgid "delete client"
+msgstr "supprimer le client"
+
+#: src/Admin/Controller/ClientsController.php:95
+#: src/Admin/Controller/ClientsController.php:136
+msgid "client has been saved"
+msgstr "Le client a été enregistré."
+
+#: src/Admin/Controller/ClientsController.php:176
+msgid "client has been deleted"
+msgstr "Le client a été supprimé."
+
+#: src/Admin/Controller/SettingsController.php:42
+msgid "manage settings"
+msgstr "gérer les paramètres de préférences"
+
+#: src/Admin/Controller/SettingsController.php:43
+#: src/Admin/Controller/SettingsController.php:79
+#: src/Admin/Controller/SettingsController.php:82
+msgid "add setting"
+msgstr "ajouter un réglage"
+
+#: src/Admin/Controller/SettingsController.php:44
+#: src/Admin/Controller/SettingsController.php:113
+#: src/Admin/Controller/SettingsController.php:116
+msgid "edit setting"
+msgstr "modifier le réglage"
+
+#: src/Admin/Controller/SettingsController.php:45
+#: src/Admin/Controller/SettingsController.php:156
+#: src/Admin/Controller/SettingsController.php:159
+msgid "delete setting"
+msgstr "supprimez le réglage"
+
+#: src/Admin/Controller/SettingsController.php:95
+#: src/Admin/Controller/SettingsController.php:136
+msgid "setting has been saved"
+msgstr "Le réglage a été enregistré."
+
+#: src/Admin/Controller/SettingsController.php:176
+msgid "setting has been deleted"
+msgstr "Le réglage a été supprimé"
+
+#: src/Admin/Controller/UsersController.php:47
+msgid "manage users"
+msgstr "gérer les utilisateurs"
+
+#: src/Admin/Controller/UsersController.php:48
+msgid "add user"
+msgstr "ajouter un utilisateur"
+
+#: src/Admin/Controller/UsersController.php:49
+msgid "edit user"
+msgstr "modifier l’utilisateur"
+
+#: src/Admin/Controller/UsersController.php:50
+msgid "delete user"
+msgstr "supprimer l’utilisateur"
+
+#: src/Admin/Controller/UsersController.php:115
+#: src/Admin/Controller/UsersController.php:163
+msgid "user has been saved"
+msgstr "L’utilisateur a été enregistré."
+
+#: src/Admin/Controller/UsersController.php:203
+msgid "user has been deleted"
+msgstr "L’utilisateur a été supprimé."
+
+#: src/Admin/Controller/UsersController.php:238
+#: src/Admin/Controller/UsersController.php:291
+msgid "user could not be found"
+msgstr "L’utilisateur n'a pas pu être trouvé."
+
+#: src/Admin/Controller/UsersController.php:242
+msgid "confirmation token is invalid"
+msgstr "Jeton de confirmation n’est pas valide."
+
+#: src/Admin/Controller/UsersController.php:256
+#: view/admin/users/confirm.phtml:6
+msgid "user's registration has been confirmed"
+msgstr "L’inscription de l’utilisateur a été confirmée."
+
+#: src/Admin/Controller/UsersController.php:259
+#: src/Admin/Controller/ZfcuserController.php:281
+msgid "admin has been notified for activation"
+msgstr "L’administrateur a été notifié pour l’activation."
+
+#: src/Admin/Controller/UsersController.php:262
+#: src/Admin/Controller/UsersController.php:309
+#: view/admin/users/activate.phtml:6
+msgid "user has been activated"
+msgstr "L’utilisateur a été activé."
+
+#: src/Admin/Controller/UsersController.php:295
+msgid "activation token is invalid"
+msgstr "Jeton d’activation n’est pas valide."
+
+#: src/Admin/Controller/ZfcuserController.php:54
+#: src/Admin/Controller/ZfcuserController.php:55
+#: view/admin/zfcuser/login.phtml:20
+#, fuzzy
+msgid "login"
+msgstr "log-in"
+
+#: src/Admin/Controller/ZfcuserController.php:56
+#: view/admin/zfcuser/index.phtml:8
+#, fuzzy
+msgid "logout"
+msgstr "log-out"
+
+#: src/Admin/Controller/ZfcuserController.php:57
+#: view/admin/zfcuser/register.phtml:4
+msgid "register user"
+msgstr "inscrire l’utilisateur"
+
+#: src/Admin/Controller/ZfcuserController.php:58
+#: src/Admin/Controller/ZfcuserController.php:61
+msgid "reset password"
+msgstr "réinitialiser le mot de passe"
+
+#: src/Admin/Controller/ZfcuserController.php:59
+#: view/admin/zfcuser/index.phtml:6
+#, fuzzy
+msgid "change email"
+msgstr "modifier l’email"
+
+#: src/Admin/Controller/ZfcuserController.php:60
+#: view/admin/zfcuser/index.phtml:7
+#, fuzzy
+msgid "change password"
+msgstr "modifier le mot de passe"
+
+#: src/Admin/Controller/ZfcuserController.php:62
+msgid "userdata"
+msgstr "données d'utilisateur"
+
+#: src/Admin/Controller/ZfcuserController.php:63
+#: view/admin/zfcuser/index.phtml:5
+msgid "edit userdata"
+msgstr "modifier les données d'utilisateur"
+
+#: src/Admin/Controller/ZfcuserController.php:64
+#: src/Admin/Controller/ZfcuserController.php:65
+msgid "user profile"
+msgstr "profil de l’utilisateur"
+
+#: src/Admin/Controller/ZfcuserController.php:66
+#: view/admin/zfcuser/index.phtml:4
+msgid "edit profile"
+msgstr "modifier mon profil"
+
+#: src/Admin/Controller/ZfcuserController.php:210
+msgid "login succeeded"
+msgstr "Se connecter."
+
+#: src/Admin/Controller/ZfcuserController.php:276
+msgid "registration succeeded"
+msgstr "Enregistrement réussi."
+
+#: src/Admin/Controller/ZfcuserController.php:278
+msgid "you have been sent an email with further instructions to follow"
+msgstr ""
+"Un e-mail avec des instructions de réinitialisation de mot de passe vous a "
+"été envoyé."
+
+#: src/Admin/Controller/ZfcuserController.php:295
+msgid "registration and activation succeeded"
+msgstr "Enregistrement et activation réussi."
+
+#: src/Admin/Controller/ZfcuserController.php:366
+#, php-format
+msgid "user '%s' not found"
+msgstr "L’utilisateur „%s“ n’a pas pu être trouvé."
+
+#: src/Admin/Controller/ZfcuserController.php:379
+#, php-format
+msgid "password reset email has been sent to user '%s'"
+msgstr ""
+"L’e-mail de réinitialisation de mot de passe a été envoyé à l’utilisateur "
+"„%s“."
+
+#: src/Admin/Controller/ZfcuserController.php:430
+#: src/Admin/Controller/ZfcuserController.php:437
+#: src/Admin/Controller/ZfcuserController.php:468
+#: src/Admin/Controller/ZfcuserController.php:475
+msgid "invalid request"
+msgstr "demande invalide"
+
+#: src/Admin/Controller/ZfcuserController.php:504
+msgid "password has been set"
+msgstr "Le nouveau mot de passe est initialisé."
+
+#: src/Admin/Controller/ZfcuserController.php:589
+msgid "user data could not be changed"
+msgstr "les données d'utilisateur ne peuvent pas être modifiés"
+
+#: src/Admin/Controller/ZfcuserController.php:607
+msgid "user data has been changed"
+msgstr "Les données de l’utilisateur ont été modifiées."
+
+#: src/Admin/Controller/ZfcuserController.php:668
+msgid "user profile data could not be changed"
+msgstr "Les informations de profil d'utilisateur ne peuvent pas être modifiés."
+
+#: src/Admin/Controller/ZfcuserController.php:683
+msgid "user profile data has been changed"
+msgstr "Les informations de profil d'utilisateur ont été modifiées."
+
+#: view/admin/acl/addacl.phtml:36 view/admin/acl/addresource.phtml:22
+#: view/admin/acl/addrole.phtml:22 view/admin/acl/deleteresource.phtml:24
+#: view/admin/acl/deleterole.phtml:24 view/admin/acl/editacl.phtml:46
+#: view/admin/acl/editresource.phtml:29 view/admin/acl/editrole.phtml:29
+#: view/admin/applications/add.phtml:28 view/admin/applications/delete.phtml:25
+#: view/admin/applications/edit.phtml:34 view/admin/clients/add.phtml:27
+#: view/admin/clients/delete.phtml:24 view/admin/clients/edit.phtml:33
+#: view/admin/settings/add.phtml:34 view/admin/settings/delete.phtml:26
+#: view/admin/settings/edit.phtml:31 view/admin/users/add.phtml:28
+#: view/admin/users/delete.phtml:26 view/admin/users/edit.phtml:35
+#: view/admin/zfcuser/changeemail.phtml:40
+#: view/admin/zfcuser/changepassword.phtml:41
+#: view/admin/zfcuser/edituserdata.phtml:25
+#: view/admin/zfcuser/edituserprofile.phtml:55
+#: view/admin/zfcuser/login.phtml:21 view/admin/zfcuser/register.phtml:54
+#: view/admin/zfcuser/requestpasswordreset.phtml:22
+#: view/admin/zfcuser/resetpassword.phtml:29
+msgid "cancel"
+msgstr ""
+
+#: view/admin/acl/deleteresource.phtml:15
+msgid "Do you really want to delete this resource?"
+msgstr ""
+
+#: view/admin/acl/deleterole.phtml:15
+msgid "Do you really want to delete this role?"
+msgstr ""
+
+#: view/admin/acl/index.list.phtml:1
+msgid "list view"
+msgstr ""
+
+#: view/admin/acl/index.list.phtml:7 view/admin/acl/index.matrix.phtml:6
+#: view/admin/users/index.phtml:7 view/admin/zfcuser/index.phtml:25
+msgid "role"
+msgstr ""
+
+#: view/admin/acl/index.list.phtml:8 view/admin/acl/index.matrix.phtml:12
+msgid "resource"
+msgstr ""
+
+#: view/admin/acl/index.list.phtml:9
+msgid "status"
+msgstr ""
+
+#: view/admin/acl/index.matrix.phtml:1
+msgid "matrix view"
+msgstr ""
+
+#: view/admin/acl/index.matrix.phtml:50
+msgid "allow"
+msgstr ""
+
+#: view/admin/acl/index.matrix.phtml:79
+msgid "deny"
+msgstr ""
+
+#: view/admin/acl/resources.phtml:5
+msgid "resource slug"
+msgstr ""
+
+#: view/admin/acl/resources.phtml:6
+msgid "resource name"
+msgstr ""
+
+#: view/admin/acl/roles.phtml:5
+msgid "role slug"
+msgstr ""
+
+#: view/admin/acl/roles.phtml:6
+msgid "role name"
+msgstr ""
+
+#: view/admin/applications/delete.phtml:15
+msgid "Do you really want to delete this application?"
+msgstr ""
+
+#: view/admin/applications/index.phtml:5 view/admin/clients/index.phtml:5
+#: view/admin/settings/index.phtml:8
+msgid "name"
+msgstr ""
+
+#: view/admin/applications/index.phtml:6
+msgid "url"
+msgstr ""
+
+#: view/admin/applications/index.phtml:7
+msgid "client"
+msgstr ""
+
+#: view/admin/clients/delete.phtml:15
+msgid "Do you really want to delete this client?"
+msgstr ""
+
+#: view/admin/clients/index.phtml:6 view/admin/users/index.phtml:6
+msgid "email"
+msgstr ""
+
+#: view/admin/clients/index.phtml:7
+#, fuzzy
+msgid "contact"
+msgstr "Contacter nous"
+
+#: view/admin/settings/delete.phtml:15
+msgid "Do you really want to delete this setting?"
+msgstr ""
+
+#: view/admin/settings/index.phtml:5
+msgid "scope"
+msgstr ""
+
+#: view/admin/settings/index.phtml:6
+msgid "reference"
+msgstr ""
+
+#: view/admin/settings/index.phtml:7
+msgid "type"
+msgstr ""
+
+#: view/admin/settings/index.phtml:9
+msgid "value"
+msgstr ""
+
+#: view/admin/users/activate.phtml:3
+msgid "activate user"
+msgstr ""
+
+#: view/admin/users/confirm.phtml:3
+msgid "confirm registration"
+msgstr ""
+
+#: view/admin/users/delete.phtml:16
+msgid "Do you really want to delete this user?"
+msgstr ""
+
+#: view/admin/users/index.phtml:5
+msgid "user name"
+msgstr ""
+
+#: view/admin/zfcuser/changeemail.phtml:3
+msgid "email address changed successfully"
+msgstr ""
+
+#: view/admin/zfcuser/changeemail.phtml:5
+msgid "unable to update your email address, please try again"
+msgstr ""
+
+#: view/admin/zfcuser/changeemail.phtml:38
+msgid "save"
+msgstr ""
+
+#: view/admin/zfcuser/changeemail.phtml:39
+#: view/admin/zfcuser/changepassword.phtml:40
+#: view/admin/zfcuser/edituserprofile.phtml:54
+#: view/admin/zfcuser/register.phtml:53
+msgid "reset"
+msgstr ""
+
+#: view/admin/zfcuser/changepassword.phtml:2
+#, php-format
+msgid "change Password for %s"
+msgstr ""
+
+#: view/admin/zfcuser/changepassword.phtml:4
+msgid "password changed successfully"
+msgstr ""
+
+#: view/admin/zfcuser/changepassword.phtml:6
+msgid "unable to update your password, please try again"
+msgstr ""
+
+#: view/admin/zfcuser/index.phtml:3
+msgid "user profile actions"
+msgstr ""
+
+#: view/admin/zfcuser/index.phtml:17
+msgid "Hallo"
+msgstr ""
+
+#: view/admin/zfcuser/index.phtml:20
+#, fuzzy
+msgid "user"
+msgstr "Utilisateur"
+
+#: view/admin/zfcuser/index.phtml:45
+msgid "messengers"
+msgstr ""
+
+#: view/admin/zfcuser/index.phtml:52
+msgid "Twitter"
+msgstr ""
+
+#: view/admin/zfcuser/index.phtml:56
+msgid "Facebook"
+msgstr ""
+
+#: view/admin/zfcuser/index.phtml:60
+msgid "Skype"
+msgstr ""
+
+#: view/admin/zfcuser/index.phtml:64
+msgid "ICQ"
+msgstr ""
+
+#: view/admin/zfcuser/index.phtml:76
+msgid "address"
+msgstr ""
+
+#: view/admin/zfcuser/index.phtml:83
+msgid "street"
+msgstr ""
+
+#: view/admin/zfcuser/index.phtml:87
+msgid "city"
+msgstr ""
+
+#: view/admin/zfcuser/index.phtml:91
+msgid "phone"
+msgstr ""
+
+#: view/admin/zfcuser/index.phtml:95
+#, fuzzy
+msgid "mobile"
+msgstr "cellulaire"
+
+#: view/admin/zfcuser/login.phtml:27
+msgid "do not have an account?"
+msgstr ""
+
+#: view/admin/zfcuser/login.phtml:28
+msgid "register now!"
+msgstr ""
+
+#: view/admin/zfcuser/login.phtml:32
+msgid "forgot your credentials?"
+msgstr ""
+
+#: view/admin/zfcuser/login.phtml:33
+msgid "reset your password"
+msgstr ""
+
+#: view/admin/zfcuser/register.phtml:7
+msgid "registration is currently not available, please try again later"
+msgstr ""
+
+#: view/admin/zfcuser/register.phtml:52
+#, fuzzy
+msgid "register"
+msgstr "inscris-toi"
+
+#: view/admin/zfcuser/requestpasswordreset.phtml:2
+msgid ""
+"To set a new password enter your username or email used for registration. "
+"You will recieve a mail with a link to set your new password."
+msgstr ""
+
+#: view/admin/zfcuser/requestpasswordreset.phtml:21
+#, fuzzy
+msgid "request password reset"
+msgstr "Demander la réinitialisation du mot de passe"
+
+#: view/admin/zfcuser/resetpassword.phtml:2
+msgid "Enter your new password and verify."
+msgstr ""
+
+#~ msgid "Home"
+#~ msgstr "Accueil"
+
+#~ msgid "All rights reserved."
+#~ msgstr "Tous droits réservés."
+
+#~ msgid "Welcome to %sZend Framework 2%s"
+#~ msgstr "Bienvenue dans le %sZend Framework 2%s"
+
+#~ msgid ""
+#~ "Congratulations! You have successfully installed the %sZF2 Skeleton "
+#~ "Application%s. You are currently running Zend Framework version %s. This "
+#~ "skeleton can serve as a simple starting point for you to begin building "
+#~ "your application on ZF2."
+#~ msgstr ""
+#~ "Félicitations ! Vous avez installé avec succès le %sZF2 Skeleton "
+#~ "Application%s. Vous utilisez actuellement Zend Framework version %s. "
+#~ "Cette structure peut vous servir comme un point de départ simple pour "
+#~ "démarrer la construction de votre application avec ZF2."
+
+#~ msgid "Fork Zend Framework 2 on GitHub"
+#~ msgstr "Faites un Fork de Zend Framework 2 sur GitHub"
+
+#~ msgid "Follow Development"
+#~ msgstr "Suivre le développement"
+
+#~ msgid ""
+#~ "Zend Framework 2 is under active development. If you are interested in "
+#~ "following the development of ZF2, there is a special ZF2 portal on the "
+#~ "official Zend Framework website which provides links to the ZF2 %swiki%s, "
+#~ "%sdev blog%s, %sissue tracker%s, and much more. This is a great resource "
+#~ "for staying up to date with the latest developments!"
+#~ msgstr ""
+#~ "Zend Framework 2 est en cours de développement. Si vous êtes intéressé "
+#~ "pour suivre l'évolution de ZF2, il existe un portail dédié à ZF2 sur le "
+#~ "site officiel Zend Framework qui propose des liens vers le %swiki%s ZF2, "
+#~ "%sdev blog%s, %ssuivi des problèmes%s, et bien plus encore. Il s'agit "
+#~ "d'une excellente ressource pour rester à jour sur les dernières "
+#~ "évolutions !"
+
+#~ msgid "ZF2 Development Portal"
+#~ msgstr "Portail sur le développement de ZF2"
+
+#~ msgid "Discover Modules"
+#~ msgstr "Découvrez les modules"
+
+#~ msgid ""
+#~ "The community is working on developing a community site to serve as a "
+#~ "repository and gallery for ZF2 modules. The project is available %son "
+#~ "GitHub%s. The site is currently live and currently contains a list of "
+#~ "some of the modules already available for ZF2."
+#~ msgstr ""
+#~ "La communauté travaille sur le développement d'un site communautaire avec "
+#~ "l'objectif de servir de dépôt et de galerie  pour les modules ZF2. Le "
+#~ "projet est disponible %ssur GitHub%s. Le site est déjà en ligne, et "
+#~ "contient une liste non exhaustive des modules déjà disponibles pour ZF2."
+
+#~ msgid "Explore ZF2 Modules"
+#~ msgstr "Explorer les modules ZF2"
+
+#~ msgid "Help &amp; Support"
+#~ msgstr "Aide &amp; support"
+
+#~ msgid ""
+#~ "If you need any help or support while developing with ZF2, you may reach "
+#~ "us via IRC: %s#zftalk on Freenode%s. We'd love to hear any questions or "
+#~ "feedback you may have regarding the beta releases. Alternatively, you may "
+#~ "subscribe and post questions to the %smailing lists%s."
+#~ msgstr ""
+#~ "Si vous avez besoin d'aide ou de support en développant avec ZF2, vous "
+#~ "pouvez nous joindre sur IRC : %s#zftalk sur Freenode%s. Nous aimerions "
+#~ "avoir vos questions ou vos commentaires que vous pourriez avoir au sujet "
+#~ "des versions bêta. Sinon, vous pouvez vous abonner, et poser des "
+#~ "questions sur la %sliste de diffusion%s."
+
+#~ msgid "Ping us on IRC"
+#~ msgstr "Rejoignez-nous sur IRC"
+
+#~ msgid "An error occurred"
+#~ msgstr "Une erreur est survenue"
+
+#~ msgid "Additional information"
+#~ msgstr "Informations complémentaires"
+
+#~ msgid "File"
+#~ msgstr "Fichier"
+
+#~ msgid "Message"
+#~ msgstr "Message"
+
+#~ msgid "Stack trace"
+#~ msgstr "Pile d'exécution"
+
+#~ msgid "Previous exceptions"
+#~ msgstr "Exceptions précédentes"
+
+#~ msgid "No Exception available"
+#~ msgstr "Aucune exception disponible"
+
+#~ msgid "A 404 error occurred"
+#~ msgstr "Une erreur 404 est survenue"
+
+#~ msgid "The requested controller was unable to dispatch the request."
+#~ msgstr "Le contrôleur demandé n'a pas pu dispatcher la requête."
+
+#~ msgid ""
+#~ "The requested controller could not be mapped to an existing controller "
+#~ "class."
+#~ msgstr ""
+#~ "Le contrôleur demandé ne correspond pas à une classe existante de "
+#~ "contrôleur."
+
+#~ msgid "The requested controller was not dispatchable."
+#~ msgstr "Le contrôleur demandé n'est pas dispatchable."
+
+#~ msgid "The requested URL could not be matched by routing."
+#~ msgstr "L'URL demandée n'a pas pu trouver de route correspondante."
+
+#~ msgid "We cannot determine at this time why a 404 was generated."
+#~ msgstr ""
+#~ "Nous ne pouvons pas déterminer pour le moment pourquoi une 404 a été "
+#~ "générée."
+
+#~ msgid "Controller"
+#~ msgstr "Contrôleur"
+
+#~ msgid "resolves to %s"
+#~ msgstr "résout en %s"
+
+#~ msgid "Exception"
+#~ msgstr "Exception"
