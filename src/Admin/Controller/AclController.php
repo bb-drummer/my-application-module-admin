@@ -105,7 +105,7 @@ class AclController extends BaseActionController
 					'icon'			=> 'list-alt',
 					'class'			=> 'btn btn-default btn-sm btn-cta',
 					'route'			=> 'admin/acledit',
-					'action'		=> 'roles',
+					'action'		=> 'resources',
 					'resource'		=> 'mvc:user',
 				),
 			),
