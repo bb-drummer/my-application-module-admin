@@ -50,7 +50,7 @@ class AclController extends BaseActionController
 				array(
 					'label'			=> 'manage roles',
 					'icon'			=> 'user',
-					'class'			=> 'btn btn-default btn-sm',
+					'class'			=> 'btn btn-default btn-sm btn-cta',
 					'route'			=> 'admin/acledit',
 					'action'		=> 'roles',
 					'resource'		=> 'mvc:user',
@@ -72,7 +72,7 @@ class AclController extends BaseActionController
 				array(
 					'label'			=> 'manage resources',
 					'icon'			=> 'list-alt',
-					'class'			=> 'btn btn-default btn-sm',
+					'class'			=> 'btn btn-default btn-sm btn-cta',
 					'route'			=> 'admin/acledit',
 					'action'		=> 'roles',
 					'resource'		=> 'mvc:user',
@@ -96,14 +96,14 @@ class AclController extends BaseActionController
 				array(
 					'label'			=> 'ACL',
 					'icon'			=> 'asterisk',
-					'class'			=> 'btn btn-default btn-sm',
+					'class'			=> 'btn btn-default btn-sm btn-cta',
 					'route'			=> 'admin/acledit',
 					'resource'		=> 'mvc:user',
 				),
 				array(
 					'label'			=> 'manage resources',
 					'icon'			=> 'list-alt',
-					'class'			=> 'btn btn-default btn-sm',
+					'class'			=> 'btn btn-default btn-sm btn-cta',
 					'route'			=> 'admin/acledit',
 					'action'		=> 'roles',
 					'resource'		=> 'mvc:user',
@@ -127,14 +127,14 @@ class AclController extends BaseActionController
 				array(
 					'label'			=> 'ACL',
 					'icon'			=> 'asterisk',
-					'class'			=> 'btn btn-default btn-sm',
+					'class'			=> 'btn btn-default btn-sm btn-cta',
 					'route'			=> 'admin/acledit',
 					'resource'		=> 'mvc:user',
 				),
 				array(
 					'label'			=> 'manage roles',
 					'icon'			=> 'user',
-					'class'			=> 'btn btn-default btn-sm',
+					'class'			=> 'btn btn-default btn-sm btn-cta',
 					'route'			=> 'admin/acledit',
 					'action'		=> 'roles',
 					'resource'		=> 'mvc:user',
