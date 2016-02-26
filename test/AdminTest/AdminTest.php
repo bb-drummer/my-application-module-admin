@@ -12,7 +12,7 @@ namespace AdminTest;
 /**
  * @coversNothing
  */
-class AdminTest extends Framework\TestCase
+class AdminTest extends \AdminTest\Framework\TestCase
 {
 
 	public function testSample()
