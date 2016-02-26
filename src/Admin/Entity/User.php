@@ -40,26 +40,6 @@ class User extends ZfcUser
 	protected $user_id;
 	
 	/**
-	 * user's street
-	 * @var string
-	 */
-	protected $street;
-	
-	/**
-	 * user's city
-	 * @var string
-	 */
-	protected $city;
-	
-	/**
-	 * user's phonenumber
-	 * @var string
-	 */
-	protected $phone;
-	
-	
-	
-	/**
 	 * Get ACL role.
 	 *
 	 * @return STRING
@@ -134,73 +114,6 @@ class User extends ZfcUser
 
 	
 	/**
-	 * Get user's street string.
-	 *
-	 * @return STRING
-	 */
-	public function getStreet()
-	{
-		return $this->street;
-	}
-	
-	/**
-	 * Set user's street string.
-	 *
-	 * @param STRING $street
-	 * @return \Admin\Entity\User
-	 */
-	public function setStreet($street)
-	{
-		$this->street = $street;
-		return $this;
-	}
-	
-	/**
-	 * Get user's city string.
-	 *
-	 * @return STRING
-	 */
-	public function getCity()
-	{
-		return $this->city;
-	}
-	
-	/**
-	 * Set user's city string.
-	 *
-	 * @param STRING $city
-	 * @return \Admin\Entity\User
-	 */
-	public function setCity($city)
-	{
-		$this->city = $city;
-		return $this;
-	}
-	
-	/**
-	 * Get user's phonenumber string.
-	 *
-	 * @return STRING
-	 */
-	public function getPhone()
-	{
-		return $this->phone;
-	}
-	
-	/**
-	 * Set user's phonenumber string.
-	 *
-	 * @param STRING $phone
-	 * @return \Admin\Entity\User
-	 */
-	public function setPhone($phone)
-	{
-		$this->phone = $phone;
-		return $this;
-	}
-	
-	
-	/**
 	 * set user's object property data
 	 * @param array $data
 	 * @param boolean $forceEncryptPassword
@@ -233,10 +146,6 @@ class User extends ZfcUser
 		$this->state		= (isset($data['state'])) ? $data['state'] : $this->state;
 		$this->aclrole		= (isset($data['aclrole'])) ? $data['aclrole'] : $this->aclrole;
 		$this->token		= (isset($data['token'])) ? $data['token'] : $this->token;
-
-		$this->street		= (isset($data['street'])) ? $data['street'] : $this->street;
-		$this->city			= (isset($data['city'])) ? $data['city'] : $this->city;
-		$this->phone		= (isset($data['phone'])) ? $data['phone'] : $this->phone;
 		
 		return $this;
 	}
@@ -258,10 +167,6 @@ class User extends ZfcUser
 			"state"			=> $this->getState(),
 			"aclrole"		=> $this->getAclrole(),
 			"token"			=> $this->getToken(),
-
-			"street"		=> $this->getStreet(),
-			"city"			=> $this->getCity(),
-			"phone"			=> $this->getPhone(),
 		);
 	}
 	

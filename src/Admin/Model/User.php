@@ -36,9 +36,6 @@ class User implements InputFilterAwareInterface, ServiceLocatorAwareInterface
 	public $display_name;
 	public $username;
 	public $email;
-	public $street;
-	public $city;
-	public $phone;
 	public $password;
 	public $state;
 	public $aclrole;
@@ -81,10 +78,6 @@ class User implements InputFilterAwareInterface, ServiceLocatorAwareInterface
 		$this->state		= (isset($data['state'])) ? $data['state'] : $this->state;
 		$this->aclrole		= (isset($data['aclrole'])) ? $data['aclrole'] : $this->aclrole;
 		$this->token		= (isset($data['token'])) ? $data['token'] : $this->token;
-
-		$this->street		= (isset($data['street'])) ? $data['street'] : $this->street;
-		$this->city			= (isset($data['city'])) ? $data['city'] : $this->city;
-		$this->phone		= (isset($data['phone'])) ? $data['phone'] : $this->phone;
 		
 		return $this;
 	}

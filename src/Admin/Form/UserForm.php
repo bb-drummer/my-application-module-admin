@@ -98,34 +98,6 @@ class UserForm extends Form
 			),
 		));
 		
-
-		$this->add(array(
-			'name' => 'street',
-			'attributes' => array(
-				'type'  => 'text',
-			),
-			'options' => array(
-				'label' => 'street',
-			),
-		));
-		$this->add(array(
-			'name' => 'city',
-			'attributes' => array(
-				'type'  => 'text',
-			),
-			'options' => array( 
-				'label' => 'city',
-			),
-		));
-		$this->add(array(
-			'name' => 'phone',
-			'attributes' => array(
-				'type'  => 'text',
-			),
-			'options' => array(
-				'label' => 'phone',
-			),
-		));
 		
 		$this->add(array(
 			'name' => 'submit',
