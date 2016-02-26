@@ -24,9 +24,13 @@ use Zend\ServiceManager\ServiceLocator;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerInterface;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class User implements InputFilterAwareInterface
+class User implements InputFilterAwareInterface, ServiceLocatorAwareInterface
 {
+	use ServiceLocatorAwareTrait;
+	
 	public $id;
 	public $user_id;
 	public $display_name;
@@ -43,7 +47,6 @@ class User implements InputFilterAwareInterface
 	protected $inputFilter;
 	protected $userService;
 	protected $serviceManager;
-	protected $serviceLocator;
 	
 	/**
 	 * set user's object property data
@@ -233,27 +236,6 @@ class User implements InputFilterAwareInterface
 	{
 		$this->serviceManager = $serviceManager;
 		return $this;
-	}
-
-	/**
-	 * Set serviceManager instance
-	 *
-	 * @param  ServiceLocatorInterface $serviceLocator
-	 * @return void
-	 */
-	public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-	{
-		$this->serviceLocator = $serviceLocator;
-	}
-
-	/**
-	 * Retrieve serviceManager instance
-	 *
-	 * @return ServiceLocatorInterface
-	 */
-	public function getServiceLocator()
-	{
-		return $this->serviceLocator;
 	}
 
 }
