@@ -456,7 +456,7 @@ return array(
 								'controller'	=> 'users',
 								'action' 		=> 'edit',
 								'resource'		=> 'mvc:admin',
-								'visible'		=> true,
+								'visible'		=> false,
 							),
 							array(
 								'label'			=> 'delete',
@@ -464,7 +464,7 @@ return array(
 								'controller'	=> 'users',
 								'action' 		=> 'delete',
 								'resource'		=> 'mvc:admin',
-								'visible'		=> true,
+								'visible'		=> false,
 							),
 						),
 					), // admin > users
