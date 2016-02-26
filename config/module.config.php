@@ -559,7 +559,7 @@ return array(
 										'route' 		=> 'admin/acledit',
 										'resource'		=> 'mvc:admin',
 										'action' 		=> 'addrole',
-										'visible'		=> false,
+										'visible'		=> true,
 									),
 									array(
 										'label' 		=> 'edit',
@@ -590,7 +590,7 @@ return array(
 										'route' 		=> 'admin/acledit',
 										'resource'		=> 'mvc:admin',
 										'action' 		=> 'addresource',
-										'visible'		=> false,
+										'visible'		=> true,
 									),
 									array(
 										'label' 		=> 'edit',
