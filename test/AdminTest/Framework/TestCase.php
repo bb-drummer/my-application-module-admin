@@ -9,9 +9,9 @@
 
 namespace AdminTest\Framework;
 
-use PHPUnit_Framework_TestCase;
+use \ApplicationTest\Framework\TestCase as ApplicationTestCase;
 
-class TestCase extends PHPUnit_Framework_TestCase
+class TestCase extends ApplicationTestCase
 {
 
 	public static $locator;

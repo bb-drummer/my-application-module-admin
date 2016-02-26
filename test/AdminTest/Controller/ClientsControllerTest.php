@@ -2,7 +2,7 @@
 namespace AdminTest\Controller;
 
 use \Admin\Controller\ClientsController,
-	\ApplicationTest\Framework\ActionControllerTestCase,
+	\AdminTest\Framework\ActionControllerTestCase,
     Zend\Http\Request,
     Zend\Http\Response,
     Zend\Http\Router,
@@ -12,7 +12,7 @@ use \Admin\Controller\ClientsController,
 ;
 
 /**
- * @coversDefaultClass \Application\Controller\SetupController
+ * @coversDefaultClass \Admin\Controller\ClientsController
  */
 class ClientsControllerTest extends ActionControllerTestCase
 {

@@ -1,8 +1,8 @@
 <?php
-namespace ApplicationTest\Controller;
+namespace AdminTest\Controller;
 
-use \Application\Controller\SetupController,
-    \ApplicationTest\Framework\ActionControllerTestCase,
+use \Admin\Controller\IndexController,
+    \AdminTest\Framework\ActionControllerTestCase,
     Zend\Http\Request,
     Zend\Http\Response,
     Zend\Http\Router,
@@ -12,7 +12,7 @@ use \Application\Controller\SetupController,
 ;
 
 /**
- * @coversDefaultClass \Application\Controller\SetupController
+ * @coversDefaultClass \Application\Controller\IndexController
  */
 class IndexControllerTest extends ActionControllerTestCase
 {

@@ -9,6 +9,9 @@
 
 namespace AdminTest;
 
+/**
+ * @coversNothing
+ */
 class AdminTest extends Framework\TestCase
 {
 

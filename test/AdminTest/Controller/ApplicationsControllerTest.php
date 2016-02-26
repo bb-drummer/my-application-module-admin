@@ -2,7 +2,7 @@
 namespace AdminTest\Controller;
 
 use \Admin\Controller\ApplicationController,
-    \ApplicationTest\Framework\ActionControllerTestCase,
+    \AdminTest\Framework\ActionControllerTestCase,
     Zend\Http\Request,
     Zend\Http\Response,
     Zend\Http\Router,
@@ -12,7 +12,7 @@ use \Admin\Controller\ApplicationController,
 ;
 
 /**
- * @coversDefaultClass \Application\Controller\SetupController
+ * @coversDefaultClass \Admin\Controller\ApplicationsController
  */
 class ApplicationsControllerTest extends ActionControllerTestCase
 {
@@ -39,7 +39,7 @@ class ApplicationsControllerTest extends ActionControllerTestCase
 
     /**
      * is the action accessable per request/response action name ?
-  *
+ 	 *
      * @covers ::indexAction
      */
     public function testIndexActionCanBeDispatched()

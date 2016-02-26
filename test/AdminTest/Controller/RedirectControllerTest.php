@@ -2,7 +2,7 @@
 namespace AdminTest\Controller;
 
 use \Admin\Controller\SetupController,
-    \ApplicationTest\Framework\ActionControllerTestCase,
+    \AdminTest\Framework\ActionControllerTestCase,
     Zend\Http\Request,
     Zend\Http\Response,
     Zend\Http\Router,
@@ -12,7 +12,7 @@ use \Admin\Controller\SetupController,
 ;
 
 /**
- * @coversDefaultClass \Application\Controller\SetupController
+ * @coversDefaultClass \Admin\Controller\RedirectController
  */
 class RedirectControllerTest extends ActionControllerTestCase
 {
@@ -44,7 +44,7 @@ class RedirectControllerTest extends ActionControllerTestCase
      */
     public function testRedirect()
     {
-        $this->routeMatch->setParam('redirect', 'not-implemented-yet');
+        $this->routeMatch->setParam('redirect', '/');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(301, $response->getStatusCode());
