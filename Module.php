@@ -126,7 +126,9 @@ class Module implements
 		
 		/** @var $serviceManager \Zend\ServiceManager\ServiceManager */
 		$serviceManager = $application->getServiceManager();
-		$this->setServiceManager( $serviceManager );
+		//$this->setServiceManager( $serviceManager );
+		static::$serviceManager = $serviceManager ;
+		static::$serviceLocator = $serviceManager ;
 		
 		/** @var $pluginManagerViewHelper \Zend\View\HelperPluginManager */
 		$viewHelperManager = $serviceManager->get('ViewHelperManager');
@@ -658,7 +660,8 @@ class Module implements
 	 * @return	void
 	 */
 	public static function checkACL (\Zend\Mvc\Mvcevent $oEvent ) {
-		$oServiceManager = $oEvent->getApplication()->getServiceManager();
+		//$oServiceManager = $oEvent->getApplication()->getServiceManager();
+		$oServiceManager = self::$serviceManager; //$this->getServiceManager();
 		$oAcl = $oEvent->getViewModel()->acl;
 		if (!$oAcl) {
 			$oAcl = self::initACL($oServiceManager);

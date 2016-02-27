@@ -2,6 +2,7 @@
 namespace AdminTest\Controller;
 
 use \Admin\Controller\ZfcuserController,
+    \Admin\Controller\RedirectCallback,
     \AdminTest\Framework\TestCase as ActionControllerTestCase,
     Zend\Http\Request,
     Zend\Http\Response,
@@ -23,14 +24,19 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function setupController()
     {
+        
+        $config = $this->getApplicationServiceLocator()->get('Config');
+        $routerConfig = isset($config['router']) ? $config['router'] : array();
+        $router = HttpRouter::factory($routerConfig);
+        
+    	$redirCallback = new \Admin\Controller\RedirectCallback($this->getApplication(), $router, new ZfcUser\Options\ModuleOptions($config['router']));
+    	
         $this->setController(new ZfcuserController());
         $this->getController()->setServiceLocator($this->getApplicationServiceLocator());
         $this->setRequest(new Request());
         $this->setRouteMatch(new RouteMatch(array('controller' => '\Admin\Controller\Zfcuser', 'action' => 'index')));
         $this->setEvent(new MvcEvent());
-        $config = $this->getApplicationServiceLocator()->get('Config');
-        $routerConfig = isset($config['router']) ? $config['router'] : array();
-        $router = HttpRouter::factory($routerConfig);
+        
         $this->getEvent()->setRouter($router);
         $this->getEvent()->setRouteMatch($this->getRouteMatch());
         $this->getController()->setEvent($this->getEvent());

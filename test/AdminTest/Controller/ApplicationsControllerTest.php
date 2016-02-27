@@ -1,7 +1,7 @@
 <?php
 namespace AdminTest\Controller;
 
-use \Admin\Controller\ApplicationController,
+use \Admin\Controller\ApplicationsController,
     \AdminTest\Framework\TestCase as ActionControllerTestCase,
     Zend\Http\Request,
     Zend\Http\Response,
@@ -23,7 +23,7 @@ class ApplicationsControllerTest extends ActionControllerTestCase
      */
     public function setupController()
     {
-        $this->setController(new ApplicationController());
+        $this->setController(new ApplicationsController());
         $this->getController()->setServiceLocator($this->getApplicationServiceLocator());
         $this->setRequest(new Request());
         $this->setRouteMatch(new RouteMatch(array('controller' => '\Admin\Controller\Applications', 'action' => 'index')));

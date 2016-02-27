@@ -23,10 +23,10 @@ class IndexControllerTest extends ActionControllerTestCase
      */
     public function setupController()
     {
-        $this->setController(new SetupController());
+        $this->setController(new IndexController());
         $this->getController()->setServiceLocator($this->getApplicationServiceLocator());
         $this->setRequest(new Request());
-        $this->setRouteMatch(new RouteMatch(array('controller' => '\Application\Controller\Setup', 'action' => 'index')));
+        $this->setRouteMatch(new RouteMatch(array('controller' => '\Admin\Controller\Index', 'action' => 'index')));
         $this->setEvent(new MvcEvent());
         $config = $this->getApplicationServiceLocator()->get('Config');
         $routerConfig = isset($config['router']) ? $config['router'] : array();
