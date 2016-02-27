@@ -126,13 +126,11 @@ class AclControllerTest extends ActionControllerTestCase
     	// redirect if acl id could not be found
     	$this->routeMatch->setParam('action', 'editacl');
     	$this->routeMatch->setParam('acl_id', 999999999);
-    	try {
-	    	$result = $this->controller->dispatch($this->request);
-	    	$response = $this->controller->getResponse();
-	    	$this->assertEquals(302, $response->getStatusCode());
-    	} catch (Exception $e) {
-	    	$this->assertTrue(true);
-    	}
+    	$result = $this->controller->dispatch($this->request);
+    	$response = $this->controller->getResponse();
+    	$this->assertEquals(302, $response->getStatusCode());
+    	
+    	//$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
@@ -171,13 +169,11 @@ class AclControllerTest extends ActionControllerTestCase
     	// redirect if acl id could not be found
     	$this->routeMatch->setParam('action', 'deleteacl');
     	$this->routeMatch->setParam('acl_id', 999999999);
-    	try {
-	    	$result = $this->controller->dispatch($this->request);
-	    	$response = $this->controller->getResponse();
-	    	$this->assertEquals(302, $response->getStatusCode());
-    	} catch (Exception $e) {
-	    	$this->assertTrue(true);
-    	}
+    	$result = $this->controller->dispatch($this->request);
+    	$response = $this->controller->getResponse();
+    	$this->assertEquals(302, $response->getStatusCode());
+    	
+    	//$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**

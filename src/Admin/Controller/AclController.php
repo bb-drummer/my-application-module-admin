@@ -347,7 +347,12 @@ class AclController extends BaseActionController
 				'action' => 'addacl'
 			));
 		}
-		$Acl = $this->getAclTable()->getAcl($id);
+		try {
+			$Acl = $this->getAclTable()->getAcl($id);
+		} catch (Exception $e) {
+			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
+			return $this->redirect()->toRoute('admin/acledit', array());
+		}
 
 		$form  = new AclForm();
 		$form->bind($Acl);
@@ -408,7 +413,13 @@ class AclController extends BaseActionController
 		}
 
 		$tmplVars["acl_id"] = $id;
-		$tmplVars["acl"] = $this->getAclTable()->getAcl($id);
+		try {
+			$Acl = $this->getAclTable()->getAcl($id);
+		} catch (Exception $e) {
+			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
+			return $this->redirect()->toRoute('admin/acledit', array());
+		}
+		$tmplVars["acl"] = $Acl;
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 			$del = $request->getPost('del', 'No');
