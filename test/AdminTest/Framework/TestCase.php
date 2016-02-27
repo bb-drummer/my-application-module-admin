@@ -9,9 +9,9 @@
 
 namespace AdminTest\Framework;
 
-use \ApplicationTest\Framework\TestCase as ApplicationTestCase;
+use \ApplicationTest\Framework\ActionControllerTestCase as ApplicationActionControllerTestCase;
 
-class TestCase extends ApplicationTestCase
+class TestCase extends ApplicationActionControllerTestCase
 {
 
 	public static $locator;
