@@ -140,7 +140,16 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     	
         // redirect if token is invalid...
         $this->routeMatch->setParam('action', 'resetpassword');
+        $this->routeMatch->setParam('user_id', 1);
         $this->routeMatch->setParam('resettoken', 'invalid-password-reset-token');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+    	
+        // redirect if user_id is invalid...
+        $this->routeMatch->setParam('action', 'resetpassword');
+        $this->routeMatch->setParam('user_id', 'xyz');
+        $this->routeMatch->setParam('resettoken', 'some-password-reset-token');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(302, $response->getStatusCode());
@@ -156,6 +165,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     	
         // display password reset form if token is valid
         $this->routeMatch->setParam('action', 'resetpassword');
+        $this->routeMatch->setParam('user_id', 1);
         $this->routeMatch->setParam('resettoken', 'valid-password-reset-token');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
