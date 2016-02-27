@@ -41,6 +41,7 @@ class AclControllerTest extends ActionControllerTestCase
      * is the action accessable per request/response action name ?
   	 *
      * @covers ::indexAction
+     * @covers ::acllistAction
      */
     public function testIndexActionCanBeDispatched()
     {
@@ -56,12 +57,48 @@ class AclControllerTest extends ActionControllerTestCase
     
         // Check for a ViewModel to be returned
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+
+        
+        // Specify which action to run
+        $this->routeMatch->setParam('action', 'acllist');
+    
+        // Kick the controller into action
+        $result = $this->controller->dispatch($this->request);
+    
+        // Check the HTTP response code
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    
+        // Check for a ViewModel to be returned
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+    
+    /**
+     * is the action accessable per request/response action name ?
+  	 *
+     * @covers ::indexAction
+     * @covers ::acllistAction
+     */
+    public function testAclDataActionCanBeDispatched()
+    {
+        // Specify which action to run
+        $this->routeMatch->setParam('action', 'acldata');
+    
+        // Kick the controller into action
+        $result = $this->controller->dispatch($this->request);
+    
+        // Check the HTTP response code
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    
+        // Check for a ViewModel to be returned
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
      * is the action accessable per request/response action name ?
      *
-     * @covers ::addAction
+     * @covers ::addaclAction
      */
     public function testAddAclActionCanBeDispatched()
     {
@@ -82,7 +119,7 @@ class AclControllerTest extends ActionControllerTestCase
     /**
      * is the action accessable per request/response action name ?
      *
-     * @covers ::editAction
+     * @covers ::editaclAction
      */
     public function testEditAclActionCanBeDispatched()
     {
@@ -103,7 +140,7 @@ class AclControllerTest extends ActionControllerTestCase
     /**
      * is the action accessable per request/response action name ?
      *
-     * @covers ::deleteAction
+     * @covers ::deleteaclAction
      */
     public function testDeleteAclActionCanBeDispatched()
     {
