@@ -138,7 +138,12 @@ class ApplicationsController extends BaseActionController
 				'action' => 'index'
 			));
 		}
-		$applications = $this->getApplicationsTable()->getApplication($id);
+		try {
+			$applications = $this->getApplicationsTable()->getApplication($id);
+		} catch (\Exception $e) {
+			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
+			return $this->redirect()->toRoute('admin/applicationsedit');
+		}
 
 		$form  = new ApplicationsForm();
 		$form->bind($applications);
@@ -189,9 +194,14 @@ class ApplicationsController extends BaseActionController
 		}
 
 		$tmplVars["application_id"] = $id;
-		$app = $this->getApplicationsTable()->getApplication($id);
+		try {
+			$applications = $this->getApplicationsTable()->getApplication($id);
+		} catch (\Exception $e) {
+			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
+			return $this->redirect()->toRoute('admin/applicationsedit');
+		}
 		$app->setServiceLocator($this->getServiceLocator());
-		$tmplVars["applications"] = $app;
+		$tmplVars["applications"] = $applications;
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 			$del = $request->getPost('del', '');

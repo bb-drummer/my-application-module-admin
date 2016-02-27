@@ -121,7 +121,12 @@ class SettingsController extends BaseActionController
 				'action' => 'index'
 			));
 		}
-		$settings = $this->getSettingsTable()->getSettings($id);
+		try {
+			$settings = $this->getSettingsTable()->getSettings($id);
+		} catch (\Exception $e) {
+			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
+			return $this->redirect()->toRoute('admin/settingsedit');
+		}
 
 		$form  = new SettingsForm();
 		$form->bind($settings);
@@ -164,7 +169,13 @@ class SettingsController extends BaseActionController
 		}
 
 		$tmplVars["settings_id"] = $id;
-		$tmplVars["settings"] = $this->getSettingsTable()->getSettings($id);
+		try {
+			$settings = $this->getSettingsTable()->getSettings($id);
+		} catch (\Exception $e) {
+			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
+			return $this->redirect()->toRoute('admin/settingsedit');
+		}
+		$tmplVars["settings"] = $settings;
 		
 		$request = $this->getRequest();
 		if ($request->isPost()) {

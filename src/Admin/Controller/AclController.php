@@ -496,7 +496,12 @@ class AclController extends BaseActionController
 			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
 			return $this->redirect()->toRoute('admin/acledit', array('action' => 'roles'));
 		}
-		$Aclrole = $this->getAclroleTable()->getAclrole($id);
+		try {
+			$Aclrole = $this->getAclroleTable()->getAclrole($id);
+		} catch (\Exception $e) {
+			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
+			return $this->redirect()->toRoute('admin/acledit', array('action' => 'roles'));
+		}
 
 		$form  = new AclroleForm();
 		$form->bind($Aclrole);
@@ -544,7 +549,13 @@ class AclController extends BaseActionController
 		}
 
 		$tmplVars["acl_id"] = $id;
-		$tmplVars["aclrole"] = $this->getAclroleTable()->getAclrole($id);
+		try {
+			$Aclrole = $this->getAclroleTable()->getAclrole($id);
+		} catch (\Exception $e) {
+			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
+			return $this->redirect()->toRoute('admin/acledit', array('action' => 'roles'));
+		}
+		$tmplVars["aclrole"] = $Aclrole;
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 			$del = $request->getPost('del', '');
@@ -581,7 +592,6 @@ class AclController extends BaseActionController
 			)
 		);
 		$this->layout()->setVariable('title', $this->translate("add resource"));
-		//if (!class_exists('\Admin\Form\AclForm')) { require_once __DIR__ . '/../Form/AclForm.php'; }
 		$form = new AclresourceForm();
 
 		$request = $this->getRequest();
@@ -622,11 +632,14 @@ class AclController extends BaseActionController
 		$id = (int) $this->params()->fromRoute('acl_id', 0);
 		if (!$id) {
 			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
-			return $this->redirect()->toRoute('admin/acledit', array(
-				'action' => 'addresource'
-			));
+			return $this->redirect()->toRoute('admin/acledit', array('action' => 'resources'));
 		}
-		$Aclresource = $this->getAclresourceTable()->getAclresource($id);
+		try {
+			$Aclresource = $this->getAclresourceTable()->getAclresource($id);
+		} catch (\Exception $e) {
+			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
+			return $this->redirect()->toRoute('admin/acledit', array('action' => 'resources'));
+		}
 
 		$form  = new AclresourceForm();
 		$form->bind($Aclresource);
@@ -675,7 +688,13 @@ class AclController extends BaseActionController
 		}
 
 		$tmplVars["acl_id"] = $id;
-		$tmplVars["aclresource"] = $this->getAclresourceTable()->getAclresource($id);
+		try {
+			$Aclresource = $this->getAclresourceTable()->getAclresource($id);
+		} catch (\Exception $e) {
+			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
+			return $this->redirect()->toRoute('admin/acledit', array('action' => 'resources'));
+		}
+		$tmplVars["aclresource"] = $Aclresource;
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 			$del = $request->getPost('del', '');

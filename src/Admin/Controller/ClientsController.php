@@ -121,7 +121,12 @@ class ClientsController extends BaseActionController
 				'action' => 'index'
 			));
 		}
-		$clients = $this->getClientsTable()->getClients($id);
+		try {
+			$clients = $this->getClientsTable()->getClients($id);
+		} catch (\Exception $e) {
+			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
+			return $this->redirect()->toRoute('admin/clientsedit');
+		}
 
 		$form  = new ClientsForm();
 		$form->bind($clients);
@@ -164,7 +169,13 @@ class ClientsController extends BaseActionController
 		}
 
 		$tmplVars["clients_id"] = $id;
-		$tmplVars["clients"] = $this->getClientsTable()->getClients($id);
+		try {
+			$clients = $this->getClientsTable()->getClients($id);
+		} catch (\Exception $e) {
+			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
+			return $this->redirect()->toRoute('admin/clientsedit');
+		}
+		$tmplVars["clients"] = $clients;
 		
 		$request = $this->getRequest();
 		if ($request->isPost()) {

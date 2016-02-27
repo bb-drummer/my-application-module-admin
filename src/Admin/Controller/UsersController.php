@@ -138,11 +138,14 @@ class UsersController extends BaseActionController
 		$id = (int) $this->params()->fromRoute('user_id', 0);
 		if (!$id) {
 			$this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
-			return $this->redirect()->toRoute('admin/default', array(
-				'controller' => 'users',
-			));
+			return $this->redirect()->toRoute('admin/default', array('controller' => 'users'));
 		}
-		$user = $this->getUserTable()->getUser($id);
+		try {
+			$user = $this->getUserTable()->getUser($id);
+		} catch (\Exception $e) {
+			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
+			return $this->redirect()->toRoute('admin/default', array('controller' => 'users'));
+		}
 
 		$form	= new UserForm();
 		$form->bind($user);
@@ -191,7 +194,13 @@ class UsersController extends BaseActionController
 		}
 
 		$tmplVars["user_id"] = $id;
-		$tmplVars["user"] = $this->getUserTable()->getUser($id);
+		try {
+			$user = $this->getUserTable()->getUser($id);
+		} catch (\Exception $e) {
+			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
+			return $this->redirect()->toRoute('admin/default', array('controller' => 'users'));
+		}
+		$tmplVars["user"] = $user;
 
 		$request = $this->getRequest();
 		if ($request->isPost()) {
