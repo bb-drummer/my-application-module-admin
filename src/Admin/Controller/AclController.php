@@ -349,7 +349,7 @@ class AclController extends BaseActionController
 		}
 		try {
 			$Acl = $this->getAclTable()->getAcl($id);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
 			return $this->redirect()->toRoute('admin/acledit', array());
 		}
@@ -415,7 +415,7 @@ class AclController extends BaseActionController
 		$tmplVars["acl_id"] = $id;
 		try {
 			$Acl = $this->getAclTable()->getAcl($id);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
 			return $this->redirect()->toRoute('admin/acledit', array());
 		}
