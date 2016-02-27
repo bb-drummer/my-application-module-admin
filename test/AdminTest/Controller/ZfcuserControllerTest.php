@@ -139,7 +139,8 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     	$this->setZfcuserNoAuthMock();
     	
         // redirect if token is invalid...
-        $this->routeMatch->setParam('action', 'resetpassword', 'resettoken', 'invalid-password-reset-token');
+        $this->routeMatch->setParam('action', 'resetpassword');
+        $this->routeMatch->setParam('resettoken', 'invalid-password-reset-token');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(302, $response->getStatusCode());
@@ -154,7 +155,8 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     	$this->setZfcuserNoAuthMock();
     	
         // display password reset form if token is valid
-        $this->routeMatch->setParam('action', 'resetpassword', 'resettoken', 'valid-password-reset-token');
+        $this->routeMatch->setParam('action', 'resetpassword');
+        $this->routeMatch->setParam('resettoken', 'valid-password-reset-token');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
@@ -391,6 +393,10 @@ class ZfcuserControllerTest extends ActionControllerTestCase
 			->method('getId')
 			->will($this->returnValue('1'));
 		
+		$ZfcUserMock->expects($this->any())
+			->method('getToken')
+			->will($this->returnValue('valid-password-reset-token'));
+		
 		$authMock = $this->getMock('ZfcUser\Controller\Plugin\ZfcUserAuthentication');
 		
 		$authMock->expects($this->any())
@@ -412,10 +418,14 @@ class ZfcuserControllerTest extends ActionControllerTestCase
 		$mockAuth = $this->getMock('ZfcUser\Entity\UserInterface');
 		
 		$ZfcUserMock = $this->getMock('Admin\Entity\User');  
-		
+
 		$ZfcUserMock->expects($this->any())
 			->method('getId')
 			->will($this->returnValue(0));
+		
+		$ZfcUserMock->expects($this->any())
+			->method('getToken')
+			->will($this->returnValue('valid-password-reset-token'));
 		
 		$authMock = $this->getMock('ZfcUser\Controller\Plugin\ZfcUserAuthentication');
 		
