@@ -200,7 +200,6 @@ class ApplicationsController extends BaseActionController
 			$this->flashMessenger()->addWarningMessage($this->translate("invalid parameters"));
 			return $this->redirect()->toRoute('admin/applicationsedit');
 		}
-		$app->setServiceLocator($this->getServiceLocator());
 		$tmplVars["applications"] = $applications;
 		$request = $this->getRequest();
 		if ($request->isPost()) {
