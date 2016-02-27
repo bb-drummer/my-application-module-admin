@@ -49,21 +49,21 @@ class ZfcuserControllerTest extends ActionControllerTestCase
 		$ZfcUserMock = $this->getMock('ZfcUser\Entity\User');  
 		
 		$ZfcUserMock->expects($this->any())
-		            ->method('getId')
-		            ->will($this->returnValue('1'));
+			->method('getId')
+			->will($this->returnValue('1'));
 		
 		$authMock = $this->getMock('ZfcUser\Controller\Plugin\ZfcUserAuthentication');
 		
 		$authMock->expects($this->any())
-		         ->method('hasIdentity')
-		            -> will($this->returnValue(true));  
+			->method('hasIdentity')
+			-> will($this->returnValue(true));  
 		
 		$authMock->expects($this->any())
-		         ->method('getIdentity')
-		         ->will($this->returnValue($ZfcUserMock));
+			->method('getIdentity')
+			->will($this->returnValue($ZfcUserMock));
 		
 		$this->getController()->getPluginManager()
-		     ->setService('zfcUserAuthentication', $authMock);
+			->setService('zfcUserAuthentication', $authMock);
     }
 
     /**
