@@ -88,6 +88,7 @@ class ApplicationsControllerTest extends ActionControllerTestCase
     {
     	// Specify which action to run
     	$this->routeMatch->setParam('action', 'edit');
+    	$this->routeMatch->setParam('application_id', 1);
     
     	// Kick the controller into action
     	$result = $this->controller->dispatch($this->request);
@@ -109,6 +110,7 @@ class ApplicationsControllerTest extends ActionControllerTestCase
     {
     	// Specify which action to run
     	$this->routeMatch->setParam('action', 'delete');
+    	$this->routeMatch->setParam('application_id', 1);
     
     	// Kick the controller into action
     	$result = $this->controller->dispatch($this->request);

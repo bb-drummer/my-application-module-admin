@@ -44,7 +44,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
         $this->setResponse(new Response());
         
         // set mock for ZfcUserAuthentication
-		$mockAuth = $this->getMock('ZfcUser\Entity\UserInterface');
+		/*$mockAuth = $this->getMock('ZfcUser\Entity\UserInterface');
 		
 		$ZfcUserMock = $this->getMock('Admin\Entity\User');  
 		
@@ -63,7 +63,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
 			->will($this->returnValue($ZfcUserMock));
 		
 		$this->getController()->getPluginManager()
-			->setService('zfcUserAuthentication', $authMock);
+			->setService('zfcUserAuthentication', $authMock);*/
     }
 
     /**
@@ -72,60 +72,15 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testUserProfileIndexActionCanBeDispatched()
     {
+    	// set user
+    	$this->setZfcuserAuthMock();
+    	
         // display user profile
         $this->routeMatch->setParam('action', 'index');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
-    }
-    
-    /**
-     * @covers ::authenticateAction
-     */
-    public function testAuthenticateActionRedirectIfNoLoginGiven()
-    {
-        // redirect on auth failure
-        $this->routeMatch->setParam('action', 'authenticate');
-        $result = $this->controller->dispatch($this->request);
-        $response = $this->controller->getResponse();
-        $this->assertEquals(302, $response->getStatusCode());
-    }
-    
-    /**
-     * @covers ::authenticateAction
-     */
-    public function testAuthenticateActionRedirectIfCredentialsAreWrong()
-    {
-        // redirect on unknown user
-        $this->routeMatch->setParam('action', 'authenticate');
-        $this->routeMatch->setParam('username', 'this-is-an-unknown-user');
-        $this->routeMatch->setParam('password', 'some-password');
-        $result = $this->controller->dispatch($this->request);
-        $response = $this->controller->getResponse();
-        $this->assertEquals(302, $response->getStatusCode());
-        
-        // redirect on wrong password
-        $this->routeMatch->setParam('action', 'authenticate');
-        $this->routeMatch->setParam('username', 'sysadmin');
-        $this->routeMatch->setParam('password', 'wrong-password');
-        $result = $this->controller->dispatch($this->request);
-        $response = $this->controller->getResponse();
-        $this->assertEquals(302, $response->getStatusCode());
-    }
-    
-    /**
-     * @covers ::authenticateAction
-     */
-    public function testAuthenticateActionRedirectIfCredentialsAreCorrect()
-    {
-        // redirect on auth failure
-        $this->routeMatch->setParam('action', 'authenticate');
-        $this->routeMatch->setParam('username', 'sysadmin');
-        $this->routeMatch->setParam('password', 'sysadmin');
-        $result = $this->controller->dispatch($this->request);
-        $response = $this->controller->getResponse();
-        $this->assertEquals(302, $response->getStatusCode());
     }
     
     /**
@@ -192,11 +147,62 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     }
     
     /**
+     * @covers ::authenticateAction
+     */
+    public function testAuthenticateActionRedirectIfNoLoginGiven()
+    {
+        // redirect on auth failure
+        $this->routeMatch->setParam('action', 'authenticate');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+    }
+    
+    /**
+     * @covers ::authenticateAction
+     */
+    public function testAuthenticateActionRedirectIfCredentialsAreWrong()
+    {
+        // redirect on unknown user
+        $this->routeMatch->setParam('action', 'authenticate');
+        $this->routeMatch->setParam('username', 'this-is-an-unknown-user');
+        $this->routeMatch->setParam('password', 'some-password');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        
+        // re-deisplay login form on wrong password
+        $this->routeMatch->setParam('action', 'authenticate');
+        $this->routeMatch->setParam('username', 'sysadmin');
+        $this->routeMatch->setParam('password', 'wrong-password');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+    
+    /**
+     * @covers ::authenticateAction
+     */
+    public function testAuthenticateActionRedirectIfCredentialsAreCorrect()
+    {
+        // redirect on auth failure
+        $this->routeMatch->setParam('action', 'authenticate');
+        $this->routeMatch->setParam('username', 'sysadmin');
+        $this->routeMatch->setParam('password', 'sysadmin');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+    }
+    
+    /**
      * @covers ::userdataAction
      */
     public function testUserDataActionRedirectsToUserProfilePage()
     {
-        // redirect to user profile/index page
+    	// set user
+    	$this->setZfcuserAuthMock();
+    	
+    	// redirect to user profile/index page
         $this->routeMatch->setParam('action', 'userdata');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
@@ -208,7 +214,10 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testEditUserDataActionCanBeDispatched()
     {
-        // display edit user data form
+    	// set user
+    	$this->setZfcuserAuthMock();
+    	
+    	// display edit user data form
         $this->routeMatch->setParam('action', 'edituserdata');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
@@ -221,7 +230,10 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testEditUserProfileActionCanBeDispatched()
     {
-        // display edit user profile form
+    	// set user
+    	$this->setZfcuserAuthMock();
+    	
+    	// display edit user profile form
         $this->routeMatch->setParam('action', 'edituserprofile');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
@@ -336,4 +348,34 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     }
     
     
+    //
+    // helpers
+    //
+    
+    
+    /**
+     *  set mock for ZfcUserAuthentication
+     */
+    private function setZfcuserAuthMock () {
+		$mockAuth = $this->getMock('ZfcUser\Entity\UserInterface');
+		
+		$ZfcUserMock = $this->getMock('Admin\Entity\User');  
+		
+		$ZfcUserMock->expects($this->any())
+			->method('getId')
+			->will($this->returnValue('1'));
+		
+		$authMock = $this->getMock('ZfcUser\Controller\Plugin\ZfcUserAuthentication');
+		
+		$authMock->expects($this->any())
+			->method('hasIdentity')
+			-> will($this->returnValue(true));  
+		
+		$authMock->expects($this->any())
+			->method('getIdentity')
+			->will($this->returnValue($ZfcUserMock));
+		
+		$this->getController()->getPluginManager()
+			->setService('zfcUserAuthentication', $authMock);
+    }
 }

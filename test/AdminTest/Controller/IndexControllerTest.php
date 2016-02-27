@@ -44,22 +44,11 @@ class IndexControllerTest extends ActionControllerTestCase
      */
     public function testIndexActionCanBeDispatched()
     {
-        // Specify which action to run
+        // redirect to whatever is set in route/navigation configuration
         $this->routeMatch->setParam('action', 'index');
-    
-        // Kick the controller into action
         $result = $this->controller->dispatch($this->request);
-    
-        // Check the HTTP response code
         $response = $this->controller->getResponse();
-        $this->assertEquals(200, $response->getStatusCode());
-    
-        // Check for a ViewModel to be returned
-        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
-    
-        // Test the parameters contained in the View model
-        //$vars = $result->getVariables();
-        //$this->assertTrue(isset($vars['var']));
+        $this->assertEquals(302, $response->getStatusCode());
     }
     
     /**
