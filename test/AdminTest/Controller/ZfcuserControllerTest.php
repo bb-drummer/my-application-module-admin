@@ -9,7 +9,8 @@ use \Admin\Controller\ZfcuserController,
     Zend\Http\Router,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\Router\RouteMatch,
-    Zend\Mvc\Router\Http\TreeRouteStack as HttpRouter
+    Zend\Mvc\Router\Http\TreeRouteStack as HttpRouter,
+    ZfcUser\Options\ModuleOptions as ZfcuserModuleOptions;
 ;
 
 /**
@@ -29,7 +30,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
         $routerConfig = isset($config['router']) ? $config['router'] : array();
         $router = HttpRouter::factory($routerConfig);
         
-    	$redirCallback = new \Admin\Controller\RedirectCallback($this->getApplication(), $router, new ZfcUser\Options\ModuleOptions($config['router']));
+    	$redirCallback = new \Admin\Controller\RedirectCallback($this->getApplication(), $router, new ZfcuserModuleOptions($config['router']));
     	
         $this->setController(new ZfcuserController());
         $this->getController()->setServiceLocator($this->getApplicationServiceLocator());
