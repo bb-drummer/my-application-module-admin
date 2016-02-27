@@ -73,7 +73,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     public function testUserProfileIndexActionCanBeDispatched()
     {
     	// set user
-    	$this->setZfcuserAuthMock();
+    	$this->setZfcuserValidAuthMock();
     	
         // display user profile
         $this->routeMatch->setParam('action', 'index');
@@ -88,6 +88,9 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testRegisterActionCanBeDispatched()
     {
+    	// set public user
+    	$this->setZfcuserNoAuthMock();
+    	
         // display registration form
         $this->routeMatch->setParam('action', 'register');
         $result = $this->controller->dispatch($this->request);
@@ -101,6 +104,9 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testRequestPasswordResetActionCanBeDispatched()
     {
+    	// set public user
+    	$this->setZfcuserNoAuthMock();
+    	
         // dispay request password reset form
         $this->routeMatch->setParam('action', 'requestpasswordreset');
         $result = $this->controller->dispatch($this->request);
@@ -114,6 +120,9 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testResetPasswordActionRedirectIfTokenIsMissing()
     {
+    	// set public user
+    	$this->setZfcuserNoAuthMock();
+    	
         // redirect if token is missing...
         $this->routeMatch->setParam('action', 'resetpassword');
         $result = $this->controller->dispatch($this->request);
@@ -126,8 +135,11 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testResetPasswordActionRedirectsIfTokenIsInvalid()
     {
+    	// set public user
+    	$this->setZfcuserNoAuthMock();
+    	
         // redirect if token is invalid...
-        $this->routeMatch->setParam('action', 'resetpassword', 'token', 'invalid-password-reset-token');
+        $this->routeMatch->setParam('action', 'resetpassword', 'resettoken', 'invalid-password-reset-token');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(302, $response->getStatusCode());
@@ -138,8 +150,11 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testResetPasswordActionCanBeDispatched()
     {
+    	// set public user
+    	$this->setZfcuserNoAuthMock();
+    	
         // display password reset form if token is valid
-        $this->routeMatch->setParam('action', 'resetpassword', 'token', 'valid-password-reset-token');
+        $this->routeMatch->setParam('action', 'resetpassword', 'resettoken', 'valid-password-reset-token');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
@@ -151,6 +166,9 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testAuthenticateActionRedirectIfNoLoginGiven()
     {
+    	// set public user
+    	$this->setZfcuserNoAuthMock();
+    	
         // redirect on auth failure
         $this->routeMatch->setParam('action', 'authenticate');
         $result = $this->controller->dispatch($this->request);
@@ -163,6 +181,9 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testAuthenticateActionRedirectIfCredentialsAreWrong()
     {
+    	// set public user
+    	$this->setZfcuserNoAuthMock();
+    	
         // redirect on unknown user
         $this->routeMatch->setParam('action', 'authenticate');
         $this->routeMatch->setParam('username', 'this-is-an-unknown-user');
@@ -185,6 +206,9 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testAuthenticateActionRedirectIfCredentialsAreCorrect()
     {
+    	// set public user
+    	$this->setZfcuserNoAuthMock();
+    	
         // redirect on auth failure
         $this->routeMatch->setParam('action', 'authenticate');
         $this->routeMatch->setParam('username', 'sysadmin');
@@ -200,7 +224,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     public function testUserDataActionRedirectsToUserProfilePage()
     {
     	// set user
-    	$this->setZfcuserAuthMock();
+    	$this->setZfcuserValidAuthMock();
     	
     	// redirect to user profile/index page
         $this->routeMatch->setParam('action', 'userdata');
@@ -215,7 +239,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     public function testEditUserDataActionCanBeDispatched()
     {
     	// set user
-    	$this->setZfcuserAuthMock();
+    	$this->setZfcuserValidAuthMock();
     	
     	// display edit user data form
         $this->routeMatch->setParam('action', 'edituserdata');
@@ -231,7 +255,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     public function testEditUserProfileActionCanBeDispatched()
     {
     	// set user
-    	$this->setZfcuserAuthMock();
+    	$this->setZfcuserValidAuthMock();
     	
     	// display edit user profile form
         $this->routeMatch->setParam('action', 'edituserprofile');
@@ -356,7 +380,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     /**
      *  set mock for ZfcUserAuthentication
      */
-    private function setZfcuserAuthMock () {
+    private function setZfcUserValidAuthMock () {
 		$mockAuth = $this->getMock('ZfcUser\Entity\UserInterface');
 		
 		$ZfcUserMock = $this->getMock('Admin\Entity\User');  
@@ -374,6 +398,32 @@ class ZfcuserControllerTest extends ActionControllerTestCase
 		$authMock->expects($this->any())
 			->method('getIdentity')
 			->will($this->returnValue($ZfcUserMock));
+		
+		$this->getController()->getPluginManager()
+			->setService('zfcUserAuthentication', $authMock);
+    }
+    
+    /**
+     *  set mock for ZfcUserAuthentication
+     */
+    private function setZfcUserNoAuthMock () {
+		$mockAuth = $this->getMock('ZfcUser\Entity\UserInterface');
+		
+		$ZfcUserMock = $this->getMock('Admin\Entity\User');  
+		
+		$ZfcUserMock->expects($this->any())
+			->method('getId')
+			->will($this->returnValue(null));
+		
+		$authMock = $this->getMock('ZfcUser\Controller\Plugin\ZfcUserAuthentication');
+		
+		$authMock->expects($this->any())
+			->method('hasIdentity')
+			-> will($this->returnValue(false));  
+		
+		$authMock->expects($this->any())
+			->method('getIdentity')
+			->will($this->returnValue(null));
 		
 		$this->getController()->getPluginManager()
 			->setService('zfcUserAuthentication', $authMock);
