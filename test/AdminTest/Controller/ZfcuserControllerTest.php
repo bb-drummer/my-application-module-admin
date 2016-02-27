@@ -46,7 +46,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
         // set mock for ZfcUserAuthentication
 		$mockAuth = $this->getMock('ZfcUser\Entity\UserInterface');
 		
-		$ZfcUserMock = $this->getMock('ZfcUser\Entity\User');  
+		$ZfcUserMock = $this->getMock('Admin\Entity\User');  
 		
 		$ZfcUserMock->expects($this->any())
 			->method('getId')
