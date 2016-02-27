@@ -63,7 +63,7 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testAclDataActionRedirectsOnNonXmlHttpRequests()
     {
-    	// redirect
+        // redirect
         $this->routeMatch->setParam('action', 'acldata');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
@@ -75,14 +75,14 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testAclDataActionCanBeDispatchedToReturnAclJsonDataOnXmlHttpRequest()
     {
-    	// set XHR header
-    	$headers = $this->getRequest()->getHeaders();
-    	if (!$headers) {
-    		$headers = new \Zend\Http\Headers();
-    	}
-    	$headers->addHeaderLine('X_REQUESTED_WITH: XMLHttpRequest');
-    	$this->getRequest()->setHeaders($headers);
-    	
+        // set XHR header
+        $headers = $this->getRequest()->getHeaders();
+        if (!$headers) {
+            $headers = new \Zend\Http\Headers();
+        }
+        $headers->addHeaderLine('X_REQUESTED_WITH: XMLHttpRequest');
+        $this->getRequest()->setHeaders($headers);
+        
         // 'display' acl json data
         $this->routeMatch->setParam('action', 'acldata');
         $result = $this->controller->dispatch($this->request);
@@ -96,7 +96,7 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testAddAclActionCanBeDispatched()
     {
-    	// display acl add form
+        // display acl add form
         $this->routeMatch->setParam('action', 'addacl');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
@@ -109,13 +109,13 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testEditAclActionRedirectsIfNoAclIdIsGiven()
     {
-    	// redirect if no acl id is given
-    	$this->routeMatch->setParam('action', 'editacl');
-    	$result = $this->controller->dispatch($this->request);
-    	$response = $this->controller->getResponse();
-    	$this->assertEquals(302, $response->getStatusCode());
-    	
-    	//$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        // redirect if no acl id is given
+        $this->routeMatch->setParam('action', 'editacl');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        
+        //$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
@@ -123,14 +123,14 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testEditAclActionRedirectsIfGivenIdIsNotFound()
     {
-    	// redirect if acl id could not be found
-    	$this->routeMatch->setParam('action', 'editacl');
-    	$this->routeMatch->setParam('acl_id', 999999999);
-    	$result = $this->controller->dispatch($this->request);
-    	$response = $this->controller->getResponse();
-    	$this->assertEquals(302, $response->getStatusCode());
-    	
-    	//$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        // redirect if acl id could not be found
+        $this->routeMatch->setParam('action', 'editacl');
+        $this->routeMatch->setParam('acl_id', 999999999);
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        
+        //$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
@@ -138,13 +138,13 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testEditAclActionCanBeDispatched()
     {
-    	// display acl edit form
-    	$this->routeMatch->setParam('action', 'editacl');
-    	$this->routeMatch->setParam('acl_id', 1);
-    	$result = $this->controller->dispatch($this->request);
-    	$response = $this->controller->getResponse();
-    	$this->assertEquals(200, $response->getStatusCode());
-    	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        // display acl edit form
+        $this->routeMatch->setParam('action', 'editacl');
+        $this->routeMatch->setParam('acl_id', 1);
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
@@ -152,13 +152,13 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testDeleteAclActionRedirectsIfNoAclIdIsGiven()
     {
-    	// redirect if no acl id is given
-    	$this->routeMatch->setParam('action', 'deleteacl');
-    	$result = $this->controller->dispatch($this->request);
-    	$response = $this->controller->getResponse();
-    	$this->assertEquals(302, $response->getStatusCode());
-    	
-    	//$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        // redirect if no acl id is given
+        $this->routeMatch->setParam('action', 'deleteacl');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        
+        //$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
@@ -166,14 +166,14 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testDeleteAclActionRedirectsIfGivenIdIsNotFound()
     {
-    	// redirect if acl id could not be found
-    	$this->routeMatch->setParam('action', 'deleteacl');
-    	$this->routeMatch->setParam('acl_id', 999999999);
-    	$result = $this->controller->dispatch($this->request);
-    	$response = $this->controller->getResponse();
-    	$this->assertEquals(302, $response->getStatusCode());
-    	
-    	//$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        // redirect if acl id could not be found
+        $this->routeMatch->setParam('action', 'deleteacl');
+        $this->routeMatch->setParam('acl_id', 999999999);
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        
+        //$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
@@ -183,13 +183,13 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testDeleteAclActionCanBeDispatched()
     {
-    	// display delete acl confirmation form
-    	$this->routeMatch->setParam('action', 'deleteacl');
-    	$this->routeMatch->setParam('acl_id', 1);
-    	$result = $this->controller->dispatch($this->request);
-    	$response = $this->controller->getResponse();
-    	$this->assertEquals(200, $response->getStatusCode());
-    	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        // display delete acl confirmation form
+        $this->routeMatch->setParam('action', 'deleteacl');
+        $this->routeMatch->setParam('acl_id', 1);
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
@@ -197,12 +197,12 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testRolesIndexActionCanBeDispatched()
     {
-    	// display roles overview page
-    	$this->routeMatch->setParam('action', 'roles');
-    	$result = $this->controller->dispatch($this->request);
-    	$response = $this->controller->getResponse();
-    	$this->assertEquals(200, $response->getStatusCode());
-    	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        // display roles overview page
+        $this->routeMatch->setParam('action', 'roles');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
@@ -210,12 +210,12 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testAddRoleActionCanBeDispatched()
     {
-    	// show add role form
-    	$this->routeMatch->setParam('action', 'addrole');
-    	$result = $this->controller->dispatch($this->request);
-   		$response = $this->controller->getResponse();
-    	$this->assertEquals(200, $response->getStatusCode());
-    	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        // show add role form
+        $this->routeMatch->setParam('action', 'addrole');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
@@ -223,13 +223,13 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testEditRoleActionCanBeDispatched()
     {
-    	// show edit role form
-    	$this->routeMatch->setParam('action', 'editrole');
-    	$this->routeMatch->setParam('acl_id', 1);
-    	$result = $this->controller->dispatch($this->request);
-    	$response = $this->controller->getResponse();
-    	$this->assertEquals(200, $response->getStatusCode());
-    	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        // show edit role form
+        $this->routeMatch->setParam('action', 'editrole');
+        $this->routeMatch->setParam('acl_id', 1);
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
@@ -237,13 +237,13 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testDeleteRoleActionCanBeDispatched()
     {
-    	// show delete role confirmation form
-    	$this->routeMatch->setParam('action', 'deleterole');
-    	$this->routeMatch->setParam('acl_id', 1);
-    	$result = $this->controller->dispatch($this->request);
-     	$response = $this->controller->getResponse();
-    	$this->assertEquals(200, $response->getStatusCode());
-    	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        // show delete role confirmation form
+        $this->routeMatch->setParam('action', 'deleterole');
+        $this->routeMatch->setParam('acl_id', 1);
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
      
     /**
@@ -251,12 +251,12 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testResourcesIndexActionCanBeDispatched()
     {
-    	// show resources overview page
-    	$this->routeMatch->setParam('action', 'resources');
-    	$result = $this->controller->dispatch($this->request);
-    	$response = $this->controller->getResponse();
-    	$this->assertEquals(200, $response->getStatusCode());
-    	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        // show resources overview page
+        $this->routeMatch->setParam('action', 'resources');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
@@ -264,12 +264,12 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testAddResourceActionCanBeDispatched()
     {
-    	// show add resource form
-    	$this->routeMatch->setParam('action', 'addresource');
-    	$result = $this->controller->dispatch($this->request);
-     	$response = $this->controller->getResponse();
-    	$this->assertEquals(200, $response->getStatusCode());
-    	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        // show add resource form
+        $this->routeMatch->setParam('action', 'addresource');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
@@ -277,13 +277,13 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testEditResourceActionCanBeDispatched()
     {
-    	// show edit resource form
-    	$this->routeMatch->setParam('action', 'editresource');
-    	$this->routeMatch->setParam('acl_id', 1);
-    	$result = $this->controller->dispatch($this->request);
-    	$response = $this->controller->getResponse();
-    	$this->assertEquals(200, $response->getStatusCode());
-    	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        // show edit resource form
+        $this->routeMatch->setParam('action', 'editresource');
+        $this->routeMatch->setParam('acl_id', 1);
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
@@ -291,13 +291,13 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testDeleteResourceActionCanBeDispatched()
     {
-    	// show delete resource confirmation form
-    	$this->routeMatch->setParam('action', 'deleteresource');
-    	$this->routeMatch->setParam('acl_id', 1);
-    	$result = $this->controller->dispatch($this->request);
-    	$response = $this->controller->getResponse();
-    	$this->assertEquals(200, $response->getStatusCode());
-    	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        // show delete resource confirmation form
+        $this->routeMatch->setParam('action', 'deleteresource');
+        $this->routeMatch->setParam('acl_id', 1);
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
  
 }

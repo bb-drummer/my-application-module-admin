@@ -4,13 +4,13 @@
  * 
  * AdminModule
  *
- * @package		[MyApplication]
- * @package		BB's Zend Framework 2 Components
- * @package		AdminModule
- * @author		Björn Bartels [dragon-projects.net] <info@dragon-projects.net>
- * @link		http://gitlab.dragon-projects.de:81/groups/zf2
- * @license		http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @copyright	copyright (c) 2016 Björn Bartels [dragon-projects.net] <info@dragon-projects.net>
+ * @package   [MyApplication]
+ * @package   BB's Zend Framework 2 Components
+ * @package   AdminModule
+ * @author    Björn Bartels [dragon-projects.net] <info@dragon-projects.net>
+ * @link      http://gitlab.dragon-projects.de:81/groups/zf2
+ * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @copyright copyright (c) 2016 Björn Bartels [dragon-projects.net] <info@dragon-projects.net>
  */
 
 namespace Admin\Model;
@@ -21,67 +21,71 @@ use Admin\Model\Aclresource;
 
 class AclresourceTable
 {
-	protected $tableGateway;
+    protected $tableGateway;
 
-	public function __construct(TableGateway $tableGateway)
-	{
-		$this->tableGateway = $tableGateway;
-	}
+    public function __construct(TableGateway $tableGateway)
+    {
+        $this->tableGateway = $tableGateway;
+    }
 
-	public function fetchAll()
-	{
-		$resultSet = $this->tableGateway->select(function (Select $select) {
-			 $select->order('resourceslug ASC');
-		});
-		return $resultSet;
-	}
+    public function fetchAll()
+    {
+        $resultSet = $this->tableGateway->select(
+            function (Select $select) {
+                $select->order('resourceslug ASC');
+            }
+        );
+        return $resultSet;
+    }
 
-	public function getAclresource($id)
-	{
-		$id  = (int) $id;
-		$rowset = $this->tableGateway->select(array('aclresources_id' => $id));
-		$row = $rowset->current();
-		if (!$row) {
-			throw new \Exception("Could not find row $id");
-		}
-		return $row;
-	}
+    public function getAclresource($id)
+    {
+        $id  = (int) $id;
+        $rowset = $this->tableGateway->select(array('aclresources_id' => $id));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $id");
+        }
+        return $row;
+    }
 
-	public function getAclresourceBySlug($resource_slug)
-	{
-		$resource_slug  = trim(strip_tags($resource_slug));
-		$rowset = $this->tableGateway->select(array(
-			'resourceslug' => $resource_slug,	
-		));
-		$row = $rowset->current();
-		if (!$row) {
-			throw new \Exception("Could not find row $resource_slug");
-		}
-		return $row;
-	}
+    public function getAclresourceBySlug($resource_slug)
+    {
+        $resource_slug  = trim(strip_tags($resource_slug));
+        $rowset = $this->tableGateway->select(
+            array(
+            'resourceslug' => $resource_slug,    
+            )
+        );
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $resource_slug");
+        }
+        return $row;
+    }
 
-	public function saveAclresource(Aclresource $Aclresource)
-	{
-		$data = array(
-			'resourceslug'			=> $Aclresource->resourceslug,
-			'resourcename'			=> $Aclresource->resourcename,
-		);
+    public function saveAclresource(Aclresource $Aclresource)
+    {
+        $data = array(
+        'resourceslug'            => $Aclresource->resourceslug,
+        'resourcename'            => $Aclresource->resourcename,
+        );
 
-		$id = (int)$Aclresource->aclresources_id;
-		if ($id == 0) {
-			$this->tableGateway->insert($data);
-		} else {
-			if ($this->getAclresource($id)) {
-				$this->tableGateway->update($data, array('aclresources_id' => $id));
-			} else {
-				throw new \Exception('Form id does not exist');
-			}
-		}
-	}
+        $id = (int)$Aclresource->aclresources_id;
+        if ($id == 0) {
+            $this->tableGateway->insert($data);
+        } else {
+            if ($this->getAclresource($id)) {
+                $this->tableGateway->update($data, array('aclresources_id' => $id));
+            } else {
+                throw new \Exception('Form id does not exist');
+            }
+        }
+    }
 
-	public function deleteAclresource($id)
-	{
-		$this->tableGateway->delete(array('aclresources_id' => $id));
-	}
+    public function deleteAclresource($id)
+    {
+        $this->tableGateway->delete(array('aclresources_id' => $id));
+    }
 }
 

@@ -6,11 +6,11 @@
  */
 // navigation
 translate('admin');
-	translate('users');
-	translate('clients');
-	translate('applications');
-	translate('permissions');
-		translate('ACL');
-		translate('roles');
-		translate('resources');
-	translate('settings');
+    translate('users');
+    translate('clients');
+    translate('applications');
+    translate('permissions');
+        translate('ACL');
+        translate('roles');
+        translate('resources');
+    translate('settings');

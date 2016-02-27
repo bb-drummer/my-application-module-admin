@@ -80,19 +80,19 @@ class UsersControllerTest extends ActionControllerTestCase
      */
     public function testEditUserActionCanBeDispatched()
     {
-    	// Specify which action to run
-    	$this->routeMatch->setParam('action', 'edit');
-    	$this->routeMatch->setParam('user_id', 1);
+        // Specify which action to run
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('user_id', 1);
     
-    	// Kick the controller into action
-    	$result = $this->controller->dispatch($this->request);
+        // Kick the controller into action
+        $result = $this->controller->dispatch($this->request);
     
-    	// Check the HTTP response code
-    	$response = $this->controller->getResponse();
-    	$this->assertEquals(200, $response->getStatusCode());
+        // Check the HTTP response code
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
     
-    	// Check for a ViewModel to be returned
-    	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        // Check for a ViewModel to be returned
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
@@ -100,19 +100,19 @@ class UsersControllerTest extends ActionControllerTestCase
      */
     public function testDeleteUserActionCanBeDispatched()
     {
-    	// Specify which action to run
-    	$this->routeMatch->setParam('action', 'delete');
-    	$this->routeMatch->setParam('user_id', 1);
+        // Specify which action to run
+        $this->routeMatch->setParam('action', 'delete');
+        $this->routeMatch->setParam('user_id', 1);
     
-    	// Kick the controller into action
-    	$result = $this->controller->dispatch($this->request);
+        // Kick the controller into action
+        $result = $this->controller->dispatch($this->request);
     
-    	// Check the HTTP response code
-    	$response = $this->controller->getResponse();
-    	$this->assertEquals(200, $response->getStatusCode());
+        // Check the HTTP response code
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
     
-    	// Check for a ViewModel to be returned
-    	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        // Check for a ViewModel to be returned
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     
