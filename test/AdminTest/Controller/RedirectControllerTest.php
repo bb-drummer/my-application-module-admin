@@ -40,9 +40,9 @@ class RedirectControllerTest extends ActionControllerTestCase
     /**
      * is the action accessable per request/response action name ?
   	 *
-     * @covers ::indexAction
+     * @covers ::redirectAction
      */
-    public function testRedirect()
+    public function testRedirectWhenSessionTimedOutAndLoginIsRequired()
     {
         $this->routeMatch->setParam('redirect', '/');
         $result = $this->controller->dispatch($this->request);
