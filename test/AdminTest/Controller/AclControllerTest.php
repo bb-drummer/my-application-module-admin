@@ -225,6 +225,7 @@ class AclControllerTest extends ActionControllerTestCase
     {
     	// show edit role form
     	$this->routeMatch->setParam('action', 'editrole');
+    	$this->routeMatch->setParam('acl_id', 1);
     	$result = $this->controller->dispatch($this->request);
     	$response = $this->controller->getResponse();
     	$this->assertEquals(200, $response->getStatusCode());
@@ -238,6 +239,7 @@ class AclControllerTest extends ActionControllerTestCase
     {
     	// show delete role confirmation form
     	$this->routeMatch->setParam('action', 'deleterole');
+    	$this->routeMatch->setParam('acl_id', 1);
     	$result = $this->controller->dispatch($this->request);
      	$response = $this->controller->getResponse();
     	$this->assertEquals(200, $response->getStatusCode());
@@ -277,6 +279,7 @@ class AclControllerTest extends ActionControllerTestCase
     {
     	// show edit resource form
     	$this->routeMatch->setParam('action', 'editresource');
+    	$this->routeMatch->setParam('acl_id', 1);
     	$result = $this->controller->dispatch($this->request);
     	$response = $this->controller->getResponse();
     	$this->assertEquals(200, $response->getStatusCode());
@@ -290,6 +293,7 @@ class AclControllerTest extends ActionControllerTestCase
     {
     	// show delete resource confirmation form
     	$this->routeMatch->setParam('action', 'deleteresource');
+    	$this->routeMatch->setParam('acl_id', 1);
     	$result = $this->controller->dispatch($this->request);
     	$response = $this->controller->getResponse();
     	$this->assertEquals(200, $response->getStatusCode());
