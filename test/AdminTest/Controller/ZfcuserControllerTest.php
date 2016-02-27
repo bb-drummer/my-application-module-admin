@@ -72,37 +72,60 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testUserProfileIndexActionCanBeDispatched()
     {
-        // Specify which action to run
+        // display user profile
         $this->routeMatch->setParam('action', 'index');
-    
-        // Kick the controller into action
         $result = $this->controller->dispatch($this->request);
-    
-        // Check the HTTP response code
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
-    
-        // Check for a ViewModel to be returned
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
      * @covers ::authenticateAction
      */
-    public function testAuthenticateActionCanBeDispatched()
+    public function testAuthenticateActionRedirectIfNoLoginGiven()
     {
-        // Specify which action to run
+        // redirect on auth failure
         $this->routeMatch->setParam('action', 'authenticate');
-    
-        // Kick the controller into action
         $result = $this->controller->dispatch($this->request);
-    
-        // Check the HTTP response code
         $response = $this->controller->getResponse();
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(302, $response->getStatusCode());
+    }
     
-        // Check for a ViewModel to be returned
-        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    /**
+     * @covers ::authenticateAction
+     */
+    public function testAuthenticateActionRedirectIfCredentialsAreWrong()
+    {
+        // redirect on unknown user
+        $this->routeMatch->setParam('action', 'authenticate');
+        $this->routeMatch->setParam('username', 'this-is-an-unknown-user');
+        $this->routeMatch->setParam('password', 'some-password');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        
+        // redirect on wrong password
+        $this->routeMatch->setParam('action', 'authenticate');
+        $this->routeMatch->setParam('username', 'sysadmin');
+        $this->routeMatch->setParam('password', 'wrong-password');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+    }
+    
+    /**
+     * @covers ::authenticateAction
+     */
+    public function testAuthenticateActionRedirectIfCredentialsAreCorrect()
+    {
+        // redirect on auth failure
+        $this->routeMatch->setParam('action', 'authenticate');
+        $this->routeMatch->setParam('username', 'sysadmin');
+        $this->routeMatch->setParam('password', 'sysadmin');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
     }
     
     /**
@@ -110,17 +133,11 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testRegisterActionCanBeDispatched()
     {
-        // Specify which action to run
+        // display registration form
         $this->routeMatch->setParam('action', 'register');
-    
-        // Kick the controller into action
         $result = $this->controller->dispatch($this->request);
-    
-        // Check the HTTP response code
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
-    
-        // Check for a ViewModel to be returned
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
@@ -129,18 +146,36 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testRequestPasswordResetActionCanBeDispatched()
     {
-        // Specify which action to run
+        // dispay request password reset form
         $this->routeMatch->setParam('action', 'requestpasswordreset');
-    
-        // Kick the controller into action
         $result = $this->controller->dispatch($this->request);
-    
-        // Check the HTTP response code
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
-    
-        // Check for a ViewModel to be returned
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+    
+    /**
+     * @covers ::resetpasswordAction
+     */
+    public function testResetPasswordActionRedirectIfTokenIsMissing()
+    {
+        // redirect if token is missing...
+        $this->routeMatch->setParam('action', 'resetpassword');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+    }
+    
+    /**
+     * @covers ::resetpasswordAction
+     */
+    public function testResetPasswordActionRedirectsIfTokenIsInvalid()
+    {
+        // redirect if token is invalid...
+        $this->routeMatch->setParam('action', 'resetpassword', 'token', 'invalid-password-reset-token');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
     }
     
     /**
@@ -148,37 +183,24 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testResetPasswordActionCanBeDispatched()
     {
-        // Specify which action to run
-        $this->routeMatch->setParam('action', 'resetpassword');
-    
-        // Kick the controller into action
+        // display password reset form if token is valid
+        $this->routeMatch->setParam('action', 'resetpassword', 'token', 'valid-password-reset-token');
         $result = $this->controller->dispatch($this->request);
-    
-        // Check the HTTP response code
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
-    
-        // Check for a ViewModel to be returned
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
      * @covers ::userdataAction
      */
-    public function testUserDataIndexActionCanBeDispatched()
+    public function testUserDataActionRedirectsToUserProfilePage()
     {
-        // Specify which action to run
+        // redirect to user profile/index page
         $this->routeMatch->setParam('action', 'userdata');
-    
-        // Kick the controller into action
         $result = $this->controller->dispatch($this->request);
-    
-        // Check the HTTP response code
         $response = $this->controller->getResponse();
-        $this->assertEquals(200, $response->getStatusCode());
-    
-        // Check for a ViewModel to be returned
-        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        $this->assertEquals(302, $response->getStatusCode());
     }
     
     /**
@@ -186,17 +208,11 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testEditUserDataActionCanBeDispatched()
     {
-        // Specify which action to run
+        // display edit user data form
         $this->routeMatch->setParam('action', 'edituserdata');
-    
-        // Kick the controller into action
         $result = $this->controller->dispatch($this->request);
-    
-        // Check the HTTP response code
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
-    
-        // Check for a ViewModel to be returned
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
@@ -205,17 +221,11 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function testEditUserProfileActionCanBeDispatched()
     {
-        // Specify which action to run
+        // display edit user profile form
         $this->routeMatch->setParam('action', 'edituserprofile');
-    
-        // Kick the controller into action
         $result = $this->controller->dispatch($this->request);
-    
-        // Check the HTTP response code
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
-    
-        // Check for a ViewModel to be returned
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     

@@ -38,66 +38,60 @@ class AclControllerTest extends ActionControllerTestCase
     }
 
     /**
-     * is the action accessable per request/response action name ?
-  	 *
      * @covers ::indexAction
      * @covers ::acllistAction
      */
     public function testIndexActionCanBeDispatched()
     {
-        // Specify which action to run
+        // dispatch index
         $this->routeMatch->setParam('action', 'index');
-    
-        // Kick the controller into action
         $result = $this->controller->dispatch($this->request);
-    
-        // Check the HTTP response code
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
-    
-        // Check for a ViewModel to be returned
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
-
         
-        // Specify which action to run
+        // dispatch acllist
         $this->routeMatch->setParam('action', 'acllist');
-    
-        // Kick the controller into action
         $result = $this->controller->dispatch($this->request);
-    
-        // Check the HTTP response code
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
-    
-        // Check for a ViewModel to be returned
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
-     * is the action accessable per request/response action name ?
-  	 *
-     * @covers ::indexAction
-     * @covers ::acllistAction
+     * @covers ::acldataAction
      */
-    public function testAclDataActionCanBeDispatched()
+    public function testAclDataActionRedirectsOnNonXmlHttpRequests()
     {
-        // Specify which action to run
+    	// redirect
         $this->routeMatch->setParam('action', 'acldata');
-    
-        // Kick the controller into action
         $result = $this->controller->dispatch($this->request);
-    
-        // Check the HTTP response code
         $response = $this->controller->getResponse();
-        $this->assertEquals(200, $response->getStatusCode());
-    
-        // Check for a ViewModel to be returned
-        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        $this->assertEquals(301, $response->getStatusCode());
     }
     
     /**
-     * is the action accessable per request/response action name ?
-     *
+     * @covers ::acldataAction
+     */
+    public function testAclDataActionCanBeDispatchedToReturnAclJsonDataOnXmlHttpRequest()
+    {
+    	// set XHR header
+    	$headers = $this->getRequest()->getHeaders();
+    	if (!$headers) {
+    		$headers = new \Zend\Http\Headers();
+    	}
+    	$headers->addHeaderLine('X_REQUESTED_WITH: XMLHttpRequest');
+    	$this->getRequest()->setHeaders($headers);
+    	
+        // 'display' acl json data
+        $this->routeMatch->setParam('action', 'acldata');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\JsonModel', $result);
+    }
+    
+    /**
      * @covers ::addaclAction
      */
     public function testAddAclActionCanBeDispatched()
