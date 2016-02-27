@@ -32,7 +32,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
         
     	$redirCallback = new \Admin\Controller\RedirectCallback($this->getApplication(), $router, new ZfcuserModuleOptions($config['router']));
     	
-        $this->setController(new ZfcuserController());
+        $this->setController(new ZfcuserController($redirCallback));
         $this->getController()->setServiceLocator($this->getApplicationServiceLocator());
         $this->setRequest(new Request());
         $this->setRouteMatch(new RouteMatch(array('controller' => '\Admin\Controller\Zfcuser', 'action' => 'index')));
