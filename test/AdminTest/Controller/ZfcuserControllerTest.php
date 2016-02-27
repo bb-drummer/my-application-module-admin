@@ -171,8 +171,8 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     	
         // redirect on auth failure
         $this->routeMatch->setParam('action', 'authenticate');
-        $this->routeMatch->setParam('username', '');
-        $this->routeMatch->setParam('password', '');
+        $this->routeMatch->setParam('identity', '');
+        $this->routeMatch->setParam('credential', '');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(302, $response->getStatusCode());
@@ -188,8 +188,8 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     	
         // redirect on unknown user
         $this->routeMatch->setParam('action', 'authenticate');
-        $this->routeMatch->setParam('username', 'this-is-an-unknown-user');
-        $this->routeMatch->setParam('password', 'some-password');
+        $this->routeMatch->setParam('identity', 'this-is-an-unknown-user');
+        $this->routeMatch->setParam('credential', 'some-password');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(302, $response->getStatusCode());
@@ -205,8 +205,8 @@ class ZfcuserControllerTest extends ActionControllerTestCase
 
         // re-deisplay login form on wrong password
         $this->routeMatch->setParam('action', 'authenticate');
-        $this->routeMatch->setParam('username', 'sysadmin');
-        $this->routeMatch->setParam('password', 'wrong-password');
+        $this->routeMatch->setParam('identity', 'sysadmin');
+        $this->routeMatch->setParam('credential', 'wrong-password');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
@@ -222,8 +222,8 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     	
         // redirect on auth failure
         $this->routeMatch->setParam('action', 'authenticate');
-        $this->routeMatch->setParam('username', 'sysadmin');
-        $this->routeMatch->setParam('password', 'sysadmin');
+        $this->routeMatch->setParam('identity', 'sysadmin');
+        $this->routeMatch->setParam('credential', 'sysadmin');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(302, $response->getStatusCode());
