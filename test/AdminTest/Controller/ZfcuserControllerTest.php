@@ -152,7 +152,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     public function testResetPasswordActionCanBeDispatched()
     {
     	// set public user
-    	$this->setZfcuserNoAuthMock();
+    	$this->setZfcuserValidAuthMock();
     	
         // display password reset form if token is valid
         $this->routeMatch->setParam('action', 'resetpassword');
