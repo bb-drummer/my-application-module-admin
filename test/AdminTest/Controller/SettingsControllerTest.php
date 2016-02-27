@@ -2,7 +2,7 @@
 namespace AdminTest\Controller;
 
 use \Admin\Controller\SettingsController,
-    \AdminTest\Framework\ActionControllerTestCase,
+    \AdminTest\Framework\TestCase as ActionControllerTestCase,
     Zend\Http\Request,
     Zend\Http\Response,
     Zend\Http\Router,
