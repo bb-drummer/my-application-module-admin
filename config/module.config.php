@@ -158,7 +158,7 @@ return array(
                             'route'    => '/clients[/:action[/:client_id]]',
                             'constraints' => array(
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'client_id'     => '[0-9]*',
+                                'client_id'  => '[0-9]*',
                             ),
                             'defaults' => array(
                                 'controller' => 'Admin\Controller\Clients',
@@ -170,11 +170,11 @@ return array(
                         'options' => array(
                             'route'    => '/apps[/:action[/:application_id]]',
                             'constraints' => array(
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'client_id'     => '[0-9]*',
+                                'action'         => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'application_id' => '[0-9]*',
                             ),
                             'defaults' => array(
-                                'controller' => 'Admin\Controller\Applications',
+                                'controller'     => 'Admin\Controller\Applications',
                             ),
                         ),
                     ),

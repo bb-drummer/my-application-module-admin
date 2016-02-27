@@ -35,6 +35,8 @@ class SettingsControllerTest extends ActionControllerTestCase
         $this->getEvent()->setRouteMatch($this->getRouteMatch());
         $this->getController()->setEvent($this->getEvent());
         $this->setResponse(new Response());
+        
+        $this->setZfcUserValidAuthMock();
     }
 
     /**

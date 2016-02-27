@@ -28,24 +28,24 @@ class ClientsController extends BaseActionController
     {
         $this->setToolbarItems(
             array(
-            "index" => array(
-            array(
-            'label'            => 'add client',
-            'icon'            => 'plus',
-            'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
-            'route'            => 'admin/clientsedit',
-            'action'        => 'add',
-            'resource'        => 'mvc:user',
-            ),
-            ),
+                "index" => array(
+                    array(
+                        'label'            => 'add client',
+                        'icon'            => 'plus',
+                        'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                        'route'            => 'admin/clientsedit',
+                        'action'        => 'add',
+                        'resource'        => 'mvc:user',
+                    ),
+                ),
             )
         );
         $this->setActionTitles(
             array(
-            'index' => $this->translate("manage clients"),
-            'add' => $this->translate("add client"),
-            'edit' => $this->translate("edit client"),
-            'delete' => $this->translate("delete client"),
+                'index' => $this->translate("manage clients"),
+                'add' => $this->translate("add client"),
+                'edit' => $this->translate("edit client"),
+                'delete' => $this->translate("delete client"),
             )
         );
         return parent::onDispatch($e);
@@ -61,14 +61,14 @@ class ClientsController extends BaseActionController
             $datatablesData['data'] = array_map(
                 function ($row) use ($oController) {
                     $actions = '<div class="btn-group btn-group-xs">'.
-                    '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
-                        'admin/clientsedit',
-                        array('action'=>'edit', 'client_id' => $row["clients_id"])
-                    ).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
-                    '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
-                        'admin/clientsedit',
-                        array('action'=>'delete', 'client_id' => $row["clients_id"])
-                    ).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'.
+                        '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
+                            'admin/clientsedit',
+                            array('action'=>'edit', 'client_id' => $row["clients_id"])
+                        ).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
+                        '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
+                            'admin/clientsedit',
+                            array('action'=>'delete', 'client_id' => $row["clients_id"])
+                        ).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'.
                     '</div>';
                     $row["_actions_"] = $actions;
                     return $row;
