@@ -201,7 +201,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     /**
      * set translator stores an instance of Zend\Translator in property
 	 *
-     * @covers ::setTranslatorAction
+     * @covers ::setTranslator
      */
     public function testSetTranslatorStoresAnInstanceOfZendTranslatorInProperty()
     {
@@ -249,7 +249,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     }
     
     /**
-     * @covers ::setToolbarItemAction
+     * @covers ::setToolbarItem
      */
     public function testSetToolbarItemStoresAnInstanceOfZendNavigationPageInProperty()
     {
@@ -257,7 +257,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     }
     
     /**
-     * @covers ::getToolbarItemAction
+     * @covers ::getToolbarItem
      */
     public function testGetToolbarItemReturnsAnInstanceOfZendNavigationPage()
     {
@@ -265,7 +265,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     }
     
     /**
-     * @covers ::setToolbarItemsAction
+     * @covers ::setToolbarItems
      */
     public function testSetToolbarItemsStoresAnArrayOfZendNavigationPageInstancesInProperty()
     {
@@ -273,7 +273,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     }
     
     /**
-     * @covers ::getToolbarItemsAction
+     * @covers ::getToolbarItems
      */
     public function testGetToolbarItemsReturnsAnArrayOfZendNavigationPageInstances()
     {
@@ -281,7 +281,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     }
     
     /**
-     * @covers ::getUserTableAction
+     * @covers ::getUserTable
      */
     public function testGetUserTableReturnsAclroleTableInstanceFromService()
     {
@@ -289,7 +289,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     }
     
     /**
-     * @covers ::getAclroleTableAction
+     * @covers ::getAclroleTable
      */
     public function testGetAclroleTableReturnsAclroleTableInstanceFromService()
     {
