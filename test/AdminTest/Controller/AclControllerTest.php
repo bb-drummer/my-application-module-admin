@@ -102,39 +102,81 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testAddAclActionCanBeDispatched()
     {
-        // Specify which action to run
-        $this->routeMatch->setParam('action', 'add');
-    
-        // Kick the controller into action
+    	// display acl add form
+        $this->routeMatch->setParam('action', 'addacl');
         $result = $this->controller->dispatch($this->request);
-    
-        // Check the HTTP response code
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
-    
-        // Check for a ViewModel to be returned
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
-     * is the action accessable per request/response action name ?
-     *
+     * @covers ::editaclAction
+     */
+    public function testEditAclActionRedirectsIfNoAclIdIsGiven()
+    {
+    	// redirect if no acl id is given
+    	$this->routeMatch->setParam('action', 'editacl');
+    	$result = $this->controller->dispatch($this->request);
+    	$response = $this->controller->getResponse();
+    	$this->assertEquals(302, $response->getStatusCode());
+    	
+    	//$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+    
+    /**
+     * @covers ::editaclAction
+     */
+    public function testEditAclActionRedirectsIfGivenIdIsNotFound()
+    {
+    	// redirect if acl id could not be found
+    	$this->routeMatch->setParam('action', 'editacl', 'aclid', 999999999);
+    	$result = $this->controller->dispatch($this->request);
+    	$response = $this->controller->getResponse();
+    	$this->assertEquals(302, $response->getStatusCode());
+    	
+    	//$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+    
+    /**
      * @covers ::editaclAction
      */
     public function testEditAclActionCanBeDispatched()
     {
-    	// Specify which action to run
-    	$this->routeMatch->setParam('action', 'edit');
-    
-    	// Kick the controller into action
+    	// display acl edit form
+    	$this->routeMatch->setParam('action', 'editacl', 'aclid', 1);
     	$result = $this->controller->dispatch($this->request);
-    
-    	// Check the HTTP response code
     	$response = $this->controller->getResponse();
     	$this->assertEquals(200, $response->getStatusCode());
-    
-    	// Check for a ViewModel to be returned
     	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+    
+    /**
+     * @covers ::deleteaclAction
+     */
+    public function testDeleteAclActionRedirectsIfNoAclIdIsGiven()
+    {
+    	// redirect if no acl id is given
+    	$this->routeMatch->setParam('action', 'deleteacl');
+    	$result = $this->controller->dispatch($this->request);
+    	$response = $this->controller->getResponse();
+    	$this->assertEquals(302, $response->getStatusCode());
+    	
+    	//$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+    
+    /**
+     * @covers ::deleteaclAction
+     */
+    public function testDeleteAclActionRedirectsIfGivenIdIsNotFound()
+    {
+    	// redirect if acl id could not be found
+    	$this->routeMatch->setParam('action', 'deleteacl', 'aclid', 999999999);
+    	$result = $this->controller->dispatch($this->request);
+    	$response = $this->controller->getResponse();
+    	$this->assertEquals(302, $response->getStatusCode());
+    	
+    	//$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
@@ -144,185 +186,115 @@ class AclControllerTest extends ActionControllerTestCase
      */
     public function testDeleteAclActionCanBeDispatched()
     {
-    	// Specify which action to run
-    	$this->routeMatch->setParam('action', 'delete');
-    
-    	// Kick the controller into action
+    	// display delete acl confirmation form
+    	$this->routeMatch->setParam('action', 'deleteacl', 'aclid', 1);
     	$result = $this->controller->dispatch($this->request);
-    
-    	// Check the HTTP response code
     	$response = $this->controller->getResponse();
     	$this->assertEquals(200, $response->getStatusCode());
-    
-    	// Check for a ViewModel to be returned
     	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
-     * is the action accessable per request/response action name ?
-     *
      * @covers ::rolesAction
      */
     public function testRolesIndexActionCanBeDispatched()
     {
-    	// Specify which action to run
+    	// display roles overview page
     	$this->routeMatch->setParam('action', 'roles');
-    
-    	// Kick the controller into action
     	$result = $this->controller->dispatch($this->request);
-    
-    	// Check the HTTP response code
     	$response = $this->controller->getResponse();
     	$this->assertEquals(200, $response->getStatusCode());
-    
-    	// Check for a ViewModel to be returned
     	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
-     * is the action accessable per request/response action name ?
-     *
      * @covers ::addroleAction
      */
     public function testAddRoleActionCanBeDispatched()
     {
-    	// Specify which action to run
+    	// show add role form
     	$this->routeMatch->setParam('action', 'addrole');
-    
-    	// Kick the controller into action
     	$result = $this->controller->dispatch($this->request);
-    
-    	// Check the HTTP response code
-    	$response = $this->controller->getResponse();
+   		$response = $this->controller->getResponse();
     	$this->assertEquals(200, $response->getStatusCode());
-    
-    	// Check for a ViewModel to be returned
     	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
-     * is the action accessable per request/response action name ?
-     *
      * @covers ::editroleAction
      */
     public function testEditRoleActionCanBeDispatched()
     {
-    	// Specify which action to run
+    	// show edit role form
     	$this->routeMatch->setParam('action', 'editrole');
-    
-    	// Kick the controller into action
     	$result = $this->controller->dispatch($this->request);
-    
-    	// Check the HTTP response code
     	$response = $this->controller->getResponse();
     	$this->assertEquals(200, $response->getStatusCode());
-    
-    	// Check for a ViewModel to be returned
     	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
-     * is the action accessable per request/response action name ?
-     *
      * @covers ::deleteroleAction
      */
     public function testDeleteRoleActionCanBeDispatched()
     {
-    	// Specify which action to run
+    	// show delete role confirmation form
     	$this->routeMatch->setParam('action', 'deleterole');
-    
-    	// Kick the controller into action
     	$result = $this->controller->dispatch($this->request);
-    
-    	// Check the HTTP response code
-    	$response = $this->controller->getResponse();
+     	$response = $this->controller->getResponse();
     	$this->assertEquals(200, $response->getStatusCode());
-    
-    	// Check for a ViewModel to be returned
     	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
      
     /**
-     * is the action accessable per request/response action name ?
-     *
      * @covers ::resourcesAction
      */
     public function testResourcesIndexActionCanBeDispatched()
     {
-    	// Specify which action to run
+    	// show resources overview page
     	$this->routeMatch->setParam('action', 'resources');
-    
-    	// Kick the controller into action
     	$result = $this->controller->dispatch($this->request);
-    
-    	// Check the HTTP response code
     	$response = $this->controller->getResponse();
     	$this->assertEquals(200, $response->getStatusCode());
-    
-    	// Check for a ViewModel to be returned
     	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
-     * is the action accessable per request/response action name ?
-     *
      * @covers ::addresourceAction
      */
     public function testAddResourceActionCanBeDispatched()
     {
-    	// Specify which action to run
+    	// show add resource form
     	$this->routeMatch->setParam('action', 'addresource');
-    
-    	// Kick the controller into action
     	$result = $this->controller->dispatch($this->request);
-    
-    	// Check the HTTP response code
-    	$response = $this->controller->getResponse();
+     	$response = $this->controller->getResponse();
     	$this->assertEquals(200, $response->getStatusCode());
-    
-    	// Check for a ViewModel to be returned
     	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
-     * is the action accessable per request/response action name ?
-     *
      * @covers ::editresourceAction
      */
     public function testEditResourceActionCanBeDispatched()
     {
-    	// Specify which action to run
+    	// show edit resource form
     	$this->routeMatch->setParam('action', 'editresource');
-    
-    	// Kick the controller into action
     	$result = $this->controller->dispatch($this->request);
-    
-    	// Check the HTTP response code
     	$response = $this->controller->getResponse();
     	$this->assertEquals(200, $response->getStatusCode());
-    
-    	// Check for a ViewModel to be returned
     	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
     
     /**
-     * is the action accessable per request/response action name ?
-     *
      * @covers ::deleteresourceAction
      */
     public function testDeleteResourceActionCanBeDispatched()
     {
-    	// Specify which action to run
+    	// show delete resource confirmation form
     	$this->routeMatch->setParam('action', 'deleteresource');
-    
-    	// Kick the controller into action
     	$result = $this->controller->dispatch($this->request);
-    
-    	// Check the HTTP response code
     	$response = $this->controller->getResponse();
     	$this->assertEquals(200, $response->getStatusCode());
-    
-    	// Check for a ViewModel to be returned
     	$this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
  
