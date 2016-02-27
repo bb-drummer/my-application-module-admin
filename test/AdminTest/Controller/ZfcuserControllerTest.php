@@ -167,10 +167,12 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     public function testAuthenticateActionRedirectIfNoLoginGiven()
     {
     	// set public user
-    	$this->setZfcuserNoAuthMock();
+    	$this->setZfcuserValidAuthMock();
     	
         // redirect on auth failure
         $this->routeMatch->setParam('action', 'authenticate');
+        $this->routeMatch->setParam('username', '');
+        $this->routeMatch->setParam('password', '');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(302, $response->getStatusCode());
@@ -182,7 +184,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     public function testAuthenticateActionRedirectIfCredentialsAreWrong()
     {
     	// set public user
-    	$this->setZfcuserNoAuthMock();
+    	$this->setZfcuserValidAuthMock();
     	
         // redirect on unknown user
         $this->routeMatch->setParam('action', 'authenticate');
@@ -207,7 +209,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     public function testAuthenticateActionRedirectIfCredentialsAreCorrect()
     {
     	// set public user
-    	$this->setZfcuserNoAuthMock();
+    	$this->setZfcuserValidAuthMock();
     	
         // redirect on auth failure
         $this->routeMatch->setParam('action', 'authenticate');
