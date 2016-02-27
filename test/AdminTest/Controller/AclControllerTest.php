@@ -124,7 +124,8 @@ class AclControllerTest extends ActionControllerTestCase
     public function testEditAclActionRedirectsIfGivenIdIsNotFound()
     {
     	// redirect if acl id could not be found
-    	$this->routeMatch->setParam('action', 'editacl', 'acl_id', 999999999);
+    	$this->routeMatch->setParam('action', 'editacl');
+    	$this->routeMatch->setParam('acl_id', 999999999);
     	$result = $this->controller->dispatch($this->request);
     	$response = $this->controller->getResponse();
     	$this->assertEquals(302, $response->getStatusCode());
@@ -138,7 +139,8 @@ class AclControllerTest extends ActionControllerTestCase
     public function testEditAclActionCanBeDispatched()
     {
     	// display acl edit form
-    	$this->routeMatch->setParam('action', 'editacl', 'acl_id', 1);
+    	$this->routeMatch->setParam('action', 'editacl');
+    	$this->routeMatch->setParam('acl_id', 1);
     	$result = $this->controller->dispatch($this->request);
     	$response = $this->controller->getResponse();
     	$this->assertEquals(200, $response->getStatusCode());
@@ -165,7 +167,8 @@ class AclControllerTest extends ActionControllerTestCase
     public function testDeleteAclActionRedirectsIfGivenIdIsNotFound()
     {
     	// redirect if acl id could not be found
-    	$this->routeMatch->setParam('action', 'deleteacl', 'acl_id', 999999999);
+    	$this->routeMatch->setParam('action', 'deleteacl');
+    	$this->routeMatch->setParam('acl_id', 999999999);
     	$result = $this->controller->dispatch($this->request);
     	$response = $this->controller->getResponse();
     	$this->assertEquals(302, $response->getStatusCode());
@@ -181,7 +184,8 @@ class AclControllerTest extends ActionControllerTestCase
     public function testDeleteAclActionCanBeDispatched()
     {
     	// display delete acl confirmation form
-    	$this->routeMatch->setParam('action', 'deleteacl', 'acl_id', 1);
+    	$this->routeMatch->setParam('action', 'deleteacl');
+    	$this->routeMatch->setParam('acl_id', 1);
     	$result = $this->controller->dispatch($this->request);
     	$response = $this->controller->getResponse();
     	$this->assertEquals(200, $response->getStatusCode());
