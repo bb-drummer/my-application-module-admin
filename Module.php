@@ -614,19 +614,11 @@ class Module implements
                 },
 
                 'zfcuser_redirect_callback' => function ($sm) {
-                    /**
- * @var RouteInterface $router 
-*/
+                    /** @var RouteInterface $router  */
                     $router = $sm->get('router');
-                    
-                    /**
- * @var Application $application 
-*/
+                    /** @var Application $application  */
                     $application = $sm->get('Application');
-
-                    /**
- * @var ModuleOptions $options 
-*/
+                    /** @var ModuleOptions $options  */
                     $options = $sm->get('zfcuser_module_options');
 
                     return new RedirectCallback($application, $router, $options);
@@ -653,10 +645,10 @@ class Module implements
     	}
     	
         //$oServiceManager	= $oEvent->getApplication()->getServiceManager();
-        $oACL                = new ZendAcl();
-        $oAcls                = $oServiceManager->get('Admin\Model\AclTable');
-        $oRoles                = $oServiceManager->get('Admin\Model\AclroleTable');
-        $oResources            = $oServiceManager->get('Admin\Model\AclresourceTable');
+        $oACL             = new ZendAcl();
+        $oAcls            = $oServiceManager->get('Admin\Model\AclTable');
+        $oRoles           = $oServiceManager->get('Admin\Model\AclroleTable');
+        $oResources       = $oServiceManager->get('Admin\Model\AclresourceTable');
         
         $aRoles = $oRoles->fetchAll()->toArray();
         foreach ($aRoles as $key => $role) {
