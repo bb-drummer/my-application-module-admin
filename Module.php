@@ -644,7 +644,7 @@ class Module implements
     public static function initACL( $oServiceManager ) // \Zend\Mvc\Mvcevent $oEvent )
     {
     	// check for cached ACL...
-    	$cacheService = \Application::getService('my-cache');
+    	$cacheService = \Application\Module::getService('my-cache');
     	if ($cacheService) {
     		$cachedAcl = $cacheService->getItem('ACL');
     		if ($cachedAcl) {
@@ -695,7 +695,7 @@ class Module implements
         );
         
         // store ACL in cache...
-        $cacheService = \Application::getService('my-cache');
+        $cacheService = \Application\Module::getService('my-cache');
         if ($cacheService) {
         	$cacheService->setItem('ACL', $oACL);
         }
