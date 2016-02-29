@@ -643,6 +643,15 @@ class Module implements
      */
     public static function initACL( $oServiceManager ) // \Zend\Mvc\Mvcevent $oEvent )
     {
+    	// check for cached ACL...
+    	$cacheService = \Application::getService('my-cache');
+    	if ($cacheService) {
+    		$cachedAcl = $cacheService->getItem('ACL');
+    		if ($cachedAcl) {
+    			return $cachedAcl;
+    		}
+    	}
+    	
         //$oServiceManager	= $oEvent->getApplication()->getServiceManager();
         $oACL                = new ZendAcl();
         $oAcls                = $oServiceManager->get('Admin\Model\AclTable');
@@ -684,6 +693,12 @@ class Module implements
             'mvc:nouser',
             )
         );
+        
+        // store ACL in cache...
+        $cacheService = \Application::getService('my-cache');
+        if ($cacheService) {
+        	$cacheService->setItem('ACL', $oACL);
+        }
         
         return ($oACL);
     }
