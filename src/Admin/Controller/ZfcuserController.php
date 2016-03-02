@@ -164,9 +164,11 @@ class ZfcuserController extends UserController
         $request    = $this->getRequest();
         $service    = $this->getUserService();
         $translator    = $this->getTranslator();
-        
+
+
+        $oIdentity = $this->zfcUserAuthentication()->getIdentity();
         $oProfile = new \Admin\Model\UserProfile();
-        $oProfile->load($this->zfcUserIdentity()->getId());
+        $oProfile->load($oIdentity->getId());
         
         return new ViewModel(
             array(
@@ -185,8 +187,9 @@ class ZfcuserController extends UserController
             return $this->redirect()->toRoute(static::ROUTE_LOGIN);
         }
         
+        $oIdentity = $this->zfcUserAuthentication()->getIdentity();
         $oProfile = new \Admin\Model\UserProfile();
-        $oProfile->load($this->zfcUserIdentity()->getId());
+        $oProfile->load($oIdentity->getId());
         
         return new ViewModel(
             array(
