@@ -39,124 +39,124 @@ class AclController extends BaseActionController
     {
         $this->setToolbarItems(
             array(
-            "index" => array(
-            array(
-            'label'            => 'add role',
-            'icon'            => 'plus',
-            'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
-            'route'            => 'admin/acledit',
-            'action'        => 'addrole',
-            'resource'        => 'mvc:user',
-            ),
-            array(
-            'label'            => 'manage roles',
-            'icon'            => 'user',
-            'class'            => 'btn btn-default btn-sm btn-cta',
-            'route'            => 'admin/acledit',
-            'action'        => 'roles',
-            'resource'        => 'mvc:user',
-            ),
-            array(
-            'label'            => "",
-            'class'            => 'btn btn-none btn-sm',
-            'uri'            => "#",
-            'active'        => false,
-            ),
-            array(
-            'label'            => 'add resource',
-            'icon'            => 'plus',
-            'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
-            'route'            => 'admin/acledit',
-            'action'        => 'addresource',
-            'resource'        => 'mvc:user',
-            ),
-            array(
-            'label'            => 'manage resources',
-            'icon'            => 'list-alt',
-            'class'            => 'btn btn-default btn-sm btn-cta',
-            'route'            => 'admin/acledit',
-            'action'        => 'roles',
-            'resource'        => 'mvc:user',
-            ),
-            ),
-            "roles" => array(
-            array(
-            'label'            => 'add role',
-            'icon'            => 'plus',
-            'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
-            'route'            => 'admin/acledit',
-            'action'        => 'addrole',
-            'resource'        => 'mvc:user',
-            ),
-            array(
-            'label'            => "",
-            'class'            => 'btn btn-none btn-sm',
-            'uri'            => "#",
-            'active'        => false,
-            ),
-            array(
-            'label'            => 'ACL',
-            'icon'            => 'asterisk',
-            'class'            => 'btn btn-default btn-sm btn-cta',
-            'route'            => 'admin/acledit',
-            'resource'        => 'mvc:user',
-            ),
-            array(
-            'label'            => 'manage resources',
-            'icon'            => 'list-alt',
-            'class'            => 'btn btn-default btn-sm btn-cta',
-            'route'            => 'admin/acledit',
-            'action'        => 'resources',
-            'resource'        => 'mvc:user',
-            ),
-            ),
-            "resources" => array(
-            array(
-            'label'            => 'add resource',
-            'icon'            => 'plus',
-            'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
-            'route'            => 'admin/acledit',
-            'action'        => 'addresource',
-            'resource'        => 'mvc:user',
-            ),
-            array(
-            'label'            => "",
-            'class'            => 'btn btn-none btn-sm',
-            'uri'            => "#",
-            'active'        => false,
-            ),
-            array(
-            'label'            => 'ACL',
-            'icon'            => 'asterisk',
-            'class'            => 'btn btn-default btn-sm btn-cta',
-            'route'            => 'admin/acledit',
-            'resource'        => 'mvc:user',
-            ),
-            array(
-            'label'            => 'manage roles',
-            'icon'            => 'user',
-            'class'            => 'btn btn-default btn-sm btn-cta',
-            'route'            => 'admin/acledit',
-            'action'        => 'roles',
-            'resource'        => 'mvc:user',
-            ),
-            ),
+                "index" => array(
+                    array(
+                        'label' => 'add role',
+                        'icon' => 'plus',
+                        'class' => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                        'route' => 'admin/acledit',
+                        'action' => 'addrole',
+                        'resource' => 'mvc:user',
+                    ),
+                    array(
+                        'label' => 'manage roles',
+                        'icon' => 'user',
+                        'class' => 'btn btn-default btn-sm btn-cta',
+                        'route' => 'admin/acledit',
+                        'action' => 'roles',
+                        'resource' => 'mvc:user',
+                    ),
+                    array(
+                        'label' => "",
+                        'class' => 'btn btn-none btn-sm',
+                        'uri' => "#",
+                        'active' => false,
+                    ),
+                    array(
+                        'label' => 'add resource',
+                        'icon' => 'plus',
+                        'class' => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                        'route' => 'admin/acledit',
+                        'action' => 'addresource',
+                        'resource' => 'mvc:user',
+                    ),
+                    array(
+                        'label' => 'manage resources',
+                        'icon' => 'list-alt',
+                        'class' => 'btn btn-default btn-sm btn-cta',
+                        'route' => 'admin/acledit',
+                        'action' => 'roles',
+                        'resource' => 'mvc:user',
+                    ),
+                  ),
+               "roles" => array(
+                    array(
+                        'label' => 'add role',
+                        'icon' => 'plus',
+                        'class' => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                        'route' => 'admin/acledit',
+                        'action' => 'addrole',
+                        'resource' => 'mvc:user',
+                    ),
+                    array(
+                        'label' => "",
+                        'class' => 'btn btn-none btn-sm',
+                        'uri' => "#",
+                        'active' => false,
+                    ),
+                    array(
+                        'label' => 'ACL',
+                        'icon' => 'asterisk',
+                        'class' => 'btn btn-default btn-sm btn-cta',
+                        'route' => 'admin/acledit',
+                        'resource' => 'mvc:user',
+                    ),
+                    array(
+                        'label' => 'manage resources',
+                        'icon' => 'list-alt',
+                        'class' => 'btn btn-default btn-sm btn-cta',
+                        'route' => 'admin/acledit',
+                        'action' => 'resources',
+                        'resource' => 'mvc:user',
+                    ),
+               ),
+               "resources" => array(
+                    array(
+                        'label' => 'add resource',
+                        'icon' => 'plus',
+                        'class' => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                        'route' => 'admin/acledit',
+                        'action' => 'addresource',
+                        'resource' => 'mvc:user',
+                    ),
+                    array(
+                        'label' => "",
+                        'class' => 'btn btn-none btn-sm',
+                        'uri' => "#",
+                        'active' => false,
+                    ),
+                    array(
+                        'label' => 'ACL',
+                        'icon' => 'asterisk',
+                        'class' => 'btn btn-default btn-sm btn-cta',
+                        'route' => 'admin/acledit',
+                        'resource' => 'mvc:user',
+                    ),
+                    array(
+                        'label' => 'manage roles',
+                        'icon' => 'user',
+                        'class' => 'btn btn-default btn-sm btn-cta',
+                        'route' => 'admin/acledit',
+                        'action' => 'roles',
+                        'resource' => 'mvc:user',
+                    ),
+               ),
             )
         );
         $this->setActionTitles(
             array(
-            'index' => $this->translate("manage permissions"),
-            'roles' => $this->translate("manage roles"),
-            'resources' => $this->translate("manage resources"),
-            'addacl' => $this->translate("add permission"),
-            'addrole' => $this->translate("add role"),
-            'addresource' => $this->translate("add resource"),
-            'editacl' => $this->translate("edit acl"),
-            'editrole' => $this->translate("edit role"),
-            'editresource' => $this->translate("edit resource"),
-            'deleteacl' => $this->translate("delete acl"),
-            'deleterole' => $this->translate("delete role"),
-            'deleteresource' => $this->translate("delete resource"),
+                'index' => $this->translate("manage permissions"),
+                'roles' => $this->translate("manage roles"),
+                'resources' => $this->translate("manage resources"),
+                'addacl' => $this->translate("add permission"),
+                'addrole' => $this->translate("add role"),
+                'addresource' => $this->translate("add resource"),
+                'editacl' => $this->translate("edit acl"),
+                'editrole' => $this->translate("edit role"),
+                'editresource' => $this->translate("edit resource"),
+                'deleteacl' => $this->translate("delete acl"),
+                'deleterole' => $this->translate("delete role"),
+                'deleteresource' => $this->translate("delete resource"),
             )
         );
         return parent::onDispatch($e);
@@ -167,11 +167,11 @@ class AclController extends BaseActionController
     {
         return new ViewModel(
             array(
-            'acldata'            => $this->getAclTable()->fetchAll(),
-            'acltable'            => $this->getAclTable(),
-            'roles'                => $this->getAclroleTable()->fetchAll()->toArray(),
-            'resources'            => $this->getAclresourceTable()->fetchAll()->toArray(),
-            'form'                => new AclmatrixForm(),
+                'acldata' => $this->getAclTable()->fetchAll(),
+                'acltable' => $this->getAclTable(),
+                'roles' => $this->getAclroleTable()->fetchAll()->toArray(),
+                'resources' => $this->getAclresourceTable()->fetchAll()->toArray(),
+                'form' => new AclmatrixForm(),
             )
         );
     }
@@ -181,11 +181,11 @@ class AclController extends BaseActionController
     {
         return new ViewModel(
             array(
-            'acldata'            => $this->getAclTable()->fetchAll(),
-            'acltable'            => $this->getAclTable(),
-            'roles'                => $this->getAclroleTable()->fetchAll()->toArray(),
-            'resources'            => $this->getAclresourceTable()->fetchAll()->toArray(),
-            'form'                => new AclmatrixForm(),
+                'acldata' => $this->getAclTable()->fetchAll(),
+                'acltable' => $this->getAclTable(),
+                'roles' => $this->getAclroleTable()->fetchAll()->toArray(),
+                'resources' => $this->getAclresourceTable()->fetchAll()->toArray(),
+                'form' => new AclmatrixForm(),
             )
         );
     }
@@ -203,36 +203,36 @@ class AclController extends BaseActionController
                     $aclstate = $this->getAclTable()
                         ->getAclByRoleResource($role['aclroles_id'], $resource['aclresources_id']);
                     $acls[] = array( 
-                    'acl_id' => ($aclstate && !empty($aclstate->acl_id) ? ($aclstate->acl_id) : ''), 
-                    'roleslug' => $role['roleslug'], 
-                    'resourceslug' => $resource['resourceslug'], 
-                    'status' => ($aclstate && !empty($aclstate->state) ? ($aclstate->state) : 'allow')
+                        'acl_id' => ($aclstate && !empty($aclstate->acl_id) ? ($aclstate->acl_id) : ''), 
+                        'roleslug' => $role['roleslug'], 
+                        'resourceslug' => $resource['resourceslug'], 
+                        'status' => ($aclstate && !empty($aclstate->state) ? ($aclstate->state) : 'allow')
                     );
                 }
             }
             $datatablesData = array(
-            'tableid'    => 'acltable',
-            'data'        => $acls
+                'tableid' => 'acltable',
+                'data' => $acls
             );
             $oController = $this;
             $datatablesData['data'] = array_map(
                 function ($row) use ($oController) {
                     $actions = '<div class="btn-group btn-group-xs">'.
-                    (empty($row["acl_id"]) ? 
-                    '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
-                        'admin/acledit',
-                        array('action'=>'addacl', 'acl_id' => '')
-                    ).'"><span class="fa fa-pencil"></span> '.$oController->translate("add acl").'</a>'
-                    :
-                    '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
-                        'admin/acledit',
-                        array('action'=>'editacl', 'acl_id' => $row["acl_id"])
-                    ).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
-                    '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
-                        'admin/acledit',
-                        array('action'=>'deleteacl', 'acl_id' => $row["acl_id"])
-                    ).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'
-                    ).                            
+                        (empty($row["acl_id"]) ? 
+                            '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
+                                'admin/acledit',
+                                array('action'=>'addacl', 'acl_id' => '')
+                            ).'"><span class="fa fa-pencil"></span> '.$oController->translate("add acl").'</a>'
+                            :
+                            '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
+                                'admin/acledit',
+                                array('action'=>'editacl', 'acl_id' => $row["acl_id"])
+                            ).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
+                            '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
+                                'admin/acledit',
+                                array('action'=>'deleteacl', 'acl_id' => $row["acl_id"])
+                            ).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'
+                        ).                            
                     '</div>';
                     $row["_actions_"] = $actions;
                     return $row;
@@ -252,14 +252,14 @@ class AclController extends BaseActionController
             $datatablesData['data'] = array_map(
                 function ($row) use ($oController) {
                     $actions = '<div class="btn-group btn-group-xs">'.
-                    '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
-                        'admin/acledit',
-                        array('action'=>'editrole', 'acl_id' => $row["aclroles_id"])
-                    ).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
-                    '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
-                        'admin/acledit',
-                        array('action'=>'deleterole', 'acl_id' => $row["aclroles_id"])
-                    ).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'.
+                        '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
+                            'admin/acledit',
+                            array('action'=>'editrole', 'acl_id' => $row["aclroles_id"])
+                        ).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
+                        '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
+                            'admin/acledit',
+                            array('action'=>'deleterole', 'acl_id' => $row["aclroles_id"])
+                        ).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'.
                     '</div>';
                     $row["_actions_"] = $actions;
                     return $row;
@@ -269,9 +269,9 @@ class AclController extends BaseActionController
         }
         return new ViewModel(
             array(
-            'acldata'    => $this->getAclTable()->fetchAll(),
-            'roles'        => $this->getAclroleTable()->fetchAll(),
-            'resources'    => $this->getAclresourceTable()->fetchAll(),
+                'acldata' => $this->getAclTable()->fetchAll(),
+                'roles' => $this->getAclroleTable()->fetchAll(),
+                'resources' => $this->getAclresourceTable()->fetchAll(),
             )
         );
     }
@@ -301,9 +301,9 @@ class AclController extends BaseActionController
         }
         return new ViewModel(
             array(
-            'acldata'    => $this->getAclTable()->fetchAll(),
-            'roles'        => $this->getAclroleTable()->fetchAll(),
-            'resources'    => $this->getAclresourceTable()->fetchAll(),
+            'acldata' => $this->getAclTable()->fetchAll(),
+            'roles' => $this->getAclroleTable()->fetchAll(),
+            'resources' => $this->getAclresourceTable()->fetchAll(),
             )
         );
     }
@@ -314,10 +314,10 @@ class AclController extends BaseActionController
     {
         $tmplVars = $this->getTemplateVars( 
             array(
-            'acldata'    => $this->getAclTable()->fetchAll(),
-            'roles'        => $this->getAclroleTable()->fetchAll(),
-            'resources'    => $this->getAclresourceTable()->fetchAll(),
-            'showForm'    => true,
+            'acldata' => $this->getAclTable()->fetchAll(),
+            'roles' => $this->getAclroleTable()->fetchAll(),
+            'resources' => $this->getAclresourceTable()->fetchAll(),
+            'showForm' => true,
             )
         );
         $this->layout()->setVariable('title', $this->translate("add permission"));
@@ -347,6 +347,9 @@ class AclController extends BaseActionController
             if ($form->isValid()) {
                 $Acl->exchangeArray($form->getData());
                 $this->getAclTable()->saveAcl($Acl);
+                
+                $this->reinitACLCache();
+                
                 // Redirect to list of Acl
                 $this->flashMessenger()->addSuccessMessage($this->translate("permission has been saved"));
                 if ($this->getRequest()->isXmlHttpRequest() ) {
@@ -365,10 +368,10 @@ class AclController extends BaseActionController
     {
         $tmplVars = $this->getTemplateVars( 
             array(
-            'acldata'    => $this->getAclTable()->fetchAll(),
-            'roles'        => $this->getAclroleTable()->fetchAll(),
-            'resources'    => $this->getAclresourceTable()->fetchAll(),
-            'showForm'    => true,
+            'acldata' => $this->getAclTable()->fetchAll(),
+            'roles' => $this->getAclroleTable()->fetchAll(),
+            'resources' => $this->getAclresourceTable()->fetchAll(),
+            'showForm' => true,
             )
         );
         $this->layout()->setVariable('title', $this->translate("change permission"));
@@ -413,6 +416,8 @@ class AclController extends BaseActionController
             if ($form->isValid()) {
                 $this->getAclTable()->saveAcl($Acl);
 
+                $this->reinitACLCache();
+                
                 // Redirect to list of Acl
                 $this->flashMessenger()->addSuccessMessage($this->translate("permission has been saved"));
                 if ($this->getRequest()->isXmlHttpRequest() ) {
@@ -433,10 +438,10 @@ class AclController extends BaseActionController
     {
         $tmplVars = $this->getTemplateVars( 
             array(
-            'acldata'    => $this->getAclTable()->fetchAll(),
-            'roles'        => $this->getAclroleTable()->fetchAll(),
-            'resources'    => $this->getAclresourceTable()->fetchAll(),
-            'showForm'    => true,
+            'acldata' => $this->getAclTable()->fetchAll(),
+            'roles' => $this->getAclroleTable()->fetchAll(),
+            'resources' => $this->getAclresourceTable()->fetchAll(),
+            'showForm' => true,
             )
         );
         $this->layout()->setVariable('title', $this->translate("delete permission"));
@@ -462,6 +467,8 @@ class AclController extends BaseActionController
                 $id = (int) $request->getPost('id');
                 $this->getAclTable()->deleteAcl($id);
                 $this->flashMessenger()->addSuccessMessage($this->translate("permission has been deleted"));
+                
+                $this->reinitACLCache();
             }
 
             // Redirect to list of albums
@@ -481,10 +488,10 @@ class AclController extends BaseActionController
     {
         $tmplVars = $this->getTemplateVars( 
             array(
-            'acldata'    => $this->getAclTable()->fetchAll(),
-            'roles'        => $this->getAclroleTable()->fetchAll(),
-            'resources'    => $this->getAclresourceTable()->fetchAll(),
-            'showForm'    => true,
+            'acldata' => $this->getAclTable()->fetchAll(),
+            'roles' => $this->getAclroleTable()->fetchAll(),
+            'resources' => $this->getAclresourceTable()->fetchAll(),
+            'showForm' => true,
             )
         );
         $this->layout()->setVariable('title', $this->translate("add role"));
@@ -499,6 +506,9 @@ class AclController extends BaseActionController
             if ($form->isValid()) {
                 $Aclrole->exchangeArray($form->getData());
                 $this->getAclroleTable()->saveAclrole($Aclrole);
+                
+                $this->reinitACLCache();
+                
                 // Redirect to list of Acl
                 $this->flashMessenger()->addSuccessMessage($this->translate("role has been saved"));
                 if ($this->getRequest()->isXmlHttpRequest() ) {
@@ -519,10 +529,10 @@ class AclController extends BaseActionController
         $this->layout()->setVariable('title', $this->translate("edit role"));
         $tmplVars = $this->getTemplateVars( 
             array(
-            'acldata'    => $this->getAclTable()->fetchAll(),
-            'roles'        => $this->getAclroleTable()->fetchAll(),
-            'resources'    => $this->getAclresourceTable()->fetchAll(),
-            'showForm'    => true,
+            'acldata' => $this->getAclTable()->fetchAll(),
+            'roles' => $this->getAclroleTable()->fetchAll(),
+            'resources' => $this->getAclresourceTable()->fetchAll(),
+            'showForm' => true,
             )
         );
         $id = (int) $this->params()->fromRoute('acl_id', 0);
@@ -548,6 +558,8 @@ class AclController extends BaseActionController
             if ($form->isValid()) {
                 $this->getAclroleTable()->saveAclrole($Aclrole);
 
+                $this->reinitACLCache();
+                
                 // Redirect to list of Acl
                 $this->flashMessenger()->addSuccessMessage($this->translate("role has been saved"));
                 if ($this->getRequest()->isXmlHttpRequest() ) {
@@ -569,10 +581,10 @@ class AclController extends BaseActionController
     {
         $tmplVars = $this->getTemplateVars( 
             array(
-            'acldata'    => $this->getAclTable()->fetchAll(),
-            'roles'        => $this->getAclroleTable()->fetchAll(),
-            'resources'    => $this->getAclresourceTable()->fetchAll(),
-            'showForm'    => true,
+            'acldata' => $this->getAclTable()->fetchAll(),
+            'roles' => $this->getAclroleTable()->fetchAll(),
+            'resources' => $this->getAclresourceTable()->fetchAll(),
+            'showForm' => true,
             )
         );
         $this->layout()->setVariable('title', $this->translate("delete role"));
@@ -598,6 +610,8 @@ class AclController extends BaseActionController
                 $id = (int) $request->getPost('id');
                 $this->getAclroleTable()->deleteAclrole($id);
                 $this->flashMessenger()->addSuccessMessage($this->translate("role has been deleted"));
+            
+                $this->reinitACLCache();
             }
 
             // Redirect to list of albums
@@ -619,10 +633,10 @@ class AclController extends BaseActionController
     {
         $tmplVars = $this->getTemplateVars( 
             array(
-            'acldata'    => $this->getAclTable()->fetchAll(),
-            'roles'        => $this->getAclroleTable()->fetchAll(),
-            'resources'    => $this->getAclresourceTable()->fetchAll(),
-            'showForm'    => true,
+            'acldata' => $this->getAclTable()->fetchAll(),
+            'roles' => $this->getAclroleTable()->fetchAll(),
+            'resources' => $this->getAclresourceTable()->fetchAll(),
+            'showForm' => true,
             )
         );
         $this->layout()->setVariable('title', $this->translate("add resource"));
@@ -637,6 +651,9 @@ class AclController extends BaseActionController
             if ($form->isValid()) {
                 $Aclresource->exchangeArray($form->getData());
                 $this->getAclresourceTable()->saveAclresource($Aclresource);
+                
+                $this->reinitACLCache();
+                
                 // Redirect to list of Acl
                 $this->flashMessenger()->addSuccessMessage($this->translate("resource has been saved"));
                 if ($this->getRequest()->isXmlHttpRequest() ) {
@@ -656,10 +673,10 @@ class AclController extends BaseActionController
     {
         $tmplVars = $this->getTemplateVars( 
             array(
-            'acldata'    => $this->getAclTable()->fetchAll(),
-            'roles'        => $this->getAclroleTable()->fetchAll(),
-            'resources'    => $this->getAclresourceTable()->fetchAll(),
-            'showForm'    => true,
+            'acldata' => $this->getAclTable()->fetchAll(),
+            'roles' => $this->getAclroleTable()->fetchAll(),
+            'resources' => $this->getAclresourceTable()->fetchAll(),
+            'showForm' => true,
             )
         );
         $this->layout()->setVariable('title', $this->translate("edit resource"));
@@ -686,6 +703,8 @@ class AclController extends BaseActionController
             if ($form->isValid()) {
                 $this->getAclresourceTable()->saveAclresource($Aclresource);
 
+                $this->reinitACLCache();
+                
                 // Redirect to list of Acl
                 $this->flashMessenger()->addSuccessMessage($this->translate("resource has been saved"));
                 if ($this->getRequest()->isXmlHttpRequest() ) {
@@ -708,10 +727,10 @@ class AclController extends BaseActionController
     {
         $tmplVars = $this->getTemplateVars( 
             array(
-            'acldata'    => $this->getAclTable()->fetchAll(),
-            'roles'        => $this->getAclroleTable()->fetchAll(),
-            'resources'    => $this->getAclresourceTable()->fetchAll(),
-            'showForm'    => true,
+            'acldata' => $this->getAclTable()->fetchAll(),
+            'roles' => $this->getAclroleTable()->fetchAll(),
+            'resources' => $this->getAclresourceTable()->fetchAll(),
+            'showForm' => true,
             )
         );
         $this->layout()->setVariable('title', $this->translate("delete resource"));
@@ -737,8 +756,10 @@ class AclController extends BaseActionController
                 $id = (int) $request->getPost('id');
                 $this->getAclresourceTable()->deleteAclresource($id);
                 $this->flashMessenger()->addSuccessMessage($this->translate("resource has been deleted"));
-            }
 
+                $this->reinitACLCache();
+            }
+            
             // Redirect to list of albums
             if ($this->getRequest()->isXmlHttpRequest() ) {
                 $tmplVars["showForm"] = false;
@@ -749,6 +770,13 @@ class AclController extends BaseActionController
 
         $tmplVars["resources"] = $this->getAclresourceTable()->fetchAll();
         return new ViewModel($tmplVars);
+    }
+    
+    private function reinitACLCache () {
+        if ( $this->getServiceLocator()->get('my-cache') ) {
+            $this->getServiceLocator()->get('my-cache')->removeItem('ACL');
+            \Admin\Module::initACL($this->getServiceLocator());
+        }
     }
 
     

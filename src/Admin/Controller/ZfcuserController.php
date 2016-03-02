@@ -356,23 +356,23 @@ class ZfcuserController extends UserController
         $identity = $this->params()->fromPost('identity');
 
         /**
- * @var \Admin\Entity\User $user 
-**/
-        /**
- * @var \Admin\Entity\User $selectedUser 
-**/
+         * @var \Admin\Entity\User $user 
+         **/
         $user = false;
         
         try {
             /**
- * @var \Admin\Model\UserTable $userTable 
-**/
+             * @var \Admin\Model\UserTable $userTable 
+             **/
             $userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
+            /**
+             * @var \Admin\Entity\User $selectedUser 
+             **/
             $selectedUser = $userTable->getUserByEmailOrUsername($identity);
             if ($selectedUser) {
                 /**
- * @var \ZfcUser\Mapper\User $userTable 
-**/
+                 * @var \ZfcUser\Mapper\User $userTable 
+                 **/
                 $userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
                 $user = $userTable->findByUsername($selectedUser->username);
                 if (!$user) {

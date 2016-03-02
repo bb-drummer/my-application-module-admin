@@ -50,7 +50,8 @@ class UserProfile implements InputFilterAwareInterface
         try {
             $oModule = new AdminModule();
             $oSM = $oModule->getServiceManager();
-            $table = $oSM->get('Admin\Model\UserProfileTable'); // $this->getServiceManager()->get('Admin\Model\UserProfileTable');
+            $table = \Application\Module::getService('Admin\Model\UserProfileTable');
+            //$oSM->get('Admin\Model\UserProfileTable'); // $this->getServiceManager()->get('Admin\Model\UserProfileTable');
             $profile = $table->getUserProfile($id);
             if ($profile) {
                 $this->exchangeArray($profile->getArrayCopy());
@@ -67,7 +68,8 @@ class UserProfile implements InputFilterAwareInterface
         try {
             $oModule = new AdminModule();
             $oSM = $oModule->getServiceManager();
-            $table = $oSM->get('Admin\Model\UserProfileTable'); // $this->getServiceManager()->get('Admin\Model\UserProfileTable');
+            $table = \Application\Module::getService('Admin\Model\UserProfileTable');
+            //$oSM->get('Admin\Model\UserProfileTable'); // $this->getServiceManager()->get('Admin\Model\UserProfileTable');
             $table->saveUserProfile($this);
             return true;
         } catch (\Exception $ex) {
