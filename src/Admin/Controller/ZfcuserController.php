@@ -184,8 +184,13 @@ class ZfcuserController extends UserController
         if (!$this->zfcUserAuthentication()->hasIdentity()) {
             return $this->redirect()->toRoute(static::ROUTE_LOGIN);
         }
+        
+        $oProfile = new \Admin\Model\UserProfile();
+        $oProfile->load($this->zfcUserIdentity()->getId());
+        
         return new ViewModel(
             array(
+            	"userProfile" => $oProfile,
                 "toolbarItems" => $this->getToolbarItems(),
             )
         );
