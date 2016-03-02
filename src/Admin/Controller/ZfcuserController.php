@@ -75,44 +75,44 @@ class ZfcuserController extends UserController
     {
         $this->setToolbarItems(
             array(
-            "index" => array(
+                "index" => array(
             array(
-            'label'            => 'edit profile',
-            'icon'            => 'edit',
-            'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
-            'route'            => 'zfcuser/edituserprofile',
-            'resource'        => 'mvc:user',
+                'label'            => 'edit profile',
+                'icon'            => 'edit',
+                'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                'route'            => 'zfcuser/edituserprofile',
+                'resource'        => 'mvc:user',
             ),
             array(
-            'label'            => 'edit userdata',
-            'icon'            => 'user',
-            'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
-            'route'            => 'zfcuser/edituserdata',
-            'resource'        => 'mvc:user',
+                'label'            => 'edit userdata',
+                'icon'            => 'user',
+                'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                'route'            => 'zfcuser/edituserdata',
+                'resource'        => 'mvc:user',
             ),
             array(
-            'label'         => 'change email',
-            'icon'            => 'envelope',
-            'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
-            'route'            => 'zfcuser/changeemail',
-            'resource'        => 'mvc:user',
+                'label'         => 'change email',
+                'icon'            => 'envelope',
+                'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                'route'            => 'zfcuser/changeemail',
+                'resource'        => 'mvc:user',
             ),
             array(
-            'label'         => 'change password',
-            'icon'            => 'lock',
-            'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
-            'route'            => 'zfcuser/changepassword',
-            'resource'        => 'mvc:user',
+                'label'         => 'change password',
+                'icon'            => 'lock',
+                'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                'route'            => 'zfcuser/changepassword',
+                'resource'        => 'mvc:user',
             ),
             array(
-            'label'            => "",
-            'class'            => 'btn btn-none btn-sm',
-            'uri'            => "#",
-            'active'        => false,
+                'label'            => "",
+                'class'            => 'btn btn-none btn-sm',
+                'uri'            => "#",
+                'active'        => false,
             ),
             array(
-            'label'         => 'logout',
-            'icon'            => 'power-off',
+                'label'         => 'logout',
+                'icon'            => 'power-off',
             'class'            => 'btn btn-default btn-sm',
             'route'            => 'zfcuser/logout',
             'resource'        => 'mvc:user',
@@ -165,9 +165,13 @@ class ZfcuserController extends UserController
         $service    = $this->getUserService();
         $translator    = $this->getTranslator();
         
+        $oProfile = new \Admin\Model\UserProfile();
+        $oProfile->load($this->zfcUserIdentity()->getId());
+        
         return new ViewModel(
             array(
-            "toolbarItems" => $this->getToolbarItems(),
+            	"userProfile" => $oProfile,
+                "toolbarItems" => $this->getToolbarItems(),
             )
         );
     }
@@ -182,7 +186,7 @@ class ZfcuserController extends UserController
         }
         return new ViewModel(
             array(
-            "toolbarItems" => $this->getToolbarItems(),
+                "toolbarItems" => $this->getToolbarItems(),
             )
         );
         //return $this->redirect()->toRoute("admin/userprofile");
@@ -371,12 +375,12 @@ class ZfcuserController extends UserController
             $selectedUser = $userTable->getUserByEmailOrUsername($identity);
             if ($selectedUser) {
                 /**
-                 * @var \ZfcUser\Mapper\User $userTable 
+                 * @var \ZfcUser\Mapper\User $userMapper 
                  **/
-                $userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
-                $user = $userTable->findByUsername($selectedUser->username);
+                $userMapper = $this->getServiceLocator()->get('zfcuser_user_mapper');
+                $user = $userMapper->findByUsername($selectedUser->username);
                 if (!$user) {
-                    $user = $userTable->findByEmail($selectedUser->email);
+                    $user = $userMapper->findByEmail($selectedUser->email);
                 }
             }
         } catch (Exception $e) {
@@ -462,12 +466,12 @@ class ZfcuserController extends UserController
             }
             
             return array(
-            'user' => $user,
-            'userId' => $userId,
-            'resetToken' => $resetToken,
-            'resetPasswordForm' => $form,
-            'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
-            'redirect' => $redirect,
+                'user' => $user,
+                'userId' => $userId,
+                'resetToken' => $resetToken,
+                'resetPasswordForm' => $form,
+                'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
+                'redirect' => $redirect,
             );
             
         }
@@ -585,13 +589,13 @@ class ZfcuserController extends UserController
         
         
         /**
- * @var \Admin\Entity\User $oIdentity 
-*/
+         * @var \Admin\Entity\User $oIdentity 
+         */
         $oIdentity        = $this->zfcUserAuthentication()->getIdentity();
         /**
- * @var \Admin\Model\UserData $oUser 
-*/
-        $oUser        = new \Admin\Model\UserData();
+         * @var \Admin\Model\UserData $oUser 
+         */
+        $oUser         = new \Admin\Model\UserData();
         
         $oUser->exchangeArray($oIdentity->__getArrayCopy());
         $userId        = (int) $oIdentity->getId();
@@ -602,10 +606,10 @@ class ZfcuserController extends UserController
             
             return new ViewModel(
                 array(
-                'showForm'        => true,
-                'user'            => $oIdentity,
-                'userId'        => $userId,
-                'userdataForm'    => $form,
+                    'showForm'        => true,
+                    'user'            => $oIdentity,
+                    'userId'          => $userId,
+                    'userdataForm'    => $form,
                 )
             );
             
@@ -686,10 +690,10 @@ class ZfcuserController extends UserController
         if (!$this->getRequest()->isPost() ) {
             
             return array(
-            'showForm'        => true,
-            'user'            => $user,
-            'userId'          => $userId,
-            'userprofileForm' => $form,
+                'showForm'        => true,
+                'user'            => $user,
+                'userId'          => $userId,
+                'userprofileForm' => $form,
             );
             
         }
@@ -703,10 +707,10 @@ class ZfcuserController extends UserController
                 $translator->translate("user profile data could not be changed")
             );
             return array(
-            'showForm'        => true,
-            'user'            => $user,
-            'userId'          => $userId,
-            'userprofileForm' => $form,
+                'showForm'        => true,
+                'user'            => $user,
+                'userId'          => $userId,
+                'userprofileForm' => $form,
             );
                 
         } else {
@@ -720,10 +724,10 @@ class ZfcuserController extends UserController
             
             if ($this->getRequest()->isXmlHttpRequest() ) {
                 $response = array(
-                'showForm'          => false,
-                'user'                => $user,
-                'userId'            => $userId,
-                'userprofileForm'    => $form,
+                    'showForm'          => false,
+                    'user'                => $user,
+                    'userId'            => $userId,
+                    'userprofileForm'    => $form,
                 );
             } else {
                 return $this->redirect()->toRoute('zfcuser');
@@ -844,7 +848,7 @@ class ZfcuserController extends UserController
     
     /**
      * retrieve user table mapper
-  *
+     *
      * @return \Admin\Model\UserTable
      */
     public function getUserTable()
@@ -858,7 +862,7 @@ class ZfcuserController extends UserController
     
     /**
      * retrieve ACL roles table mapper
-  *
+     *
      * @return \Admin\Model\AclroleTable
      */
     public function getAclroleTable()
@@ -871,3 +875,4 @@ class ZfcuserController extends UserController
     }
     
 }
+    

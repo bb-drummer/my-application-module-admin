@@ -17,28 +17,28 @@ return array(
     'settings' => array(
         'scopes' => array(
             'system'        => 'system',
-            'user'            => 'user',
+            'user'          => 'user',
             'client'        => 'client',
-            'application'    => 'application',
+            'application'   => 'application',
         ),
         // ???
         'types' => array(
             'system'        => 'system',
-            'user'            => 'user',
+            'user'          => 'user',
             'client'        => 'client',
-            'application'    => 'application',
+            'application'   => 'application',
             'module'        => 'module',
         )
     ),
     'controllers' => array(
         'invokables' => array(
-            'Admin\Controller\Index'        => 'Admin\Controller\IndexController',
-            'Admin\Controller\Users'        => 'Admin\Controller\UsersController',
+            'Admin\Controller\Index'          => 'Admin\Controller\IndexController',
+            'Admin\Controller\Users'          => 'Admin\Controller\UsersController',
             'Admin\Controller\Zfcuser'        => 'Admin\Controller\ZfcuserController',
             'Admin\Controller\Acl'            => 'Admin\Controller\AclController',
-            'Admin\Controller\Applications'    => 'Admin\Controller\ApplicationsController',
+            'Admin\Controller\Applications'   => 'Admin\Controller\ApplicationsController',
             'Admin\Controller\Clients'        => 'Admin\Controller\ClientsController',
-            'Admin\Controller\Settings'     => 'Admin\Controller\SettingsController',
+            'Admin\Controller\Settings'       => 'Admin\Controller\SettingsController',
         ),
     ),
         
@@ -49,24 +49,24 @@ return array(
             'Admin\Model\AclTable'            => 'Admin\Factory\AclTableFactory',
             'Admin\Model\AclresourceTable'    => 'Admin\Factory\AclresourceTableFactory',
             'Admin\Model\AclroleTable'        => 'Admin\Factory\AclroleTableFactory',
-            'Admin\Model\ApplicationsTable'    => 'Admin\Factory\ApplicationsTableFactory',
+            'Admin\Model\ApplicationsTable'   => 'Admin\Factory\ApplicationsTableFactory',
             'Admin\Model\ClientsTable'        => 'Admin\Factory\ClientsTableFactory',
-            'Admin\Model\SettingsTable'        => 'Admin\Factory\SettingsTableFactory',
-            'Admin\Model\UserTable'            => 'Admin\Factory\UserTableFactory',
-            'Admin\Model\UserProfileTable'    => 'Admin\Factory\UserProvileTableFactory',
+            'Admin\Model\SettingsTable'       => 'Admin\Factory\SettingsTableFactory',
+            'Admin\Model\UserTable'           => 'Admin\Factory\UserTableFactory',
+            'Admin\Model\UserProfileTable'    => 'Admin\Factory\UserProfileTableFactory',
         ),
             
         'aliases' => array(
                 
             // table aliases
-            'AdminAclTable'                    => 'Admin\Model\AclTable',
-            'AdminAclresourceTable'            => 'Admin\Model\AclresourceTable',
-            'AdminAclroleTable'                => 'Admin\Model\AclroleTable',
-            'AdminApplicationsTable'        => 'Admin\Model\ApplicationsTable',
-            'AdminClientsTable'                => 'Admin\Model\ClientsTable',
-            'AdminSettingsTable'            => 'Admin\Model\SettingsTable',
-            'AdminUserTable'                => 'Admin\Model\UserTable',
-            'AdminUserProfileTable'            => 'Admin\Model\UserProfileTable',
+            'AdminAclTable'                   => 'Admin\Model\AclTable',
+            'AdminAclresourceTable'           => 'Admin\Model\AclresourceTable',
+            'AdminAclroleTable'               => 'Admin\Model\AclroleTable',
+            'AdminApplicationsTable'          => 'Admin\Model\ApplicationsTable',
+            'AdminClientsTable'               => 'Admin\Model\ClientsTable',
+            'AdminSettingsTable'              => 'Admin\Model\SettingsTable',
+            'AdminUserTable'                  => 'Admin\Model\UserTable',
+            'AdminUserProfileTable'           => 'Admin\Model\UserProfileTable',
         ),
         
     ),
@@ -74,7 +74,7 @@ return array(
     'acl_helpers' => array (
         'invokables' => array(
             // override or add a view helper
-            'isallowed'    => 'Admin\View\Helper\Isallowed',
+            'isallowed'   => 'Admin\View\Helper\Isallowed',
             'isdenied'    => 'Admin\View\Helper\Isdenied',
         ),
     ),

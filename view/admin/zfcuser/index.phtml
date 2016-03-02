@@ -29,9 +29,8 @@
 		</section>
 	</div>
 	<?php 
-		$oProfile = new Admin\Model\UserProfile();
-		$res = $oProfile->load($this->zfcUserIdentity()->getId());
-		if ($res) {
+		if ($this->userProfile) {
+			$oProfile = $this->userProfile;
 	?>
 	<div class="panel-body panel-user-profile">
 		
