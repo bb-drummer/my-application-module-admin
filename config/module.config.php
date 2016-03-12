@@ -8,7 +8,7 @@
  * @package   BB's Zend Framework 2 Components
  * @package   AdminModule
  * @author    Björn Bartels [dragon-projects.net] <info@dragon-projects.net>
- * @link      http://gitlab.dragon-projects.de:81/groups/zf2
+ * @link      https://gitlab.bjoernbartels.earth/groups/zf2
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
  * @copyright copyright (c) 2016 Björn Bartels [dragon-projects.net] <info@dragon-projects.net>
  */
@@ -91,8 +91,8 @@ return array(
     ),
         
     'router' => array(
-    'routes' => array(
-    'admin' => array(
+        'routes' => array(
+            'admin' => array(
                 'type'    => 'Literal',
                 'options' => array(
                     // Change this to something specific to your module
@@ -179,9 +179,9 @@ return array(
                         ),
                     ),
                 ),
-    ),
+            ),
 
-    'userconfirmation' => array(
+            'userconfirmation' => array(
                 'type'    => 'Segment',
                 'options' => array(
                     'route'    => '/confirmuserregistration[/:user_id[/:confirmtoken]]',
@@ -196,8 +196,8 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(),
-    ),
-    'useractivation' => array(
+            ),
+            'useractivation' => array(
                 'type'    => 'Segment',
                 'options' => array(
                     'route'    => '/activateuser[/:user_id[/:activatetoken]]',
@@ -212,8 +212,8 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(),
-    ),
-    'userrequestpasswordreset' => array(
+            ),
+            'userrequestpasswordreset' => array(
                 'type'    => 'Literal',
                 'options' => array(
                     'route'    => '/requestpasswordreset',
@@ -226,8 +226,8 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(),
-    ),
-    'userresetpassword' => array(
+            ),
+            'userresetpassword' => array(
                 'type'    => 'Segment',
                 'options' => array(
                     'route'    => '/resetpassword[/:user_id[/:resettoken]]',
@@ -242,8 +242,8 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(),
-    ),
-    'zfcuser' => array(
+            ),
+            'zfcuser' => array(
                 'child_routes' => array(
                     'userprofile' => array(
                         'type' => 'Literal',
@@ -276,28 +276,28 @@ return array(
                         ),
                     ),
                 ),
-    ),
-    ),
+            ),
+        ),
     ),
         
     'view_manager' => array(
-    'template_map' => array(
-    'mails/userconfirm_html'    => __DIR__ . '/../view/mails/userconfirm_html.phtml',
-    'mails/userconfirm_txt'        => __DIR__ . '/../view/mails/userconfirm_txt.phtml',
-    'mails/useractivate_html'    => __DIR__ . '/../view/mails/useractivate_html.phtml',
-    'mails/useractivate_txt'    => __DIR__ . '/../view/mails/useractivate_txt.phtml',
-    ),
-    'template_path_stack' => array(
-    'admin' => __DIR__ . '/../view',
-    ),
-    'strategies' => array(
-    'ViewJsonStrategy'
-    )
+        'template_map' => array(
+            'mails/userconfirm_html'    => __DIR__ . '/../view/mails/userconfirm_html.phtml',
+            'mails/userconfirm_txt'        => __DIR__ . '/../view/mails/userconfirm_txt.phtml',
+            'mails/useractivate_html'    => __DIR__ . '/../view/mails/useractivate_html.phtml',
+            'mails/useractivate_txt'    => __DIR__ . '/../view/mails/useractivate_txt.phtml',
+        ),
+        'template_path_stack' => array(
+            'admin' => __DIR__ . '/../view',
+        ),
+        'strategies' => array(
+            'ViewJsonStrategy'
+        )
     ),
         
     'navigation' => array(
-    'default' => array(
-    'account' => array(
+        'default' => array(
+            'account' => array(
                 'label' => 'account',
                 'icon'    => 'user',
                 'route' => 'zfcuser',
@@ -375,9 +375,9 @@ return array(
                         'visible'        => false,
                     ),
                 ),
-    ), // user/profile
+            ), // user/profile
                 
-    'system' => array(
+            'system' => array(
                 'label'            => 'system',
                 'icon'            => 'desktop',
                 'route'            => 'admin',
@@ -426,9 +426,9 @@ return array(
                     ),
                         
                 ),
-    ), // user/profile
+            ), // user/profile
                 
-    'admin' => array(
+            'admin' => array(
                 'label'            => 'admin',
                 'icon'            => 'cogs',
                 'route'            => 'admin',
@@ -643,8 +643,8 @@ return array(
                         ),
                     ),
                 ),
-    ),
-    ),
+            ),
+        ),
     ),
                 
 );

@@ -45,7 +45,7 @@
 			echo $this->formHidden($form->get('acl_id'));
 			echo $this->formSubmit($form
 					->get('submit')
-					->setAttribute('class', 'btn btn-success btn-xs')
+					->setAttribute('class', 'button small success btn btn-success tiny btn-xs')
 					->setAttribute('value', 'allow')
 					->setAttribute('title', $this->translate("allow"))
 			);
@@ -74,7 +74,7 @@
 			echo $this->formHidden($form->get('acl_id'));
 			echo $this->formSubmit($form
 					->get('submit')
-					->setAttribute('class', 'btn btn-danger btn-xs')
+					->setAttribute('class', 'button small alert button alert btn btn-danger tiny btn-xs')
 					->setAttribute('value', 'deny')
 					->setAttribute('title', $this->translate("deny"))
 			);

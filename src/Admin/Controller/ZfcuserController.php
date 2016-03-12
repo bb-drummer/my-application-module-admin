@@ -8,7 +8,7 @@
  * @package   BB's Zend Framework 2 Components
  * @package   AdminModule
  * @author    Björn Bartels [dragon-projects.net] <info@dragon-projects.net>
- * @link      http://gitlab.dragon-projects.de:81/groups/zf2
+ * @link      https://gitlab.bjoernbartels.earth/groups/zf2
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
  * @copyright copyright (c) 2016 Björn Bartels [dragon-projects.net] <info@dragon-projects.net>
  */
@@ -79,41 +79,41 @@ class ZfcuserController extends UserController
             array(
                 'label'            => 'edit profile',
                 'icon'            => 'edit',
-                'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                'class'            => 'button btn btn-default small btn-sm btn-cta-xhr cta-xhr-modal',
                 'route'            => 'zfcuser/edituserprofile',
                 'resource'        => 'mvc:user',
             ),
             array(
                 'label'            => 'edit userdata',
                 'icon'            => 'user',
-                'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                'class'            => 'button btn btn-default small btn-sm btn-cta-xhr cta-xhr-modal',
                 'route'            => 'zfcuser/edituserdata',
                 'resource'        => 'mvc:user',
             ),
             array(
                 'label'         => 'change email',
                 'icon'            => 'envelope',
-                'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                'class'            => 'button btn btn-default small btn-sm btn-cta-xhr cta-xhr-modal',
                 'route'            => 'zfcuser/changeemail',
                 'resource'        => 'mvc:user',
             ),
             array(
                 'label'         => 'change password',
                 'icon'            => 'lock',
-                'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                'class'            => 'button btn btn-default small btn-sm btn-cta-xhr cta-xhr-modal',
                 'route'            => 'zfcuser/changepassword',
                 'resource'        => 'mvc:user',
             ),
             array(
                 'label'            => "",
-                'class'            => 'btn btn-none btn-sm',
+                'class'            => 'btn btn-none small btn-sm',
                 'uri'            => "#",
                 'active'        => false,
             ),
             array(
                 'label'         => 'logout',
                 'icon'            => 'power-off',
-            'class'            => 'btn btn-default btn-sm',
+            'class'            => 'button btn btn-default small btn-sm',
             'route'            => 'zfcuser/logout',
             'resource'        => 'mvc:user',
             ),

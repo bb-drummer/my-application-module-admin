@@ -22,8 +22,8 @@ if ($showForm) {
 		'<form action="'.$url.'" method="post" class="form-xhr">'.
 			'<div>'.
 				'<input type="hidden" name="id" value="'.((int) $user->user_id).'" />'.
-				'<input class="btn btn-primary" type="submit" name="del" value="'.$this->translate("delete").'" />'.
-				'<a class="btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'.$this->url('admin/default', array("controller" => "users")).'">'.$this->translate("cancel").'</a>'.
+				'<input class="button primary btn btn-primary" type="submit" name="del" value="'.$this->translate("delete").'" />'.
+				'<a class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'.$this->url('admin/default', array("controller" => "users")).'">'.$this->translate("cancel").'</a>'.
 			'</div>'.
 		'</form>'
 	);

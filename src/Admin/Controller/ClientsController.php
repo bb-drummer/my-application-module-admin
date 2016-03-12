@@ -8,7 +8,7 @@
  * @package   BB's Zend Framework 2 Components
  * @package   AdminModule
  * @author    Björn Bartels [dragon-projects.net] <info@dragon-projects.net>
- * @link      http://gitlab.dragon-projects.de:81/groups/zf2
+ * @link      https://gitlab.bjoernbartels.earth/groups/zf2
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
  * @copyright copyright (c) 2016 Björn Bartels [dragon-projects.net] <info@dragon-projects.net>
  */
@@ -32,7 +32,7 @@ class ClientsController extends BaseActionController
                     array(
                         'label'            => 'add client',
                         'icon'            => 'plus',
-                        'class'            => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                        'class'            => 'button btn btn-default small btn-sm btn-cta-xhr cta-xhr-modal',
                         'route'            => 'admin/clientsedit',
                         'action'        => 'add',
                         'resource'        => 'mvc:user',
@@ -60,12 +60,12 @@ class ClientsController extends BaseActionController
             $oController = $this;
             $datatablesData['data'] = array_map(
                 function ($row) use ($oController) {
-                    $actions = '<div class="btn-group btn-group-xs">'.
-                        '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
+                    $actions = '<div class="button-group tiny btn-group btn-group-xs">'.
+                        '<a class="button btn btn-default tiny btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
                             'admin/clientsedit',
                             array('action'=>'edit', 'client_id' => $row["clients_id"])
                         ).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
-                        '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
+                        '<a class="button btn btn-default tiny btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
                             'admin/clientsedit',
                             array('action'=>'delete', 'client_id' => $row["clients_id"])
                         ).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'.

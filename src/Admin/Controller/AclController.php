@@ -8,7 +8,7 @@
  * @package   BB's Zend Framework 2 Components
  * @package   AdminModule
  * @author    Björn Bartels [dragon-projects.net] <info@dragon-projects.net>
- * @link      http://gitlab.dragon-projects.de:81/groups/zf2
+ * @link      https://gitlab.bjoernbartels.earth/groups/zf2
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
  * @copyright copyright (c) 2016 Björn Bartels [dragon-projects.net] <info@dragon-projects.net>
  */
@@ -43,7 +43,7 @@ class AclController extends BaseActionController
                     array(
                         'label' => 'add role',
                         'icon' => 'plus',
-                        'class' => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                        'class' => 'button btn btn-default small btn-sm btn-cta-xhr cta-xhr-modal',
                         'route' => 'admin/acledit',
                         'action' => 'addrole',
                         'resource' => 'mvc:user',
@@ -51,21 +51,21 @@ class AclController extends BaseActionController
                     array(
                         'label' => 'manage roles',
                         'icon' => 'user',
-                        'class' => 'btn btn-default btn-sm btn-cta',
+                        'class' => 'button btn btn-default small btn-sm btn-cta',
                         'route' => 'admin/acledit',
                         'action' => 'roles',
                         'resource' => 'mvc:user',
                     ),
                     array(
                         'label' => "",
-                        'class' => 'btn btn-none btn-sm',
+                        'class' => 'btn btn-none small btn-sm',
                         'uri' => "#",
                         'active' => false,
                     ),
                     array(
                         'label' => 'add resource',
                         'icon' => 'plus',
-                        'class' => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                        'class' => 'button btn btn-default small btn-sm btn-cta-xhr cta-xhr-modal',
                         'route' => 'admin/acledit',
                         'action' => 'addresource',
                         'resource' => 'mvc:user',
@@ -73,7 +73,7 @@ class AclController extends BaseActionController
                     array(
                         'label' => 'manage resources',
                         'icon' => 'list-alt',
-                        'class' => 'btn btn-default btn-sm btn-cta',
+                        'class' => 'button btn btn-default small btn-sm btn-cta',
                         'route' => 'admin/acledit',
                         'action' => 'roles',
                         'resource' => 'mvc:user',
@@ -83,28 +83,28 @@ class AclController extends BaseActionController
                     array(
                         'label' => 'add role',
                         'icon' => 'plus',
-                        'class' => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                        'class' => 'button btn btn-default small btn-sm btn-cta-xhr cta-xhr-modal',
                         'route' => 'admin/acledit',
                         'action' => 'addrole',
                         'resource' => 'mvc:user',
                     ),
                     array(
                         'label' => "",
-                        'class' => 'btn btn-none btn-sm',
+                        'class' => 'btn btn-none small btn-sm',
                         'uri' => "#",
                         'active' => false,
                     ),
                     array(
                         'label' => 'ACL',
                         'icon' => 'asterisk',
-                        'class' => 'btn btn-default btn-sm btn-cta',
+                        'class' => 'button btn btn-default small btn-sm btn-cta',
                         'route' => 'admin/acledit',
                         'resource' => 'mvc:user',
                     ),
                     array(
                         'label' => 'manage resources',
                         'icon' => 'list-alt',
-                        'class' => 'btn btn-default btn-sm btn-cta',
+                        'class' => 'button btn btn-default small btn-sm btn-cta',
                         'route' => 'admin/acledit',
                         'action' => 'resources',
                         'resource' => 'mvc:user',
@@ -114,28 +114,28 @@ class AclController extends BaseActionController
                     array(
                         'label' => 'add resource',
                         'icon' => 'plus',
-                        'class' => 'btn btn-default btn-sm btn-cta-xhr cta-xhr-modal',
+                        'class' => 'button btn btn-default small btn-sm btn-cta-xhr cta-xhr-modal',
                         'route' => 'admin/acledit',
                         'action' => 'addresource',
                         'resource' => 'mvc:user',
                     ),
                     array(
                         'label' => "",
-                        'class' => 'btn btn-none btn-sm',
+                        'class' => 'btn btn-none small btn-sm',
                         'uri' => "#",
                         'active' => false,
                     ),
                     array(
                         'label' => 'ACL',
                         'icon' => 'asterisk',
-                        'class' => 'btn btn-default btn-sm btn-cta',
+                        'class' => 'button btn btn-default small btn-sm btn-cta',
                         'route' => 'admin/acledit',
                         'resource' => 'mvc:user',
                     ),
                     array(
                         'label' => 'manage roles',
                         'icon' => 'user',
-                        'class' => 'btn btn-default btn-sm btn-cta',
+                        'class' => 'button btn btn-default small btn-sm btn-cta',
                         'route' => 'admin/acledit',
                         'action' => 'roles',
                         'resource' => 'mvc:user',
@@ -217,18 +217,18 @@ class AclController extends BaseActionController
             $oController = $this;
             $datatablesData['data'] = array_map(
                 function ($row) use ($oController) {
-                    $actions = '<div class="btn-group btn-group-xs">'.
+                    $actions = '<div class="button-group tiny btn-group btn-group-xs">'.
                         (empty($row["acl_id"]) ? 
-                            '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
+                            '<a class="button btn btn-default tiny btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
                                 'admin/acledit',
                                 array('action'=>'addacl', 'acl_id' => '')
                             ).'"><span class="fa fa-pencil"></span> '.$oController->translate("add acl").'</a>'
                             :
-                            '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
+                            '<a class="button btn btn-default tiny btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
                                 'admin/acledit',
                                 array('action'=>'editacl', 'acl_id' => $row["acl_id"])
                             ).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
-                            '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
+                            '<a class="button btn btn-default tiny btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
                                 'admin/acledit',
                                 array('action'=>'deleteacl', 'acl_id' => $row["acl_id"])
                             ).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'
@@ -251,12 +251,12 @@ class AclController extends BaseActionController
             $oController = $this;
             $datatablesData['data'] = array_map(
                 function ($row) use ($oController) {
-                    $actions = '<div class="btn-group btn-group-xs">'.
-                        '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
+                    $actions = '<div class="button-group tiny btn-group btn-group-xs">'.
+                        '<a class="button btn btn-default tiny btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
                             'admin/acledit',
                             array('action'=>'editrole', 'acl_id' => $row["aclroles_id"])
                         ).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
-                        '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
+                        '<a class="button btn btn-default tiny btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
                             'admin/acledit',
                             array('action'=>'deleterole', 'acl_id' => $row["aclroles_id"])
                         ).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'.
@@ -283,12 +283,12 @@ class AclController extends BaseActionController
             $oController = $this;
             $datatablesData['data'] = array_map(
                 function ($row) use ($oController) {
-                    $actions = '<div class="btn-group btn-group-xs">'.
-                    '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
+                    $actions = '<div class="button-group tiny btn-group btn-group-xs">'.
+                    '<a class="button btn btn-default tiny btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
                         'admin/acledit',
                         array('action'=>'editresource', 'acl_id' => $row["aclresources_id"])
                     ).'"><span class="fa fa-pencil"></span> '.$oController->translate("edit").'</a>'.
-                    '<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
+                    '<a class="button btn btn-default tiny btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="'.$oController->url()->fromRoute(
                         'admin/acledit',
                         array('action'=>'deleteresource', 'acl_id' => $row["aclresources_id"])
                     ).'"><span class="fa fa-trash-o"></span> '.$oController->translate("delete").'</a>'.

@@ -19,10 +19,10 @@
 				<td><?php echo $this->escapeHtml($settings->name); ?></td>
 				<td><?php echo $this->escapeHtml($settings->value); ?></td>
 				<td>
-					<div class="btn-group btn-group-xs">
-						<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/settingsedit',
+					<div class="button-group tiny btn-group btn-group-xs">
+						<a class="button btn btn-default tiny btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/settingsedit',
 							array('action'=>'edit', 'set_id' => $settings->settings_id));?>"><span class="fa fa-pencil"></span> <?php echo $this->translate("edit"); ?></a>
-						<a class="btn btn-default btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/settingsedit',
+						<a class="button btn btn-default tiny btn-xs btn-clean btn-cta-xhr cta-xhr-modal" href="<?php echo $this->url('admin/settingsedit',
 							array('action'=>'delete', 'set_id' => $settings->settings_id));?>"><span class="fa fa-trash-o"></span> <?php echo $this->translate("delete"); ?></a>
 					</div>
 				</td>
