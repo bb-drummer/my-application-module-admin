@@ -7,10 +7,10 @@
  * @package   [MyApplication]
  * @package   BB's Zend Framework 2 Components
  * @package   AdminModule
- * @author    Björn Bartels [dragon-projects.net] <info@dragon-projects.net>
+ * @author    Björn Bartels <development@bjoernbartels.earth>
  * @link      https://gitlab.bjoernbartels.earth/groups/zf2
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @copyright copyright (c) 2016 Björn Bartels [dragon-projects.net] <info@dragon-projects.net>
+ * @copyright copyright (c) 2016 Björn Bartels <development@bjoernbartels.earth>
  */
 
 namespace Admin\Model;
