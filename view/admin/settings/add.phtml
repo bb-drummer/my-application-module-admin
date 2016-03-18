@@ -28,7 +28,7 @@ if ($showForm) {
 			->setOption('type', 'button')
 	);
 	$formHTML .= $this->formReset($form->get('reset')
-			->setAttributes(array('class' =>'button btn btn-default'))
+			->setAttributes(array('class' =>'button secondary btn btn-default'))
 			->setOption('type', 'button')
 	);
 	$formHTML .= '<a class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'. $this->url('admin/settingsedit') .'">'. $this->translate("cancel") .'</a>';

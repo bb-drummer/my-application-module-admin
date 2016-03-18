@@ -36,7 +36,7 @@
 		<?php endif ?>
 		<?php echo $this->formHidden($form->get('identity')); ?>
 		<input class="button primary btn btn-primary" type="submit" value="<?php echo $this->translate("save"); ?>" />
-		<input class="button btn btn-default" type="reset" value="<?php echo $this->translate("reset"); ?>" />
+		<input class="button secondary btn btn-default" type="reset" value="<?php echo $this->translate("reset"); ?>" />
 		<a class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="<?php echo $this->url('zfcuser'); ?>"><?php echo $this->translate("cancel"); ?></a>
 	<?php echo $this->form()->closeTag(); ?>
 </section>
