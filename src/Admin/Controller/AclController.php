@@ -773,8 +773,8 @@ class AclController extends BaseActionController
     }
     
     private function reinitACLCache () {
-        if ( $this->getServiceLocator()->get('CacheService') ) {
-            $this->getServiceLocator()->get('CacheService')->removeItem('ACL');
+        if ( \Application\Module::getService('CacheService') ) {
+            \Application\Module::('CacheService')->removeItem('ACL');
             \Admin\Module::initACL($this->getServiceLocator());
         }
     }
