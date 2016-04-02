@@ -7,25 +7,25 @@ $oComponents = $this->Components();
 $oUser = $this->zfcUserIdentity();
 
 if ($showForm) {
-	$url = $this->url('admin/default', array(
-		'controller' => 'users',
-		'action'	 => 'delete',
-		'user_id'	=> $user->user_id,
-	));
-	$formHTML = array(
-		'<p>'.$this->translate("Do you really want to delete this user?").'</p>',
-		'<p>'.
-			'&quot;'.$this->escapeHtml($user->username).'&quot; - '.
-			'&quot;'.$this->escapeHtml($user->display_name).'&quot; - '.
-			'&quot;'.$this->escapeHtml($user->username).'&quot;'.
-		'</p>',
-		'<form action="'.$url.'" method="post" class="form-xhr">'.
-			'<div>'.
-				'<input type="hidden" name="id" value="'.((int) $user->user_id).'" />'.
-				'<input class="button primary btn btn-primary" type="submit" name="del" value="'.$this->translate("delete").'" />'.
-				'<a class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'.$this->url('admin/default', array("controller" => "users")).'">'.$this->translate("cancel").'</a>'.
-			'</div>'.
-		'</form>'
-	);
-	echo implode("", $formHTML);
+    $url = $this->url('admin/default', array(
+        'controller' => 'users',
+        'action'     => 'delete',
+        'user_id'    => $user->user_id,
+    ));
+    $formHTML = array(
+        '<p>'.$this->translate("Do you really want to delete this user?").'</p>',
+        '<p>'.
+            '&quot;'.$this->escapeHtml($user->username).'&quot; - '.
+            '&quot;'.$this->escapeHtml($user->display_name).'&quot; - '.
+            '&quot;'.$this->escapeHtml($user->username).'&quot;'.
+        '</p>',
+        '<form action="'.$url.'" method="post" class="form-xhr">'.
+            '<div>'.
+                '<input type="hidden" name="id" value="'.((int) $user->user_id).'" />'.
+                '<input class="button primary btn btn-primary" type="submit" name="del" value="'.$this->translate("delete").'" />'.
+                '<a class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'.$this->url('admin/default', array("controller" => "users")).'">'.$this->translate("cancel").'</a>'.
+            '</div>'.
+        '</form>'
+    );
+    echo implode("", $formHTML);
 } 

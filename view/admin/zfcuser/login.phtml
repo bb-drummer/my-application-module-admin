@@ -1,35 +1,35 @@
 <section>
-	<?php
-		$form = $this->loginForm;
-		$form->prepare();
-		$form->setAttribute('action', $this->url('zfcuser/login'));
-		$form->setAttribute('method', 'post');
-		
-		echo $this->form()->openTag($form) ?>
-		<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('identity')))) ? ' has-error' : '' ?>">
-			<?php echo $this->formLabel($form->get('identity')); ?>
-			<?php echo $this->formInput($form->get('identity')->setAttributes(array('class' => 'form-control'))); ?>
-			<?php echo $this->formElementErrors($form->get('identity')); ?>
-		</div>
-		<div class="form-group<?php echo (!empty($this->formElementErrors($form->get('credential')))) ? ' has-error' : '' ?>">
-			<?php echo $this->formLabel($form->get('credential')); ?>
-			<?php echo $this->formInput($form->get('credential')->setAttributes(array('class' => 'form-control'))); ?>
-			<?php echo $this->formElementErrors($form->get('credential')); ?>
-		</div>
-		<hr />
-		<?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'button primary btn btn-primary', 'value' => $this->translate('login')))); ?>
-		<a class="button alert btn btn-danger" href="<?php echo $this->url('home'); ?>"><?php echo $this->translate("cancel"); ?></a>
-			<?php if ($this->redirect): ?><input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" /><?php endif ?>
-	<?php echo $this->form()->closeTag() ?>
-	<br />
-	<?php if ($this->enableRegistration) : ?>
-	<p class="enabled_registration">
-		<?php echo $this->translate('do not have an account?'); ?>
-		<a href="<?php echo $this->url('zfcuser/register') . ($this->redirect ? '?redirect='.$this->escapeUrl($this->redirect) : ''); ?>"><?php echo $this->translate('register now!'); ?></a>
-	</p>
-	<?php endif; ?>
-	<p class="enabled_resetpassword">
-		<?php echo $this->translate('forgot your credentials?'); ?>
-		<a href="<?php echo $this->url('userrequestpasswordreset'); ?>"><?php echo $this->translate('reset your password'); ?></a>
-	</p>
+    <?php
+        $form = $this->loginForm;
+        $form->prepare();
+        $form->setAttribute('action', $this->url('zfcuser/login'));
+        $form->setAttribute('method', 'post');
+        
+        echo $this->form()->openTag($form) ?>
+        <div class="form-group<?php echo (!empty($this->formElementErrors($form->get('identity')))) ? ' has-error' : '' ?>">
+            <?php echo $this->formLabel($form->get('identity')); ?>
+            <?php echo $this->formInput($form->get('identity')->setAttributes(array('class' => 'form-control'))); ?>
+            <?php echo $this->formElementErrors($form->get('identity')); ?>
+        </div>
+        <div class="form-group<?php echo (!empty($this->formElementErrors($form->get('credential')))) ? ' has-error' : '' ?>">
+            <?php echo $this->formLabel($form->get('credential')); ?>
+            <?php echo $this->formInput($form->get('credential')->setAttributes(array('class' => 'form-control'))); ?>
+            <?php echo $this->formElementErrors($form->get('credential')); ?>
+        </div>
+        <hr />
+        <?php echo $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'button primary btn btn-primary', 'value' => $this->translate('login')))); ?>
+        <a class="button alert btn btn-danger" href="<?php echo $this->url('home'); ?>"><?php echo $this->translate("cancel"); ?></a>
+            <?php if ($this->redirect): ?><input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" /><?php endif ?>
+    <?php echo $this->form()->closeTag() ?>
+    <br />
+    <?php if ($this->enableRegistration) : ?>
+    <p class="enabled_registration">
+        <?php echo $this->translate('do not have an account?'); ?>
+        <a href="<?php echo $this->url('zfcuser/register') . ($this->redirect ? '?redirect='.$this->escapeUrl($this->redirect) : ''); ?>"><?php echo $this->translate('register now!'); ?></a>
+    </p>
+    <?php endif; ?>
+    <p class="enabled_resetpassword">
+        <?php echo $this->translate('forgot your credentials?'); ?>
+        <a href="<?php echo $this->url('userrequestpasswordreset'); ?>"><?php echo $this->translate('reset your password'); ?></a>
+    </p>
 </section>

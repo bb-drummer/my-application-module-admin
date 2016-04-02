@@ -101,7 +101,7 @@ class UsersController extends BaseActionController
         $tmplVars = $this->getTemplateVars( 
             array(
             'showForm'    => true,
-            //'title'		=> $this->translate("add user")
+            //'title'        => $this->translate("add user")
             )
         );
         //$this->layout()->setVariable('title', $this->translate("add user"));
@@ -143,7 +143,7 @@ class UsersController extends BaseActionController
         $tmplVars = $this->getTemplateVars( 
             array(
             'showForm'    => true,
-            //'title'		=> $this->translate("edit user")
+            //'title'        => $this->translate("edit user")
             )
         );
         //$this->layout()->setVariable('title', $this->translate("edit user"));
@@ -195,7 +195,7 @@ class UsersController extends BaseActionController
         $tmplVars = $this->getTemplateVars( 
             array(
             'showForm'    => true,
-            //'title'		=> $this->translate("delete user")
+            //'title'        => $this->translate("delete user")
             )
         );
         //$this->layout()->setVariable('title', $this->translate("delete user"));

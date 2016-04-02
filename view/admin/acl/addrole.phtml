@@ -7,20 +7,20 @@ $oComponents = $this->Components();
 $oUser = $this->zfcUserIdentity();
 
 if ($showForm) {
-	$form = $this->form;
-	$form->setAttribute('action', $this->url('admin/acledit', array('action' => 'addrole')));
-	$form->setAttribute('class', 'form-xhr');
-	$form->prepare();
-		
-	$formHTML = $this->form()->openTag($form);
-	$formHTML .= $oComponents->formGroup($form, "roleslug");
-	$formHTML .= $oComponents->formGroup($form, "rolename");
-	$formHTML .= '<hr />'; 
-	$formHTML .= $this->formHidden($form->get('aclroles_id'));
-	$formHTML .= $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'button primary btn btn-primary')));
-	$formHTML .= $this->formReset($form->get('reset')->setAttributes(array('class' =>'button secondary btn btn-default')));
-	$formHTML .= '<a class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'. $this->url('admin/acledit') .'">'. $this->translate("cancel") .'</a>';
-	$formHTML .=  $this->form()->closeTag($form);
-		
-	echo $formHTML;
+    $form = $this->form;
+    $form->setAttribute('action', $this->url('admin/acledit', array('action' => 'addrole')));
+    $form->setAttribute('class', 'form-xhr');
+    $form->prepare();
+        
+    $formHTML = $this->form()->openTag($form);
+    $formHTML .= $oComponents->formGroup($form, "roleslug");
+    $formHTML .= $oComponents->formGroup($form, "rolename");
+    $formHTML .= '<hr />'; 
+    $formHTML .= $this->formHidden($form->get('aclroles_id'));
+    $formHTML .= $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'button primary btn btn-primary')));
+    $formHTML .= $this->formReset($form->get('reset')->setAttributes(array('class' =>'button secondary btn btn-default')));
+    $formHTML .= '<a class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'. $this->url('admin/acledit') .'">'. $this->translate("cancel") .'</a>';
+    $formHTML .=  $this->form()->closeTag($form);
+        
+    echo $formHTML;
 }

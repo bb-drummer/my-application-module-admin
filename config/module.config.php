@@ -405,14 +405,14 @@ return array(
                         'icon'            => 'wrench',
                         'route'            => 'setup',
                         'action'         => 'index',
-                        //'resource'		=> 'mvc:admin',
+                        //'resource'        => 'mvc:admin',
                         'visible'        => true,
                         'pages' => array(
                             array(
                                 'label'         => 'install',
                                 'icon'            => 'magic',
                                 'route'         => 'setup',
-                                //'resource'		=> 'mvc:admin',
+                                //'resource'        => 'mvc:admin',
                                 'action'         => 'install',
                             ),
                             array(

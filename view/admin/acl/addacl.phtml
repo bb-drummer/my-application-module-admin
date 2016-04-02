@@ -7,34 +7,34 @@ $oComponents = $this->Components();
 $oUser = $this->zfcUserIdentity();
 
 if ($showForm) {
-	$form = $this->form;
-	$form->setAttribute('class', 'form-xhr');
-	$form->setAttribute('action', $this->url('admin/acledit', array('action' => 'addacl')));
-	$oRoles = $form->get('aclroles_id');
-	$valueoptions = array();
-	foreach ($roles as $role) {
-		$valueoptions[$role->aclroles_id] = $role->rolename;
-	}
-	$oRoles->setValueOptions($valueoptions);
-	$oResources = $form->get('aclresources_id');
-	$valueoptions = array();
-	foreach ($resources as $resource) {
-		$valueoptions[$resource->aclresources_id] = $resource->resourcename;
-	}
-	$oResources->setValueOptions($valueoptions);
-	$form->prepare();
-		
-	$formHTML = $this->form()->openTag($form);
-	$formHTML .= $oComponents->formGroup($form, "aclroles_id");
-	$formHTML .= $oComponents->formGroup($form, "aclresources_id");
-	$formHTML .= '<hr />'; 
-	$formHTML .= $oComponents->formGroup($form, "state");
-	$formHTML .= '<hr />'; 
-	$formHTML .= $this->formHidden($form->get('acl_id'));
-	$formHTML .= $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'button primary btn btn-primary')));
-	$formHTML .= $this->formReset($form->get('reset')->setAttributes(array('class' =>'button secondary btn btn-default')));
-	$formHTML .= '<a class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'. $this->url('admin/acledit') .'">'. $this->translate("cancel") .'</a>';
-	$formHTML .=  $this->form()->closeTag($form);
-		
-	echo $formHTML;
+    $form = $this->form;
+    $form->setAttribute('class', 'form-xhr');
+    $form->setAttribute('action', $this->url('admin/acledit', array('action' => 'addacl')));
+    $oRoles = $form->get('aclroles_id');
+    $valueoptions = array();
+    foreach ($roles as $role) {
+        $valueoptions[$role->aclroles_id] = $role->rolename;
+    }
+    $oRoles->setValueOptions($valueoptions);
+    $oResources = $form->get('aclresources_id');
+    $valueoptions = array();
+    foreach ($resources as $resource) {
+        $valueoptions[$resource->aclresources_id] = $resource->resourcename;
+    }
+    $oResources->setValueOptions($valueoptions);
+    $form->prepare();
+        
+    $formHTML = $this->form()->openTag($form);
+    $formHTML .= $oComponents->formGroup($form, "aclroles_id");
+    $formHTML .= $oComponents->formGroup($form, "aclresources_id");
+    $formHTML .= '<hr />'; 
+    $formHTML .= $oComponents->formGroup($form, "state");
+    $formHTML .= '<hr />'; 
+    $formHTML .= $this->formHidden($form->get('acl_id'));
+    $formHTML .= $this->formSubmit($form->get('submit')->setAttributes(array('class' =>'button primary btn btn-primary')));
+    $formHTML .= $this->formReset($form->get('reset')->setAttributes(array('class' =>'button secondary btn btn-default')));
+    $formHTML .= '<a class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'. $this->url('admin/acledit') .'">'. $this->translate("cancel") .'</a>';
+    $formHTML .=  $this->form()->closeTag($form);
+        
+    echo $formHTML;
 }

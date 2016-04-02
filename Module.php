@@ -366,14 +366,14 @@ class Module implements
     /* public function initAcl(MvcEvent $e) {
     $sm = $e->getApplication()->getServiceManager();
     $acl = \Admin\Module::initACL($sm);
-		
+        
     $e->getViewModel()->acl = $acl;
     }
-	
+    
     public function checkAcl(MvcEvent $e) {
     $oAcl = $e->getViewModel()->acl;
     $oSM = $e->getApplication()->getServiceManager();
-		
+        
     $sAclRole = 'public';
     $oAuth = $oSM->get('zfcuser_auth_service');
     if ( $oAuth->hasIdentity() ) {
@@ -386,12 +386,12 @@ class Module implements
     if ($activePage) {
     $sAclResource = $activePage->getResource();
     if (!empty($sAclResource) && $oAcl->hasResource($sAclResource)) {
-				if ( !$oAcl->isAllowed($sAclRole, $sAclResource) ) {
-					$response = $e->getResponse();
-					//location to page or what ever
-					$response->getHeaders()->addHeaderLine('Location', $e->getRequest()->getBaseUrl() . '/user/login?redirect=' . $e->getRequest()->getRequestUri() );
-					$response->setStatusCode(301);
-				}
+                if ( !$oAcl->isAllowed($sAclRole, $sAclResource) ) {
+                    $response = $e->getResponse();
+                    //location to page or what ever
+                    $response->getHeaders()->addHeaderLine('Location', $e->getRequest()->getBaseUrl() . '/user/login?redirect=' . $e->getRequest()->getRequestUri() );
+                    $response->setStatusCode(301);
+                }
     }
     }
     } */
@@ -635,16 +635,16 @@ class Module implements
      */
     public static function initACL( $oServiceManager ) // \Zend\Mvc\Mvcevent $oEvent )
     {
-    	// check for cached ACL...
-    	$cacheService = \Application\Module::getService('CacheService');
-    	if ($cacheService) {
-    		$cachedAcl = $cacheService->getItem('ACL');
-    		if ($cachedAcl) {
-    			return $cachedAcl;
-    		}
-    	}
-    	
-        //$oServiceManager	= $oEvent->getApplication()->getServiceManager();
+        // check for cached ACL...
+        $cacheService = \Application\Module::getService('CacheService');
+        if ($cacheService) {
+            $cachedAcl = $cacheService->getItem('ACL');
+            if ($cachedAcl) {
+                return $cachedAcl;
+            }
+        }
+        
+        //$oServiceManager    = $oEvent->getApplication()->getServiceManager();
         $oACL             = new ZendAcl();
         $oAcls            = $oServiceManager->get('Admin\Model\AclTable');
         $oRoles           = $oServiceManager->get('Admin\Model\AclroleTable');
@@ -689,7 +689,7 @@ class Module implements
         // store ACL in cache...
         $cacheService = \Application\Module::getService('CacheService');
         if ($cacheService) {
-        	$cacheService->setItem('ACL', $oACL);
+            $cacheService->setItem('ACL', $oACL);
         }
         
         return ($oACL);

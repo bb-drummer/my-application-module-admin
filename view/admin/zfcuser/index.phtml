@@ -1,99 +1,99 @@
 <section>
-	<div class="panel-body">
-		<section class="row">
-			<div class="col-md-2">
-				<?php echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?>
-			</div>
-			<div class="col-md-10">
-				<h3><?php echo $this->translate('Hallo'); ?>, <?php echo $this->zfcUserDisplayName() ?>!</h3>
-				<hr />
-				<div class="row">
-					<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('user')); ?>:</span>
-					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getUsername()); ?>, 
-						<a href="mailto:<?php echo ($this->zfcUserIdentity()->getEmail()); ?>" target="_blank"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getEmail()); ?></a></span>
-				</div>
-				<div class="row">
-					<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('role')); ?>:</span>
-					<span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getAclrole()); ?></span>
-				</div>
-			</div>
-		</section>
-	</div>
-	<?php 
-		if ($this->userProfile) {
-			$oProfile = $this->userProfile;
-	?>
-	<div class="panel-body panel-user-profile">
-		
-		<div class="panel-group container-fluid" id="accordion" role="tablist" aria-multiselectable="false">
-			<div class="row">
-				<div class="col-md-6 col-xs-12">
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="h1">
-							<h4 class="panel-title">
-								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#p1" aria-expanded="true" aria-controls="p1">
-									<?php echo $this->escapeHtml($this->translate('messengers')); ?>
-								</a>
-							</h4>
-						</div>
-						<div id="p1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="h1">
-							<div class="panel-body">
-								<div class="row">
-									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('Twitter')); ?>:</span>
-									<span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getTwitter()); ?></span>
-								</div>
-								<div class="row">
-									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('Facebook')); ?>:</span>
-									<span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getFacebook()); ?></span>
-								</div>
-								<div class="row">
-									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('Skype')); ?>:</span>
-									<span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getSkype()); ?></span>
-								</div>
-								<div class="row">
-									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('ICQ')); ?>:</span>
-									<span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getIcq()); ?></span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-xs-12">
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="h2">
-							<h4 class="panel-title">
-								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#p2" aria-expanded="true" aria-controls="p2">
-									<?php echo $this->escapeHtml($this->translate('address')); ?>
-								</a>
-							</h4>
-						</div>
-						<div id="p2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="h2">
-							<div class="panel-body">
-								<div class="row">
-									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('street')); ?>:</span>
-									<span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getStreet()); ?></span>
-								</div>
-								<div class="row">
-									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('city')); ?>:</span>
-									<span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getCity()); ?></span>
-								</div>
-								<div class="row">
-									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('phone')); ?>:</span>
-									<span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getPhone()); ?></span>
-								</div>
-								<div class="row">
-									<span class="col-md-2"><?php echo $this->escapeHtml($this->translate('mobile')); ?>:</span>
-									<span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getCell()); ?></span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			 			  
-		</div>
+    <div class="panel-body">
+        <section class="row">
+            <div class="col-md-2">
+                <?php echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?>
+            </div>
+            <div class="col-md-10">
+                <h3><?php echo $this->translate('Hallo'); ?>, <?php echo $this->zfcUserDisplayName() ?>!</h3>
+                <hr />
+                <div class="row">
+                    <span class="col-md-2"><?php echo $this->escapeHtml($this->translate('user')); ?>:</span>
+                    <span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getUsername()); ?>, 
+                        <a href="mailto:<?php echo ($this->zfcUserIdentity()->getEmail()); ?>" target="_blank"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getEmail()); ?></a></span>
+                </div>
+                <div class="row">
+                    <span class="col-md-2"><?php echo $this->escapeHtml($this->translate('role')); ?>:</span>
+                    <span class="col-md-10"><?php echo $this->escapeHtml($this->zfcUserIdentity()->getAclrole()); ?></span>
+                </div>
+            </div>
+        </section>
+    </div>
+    <?php 
+        if ($this->userProfile) {
+            $oProfile = $this->userProfile;
+    ?>
+    <div class="panel-body panel-user-profile">
+        
+        <div class="panel-group container-fluid" id="accordion" role="tablist" aria-multiselectable="false">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="h1">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#p1" aria-expanded="true" aria-controls="p1">
+                                    <?php echo $this->escapeHtml($this->translate('messengers')); ?>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="p1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="h1">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <span class="col-md-2"><?php echo $this->escapeHtml($this->translate('Twitter')); ?>:</span>
+                                    <span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getTwitter()); ?></span>
+                                </div>
+                                <div class="row">
+                                    <span class="col-md-2"><?php echo $this->escapeHtml($this->translate('Facebook')); ?>:</span>
+                                    <span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getFacebook()); ?></span>
+                                </div>
+                                <div class="row">
+                                    <span class="col-md-2"><?php echo $this->escapeHtml($this->translate('Skype')); ?>:</span>
+                                    <span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getSkype()); ?></span>
+                                </div>
+                                <div class="row">
+                                    <span class="col-md-2"><?php echo $this->escapeHtml($this->translate('ICQ')); ?>:</span>
+                                    <span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getIcq()); ?></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="h2">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#p2" aria-expanded="true" aria-controls="p2">
+                                    <?php echo $this->escapeHtml($this->translate('address')); ?>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="p2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="h2">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <span class="col-md-2"><?php echo $this->escapeHtml($this->translate('street')); ?>:</span>
+                                    <span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getStreet()); ?></span>
+                                </div>
+                                <div class="row">
+                                    <span class="col-md-2"><?php echo $this->escapeHtml($this->translate('city')); ?>:</span>
+                                    <span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getCity()); ?></span>
+                                </div>
+                                <div class="row">
+                                    <span class="col-md-2"><?php echo $this->escapeHtml($this->translate('phone')); ?>:</span>
+                                    <span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getPhone()); ?></span>
+                                </div>
+                                <div class="row">
+                                    <span class="col-md-2"><?php echo $this->escapeHtml($this->translate('mobile')); ?>:</span>
+                                    <span class="col-md-10"><?php echo $this->escapeHtml($oProfile->getCell()); ?></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                           
+        </div>
 
-	</div>
-	<?php } ?>
+    </div>
+    <?php } ?>
 </section>
 

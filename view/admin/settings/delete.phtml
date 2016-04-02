@@ -7,25 +7,25 @@ $oComponents = $this->Components();
 $oUser = $this->zfcUserIdentity();
 
 if ($showForm) {
-	$url = $this->url('admin/settingsedit', array(
-		'action'	 => 'delete',
-		'set_id'	 => $settings->settings_id,
-	));
-	$formHTML = array(
-		'<p>'.$this->translate("Do you really want to delete this setting?").'</p>',
-		'<p>'.
-			'&quot;'.$this->escapeHtml($settings->scope).'&quot;, '.
-				'&quot;'.$this->escapeHtml($settings->ref_id).'&quot; - '.
-			'&quot;'.$this->escapeHtml($settings->type).'&quot; - '.
-			'&quot;'.$this->escapeHtml($settings->name).'&quot;'.
-		'</p>',
-		'<form action="'.$url.'" method="post" class="form-xhr">'.
-			'<div>'.
-				'<input type="hidden" name="id" value="'.((int) $settings->settings_id).'" />'.
-				'<input class="button primary btn btn-primary" type="submit" name="del" value="'.$this->translate("delete").'" />'.
-				'<a class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'.$this->url('admin/settingsedit').'">'.$this->translate("cancel").'</a>'.
-			'</div>'.
-		'</form>'
-	);
-	echo implode("", $formHTML);
+    $url = $this->url('admin/settingsedit', array(
+        'action'     => 'delete',
+        'set_id'     => $settings->settings_id,
+    ));
+    $formHTML = array(
+        '<p>'.$this->translate("Do you really want to delete this setting?").'</p>',
+        '<p>'.
+            '&quot;'.$this->escapeHtml($settings->scope).'&quot;, '.
+                '&quot;'.$this->escapeHtml($settings->ref_id).'&quot; - '.
+            '&quot;'.$this->escapeHtml($settings->type).'&quot; - '.
+            '&quot;'.$this->escapeHtml($settings->name).'&quot;'.
+        '</p>',
+        '<form action="'.$url.'" method="post" class="form-xhr">'.
+            '<div>'.
+                '<input type="hidden" name="id" value="'.((int) $settings->settings_id).'" />'.
+                '<input class="button primary btn btn-primary" type="submit" name="del" value="'.$this->translate("delete").'" />'.
+                '<a class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'.$this->url('admin/settingsedit').'">'.$this->translate("cancel").'</a>'.
+            '</div>'.
+        '</form>'
+    );
+    echo implode("", $formHTML);
 } 

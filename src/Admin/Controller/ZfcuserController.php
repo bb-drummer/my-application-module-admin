@@ -172,7 +172,7 @@ class ZfcuserController extends UserController
         
         return new ViewModel(
             array(
-            	"userProfile" => $oProfile,
+                "userProfile" => $oProfile,
                 "toolbarItems" => $this->getToolbarItems(),
             )
         );
@@ -193,7 +193,7 @@ class ZfcuserController extends UserController
         
         return new ViewModel(
             array(
-            	"userProfile" => $oProfile,
+                "userProfile" => $oProfile,
                 "toolbarItems" => $this->getToolbarItems(),
             )
         );
@@ -579,10 +579,10 @@ class ZfcuserController extends UserController
             return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
         }
         
-        /*$config		= $this->getServiceLocator()->get('Config');
-        $options	= $this->getServiceLocator()->get('zfcuser_module_options');
-        $request	= $this->getRequest();
-        $service	= $this->getUserService();*/
+        /*$config        = $this->getServiceLocator()->get('Config');
+        $options    = $this->getServiceLocator()->get('zfcuser_module_options');
+        $request    = $this->getRequest();
+        $service    = $this->getUserService();*/
 
         $form        = new UserDataForm();
         $translator    = $this->getTranslator();
@@ -681,10 +681,10 @@ class ZfcuserController extends UserController
             return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
         }
         
-        /*$config		= $this->getServiceLocator()->get('Config');
-        $options	= $this->getServiceLocator()->get('zfcuser_module_options');
-        $request	= $this->getRequest();
-        $service	= $this->getUserService();*/
+        /*$config        = $this->getServiceLocator()->get('Config');
+        $options    = $this->getServiceLocator()->get('zfcuser_module_options');
+        $request    = $this->getRequest();
+        $service    = $this->getUserService();*/
         
         $form        = new UserProfileForm();
         $translator    = $this->getTranslator();
@@ -775,7 +775,7 @@ class ZfcuserController extends UserController
     }
     
     
-    // //	action titles
+    // //    action titles
     
     /**
      * @return the $actionTitles
@@ -813,7 +813,7 @@ class ZfcuserController extends UserController
     }
     
     
-    // //	toolbar items
+    // //    toolbar items
 
     /**
      * @return the $toolbarItems

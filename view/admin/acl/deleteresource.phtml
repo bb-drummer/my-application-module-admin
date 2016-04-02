@@ -7,52 +7,52 @@ $oComponents = $this->Components();
 $oUser = $this->zfcUserIdentity();
 
 if ($showForm) {
-	$url = $this->url('admin/acledit', array(
-		'action'	 => 'deleteresource',
-		'acl_id'	 => $acl_id,
-	));
-	$formHTML = array(
-		'<p>'.$this->translate("Do you really want to delete this resource?").'</p>',
-		'<p>'.
-			'&quot;'.$this->escapeHtml($aclresource->resourcename).'&quot; - '.
-			'&quot;'.$this->escapeHtml($aclresource->resourceslug).'&quot;'.
-		'</p>',
-		'<form action="'.$url.'" method="post" class="form-xhr">'.
-			'<div>'.
-				'<input type="hidden" name="id" value="'.((int) $acl_id).'" />'.
-				'<input class="button primary btn btn-primary" type="submit" name="del" value="'.$this->translate("delete").'" />'.
-				'<a class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'.$this->url('admin/acledit').'">'.$this->translate("cancel").'</a>'.
-			'</div>'.
-		'</form>'
-	);
-	echo implode("", $formHTML);
+    $url = $this->url('admin/acledit', array(
+        'action'     => 'deleteresource',
+        'acl_id'     => $acl_id,
+    ));
+    $formHTML = array(
+        '<p>'.$this->translate("Do you really want to delete this resource?").'</p>',
+        '<p>'.
+            '&quot;'.$this->escapeHtml($aclresource->resourcename).'&quot; - '.
+            '&quot;'.$this->escapeHtml($aclresource->resourceslug).'&quot;'.
+        '</p>',
+        '<form action="'.$url.'" method="post" class="form-xhr">'.
+            '<div>'.
+                '<input type="hidden" name="id" value="'.((int) $acl_id).'" />'.
+                '<input class="button primary btn btn-primary" type="submit" name="del" value="'.$this->translate("delete").'" />'.
+                '<a class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'.$this->url('admin/acledit').'">'.$this->translate("cancel").'</a>'.
+            '</div>'.
+        '</form>'
+    );
+    echo implode("", $formHTML);
 } /*
 <div class="panel panel-default">
-	<div class="panel-heading">
-		<label>
-			<span class="panel-title"><?php echo $this->translate("delete resource"); ?></span>
-		</label>
-	</div>
-	<div class="panel-body">
-		<p><?php echo $this->translate("Do you really want to delete this resource?"); ?></p>
-		<p>
-			'<?php echo $this->escapeHtml($aclresource->resourcename); ?>' - 
-			'<?php echo $this->escapeHtml($aclresource->resourceslug); ?>'?
-		</p>
-		<?php
-		$url = $this->url('admin/acledit', array(
-			'action'	=> 'deleteresource',
-			'acl_id'	=> (int)$acl_id,
-		));
-		?>
-		<form action="<?php echo $url; ?>" method="post">
-			<div>
-				<input type="hidden" name="id" value="<?php echo (int)$acl_id; ?>" />
-				<input class="button primary btn btn-primary" type="submit" name="del" value="<?php echo $this->translate("delete"); ?>" />
-				<input class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" type="submit" name="abort" value="<?php echo $this->translate("cancel"); ?>" />
-			</div>
-		</form>
-	</div>
+    <div class="panel-heading">
+        <label>
+            <span class="panel-title"><?php echo $this->translate("delete resource"); ?></span>
+        </label>
+    </div>
+    <div class="panel-body">
+        <p><?php echo $this->translate("Do you really want to delete this resource?"); ?></p>
+        <p>
+            '<?php echo $this->escapeHtml($aclresource->resourcename); ?>' - 
+            '<?php echo $this->escapeHtml($aclresource->resourceslug); ?>'?
+        </p>
+        <?php
+        $url = $this->url('admin/acledit', array(
+            'action'    => 'deleteresource',
+            'acl_id'    => (int)$acl_id,
+        ));
+        ?>
+        <form action="<?php echo $url; ?>" method="post">
+            <div>
+                <input type="hidden" name="id" value="<?php echo (int)$acl_id; ?>" />
+                <input class="button primary btn btn-primary" type="submit" name="del" value="<?php echo $this->translate("delete"); ?>" />
+                <input class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" type="submit" name="abort" value="<?php echo $this->translate("cancel"); ?>" />
+            </div>
+        </form>
+    </div>
 </div>
-	
+    
 */

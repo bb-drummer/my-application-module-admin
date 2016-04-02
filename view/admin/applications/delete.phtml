@@ -7,24 +7,24 @@ $oComponents = $this->Components();
 $oUser = $this->zfcUserIdentity();
 
 if ($showForm) {
-	$url = $this->url('admin/applicationsedit', array(
-		'action'	 => 'delete',
-		'application_id'	 => $applications->application_id,
-	));
-	$formHTML = array(
-		'<p>'.$this->translate("Do you really want to delete this application?").'</p>',
-		'<p>'.
-			'&quot;'.$this->escapeHtml($applications->name).'&quot;, '.
-				'&quot;'.$this->escapeHtml($applications->shortname).'&quot; - '.
-				'&quot;'.$this->escapeHtml($applications->getClient()->name).'&quot;'.
-		'</p>',
-		'<form action="'.$url.'" method="post" class="form-xhr">'.
-			'<div>'.
-				'<input type="hidden" name="id" value="'.((int) $applications->application_id).'" />'.
-				'<input class="button primary btn btn-primary" type="submit" name="del" value="'.$this->translate("delete").'" />'.
-				'<a class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'.$this->url('admin/applicationsedit').'">'.$this->translate("cancel").'</a>'.
-			'</div>'.
-		'</form>'
-	);
-	echo implode("", $formHTML);
+    $url = $this->url('admin/applicationsedit', array(
+        'action'     => 'delete',
+        'application_id'     => $applications->application_id,
+    ));
+    $formHTML = array(
+        '<p>'.$this->translate("Do you really want to delete this application?").'</p>',
+        '<p>'.
+            '&quot;'.$this->escapeHtml($applications->name).'&quot;, '.
+                '&quot;'.$this->escapeHtml($applications->shortname).'&quot; - '.
+                '&quot;'.$this->escapeHtml($applications->getClient()->name).'&quot;'.
+        '</p>',
+        '<form action="'.$url.'" method="post" class="form-xhr">'.
+            '<div>'.
+                '<input type="hidden" name="id" value="'.((int) $applications->application_id).'" />'.
+                '<input class="button primary btn btn-primary" type="submit" name="del" value="'.$this->translate("delete").'" />'.
+                '<a class="button alert btn btn-danger btn-cta-xhr cta-xhr-modal-close" href="'.$this->url('admin/applicationsedit').'">'.$this->translate("cancel").'</a>'.
+            '</div>'.
+        '</form>'
+    );
+    echo implode("", $formHTML);
 } 
