@@ -139,7 +139,7 @@ class ZfcuserController extends UserController
 
         $toolbarItems = $this->getToolbarItem($action);
         if ($toolbarItems) {
-            $toolbarNav = $serviceManager->get('toolbarnavigation');
+            $toolbarNav = $serviceManager->get('componentnavigationhelper');
             $toolbarNav->addPages($toolbarItems);
         }
         
