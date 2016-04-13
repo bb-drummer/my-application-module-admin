@@ -22,8 +22,18 @@ use Admin\Form\ClientsForm;
 
 class ClientsController extends BaseActionController
 {
-    protected $clientsTable;
+	
+	/**
+	 * @var \Admin\Model\ClientsTable
+	 */
+	protected $clientsTable;
     
+    /**
+     * initialize titles and toolbar items
+     * 
+     * {@inheritDoc}
+     * @see \Zend\Mvc\Controller\AbstractActionController::onDispatch()
+     */
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
         $this->setToolbarItems(
@@ -51,11 +61,15 @@ class ClientsController extends BaseActionController
         return parent::onDispatch($e);
     }
 
+    /**
+     * list clients in a table
+     * @return \Zend\View\Model\ViewModel
+     */ 
     public function indexAction() 
     {
         $tmplVars = $this->getTemplateVars();
         $aClientslist = $this->getClientsTable()->fetchAll();
-        if ($this->getRequest()->isXmlHttpRequest() ) {
+        if ( $this->isXHR() ) {
             $datatablesData = array('data' => $aClientslist->toArray());
             $oController = $this;
             $datatablesData['data'] = array_map(
@@ -83,6 +97,10 @@ class ClientsController extends BaseActionController
         );
     }
     
+    /**
+     * add client entry
+     * @return \Zend\View\Model\ViewModel
+     */
     public function addAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -105,7 +123,7 @@ class ClientsController extends BaseActionController
                 $clients->exchangeArray($form->getData());
                 $this->getClientsTable()->saveClients($clients);
                 $this->flashMessenger()->addSuccessMessage($this->translate('client has been saved'));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/clientsedit', array('action' => 'index'));
@@ -117,6 +135,10 @@ class ClientsController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
+    /**
+     * edit client entry
+     * @return \Zend\View\Model\ViewModel
+     */
     public function editAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -153,7 +175,7 @@ class ClientsController extends BaseActionController
             if ($form->isValid()) {
                 $this->getClientsTable()->saveClients($clients);
                 $this->flashMessenger()->addSuccessMessage($this->translate("client has been saved"));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/clientsedit', array('action' => 'index'));
@@ -167,6 +189,10 @@ class ClientsController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
+    /**
+     * delete client entry
+     * @return \Zend\View\Model\ViewModel
+     */
     public function deleteAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -199,7 +225,7 @@ class ClientsController extends BaseActionController
                 $id = (int) $request->getPost('id');
                 $this->getClientsTable()->deleteClients($id);
                 $this->flashMessenger()->addSuccessMessage($this->translate("client has been deleted"));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/clientsedit', array('action' => 'index'));
@@ -211,6 +237,7 @@ class ClientsController extends BaseActionController
     }
 
     /**
+     * retrieve client entry table
      * @return Admin\Model\ClientsTable
      */
     public function getClientsTable()

@@ -13,9 +13,6 @@
  * @copyright copyright (c) 2016 Björn Bartels <coding@bjoernbartels.earth>
  */
 
-/**
- * overrides to ZFC-User's own 'user'-controller
- */
 
 namespace Admin\Controller;
 
@@ -36,41 +33,64 @@ use ZfcUser\Controller\UserController;
 use Zend\View\Model\ViewModel;
 use Zend\Mvc\MvcEvent;
 
+use Application\Controller\Traits\ControllerTranslatorTrait;
+use Application\Controller\Traits\ControllerActiontitlesTrait;
+use Application\Controller\Traits\ControllerToolbarTrait;
+use ZfcUser\Controller\Plugin\ZfcUserAuthentication;
+
+/**
+ * overrides to ZFC-User's own 'user'-controller
+ * 
+ * @method \ZfcUserAuthentication zfcUserAuthentication()
+ */
 class ZfcuserController extends UserController
 {
-    
+	use ControllerTranslatorTrait;
+	use ControllerActiontitlesTrait;
+	use ControllerToolbarTrait;
+	
+    /**
+     * 
+     * @var \Admin\Model\AclroleTable
+     */
     protected $aclroleTable;
     
+    /**
+     * 
+     * @var \Admin\Model\UserTable
+     */
     protected $userTable;
     
-    protected $translator;
-
-    protected $actionTitles = array();
-
-    protected $toolbarItems = array();
-    
+    /**
+     * set current action titles
+     * @return self
+     */
     public function defineActionTitles() 
     {
         $this->setActionTitles(
             array(
-            'login'                    => $this->translate("login"),
-            'authenticate'            => $this->translate("login"),
-            'logout'                => $this->translate("logout"),
-            'register'                => $this->translate("register user"),
-            'requestpasswordreset'    => $this->translate("reset password"),
-            'changeemail'            => $this->translate("change email"),
-            'changepassword'        => $this->translate("change password"),
-            'resetpassword'            => $this->translate("reset password"),
-            'userdata'                => $this->translate("userdata"),
-            'edituserdata'            => $this->translate("edit userdata"),
-            'userprofile'            => $this->translate("user profile"),
-            'index'                    => $this->translate("user profile"),
-            'edituserprofile'        => $this->translate("edit profile"),
+                'login'                 => $this->translate("login"),
+                'authenticate'          => $this->translate("login"),
+                'logout'                => $this->translate("logout"),
+                'register'              => $this->translate("register user"),
+                'requestpasswordreset'  => $this->translate("reset password"),
+                'changeemail'           => $this->translate("change email"),
+                'changepassword'        => $this->translate("change password"),
+                'resetpassword'         => $this->translate("reset password"),
+                'userdata'              => $this->translate("userdata"),
+                'edituserdata'          => $this->translate("edit userdata"),
+                'userprofile'           => $this->translate("user profile"),
+                'index'                 => $this->translate("user profile"),
+                'edituserprofile'       => $this->translate("edit profile"),
             )
         );
         return $this;
     }
 
+    /**
+     * set current toolbar items
+     * @return self
+     */
     public function defineToolbarItems() 
     {
         $this->setToolbarItems(
@@ -113,9 +133,9 @@ class ZfcuserController extends UserController
             array(
                 'label'         => 'logout',
                 'icon'            => 'power-off',
-            'class'            => 'button btn btn-default small btn-sm',
-            'route'            => 'zfcuser/logout',
-            'resource'        => 'mvc:user',
+                'class'            => 'button btn btn-default small btn-sm',
+                'route'            => 'zfcuser/logout',
+                'resource'        => 'mvc:user',
             ),
             ),
             )
@@ -123,11 +143,17 @@ class ZfcuserController extends UserController
         return $this;
     }
 
+    /**
+     * initialize titles and toolbar items
+     * 
+     * {@inheritDoc}
+     * @see \Zend\Mvc\Controller\AbstractActionController::onDispatch()
+     */
     public function onDispatch(MvcEvent $e)
     {
         /**
- * @var $serviceManager \Zend\ServiceManager\ServiceManager 
-*/
+         * @var $serviceManager \Zend\ServiceManager\ServiceManager 
+         */
         $serviceManager = $this->getServiceLocator();
         
         \Zend\Navigation\Page\Mvc::setDefaultRouter($serviceManager->get('router'));
@@ -197,7 +223,6 @@ class ZfcuserController extends UserController
                 "toolbarItems" => $this->getToolbarItems(),
             )
         );
-        //return $this->redirect()->toRoute("admin/userprofile");
     }
 
     /**
@@ -337,9 +362,12 @@ class ZfcuserController extends UserController
 
         $config        = $this->getServiceLocator()->get('Config');
         $options    = $this->getServiceLocator()->get('zfcuser_module_options');
+        /**
+         * @var \Zend\Http\PhpEnvironment\Request|\Zend\Http\Request $request
+         */
         $request    = $this->getRequest();
         $service    = $this->getUserService();
-        $form        = new RequestPasswordResetForm(null, $options); // $this->getRegisterForm();
+        $form        = new RequestPasswordResetForm(null, $options);
         $translator    = $this->getTranslator();
         
         // if password reset is disabled
@@ -355,7 +383,7 @@ class ZfcuserController extends UserController
 
         $redirectUrl = $this->url()->fromRoute('userrequestpasswordreset') . ($redirect ? '?redirect=' . rawurlencode($redirect) : '');
         
-        if (!$this->getRequest()->isPost()) {
+        if (!$request->isPost()) {
             return array(
             'requestPasswordResetForm' => $form,
             'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
@@ -391,7 +419,7 @@ class ZfcuserController extends UserController
                     $user = $userMapper->findByEmail($selectedUser->email);
                 }
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
         
         if (!$user) {
@@ -429,9 +457,12 @@ class ZfcuserController extends UserController
 
         $config        = $this->getServiceLocator()->get('Config');
         $options    = $this->getServiceLocator()->get('zfcuser_module_options');
+        /**
+         * @var \Zend\Http\PhpEnvironment\Request|\Zend\Http\Request $request
+         */
         $request    = $this->getRequest();
         $service    = $this->getUserService();
-        $form        = new ResetPasswordForm(null, $options); // $this->getRegisterForm();
+        $form        = new ResetPasswordForm(null, $options);
         $translator    = $this->getTranslator();
         
         // if password reset is disabled
@@ -447,7 +478,7 @@ class ZfcuserController extends UserController
 
         $redirectUrl = $this->url()->fromRoute(static::ROUTE_LOGIN) . ($redirect ? '?redirect=' . rawurlencode($redirect) : '');
         
-        if (!$this->getRequest()->isPost() ) {
+        if (!$request->isPost() ) {
             
             $user = false;
             $userId = (int) $this->params()->fromRoute('user_id');
@@ -456,7 +487,7 @@ class ZfcuserController extends UserController
             try {
                 $userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
                 $user = $userTable->findById($userId);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
             }
             
             if (!$user ) {
@@ -478,7 +509,7 @@ class ZfcuserController extends UserController
                 'userId' => $userId,
                 'resetToken' => $resetToken,
                 'resetPasswordForm' => $form,
-                'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'], // $this->getOptions()->getEnablePasswordreset(),
+                'enablePasswordReset' => !!$config['zfcuser']['enable_passwordreset'],
                 'redirect' => $redirect,
             );
             
@@ -558,11 +589,14 @@ class ZfcuserController extends UserController
             return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
         }
         
-        $config        = $this->getServiceLocator()->get('Config');
+        $config     = $this->getServiceLocator()->get('Config');
         $options    = $this->getServiceLocator()->get('zfcuser_module_options');
+        /**
+         * @var \Zend\Http\PhpEnvironment\Request|\Zend\Http\Request $request
+         */
         $request    = $this->getRequest();
         $service    = $this->getUserService();
-        $translator    = $this->getTranslator();
+        $translator = $this->getTranslator();
 
         return $this->redirect()->toRoute("zfcuser");
     }
@@ -579,22 +613,8 @@ class ZfcuserController extends UserController
             return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
         }
         
-        /*$config        = $this->getServiceLocator()->get('Config');
-        $options    = $this->getServiceLocator()->get('zfcuser_module_options');
-        $request    = $this->getRequest();
-        $service    = $this->getUserService();*/
-
         $form        = new UserDataForm();
         $translator    = $this->getTranslator();
-        
-        /*$oRolesTable = $this->getServiceLocator()->get("Admin\Model\AclroleTable");
-        $aRoles = $oRolesTable->fetchAll()->toArray();
-        $aRoleOptions = array();
-        foreach ($aRoles as $key => $role) {
-        $aRoleOptions[$role['roleslug']] = $role['rolename'];
-        }
-        $form->get('aclrole')->setAttribute('options', $aRoleOptions);*/
-        
         
         /**
          * @var \Admin\Entity\User $oIdentity 
@@ -681,14 +701,12 @@ class ZfcuserController extends UserController
             return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
         }
         
-        /*$config        = $this->getServiceLocator()->get('Config');
-        $options    = $this->getServiceLocator()->get('zfcuser_module_options');
-        $request    = $this->getRequest();
-        $service    = $this->getUserService();*/
-        
         $form        = new UserProfileForm();
         $translator    = $this->getTranslator();
-        
+        /**
+         * @var \Zend\Http\PhpEnvironment\Request|\Zend\Http\Request $request
+         */
+        $request    = $this->getRequest();
         $user        = $this->zfcUserAuthentication()->getIdentity();
         $userId        = (int) $user->getId();
         $profile    = new UserProfile;
@@ -730,7 +748,7 @@ class ZfcuserController extends UserController
                 $translator->translate("user profile data has been changed")
             );
             
-            if ($this->getRequest()->isXmlHttpRequest() ) {
+            if ($request->isXmlHttpRequest() ) {
                 $response = array(
                     'showForm'          => false,
                     'user'                => $user,
@@ -745,112 +763,7 @@ class ZfcuserController extends UserController
         
     }
     
-    /**
-     * @param string $translator
-     * @param string $textdomain
-     * @param string $locale
-     */
-    public function translate($message, $textdomain = 'default', $locale = null) 
-    {
-        return ( $this->getTranslator()->translate($message, $textdomain, $locale) );
-    }
-    
-    /**
-     * @return the $translator
-     */
-    public function getTranslator() 
-    {
-        if (!$this->translator) {
-            $this->setTranslator($this->getServiceLocator()->get('translator'));
-        }
-        return $this->translator;
-    }
 
-    /**
-     * @param field_type $translator
-     */
-    public function setTranslator($translator) 
-    {
-        $this->translator = $translator;
-    }
-    
-    
-    // //    action titles
-    
-    /**
-     * @return the $actionTitles
-     */
-    public function getActionTitles() 
-    {
-        return $this->actionTitles ;
-    }
-
-    /**
-     * @param array $actionTitles
-     */
-    public function setActionTitles($actionTitles = array()) 
-    {
-        $this->actionTitles = $actionTitles;
-        return $this;
-    }
-
-    /**
-     * @return the $actionTitles
-     */
-    public function getActionTitle($action) 
-    {
-        return ($this->actionTitles[$action] ?: '');
-    }
-    
-    /**
-     * @param string $action
-     * @param string $title
-     */
-    public function setActionTitle($action, $title) 
-    {
-        $this->actionTitles[$action] = $title;
-        return $this;
-    }
-    
-    
-    // //    toolbar items
-
-    /**
-     * @return the $toolbarItems
-     */
-    public function getToolbarItems() 
-    {
-        return $this->toolbarItems ;
-    }
-    
-    /**
-     * @param array $toolbarItems
-     */
-    public function setToolbarItems($toolbarItems = array()) 
-    {
-        $this->toolbarItems = $toolbarItems;
-        return $this;
-    }
-    
-    /**
-     * @return the $actionTitles
-     */
-    public function getToolbarItem($action) 
-    {
-        return (isset($this->toolbarItems[$action]) ? $this->toolbarItems[$action] : null);
-    }
-    
-    /**
-     * @param string $action
-     * @param string $title
-     */
-    public function setToolbarItem($action, $item) 
-    {
-        $this->toolbarItems[$action] = $item;
-        return $this;
-    }
-    
-    
     // // db mappers
 
     

@@ -31,10 +31,28 @@ use Zend\View\Model\ViewModel;
 
 class AclController extends BaseActionController
 {
-    protected $AclTable;
-    protected $AclroleTable;
-    protected $AclresourceTable;
+	
+	/**
+	 * @var \Admin\Model\AclTable
+	 */
+	protected $AclTable;
+	
+	/**
+	 * @var \Admin\Model\AclroleTable
+	 */
+	protected $AclroleTable;
+	
+	/**
+	 * @var \Admin\Model\AclresourceTable
+	 */
+	protected $AclresourceTable;
 
+    /**
+     * initialize titles and toolbar items
+     * 
+     * {@inheritDoc}
+     * @see \Zend\Mvc\Controller\AbstractActionController::onDispatch()
+     */
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
         $this->setToolbarItems(
@@ -162,7 +180,11 @@ class AclController extends BaseActionController
         return parent::onDispatch($e);
     }
 
-    // list actions 
+    /**
+     * list acl
+     * {@inheritDoc}
+     * @see \Zend\Mvc\Controller\AbstractActionController::indexAction()
+     */
     public function indexAction()
     {
         return new ViewModel(
@@ -176,24 +198,22 @@ class AclController extends BaseActionController
         );
     }
 
-    // list actions 
+    /**
+     * list acl in a table
+     * @return \Zend\View\Model\ViewModel
+     */ 
     public function acllistAction()
     {
-        return new ViewModel(
-            array(
-                'acldata' => $this->getAclTable()->fetchAll(),
-                'acltable' => $this->getAclTable(),
-                'roles' => $this->getAclroleTable()->fetchAll()->toArray(),
-                'resources' => $this->getAclresourceTable()->fetchAll()->toArray(),
-                'form' => new AclmatrixForm(),
-            )
-        );
+        return $this->indexAction();
     }
 
-    // list actions 
+    /**
+     * list acl in json
+     * @return mixed|\Zend\Http\Response
+     */
     public function acldataAction()
     {
-        if ($this->getRequest()->isXmlHttpRequest() ) {
+        if ( $this->isXHR() ) {
             $roles = $this->getAclroleTable()->fetchAll()->toArray();
             $resources = $this->getAclresourceTable()->fetchAll()->toArray();
             $acls = array();
@@ -243,10 +263,14 @@ class AclController extends BaseActionController
         return $this->redirect()->toRoute('admin/acledit', array());
     }
 
+    /**
+     * list roles
+     * @return \Zend\View\Model\ViewModel
+     */
     public function rolesAction()
     {
 
-        if ($this->getRequest()->isXmlHttpRequest() ) {
+        if ( $this->isXHR() ) {
             $datatablesData = array('data' => $this->getAclroleTable()->fetchAll()->toArray());
             $oController = $this;
             $datatablesData['data'] = array_map(
@@ -276,9 +300,13 @@ class AclController extends BaseActionController
         );
     }
 
+    /**
+     * list resources
+     * @return \Zend\View\Model\ViewModel
+     */
     public function resourcesAction()
     {
-        if ($this->getRequest()->isXmlHttpRequest() ) {
+        if ( $this->isXHR() ) {
             $datatablesData = array('data' => $this->getAclresourceTable()->fetchAll()->toArray());
             $oController = $this;
             $datatablesData['data'] = array_map(
@@ -308,8 +336,10 @@ class AclController extends BaseActionController
         );
     }
 
-    
-    // acl actions 
+    /**
+     * add acl entry
+     * @return \Zend\View\Model\ViewModel
+     */
     public function addaclAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -320,8 +350,6 @@ class AclController extends BaseActionController
             'showForm' => true,
             )
         );
-        $this->layout()->setVariable('title', $this->translate("add permission"));
-        //if (!class_exists('\Admin\Form\AclForm')) { require_once __DIR__ . '/../Form/AclForm.php'; }
         $form = new AclForm();
 
         $roles = $this->getAclroleTable()->fetchAll()->toArray();
@@ -329,14 +357,22 @@ class AclController extends BaseActionController
         foreach ($roles as $role) {
             $valueoptions[$role["aclroles_id"]] = $role["rolename"];
         }
-        $form->get('aclroles_id')->setValueOptions($valueoptions);
+        /**
+         * @var \Zend\Form\Element\Select $selectRoles
+         */
+        $selectRoles = $form->get('aclroles_id');
+        $selectRoles->setValueOptions($valueoptions);
         
         $resources = $this->getAclresourceTable()->fetchAll()->toArray();
         $valueoptions = array();
         foreach ($resources as $resource) {
             $valueoptions[$resource["aclresources_id"]] = $resource["resourcename"];
         }
-        $form->get('aclresources_id')->setValueOptions($valueoptions);
+        /**
+         * @var \Zend\Form\Element\Select $selectResources
+         */
+        $selectResources = $form->get('aclresources_id');
+        $selectResources->setValueOptions($valueoptions);
         
         $request = $this->getRequest();
         $Acl = new Acl();
@@ -352,7 +388,7 @@ class AclController extends BaseActionController
                 
                 // Redirect to list of Acl
                 $this->flashMessenger()->addSuccessMessage($this->translate("permission has been saved"));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/acledit', array());
@@ -364,6 +400,10 @@ class AclController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
+    /**
+     * edit acl entry
+     * @return \Zend\View\Model\ViewModel
+     */
     public function editaclAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -374,7 +414,6 @@ class AclController extends BaseActionController
             'showForm' => true,
             )
         );
-        $this->layout()->setVariable('title', $this->translate("change permission"));
         $id = (int) $this->params()->fromRoute('acl_id', 0);
         if (!$id) {
             $this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -399,14 +438,22 @@ class AclController extends BaseActionController
         foreach ($roles as $role) {
             $valueoptions[$role["aclroles_id"]] = $role["rolename"];
         }
-        $form->get('aclroles_id')->setValueOptions($valueoptions);
+        /**
+         * @var \Zend\Form\Element\Select $selectRoles
+         */
+        $selectRoles = $form->get('aclroles_id');
+        $selectRoles->setValueOptions($valueoptions);
         
         $resources = $this->getAclresourceTable()->fetchAll()->toArray();
         $valueoptions = array();
         foreach ($resources as $resource) {
             $valueoptions[$resource["aclresources_id"]] = $resource["resourcename"];
         }
-        $form->get('aclresources_id')->setValueOptions($valueoptions);
+        /**
+         * @var \Zend\Form\Element\Select $selectResources
+         */
+        $selectResources = $form->get('aclresources_id');
+        $selectResources->setValueOptions($valueoptions);
         
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -420,7 +467,7 @@ class AclController extends BaseActionController
                 
                 // Redirect to list of Acl
                 $this->flashMessenger()->addSuccessMessage($this->translate("permission has been saved"));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/acledit', array());
@@ -434,6 +481,10 @@ class AclController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
+    /**
+     * delete acl entry
+     * @return \Zend\View\Model\ViewModel
+     */
     public function deleteaclAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -444,7 +495,6 @@ class AclController extends BaseActionController
             'showForm' => true,
             )
         );
-        $this->layout()->setVariable('title', $this->translate("delete permission"));
         $id = (int) $this->params()->fromRoute('acl_id', 0);
         if (!$id) {
             $this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -472,7 +522,7 @@ class AclController extends BaseActionController
             }
 
             // Redirect to list of albums
-            if ($this->getRequest()->isXmlHttpRequest() ) {
+            if ( $this->isXHR() ) {
                 $tmplVars["showForm"] = false;
             } else {
                 return $this->redirect()->toRoute('admin/acledit', array());
@@ -482,8 +532,10 @@ class AclController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
-    
-    // role actions 
+    /**
+     * add role item
+     * @return \Zend\View\Model\ViewModel
+     */
     public function addroleAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -494,7 +546,6 @@ class AclController extends BaseActionController
             'showForm' => true,
             )
         );
-        $this->layout()->setVariable('title', $this->translate("add role"));
         $form = new AclroleForm();
 
         $request = $this->getRequest();
@@ -511,7 +562,7 @@ class AclController extends BaseActionController
                 
                 // Redirect to list of Acl
                 $this->flashMessenger()->addSuccessMessage($this->translate("role has been saved"));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/acledit', array('action' => 'roles'));
@@ -524,9 +575,12 @@ class AclController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
+    /**
+     * edit role item
+     * @return \Zend\View\Model\ViewModel
+     */
     public function editroleAction()
     {
-        $this->layout()->setVariable('title', $this->translate("edit role"));
         $tmplVars = $this->getTemplateVars( 
             array(
             'acldata' => $this->getAclTable()->fetchAll(),
@@ -562,7 +616,7 @@ class AclController extends BaseActionController
                 
                 // Redirect to list of Acl
                 $this->flashMessenger()->addSuccessMessage($this->translate("role has been saved"));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/acledit', array('action' => 'roles'));
@@ -577,6 +631,10 @@ class AclController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
+    /**
+     * delete role item
+     * @return \Zend\View\Model\ViewModel
+     */
     public function deleteroleAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -587,7 +645,6 @@ class AclController extends BaseActionController
             'showForm' => true,
             )
         );
-        $this->layout()->setVariable('title', $this->translate("delete role"));
         $id = (int) $this->params()->fromRoute('acl_id', 0);
         if (!$id) {
             $this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -615,7 +672,7 @@ class AclController extends BaseActionController
             }
 
             // Redirect to list of albums
-            if ($this->getRequest()->isXmlHttpRequest() ) {
+            if ( $this->isXHR() ) {
                 $tmplVars["showForm"] = false;
             } else {
                 return $this->redirect()->toRoute('admin/acledit', array('action' => 'roles'));
@@ -627,8 +684,10 @@ class AclController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
-    
-    // resource actions 
+    /**
+     * add resource item
+     * @return \Zend\View\Model\ViewModel
+     */
     public function addresourceAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -639,7 +698,6 @@ class AclController extends BaseActionController
             'showForm' => true,
             )
         );
-        $this->layout()->setVariable('title', $this->translate("add resource"));
         $form = new AclresourceForm();
 
         $request = $this->getRequest();
@@ -656,7 +714,7 @@ class AclController extends BaseActionController
                 
                 // Redirect to list of Acl
                 $this->flashMessenger()->addSuccessMessage($this->translate("resource has been saved"));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/acledit', array('action' => 'resources'));
@@ -669,6 +727,10 @@ class AclController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
+    /**
+     * edit resource item
+     * @return \Zend\View\Model\ViewModel
+     */
     public function editresourceAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -679,7 +741,6 @@ class AclController extends BaseActionController
             'showForm' => true,
             )
         );
-        $this->layout()->setVariable('title', $this->translate("edit resource"));
         $id = (int) $this->params()->fromRoute('acl_id', 0);
         if (!$id) {
             $this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -707,14 +768,14 @@ class AclController extends BaseActionController
                 
                 // Redirect to list of Acl
                 $this->flashMessenger()->addSuccessMessage($this->translate("resource has been saved"));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/acledit', array('action' => 'resources'));
                 }
             }
         } else {
-            $form->bind($Aclresource); //->getArrayCopy());
+            $form->bind($Aclresource);
         }
         $tmplVars["acl_id"] = $id;
         $tmplVars["aclresource"] = $Aclresource;
@@ -723,6 +784,10 @@ class AclController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
+    /**
+     * delete resource item
+     * @return \Zend\View\Model\ViewModel
+     */
     public function deleteresourceAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -733,7 +798,6 @@ class AclController extends BaseActionController
             'showForm' => true,
             )
         );
-        $this->layout()->setVariable('title', $this->translate("delete resource"));
         $id = (int) $this->params()->fromRoute('acl_id', 0);
         if (!$id) {
             $this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -761,7 +825,7 @@ class AclController extends BaseActionController
             }
             
             // Redirect to list of albums
-            if ($this->getRequest()->isXmlHttpRequest() ) {
+            if ( $this->isXHR() ) {
                 $tmplVars["showForm"] = false;
             } else {
                 return $this->redirect()->toRoute('admin/acledit', array('action' => 'resources'));
@@ -772,17 +836,23 @@ class AclController extends BaseActionController
         return new ViewModel($tmplVars);
     }
     
+    /**
+     * re-initialize, respectively clear ACL cache entries
+     * @return self
+     */
     private function reinitACLCache () {
         if ( \Application\Module::getService('CacheService') ) {
             \Application\Module::getService('CacheService')->removeItem('ACL');
             \Admin\Module::initACL($this->getServiceLocator());
         }
+        return ($this);
     }
 
     
     // table getters
     
     /**
+     * retrieve ACL entry table
      * @return Admin\Model\AclTable
      */
     public function getAclTable()
@@ -795,6 +865,7 @@ class AclController extends BaseActionController
     }
 
     /**
+     * retrieve role item table
      * @return Admin\Model\AclroleTable
      */
     public function getAclroleTable()
@@ -807,6 +878,7 @@ class AclController extends BaseActionController
     }
 
     /**
+     * retrieve resource item table
      * @return Admin\Model\AclresourceTable
      */
     public function getAclresourceTable()

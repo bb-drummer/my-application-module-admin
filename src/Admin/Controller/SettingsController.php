@@ -22,8 +22,18 @@ use Admin\Form\SettingsForm;
 
 class SettingsController extends BaseActionController
 {
+	
+	/**
+	 * @var \Admin\Model\SettingsTable
+	 */
     protected $settingsTable;
     
+    /**
+     * initialize titles and toolbar items
+     * 
+     * {@inheritDoc}
+     * @see \Zend\Mvc\Controller\AbstractActionController::onDispatch()
+     */
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
         $this->setToolbarItems(
@@ -51,11 +61,15 @@ class SettingsController extends BaseActionController
         return parent::onDispatch($e);
     }
 
+    /**
+     * list settings in a table
+     * @return \Zend\View\Model\ViewModel
+     */ 
     public function indexAction() 
     {
         $tmplVars = $this->getTemplateVars();
         $aSettingslist = $this->getSettingsTable()->fetchAll();
-        if ($this->getRequest()->isXmlHttpRequest() ) {
+        if ( $this->isXHR() ) {
             $datatablesData = array('data' => $aSettingslist->toArray());
             $oController = $this;
             $datatablesData['data'] = array_map(
@@ -83,6 +97,10 @@ class SettingsController extends BaseActionController
         );
     }
     
+    /**
+     * add setting entry
+     * @return \Zend\View\Model\ViewModel
+     */
     public function addAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -105,7 +123,7 @@ class SettingsController extends BaseActionController
                 $settings->exchangeArray($form->getData());
                 $this->getSettingsTable()->saveSettings($settings);
                 $this->flashMessenger()->addSuccessMessage($this->translate('setting has been saved'));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/settingsedit', array('action' => 'index'));
@@ -117,6 +135,10 @@ class SettingsController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
+    /**
+     * edit setting entry
+     * @return \Zend\View\Model\ViewModel
+     */
     public function editAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -153,7 +175,7 @@ class SettingsController extends BaseActionController
             if ($form->isValid()) {
                 $this->getSettingsTable()->saveSettings($settings);
                 $this->flashMessenger()->addSuccessMessage($this->translate("setting has been saved"));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/settingsedit', array('action' => 'index'));
@@ -167,6 +189,10 @@ class SettingsController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
+    /**
+     * delete setting entry
+     * @return \Zend\View\Model\ViewModel
+     */
     public function deleteAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -199,7 +225,7 @@ class SettingsController extends BaseActionController
                 $id = (int) $request->getPost('id');
                 $this->getSettingsTable()->deleteSettings($id);
                 $this->flashMessenger()->addSuccessMessage($this->translate("setting has been deleted"));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/settingsedit', array('action' => 'index'));
@@ -211,7 +237,8 @@ class SettingsController extends BaseActionController
     }
 
     /**
-     * @return Admin\Model\SettingsTable
+     * retrieve setting entry table
+     * @return \Admin\Model\SettingsTable
      */
     public function getSettingsTable()
     {

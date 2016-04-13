@@ -22,9 +22,23 @@ use Admin\Form\ApplicationsForm;
 
 class ApplicationsController extends BaseActionController
 {
-    protected $clientsTable;
-    protected $applicationsTable;
+	
+	/**
+	 * @var \Admin\Model\ClientsTable
+	 */
+	protected $clientsTable;
+	
+	/**
+	 * @var \Admin\Model\ApplicationsTable
+	 */
+	protected $applicationsTable;
     
+    /**
+     * initialize titles and toolbar items
+     * 
+     * {@inheritDoc}
+     * @see \Zend\Mvc\Controller\AbstractActionController::onDispatch()
+     */
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
         $this->setToolbarItems(
@@ -52,13 +66,17 @@ class ApplicationsController extends BaseActionController
         return parent::onDispatch($e);
     }
 
+    /**
+     * list applications in a table
+     * @return \Zend\View\Model\ViewModel
+     */ 
     public function indexAction() 
     {
         $oController = $this;
         $tmplVars = $this->getTemplateVars();
         /**
- * @var \Zend\Db\Adapter\Driver\Pdo\Result $aApplicationslist 
-*/
+         * @var \Zend\Db\Adapter\Driver\Pdo\Result $aApplicationslist 
+         */
         $aApplicationslist = $this->getApplicationsTable()->fetchAllFull();
 
         $data = array();
@@ -67,7 +85,7 @@ class ApplicationsController extends BaseActionController
             $data[] = $row;
             $dataObj[] = (object)$row;
         }
-        if ($this->getRequest()->isXmlHttpRequest() ) {
+        if ( $this->isXHR() ) {
             $datatablesData = array('data' => $data);
             $datatablesData['data'] = array_map(
                 function ($row) use ($oController) {
@@ -94,6 +112,10 @@ class ApplicationsController extends BaseActionController
         );
     }
     
+    /**
+     * add application entry
+     * @return \Zend\View\Model\ViewModel
+     */
     public function addAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -124,7 +146,7 @@ class ApplicationsController extends BaseActionController
                 $applications->exchangeArray($form->getData());
                 $this->getApplicationsTable()->saveApplication($applications);
                 $this->flashMessenger()->addSuccessMessage($this->translate('application has been saved'));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/applicationsedit', array('action' => 'index'));
@@ -136,6 +158,10 @@ class ApplicationsController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
+    /**
+     * edit application entry
+     * @return \Zend\View\Model\ViewModel
+     */
     public function editAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -180,7 +206,7 @@ class ApplicationsController extends BaseActionController
             if ($form->isValid()) {
                 $this->getApplicationsTable()->saveApplication($applications);
                 $this->flashMessenger()->addSuccessMessage($this->translate("application has been saved"));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/applicationsedit', array('action' => 'index'));
@@ -194,6 +220,10 @@ class ApplicationsController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
+    /**
+     * delete application entry
+     * @return \Zend\View\Model\ViewModel
+     */
     public function deleteAction()
     {
         $tmplVars = $this->getTemplateVars( 
@@ -225,7 +255,7 @@ class ApplicationsController extends BaseActionController
                 $id = (int) $request->getPost('id');
                 $this->getApplicationsTable()->deleteApplication($id);
                 $this->flashMessenger()->addSuccessMessage($this->translate("application has been deleted"));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/applicationsedit', array('action' => 'index'));
@@ -237,6 +267,7 @@ class ApplicationsController extends BaseActionController
     }
 
     /**
+     * retrieve application entry table
      * @return Admin\Model\ApplicationsTable
      */
     public function getApplicationsTable()
@@ -249,6 +280,7 @@ class ApplicationsController extends BaseActionController
     }
 
     /**
+     * retrieve client entry table
      * @return Admin\Model\ClientsTable
      */
     public function getClientsTable()

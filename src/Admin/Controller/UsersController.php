@@ -25,9 +25,23 @@ use Admin\Model\AclroleTable;
 
 class UsersController extends BaseActionController
 {
-    protected $userTable;
-    protected $AclroleTable;
+	
+	/**
+	 * @var \Admin\Model\UserTable
+	 */
+	protected $userTable;
+	
+	/**
+	 * @var \Admin\Model\AclroleTable
+	 */
+	protected $AclroleTable;
 
+    /**
+     * initialize titles and toolbar items
+     * 
+     * {@inheritDoc}
+     * @see \Zend\Mvc\Controller\AbstractActionController::onDispatch()
+     */
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
         $this->setToolbarItems(
@@ -56,11 +70,15 @@ class UsersController extends BaseActionController
         return parent::onDispatch($e);
     }
 
+    /**
+     * list users in a table
+     * @return \Zend\View\Model\ViewModel
+     */ 
     public function indexAction()
     {
         $tmplVars = $this->getTemplateVars();
         $aUserlist = $this->getUserTable()->fetchAll();
-        if ($this->getRequest()->isXmlHttpRequest() ) {
+        if ( $this->isXHR() ) {
             $datatablesData = array('data' => $aUserlist->toArray());
             $oController = $this;
             $datatablesData['data'] = array_map(
@@ -89,28 +107,22 @@ class UsersController extends BaseActionController
         );
     }
 
-    public function setButtons($row)
-    {
-        $actions = '';
-        $row['_action_'] = $actions;
-        return $row;
-    }
-
+    /**
+     * add user entry
+     * @return \Zend\View\Model\ViewModel
+     */
     public function addAction()
     {
         $tmplVars = $this->getTemplateVars( 
             array(
             'showForm'    => true,
-            //'title'        => $this->translate("add user")
             )
         );
-        //$this->layout()->setVariable('title', $this->translate("add user"));
         $form = new UserForm();
 
         $roles = $this->getAclroleTable()->fetchAll()->toArray();
         $valueoptions = array();
         foreach ($roles as $role) {
-            //$valueoptions[$role["aclroles_id"]] = $role["rolename"];
             $valueoptions[$role["roleslug"]] = $role["rolename"];
         }
         $form->get('aclrole')->setValueOptions($valueoptions);
@@ -125,7 +137,7 @@ class UsersController extends BaseActionController
                 $user->exchangeArray($form->getData());
                 $this->getUserTable()->saveUser($user);
                 $this->flashMessenger()->addSuccessMessage($this->translate("user has been saved"));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/default', array('controller' => 'users'));
@@ -138,15 +150,17 @@ class UsersController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
+    /**
+     * edit user entry
+     * @return \Zend\View\Model\ViewModel
+     */
     public function editAction()
     {
         $tmplVars = $this->getTemplateVars( 
             array(
-            'showForm'    => true,
-            //'title'        => $this->translate("edit user")
+                'showForm'    => true,
             )
         );
-        //$this->layout()->setVariable('title', $this->translate("edit user"));
         $id = (int) $this->params()->fromRoute('user_id', 0);
         if (!$id) {
             $this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -176,7 +190,7 @@ class UsersController extends BaseActionController
             if ($form->isValid()) {
                 $this->getUserTable()->saveUser($user);
                 $this->flashMessenger()->addSuccessMessage($this->translate("user has been saved"));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/default', array('controller' => 'users'));
@@ -190,15 +204,17 @@ class UsersController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
+    /**
+     * delete user entry
+     * @return \Zend\View\Model\ViewModel
+     */
     public function deleteAction()
     {
         $tmplVars = $this->getTemplateVars( 
             array(
-            'showForm'    => true,
-            //'title'        => $this->translate("delete user")
+                'showForm'    => true,
             )
         );
-        //$this->layout()->setVariable('title', $this->translate("delete user"));
         $id = (int) $this->params()->fromRoute('user_id', 0);
         if (!$id) {
             $this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -222,7 +238,7 @@ class UsersController extends BaseActionController
                 $id = (int) $request->getPost('id');
                 $this->getUserTable()->deleteUser($id);
                 $this->flashMessenger()->addSuccessMessage($this->translate("user has been deleted"));
-                if ($this->getRequest()->isXmlHttpRequest() ) {
+                if ( $this->isXHR() ) {
                     $tmplVars["showForm"] = false;
                 } else {
                     return $this->redirect()->toRoute('admin/default', array('controller' => 'users'));
@@ -233,6 +249,10 @@ class UsersController extends BaseActionController
         return new ViewModel($tmplVars);
     }
 
+    /**
+     * confirm user registration
+     * @return \Zend\View\Model\ViewModel
+     */
     public function confirmAction()
     {
         $tmplVars = array_merge( 
@@ -288,6 +308,10 @@ class UsersController extends BaseActionController
         
     }
 
+    /**
+     * active user registration
+     * @return \Zend\View\Model\ViewModel
+     */
     public function activateAction()
     {
         $tmplVars = array_merge( 
@@ -339,6 +363,7 @@ class UsersController extends BaseActionController
     }
 
     /**
+     * retrieve user data table
      * @return Admin\Model\UserTable
      */
     public function getUserTable()
@@ -351,6 +376,7 @@ class UsersController extends BaseActionController
     }
     
     /**
+     * retrieve role item table
      * @return Admin\Model\AclroleTable
      */
     public function getAclroleTable()
