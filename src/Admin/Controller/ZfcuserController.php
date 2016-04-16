@@ -27,7 +27,6 @@ use Admin\Model\UserProfile;
 
 use Zend\Crypt\Password\Bcrypt;
 use Zend\Stdlib\ResponseInterface as Response;
-use Zend\Stdlib\Parameters;
 
 use ZfcUser\Controller\UserController;
 use Zend\View\Model\ViewModel;
@@ -151,25 +150,8 @@ class ZfcuserController extends UserController
      */
     public function onDispatch(MvcEvent $e)
     {
-        /**
-         * @var $serviceManager \Zend\ServiceManager\ServiceManager 
-         */
-        $serviceManager = $this->getServiceLocator();
-        
-        \Zend\Navigation\Page\Mvc::setDefaultRouter($serviceManager->get('router'));
-        $this->defineActionTitles();
-        $this->defineToolbarItems();
-        
-        $action = $e->getRouteMatch()->getParam('action');
-        $this->layout()->setVariable("title", $this->getActionTitle($action));
-
-        $toolbarItems = $this->getToolbarItem($action);
-        if ($toolbarItems) {
-            $toolbarNav = $serviceManager->get('componentnavigationhelper');
-            $toolbarNav->addPages($toolbarItems);
-        }
-        
-        $result = parent::onDispatch($e);
+        $oEvent = $this->applyToolbarOnDispatch($e);
+        $result = parent::onDispatch($oEvent);
         return $result;
     }
     
@@ -183,16 +165,7 @@ class ZfcuserController extends UserController
             // ...redirect to the login redirect route
             return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
         }
-        return $this->redirect()->toRoute("zfcuser/userprofile");
-        
-        $config        = $this->getServiceLocator()->get('Config');
-        $options    = $this->getServiceLocator()->get('zfcuser_module_options');
-        $request    = $this->getRequest();
-        $service    = $this->getUserService();
-        $translator    = $this->getTranslator();
-
-
-        $oIdentity = $this->zfcUserAuthentication()->getIdentity();
+    	$oIdentity = $this->zfcUserAuthentication()->getIdentity();
         $oProfile = new \Admin\Model\UserProfile();
         $oProfile->load($oIdentity->getId());
         
@@ -209,57 +182,13 @@ class ZfcuserController extends UserController
      */
     public function indexAction()
     {
+        // if the user is logged in...
         if (!$this->zfcUserAuthentication()->hasIdentity()) {
-            return $this->redirect()->toRoute(static::ROUTE_LOGIN);
-        }
-        
-        $oIdentity = $this->zfcUserAuthentication()->getIdentity();
-        $oProfile = new \Admin\Model\UserProfile();
-        $oProfile->load($oIdentity->getId());
-        
-        return new ViewModel(
-            array(
-                "userProfile" => $oProfile,
-                "toolbarItems" => $this->getToolbarItems(),
-            )
-        );
-    }
-
-    /**
-     * General-purpose authentication action
-     */
-    public function authenticateAction()
-    {
-        if ($this->zfcUserAuthentication()->hasIdentity()) {
+            // ...redirect to the login redirect route
             return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
         }
-
-        $translator = $this->getTranslator();
-        $adapter = $this->zfcUserAuthentication()->getAuthAdapter();
-        $redirect = $this->params()->fromPost('redirect', $this->params()->fromQuery('redirect', false));
-
-        $result = $adapter->prepareForAuthentication($this->getRequest());
-
-        // Return early if an adapter returned a response
-        if ($result instanceof Response) {
-            return $result;
-        }
-
-        $auth = $this->zfcUserAuthentication()->getAuthService()->authenticate($adapter);
-
-        if (!$auth->isValid()) {
-            $this->flashMessenger()->setNamespace('zfcuser-login-form')->addMessage($this->failedLoginMessage);
-            $adapter->resetAdapters();
-            return $this->redirect()->toUrl(
-                $this->url()->fromRoute(static::ROUTE_LOGIN) .
-                ($redirect ? '?redirect='. rawurlencode($redirect) : '')
-            );
-        }
-
-        $this->flashMessenger()->addSuccessMessage($translator->translate("login succeeded"));
-        $redirect = $this->redirectCallback;
-
-        return $redirect();
+        return $this->userprofileAction();
+        
     }
 
     /**
@@ -267,7 +196,6 @@ class ZfcuserController extends UserController
      */
     public function registerAction()
     {
-            
         // if the user is logged in, we don't need to register
         if ($this->zfcUserAuthentication()->hasIdentity()) {
             // redirect to the login redirect route
@@ -278,75 +206,32 @@ class ZfcuserController extends UserController
             return array('enableRegistration' => false);
         }
         
-        $request = $this->getRequest();
         $service = $this->getUserService();
-        $form = $this->getRegisterForm();
-        $translator = $this->getTranslator();
-        
-        if ($this->getOptions()->getUseRedirectParameterIfPresent() && $request->getQuery()->get('redirect')) {
-            $redirect = $request->getQuery()->get('redirect');
-        } else {
-            $redirect = false;
-        }
-        
-        $redirectUrl = $this->url()->fromRoute(static::ROUTE_REGISTER)
-        . ($redirect ? '?redirect=' . rawurlencode($redirect) : '');
-        $prg = $this->prg($redirectUrl, true);
-        
-        if ($prg instanceof Response) {
-            return $prg;
-        } elseif ($prg === false) {
-            return array(
-            'registerForm' => $form,
-            'enableRegistration' => $this->getOptions()->getEnableRegistration(),
-            'redirect' => $redirect,
-            );
-        }
-        
-        $post = $prg;
-        $user = $service->register($post);
-        
-        $redirect = isset($prg['redirect']) ? $prg['redirect'] : null;
-        
-        if (!$user) {
-            return array(
-            'registerForm' => $form,
-            'enableRegistration' => $this->getOptions()->getEnableRegistration(),
-            'redirect' => $redirect,
-            );
-        }
-        
-        // ... form input valid, do stuff...
-        
         $config = $this->getServiceLocator()->get('Config');
+        $translator    = $this->getTranslator();
         $oModule = new AdminModule();
         $oModule->setAppConfig($config);
         
-        $this->flashMessenger()->addSuccessMessage($translator->translate("registration succeeded"));
-        if ($config['zfcuser_user_must_confirm']) {
-            $this->flashMessenger()->addInfoMessage($translator->translate("you have been sent an email with further instructions to follow"));
-            return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
-        } else if ($config['zfcuser_admin_must_activate']) {
-            $this->flashMessenger()->addInfoMessage($translator->translate("admin has been notified for activation"));
-            return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
-        }
+        /** @var \Zend\Http\Response $registrationResponse */
+        $registrationResponse = parent::registerAction();
         
-        if ($service->getOptions()->getLoginAfterRegistration()) {
-            $identityFields = $service->getOptions()->getAuthIdentityFields();
-            if (in_array('email', $identityFields)) {
-                $post['identity'] = $user->getEmail();
-            } elseif (in_array('username', $identityFields)) {
-                $post['identity'] = $user->getUsername();
-            }
-            $post['credential'] = $post['password'];
-            $request->setPost(new Parameters($post));
-            $oModule->sendActivationNotificationMail($user);
-            $this->flashMessenger()->addSuccessMessage($translator->translate("registration and activation succeeded"));
-            return $this->forward()->dispatch(static::CONTROLLER_NAME, array('action' => 'authenticate'));
-        }
-        
-        return $this->redirect()->toUrl($this->url()->fromRoute($config["zfcuser_registration_redirect_route"]) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
-                
+        if ($registrationResponse instanceof Response) {
+        	$statusCode = $registrationResponse->getStatusCode();
+        	if ($statusCode != 303) {
+        		$this->flashMessenger()->addSuccessMessage($translator->translate("registration succeeded"));
+		        if ($config['zfcuser_user_must_confirm']) {
+		            $this->flashMessenger()->addInfoMessage($translator->translate("you have been sent an email with further instructions to follow"));
+		        }
+		        if ($config['zfcuser_admin_must_activate']) {
+		        	$this->flashMessenger()->addInfoMessage($translator->translate("admin has been notified for activation"));
+		        }
+		        if ($service->getOptions()->getLoginAfterRegistration()) {
+	            	//$oModule->sendActivationNotificationMail($user);
+	            	$this->flashMessenger()->addSuccessMessage($translator->translate("registration and activation succeeded"));
+		        }
+        	}
+	    }
+        return $registrationResponse;
     }
 
     /**
@@ -395,32 +280,21 @@ class ZfcuserController extends UserController
         $oModule->setAppConfig($config);
         $identity = $this->params()->fromPost('identity');
 
-        /**
-         * @var \Admin\Entity\User $user 
-         **/
+        /** @var \Admin\Entity\User $user */
         $user = false;
         
-        try {
-            /**
-             * @var \Admin\Model\UserTable $userTable 
-             **/
+            /** @var \Admin\Model\UserTable $userTable */
             $userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
-            /**
-             * @var \Admin\Entity\User $selectedUser 
-             **/
+            /** @var \Admin\Entity\User $selectedUser */
             $selectedUser = $userTable->getUserByEmailOrUsername($identity);
             if ($selectedUser) {
-                /**
-                 * @var \ZfcUser\Mapper\User $userMapper 
-                 **/
+                /** @var \ZfcUser\Mapper\User $userMapper */
                 $userMapper = $this->getServiceLocator()->get('zfcuser_user_mapper');
                 $user = $userMapper->findByUsername($selectedUser->username);
                 if (!$user) {
                     $user = $userMapper->findByEmail($selectedUser->email);
                 }
             }
-        } catch (\Exception $e) {
-        }
         
         if (!$user) {
             $this->flashMessenger()->addWarningMessage(
@@ -484,11 +358,8 @@ class ZfcuserController extends UserController
             $userId = (int) $this->params()->fromRoute('user_id');
             $resetToken = $this->params()->fromRoute('resettoken');
             
-            try {
-                $userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
-                $user = $userTable->findById($userId);
-            } catch (\Exception $e) {
-            }
+            $userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
+            $user = $userTable->findById($userId);
             
             if (!$user ) {
                 $this->flashMessenger()->addWarningMessage(
@@ -523,11 +394,8 @@ class ZfcuserController extends UserController
         $oModule->setAppConfig($config);
         $user = false;
         
-        try {
-            $userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
-            $user = $userTable->findByEmail($userId);
-        } catch (\Exception $e) {
-        }
+        $userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
+        $user = $userTable->findByEmail($userId);
             
         if (!$user ) {
             $this->flashMessenger()->addWarningMessage(
@@ -589,15 +457,6 @@ class ZfcuserController extends UserController
             return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
         }
         
-        $config     = $this->getServiceLocator()->get('Config');
-        $options    = $this->getServiceLocator()->get('zfcuser_module_options');
-        /**
-         * @var \Zend\Http\PhpEnvironment\Request|\Zend\Http\Request $request
-         */
-        $request    = $this->getRequest();
-        $service    = $this->getUserService();
-        $translator = $this->getTranslator();
-
         return $this->redirect()->toRoute("zfcuser");
     }
     
@@ -616,13 +475,9 @@ class ZfcuserController extends UserController
         $form        = new UserDataForm();
         $translator    = $this->getTranslator();
         
-        /**
-         * @var \Admin\Entity\User $oIdentity 
-         */
+        /** @var \Admin\Entity\User $oIdentity */
         $oIdentity        = $this->zfcUserAuthentication()->getIdentity();
-        /**
-         * @var \Admin\Model\UserData $oUser 
-         */
+        /** @var \Admin\Model\UserData $oUser */
         $oUser         = new \Admin\Model\UserData();
         
         $oUser->exchangeArray($oIdentity->__getArrayCopy());
@@ -771,12 +626,16 @@ class ZfcuserController extends UserController
      * retrieve user table mapper
      *
      * @return \Admin\Model\UserTable
+     * @throws \Exception
      */
     public function getUserTable()
     {
         if (!$this->userTable) {
             $sm = $this->getServiceLocator();
             $this->userTable = $sm->get('Admin\Model\UserTable');
+            if (!$this->userTable instanceof \Admin\Model\UserTable) {
+            	throw new \Exception("invalid user table object: ".gettype($this->userTable));
+            }
         }
         return $this->userTable;
     }
@@ -785,12 +644,16 @@ class ZfcuserController extends UserController
      * retrieve ACL roles table mapper
      *
      * @return \Admin\Model\AclroleTable
+     * @throws \Exception
      */
     public function getAclroleTable()
     {
         if (!$this->aclroleTable) {
             $sm = $this->getServiceLocator();
             $this->aclroleTable = $sm->get('Admin\Model\AclroleTable');
+            if (!$this->aclroleTable instanceof \Admin\Model\AclroleTable) {
+            	throw new \Exception("invalid ACL role table object: ".gettype($this->aclroleTable));
+            }
         }
         return $this->aclroleTable;
     }

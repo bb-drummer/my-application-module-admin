@@ -55,22 +55,20 @@ use Admin\Model\AclroleTable;
 use Admin\Model\Aclresource;
 use Admin\Model\AclresourceTable;
 
-class Module implements 
-                AutoloaderProviderInterface, 
-                ServiceLocatorAwareInterface, 
-                ServiceProviderInterface
+class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterface, ServiceProviderInterface
 {
 
     protected $appobj;
     protected $appconfig;
+    
     /**
- * @var $serviceLocator \Zend\Di\ServiceLocator 
-*/
+     * @var $serviceLocator \Zend\Di\ServiceLocator 
+     */
     protected static $serviceLocator;
 
     /**
- * @var $serviceManager \Zend\ServiceManager\ServiceManager 
-*/
+     * @var $serviceManager \Zend\ServiceManager\ServiceManager 
+     */
     protected static $serviceManager;
     
     public function init(ModuleManager $oModuleManager)
@@ -90,15 +88,15 @@ class Module implements
     public function getAutoloaderConfig()
     {
         return array(
-        'Zend\Loader\ClassMapAutoloader' => array(
-        __DIR__ . '/autoload_classmap.php',
-        ),
-        'Zend\Loader\StandardAutoloader' => array(
-        'namespaces' => array(
-        // if we're in a namespace deeper than one level we need to fix the \ in the path
-        __NAMESPACE__ => __DIR__ . '/src/' . str_replace('\\', '/', __NAMESPACE__),
-        ),
-        ),
+            'Zend\Loader\ClassMapAutoloader' => array(
+                __DIR__ . '/autoload_classmap.php',
+            ),
+            'Zend\Loader\StandardAutoloader' => array(
+                'namespaces' => array(
+                    // if we're in a namespace deeper than one level we need to fix the \ in the path
+                    __NAMESPACE__ => __DIR__ . '/src/' . str_replace('\\', '/', __NAMESPACE__),
+                ),
+            ),
         );
     }
 
@@ -123,38 +121,25 @@ class Module implements
 
     public function onBootstrap(MvcEvent $e)
     {
-        /**
- * @var $application \Zend\Mvc\Application 
-*/
+        /** @var $application \Zend\Mvc\Application */
         $application = $e->getApplication();
         $this->appobj = $application;
         
-        /**
- * @var $serviceManager \Zend\ServiceManager\ServiceManager 
-*/
+        /** @var $serviceManager \Zend\ServiceManager\ServiceManager */
         $serviceManager = $application->getServiceManager();
-        //$this->setServiceManager( $serviceManager );
         static::$serviceManager = $serviceManager ;
         static::$serviceLocator = $serviceManager ;
         
-        /**
- * @var $pluginManagerViewHelper \Zend\View\HelperPluginManager 
-*/
+        /** @var $pluginManagerViewHelper \Zend\View\HelperPluginManager */
         $viewHelperManager = $serviceManager->get('ViewHelperManager');
         
-        /**
- * @var $eventManager \Zend\EventManager\EventManager 
-*/
+        /** @var $eventManager \Zend\EventManager\EventManager */
         $eventManager        = $application->getEventManager();
         
-        /**
- * @var $staticEventManager \Zend\EventManager\StaticEventManager 
-*/
+        /** @var $staticEventManager \Zend\EventManager\StaticEventManager */
         $staticEventManager        = \Zend\EventManager\StaticEventManager::getInstance();
         
-        /**
- * @var $moduleRouteListener \Zend\Mvc\ModuleRouteListener 
-*/
+        /** @var $moduleRouteListener \Zend\Mvc\ModuleRouteListener */
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
         
@@ -169,11 +154,6 @@ class Module implements
         // setup user registration mails
         $staticEventManager->attach('ZfcUser\Service\User', 'register', array($this, 'userRegisterBeforeInsert'));
         $staticEventManager->attach('ZfcUser\Service\User', 'register.post', array($this, 'userRegisterAfterInsert'));
-        
-        
-        // override or add a view helper ... or setup in 'getViewHelperConfig' method
-        //$viewHelperManager->get('navigation')->getPluginManager()->setInvokableClass('isallowed', '\Admin\View\Helper\Isallowed');
-        //$viewHelperManager->get('navigation')->getPluginManager()->setInvokableClass('isdenied', '\Admin\View\Helper\Isdenied');
         
     }
     
@@ -363,38 +343,6 @@ class Module implements
         
     }
     
-    /* public function initAcl(MvcEvent $e) {
-    $sm = $e->getApplication()->getServiceManager();
-    $acl = \Admin\Module::initACL($sm);
-        
-    $e->getViewModel()->acl = $acl;
-    }
-    
-    public function checkAcl(MvcEvent $e) {
-    $oAcl = $e->getViewModel()->acl;
-    $oSM = $e->getApplication()->getServiceManager();
-        
-    $sAclRole = 'public';
-    $oAuth = $oSM->get('zfcuser_auth_service');
-    if ( $oAuth->hasIdentity() ) {
-    $oUser = $oAuth->getIdentity();
-    $sAclRole = $oUser->getAclrole();
-    }
-
-    $oNavigation = $oSM->get('navigation');
-    $activePage = $oNavigation->findBy('active', 1);
-    if ($activePage) {
-    $sAclResource = $activePage->getResource();
-    if (!empty($sAclResource) && $oAcl->hasResource($sAclResource)) {
-                if ( !$oAcl->isAllowed($sAclRole, $sAclResource) ) {
-                    $response = $e->getResponse();
-                    //location to page or what ever
-                    $response->getHeaders()->addHeaderLine('Location', $e->getRequest()->getBaseUrl() . '/user/login?redirect=' . $e->getRequest()->getRequestUri() );
-                    $response->setStatusCode(301);
-                }
-    }
-    }
-    } */
     
     /**
      * fetch user's profile data
@@ -479,7 +427,6 @@ class Module implements
     {
         if (!self::$serviceLocator) {
             self::$serviceLocator = new \Zend\Di\ServiceLocator();
-            //$this->serviceLocator = new \Zend\Di\ServiceLocator();
         }
         return self::$serviceLocator;
     }
@@ -489,19 +436,11 @@ class Module implements
         return array(
             'factories' => array(
                 'zfcuser' => function ($controllerManager) {
-                        /**
- * @var ControllerManager $controllerManager
-*/
+                        /** @var \Zend\Mvc\Controller\ControllerManager $controllerManager */
                         $serviceManager = $controllerManager->getServiceLocator();
-
-                        /**
- * @var RedirectCallback $redirectCallback 
-*/
+                        /** @var \Admin\Controller\RedirectCallback $redirectCallback */
                         $redirectCallback = $serviceManager->get('zfcuser_redirect_callback');
-
-                        /**
- * @var UserController $controller 
-*/
+                        /** @var \Admin\Controller\ZfcuserController $controller */
                         $controller = new ZfcuserController($redirectCallback);
 
                         return $controller;
@@ -539,7 +478,7 @@ class Module implements
         $resultSetPrototype = new ResultSet();
         $resultSetPrototype->setArrayObjectPrototype(new Clients());
         return new TableGateway('clients', $dbAdapter, null, $resultSetPrototype);
-        }, */
+        },
                     
                         
         'Admin\Model\UserTable' =>  function ($sm) {
@@ -612,7 +551,7 @@ class Module implements
                     $resultSetPrototype->setArrayObjectPrototype(new UserProfile());
                     return new TableGateway('userprofile', $dbAdapter, null, $resultSetPrototype);
                 },
-
+ */
                 'zfcuser_redirect_callback' => function ($sm) {
                     /** @var RouteInterface $router  */
                     $router = $sm->get('router');
@@ -633,7 +572,7 @@ class Module implements
      * @param  $oEvent    \Zend\Mvc\Mvcevent
      * @return \Zend\Permissions\Acl\Acl
      */
-    public static function initACL( $oServiceManager ) // \Zend\Mvc\Mvcevent $oEvent )
+    public static function initACL( $oServiceManager )
     {
         // check for cached ACL...
         $cacheService = \Application\Module::getService('CacheService');
@@ -644,7 +583,6 @@ class Module implements
             }
         }
         
-        //$oServiceManager    = $oEvent->getApplication()->getServiceManager();
         $oACL             = new ZendAcl();
         $oAcls            = $oServiceManager->get('Admin\Model\AclTable');
         $oRoles           = $oServiceManager->get('Admin\Model\AclroleTable');
@@ -704,8 +642,7 @@ class Module implements
      */
     public static function checkACL(\Zend\Mvc\Mvcevent $oEvent ) 
     {
-        //$oServiceManager = $oEvent->getApplication()->getServiceManager();
-        $oServiceManager = self::$serviceManager; //$this->getServiceManager();
+        $oServiceManager = self::$serviceManager;
         $oAcl = $oEvent->getViewModel()->acl;
         if (!$oAcl) {
             $oAcl = self::initACL($oServiceManager);
