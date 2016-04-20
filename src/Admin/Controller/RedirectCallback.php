@@ -64,12 +64,22 @@ class RedirectCallback extends ZfcUserRedirectCallback
     public function __invoke()
     {
     	$routeMatch = $this->application->getMvcEvent()->getRouteMatch();
-        $redirect = $this->getRedirect($routeMatch->getMatchedRouteName(), parent::getRedirectRouteFromRequest());
+        $redirect = $this->getRedirect($routeMatch->getMatchedRouteName(), $this->getRedirectRouteFromRequestCopy());
 
         $response = $this->application->getResponse();
         $response->getHeaders()->addHeaderLine('Location', $redirect);
         $response->setStatusCode(302);
         return $response;
+    }
+
+    /**
+     * Return the redirect from param.
+     * First checks GET then POST
+     * @return boolean|string
+     */
+    private function getRedirectRouteFromRequestCopy()
+    {
+        return $this->getRedirectRouteFromRequest();
     }
 
     /**
