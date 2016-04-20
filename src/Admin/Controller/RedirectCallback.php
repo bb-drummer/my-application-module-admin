@@ -81,16 +81,30 @@ class RedirectCallback extends ZfcUserRedirectCallback
     {
         $request  = $this->application->getRequest();
         $redirect = $request->getQuery('redirect');
-        if ($redirect && $this->routeExists($redirect)) {
+        if ($redirect && $this->checkIfRouteExists($redirect)) {
             return $redirect;
         }
 
         $redirect = $request->getPost('redirect');
-        if ($redirect && $this->routeExists($redirect)) {
+        if ($redirect && $this->checkIfRouteExists($redirect)) {
             return $redirect;
         }
 
         return false;
+    }
+
+    /**
+     * @param $route
+     * @return bool
+     */
+    private function checkIfRouteExists($route)
+    {
+        try {
+            $this->router->assemble(array(), array('name' => $route));
+        } catch (Exception\RuntimeException $e) {
+            return false;
+        }
+        return true;
     }
 
     /**
