@@ -63,6 +63,8 @@ class RedirectCallback extends ZfcUserRedirectCallback
      */
     public function __invoke()
     {
+    	return parent::__invoke();
+    	/*
         $routeMatch = $this->application->getMvcEvent()->getRouteMatch();
         $redirect = $this->getRedirect($routeMatch->getMatchedRouteName(), $this->getRedirectRouteFromRequest());
 
@@ -70,6 +72,7 @@ class RedirectCallback extends ZfcUserRedirectCallback
         $response->getHeaders()->addHeaderLine('Location', $redirect);
         $response->setStatusCode(302);
         return $response;
+        */
     }
 
     /**
