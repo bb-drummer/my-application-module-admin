@@ -33,17 +33,17 @@ class AclController extends BaseActionController
 {
 	
 	/**
-	 * @var \Admin\Model\AclTable
+	 * @var array|\Admin\Model\AclTable
 	 */
 	protected $AclTable;
 	
 	/**
-	 * @var \Admin\Model\AclroleTable
+	 * @var array|\Admin\Model\AclroleTable
 	 */
 	protected $AclroleTable;
 	
 	/**
-	 * @var \Admin\Model\AclresourceTable
+	 * @var array|\Admin\Model\AclresourceTable
 	 */
 	protected $AclresourceTable;
 
@@ -182,8 +182,7 @@ class AclController extends BaseActionController
 
     /**
      * list acl
-     * {@inheritDoc}
-     * @see \Zend\Mvc\Controller\AbstractActionController::indexAction()
+     * @return \Zend\View\Model\ViewModel
      */
     public function indexAction()
     {
@@ -265,7 +264,7 @@ class AclController extends BaseActionController
 
     /**
      * list roles
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function rolesAction()
     {
@@ -302,7 +301,7 @@ class AclController extends BaseActionController
 
     /**
      * list resources
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function resourcesAction()
     {
@@ -338,7 +337,7 @@ class AclController extends BaseActionController
 
     /**
      * add acl entry
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function addaclAction()
     {
@@ -402,7 +401,7 @@ class AclController extends BaseActionController
 
     /**
      * edit acl entry
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function editaclAction()
     {
@@ -483,7 +482,7 @@ class AclController extends BaseActionController
 
     /**
      * delete acl entry
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function deleteaclAction()
     {
@@ -534,7 +533,7 @@ class AclController extends BaseActionController
 
     /**
      * add role item
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function addroleAction()
     {
@@ -577,7 +576,7 @@ class AclController extends BaseActionController
 
     /**
      * edit role item
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function editroleAction()
     {
@@ -633,7 +632,7 @@ class AclController extends BaseActionController
 
     /**
      * delete role item
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function deleteroleAction()
     {
@@ -686,7 +685,7 @@ class AclController extends BaseActionController
 
     /**
      * add resource item
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function addresourceAction()
     {
@@ -729,7 +728,7 @@ class AclController extends BaseActionController
 
     /**
      * edit resource item
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function editresourceAction()
     {
@@ -786,7 +785,7 @@ class AclController extends BaseActionController
 
     /**
      * delete resource item
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function deleteresourceAction()
     {
@@ -853,7 +852,7 @@ class AclController extends BaseActionController
     
     /**
      * retrieve ACL entry table
-     * @return Admin\Model\AclTable
+     * @return array|\Admin\Model\AclTable
      */
     public function getAclTable()
     {
@@ -866,7 +865,7 @@ class AclController extends BaseActionController
 
     /**
      * retrieve role item table
-     * @return Admin\Model\AclroleTable
+     * @return array|\Admin\Model\AclroleTable
      */
     public function getAclroleTable()
     {
@@ -879,7 +878,7 @@ class AclController extends BaseActionController
 
     /**
      * retrieve resource item table
-     * @return Admin\Model\AclresourceTable
+     * @return array|\Admin\Model\AclresourceTable
      */
     public function getAclresourceTable()
     {

@@ -20,7 +20,11 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 class IndexController extends AbstractActionController
 {
-    public function indexAction()
+    /**
+     * redirect to acl section
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
+     */
+	public function indexAction()
     {
         return $this->redirect()->toRoute('admin/acledit', array());
     }

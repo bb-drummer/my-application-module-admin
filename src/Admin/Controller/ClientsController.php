@@ -24,7 +24,7 @@ class ClientsController extends BaseActionController
 {
 	
 	/**
-	 * @var \Admin\Model\ClientsTable
+	 * @var array|\Admin\Model\ClientsTable
 	 */
 	protected $clientsTable;
     
@@ -63,7 +63,7 @@ class ClientsController extends BaseActionController
 
     /**
      * list clients in a table
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */ 
     public function indexAction() 
     {
@@ -99,17 +99,15 @@ class ClientsController extends BaseActionController
     
     /**
      * add client entry
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function addAction()
     {
         $tmplVars = $this->getTemplateVars( 
             array(
             'showForm'    => true,
-            'title'        => $this->translate("add client")
             )
         );
-        $this->layout()->setVariable('title', $this->translate("add client"));
         
         $form = new ClientsForm();
 
@@ -137,17 +135,16 @@ class ClientsController extends BaseActionController
 
     /**
      * edit client entry
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function editAction()
     {
         $tmplVars = $this->getTemplateVars( 
             array(
             'showForm'    => true,
-            'title'        => $this->translate("edit client")
             )
         );
-        $this->layout()->setVariable('title', $this->translate("edit client"));
+        
         $id = (int) $this->params()->fromRoute('client_id', 0);
         if (!$id) {
             $this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -191,17 +188,16 @@ class ClientsController extends BaseActionController
 
     /**
      * delete client entry
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function deleteAction()
     {
         $tmplVars = $this->getTemplateVars( 
             array(
             'showForm'    => true,
-            'title'        => $this->translate("delete client")
             )
         );
-        $this->layout()->setVariable('title', $this->translate("delete client"));
+        
         $id = (int) $this->params()->fromRoute('client_id', 0);
         if (!$id) {
             $this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -238,7 +234,7 @@ class ClientsController extends BaseActionController
 
     /**
      * retrieve client entry table
-     * @return Admin\Model\ClientsTable
+     * @return array|\Admin\Model\ClientsTable
      */
     public function getClientsTable()
     {

@@ -27,12 +27,12 @@ class UsersController extends BaseActionController
 {
 	
 	/**
-	 * @var \Admin\Model\UserTable
+	 * @var array|\Admin\Model\UserTable
 	 */
 	protected $userTable;
 	
 	/**
-	 * @var \Admin\Model\AclroleTable
+	 * @var array|\Admin\Model\AclroleTable
 	 */
 	protected $AclroleTable;
 
@@ -72,7 +72,7 @@ class UsersController extends BaseActionController
 
     /**
      * list users in a table
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */ 
     public function indexAction()
     {
@@ -102,20 +102,20 @@ class UsersController extends BaseActionController
         }
         return new ViewModel(
             array(
-            'userdata' => $aUserlist,
+                'userdata' => $aUserlist,
             )
         );
     }
 
     /**
      * add user entry
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function addAction()
     {
         $tmplVars = $this->getTemplateVars( 
             array(
-            'showForm'    => true,
+                'showForm'    => true,
             )
         );
         $form = new UserForm();
@@ -125,8 +125,10 @@ class UsersController extends BaseActionController
         foreach ($roles as $role) {
             $valueoptions[$role["roleslug"]] = $role["rolename"];
         }
-        $form->get('aclrole')->setValueOptions($valueoptions);
-                
+        /** @var \Zend\Form\Element\Select $aclroleSelect */
+        $aclroleSelect = $form->get('aclrole');
+        $aclroleSelect->setValueOptions($valueoptions);
+        
         $request = $this->getRequest();
         $user = new User();
         if ($request->isPost()) {
@@ -152,7 +154,7 @@ class UsersController extends BaseActionController
 
     /**
      * edit user entry
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function editAction()
     {
@@ -206,7 +208,7 @@ class UsersController extends BaseActionController
 
     /**
      * delete user entry
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function deleteAction()
     {
@@ -251,7 +253,7 @@ class UsersController extends BaseActionController
 
     /**
      * confirm user registration
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function confirmAction()
     {
@@ -310,7 +312,7 @@ class UsersController extends BaseActionController
 
     /**
      * active user registration
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function activateAction()
     {
@@ -348,10 +350,10 @@ class UsersController extends BaseActionController
         $oModule->setAppConfig($config);
         $this->getUserTable()->getTableGateway()->update(
             array(
-            "state"        => "1",
-            "token"        => $user->token,
+                "state"        => "1",
+                "token"        => $user->token,
             ), array(
-            "user_id"    => $oUser->getId(),
+                "user_id"    => $oUser->getId(),
             )
         );
         $oUser = $users->findById($user_id);
@@ -364,7 +366,7 @@ class UsersController extends BaseActionController
 
     /**
      * retrieve user data table
-     * @return Admin\Model\UserTable
+     * @return array|\Admin\Model\UserTable
      */
     public function getUserTable()
     {
@@ -377,7 +379,7 @@ class UsersController extends BaseActionController
     
     /**
      * retrieve role item table
-     * @return Admin\Model\AclroleTable
+     * @return array|\Admin\Model\AclroleTable
      */
     public function getAclroleTable()
     {

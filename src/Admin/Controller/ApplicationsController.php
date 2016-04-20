@@ -24,12 +24,12 @@ class ApplicationsController extends BaseActionController
 {
 	
 	/**
-	 * @var \Admin\Model\ClientsTable
+	 * @var array|\Admin\Model\ClientsTable
 	 */
 	protected $clientsTable;
 	
 	/**
-	 * @var \Admin\Model\ApplicationsTable
+	 * @var array|\Admin\Model\ApplicationsTable
 	 */
 	protected $applicationsTable;
     
@@ -68,7 +68,7 @@ class ApplicationsController extends BaseActionController
 
     /**
      * list applications in a table
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */ 
     public function indexAction() 
     {
@@ -114,24 +114,21 @@ class ApplicationsController extends BaseActionController
     
     /**
      * add application entry
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function addAction()
     {
         $tmplVars = $this->getTemplateVars( 
             array(
             'showForm'    => true,
-            'title'        => $this->translate("add application")
             )
         );
-        $this->layout()->setVariable('title', $this->translate("add application"));
         
         $form = new ApplicationsForm();
         
         $clients = $this->getClientsTable()->fetchAll()->toArray();
         $valueoptions = array();
         foreach ($clients as $client) {
-            //$valueoptions[$role["aclroles_id"]] = $role["rolename"];
             $valueoptions[$client["clients_id"]] = $client["name"];
         }
         $form->get('client_id')->setValueOptions($valueoptions);
@@ -160,17 +157,16 @@ class ApplicationsController extends BaseActionController
 
     /**
      * edit application entry
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function editAction()
     {
         $tmplVars = $this->getTemplateVars( 
             array(
             'showForm'    => true,
-            'title'        => $this->translate("edit application")
             )
         );
-        $this->layout()->setVariable('title', $this->translate("edit application"));
+        
         $id = (int) $this->params()->fromRoute('application_id', 0);
         if (!$id) {
             $this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -193,7 +189,6 @@ class ApplicationsController extends BaseActionController
         $clients = $this->getClientsTable()->fetchAll()->toArray();
         $valueoptions = array();
         foreach ($clients as $client) {
-            //$valueoptions[$role["aclroles_id"]] = $role["rolename"];
             $valueoptions[$client["clients_id"]] = $client["name"];
         }
         $form->get('client_id')->setValueOptions($valueoptions);
@@ -222,17 +217,16 @@ class ApplicationsController extends BaseActionController
 
     /**
      * delete application entry
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function deleteAction()
     {
         $tmplVars = $this->getTemplateVars( 
             array(
             'showForm'    => true,
-            'title'        => $this->translate("delete application")
             )
         );
-        $this->layout()->setVariable('title', $this->translate("delete application"));
+        
         $id = (int) $this->params()->fromRoute('application_id', 0);
         if (!$id) {
             $this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -268,7 +262,7 @@ class ApplicationsController extends BaseActionController
 
     /**
      * retrieve application entry table
-     * @return Admin\Model\ApplicationsTable
+     * @return array|\Admin\Model\ApplicationsTable
      */
     public function getApplicationsTable()
     {
@@ -281,7 +275,7 @@ class ApplicationsController extends BaseActionController
 
     /**
      * retrieve client entry table
-     * @return Admin\Model\ClientsTable
+     * @return array|\Admin\Model\ClientsTable
      */
     public function getClientsTable()
     {

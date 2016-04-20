@@ -50,13 +50,13 @@ class ZfcuserController extends UserController
 	
     /**
      * 
-     * @var \Admin\Model\AclroleTable
+     * @var array|\Admin\Model\AclroleTable
      */
     protected $aclroleTable;
     
     /**
      * 
-     * @var \Admin\Model\UserTable
+     * @var array|\Admin\Model\UserTable
      */
     protected $userTable;
     
@@ -157,6 +157,7 @@ class ZfcuserController extends UserController
     
     /**
      * view user's profile data
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function userprofileAction()
     {
@@ -179,6 +180,7 @@ class ZfcuserController extends UserController
     
     /**
      * User page
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function indexAction()
     {
@@ -193,6 +195,7 @@ class ZfcuserController extends UserController
 
     /**
      * Register new user
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function registerAction()
     {
@@ -236,6 +239,7 @@ class ZfcuserController extends UserController
 
     /**
      * request a user's password reset link
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function requestpasswordresetAction()
     {
@@ -320,6 +324,7 @@ class ZfcuserController extends UserController
 
     /**
      * reset a user's password
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function resetpasswordAction()
     {
@@ -448,6 +453,7 @@ class ZfcuserController extends UserController
 
     /**
      * view user's basic data
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function userdataAction()
     {
@@ -462,6 +468,7 @@ class ZfcuserController extends UserController
     
     /**
      * edit user's basic data
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function edituserdataAction()
     {
@@ -546,6 +553,7 @@ class ZfcuserController extends UserController
     
     /**
      * edit user's profile data
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function edituserprofileAction()
     {
@@ -625,7 +633,7 @@ class ZfcuserController extends UserController
     /**
      * retrieve user table mapper
      *
-     * @return \Admin\Model\UserTable
+     * @return array|\Admin\Model\UserTable
      * @throws \Exception
      */
     public function getUserTable()
@@ -643,7 +651,7 @@ class ZfcuserController extends UserController
     /**
      * retrieve ACL roles table mapper
      *
-     * @return \Admin\Model\AclroleTable
+     * @return array|\Admin\Model\AclroleTable
      * @throws \Exception
      */
     public function getAclroleTable()

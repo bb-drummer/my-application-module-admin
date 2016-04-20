@@ -24,7 +24,7 @@ class SettingsController extends BaseActionController
 {
 	
 	/**
-	 * @var \Admin\Model\SettingsTable
+	 * @var array|\Admin\Model\SettingsTable
 	 */
     protected $settingsTable;
     
@@ -63,7 +63,7 @@ class SettingsController extends BaseActionController
 
     /**
      * list settings in a table
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */ 
     public function indexAction() 
     {
@@ -99,17 +99,15 @@ class SettingsController extends BaseActionController
     
     /**
      * add setting entry
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function addAction()
     {
         $tmplVars = $this->getTemplateVars( 
             array(
             'showForm'    => true,
-            'title'        => $this->translate("add setting")
             )
         );
-        $this->layout()->setVariable('title', $this->translate("add setting"));
         
         $form = new SettingsForm();
 
@@ -137,17 +135,16 @@ class SettingsController extends BaseActionController
 
     /**
      * edit setting entry
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function editAction()
     {
         $tmplVars = $this->getTemplateVars( 
             array(
             'showForm'    => true,
-            'title'        => $this->translate("edit setting")
             )
         );
-        $this->layout()->setVariable('title', $this->translate("edit setting"));
+        
         $id = (int) $this->params()->fromRoute('set_id', 0);
         if (!$id) {
             $this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -191,17 +188,16 @@ class SettingsController extends BaseActionController
 
     /**
      * delete setting entry
-     * @return \Zend\View\Model\ViewModel
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function deleteAction()
     {
         $tmplVars = $this->getTemplateVars( 
             array(
             'showForm'    => true,
-            'title'        => $this->translate("delete setting")
             )
         );
-        $this->layout()->setVariable('title', $this->translate("delete setting"));
+        
         $id = (int) $this->params()->fromRoute('set_id', 0);
         if (!$id) {
             $this->flashMessenger()->addWarningMessage($this->translate("missing parameters"));
@@ -238,7 +234,7 @@ class SettingsController extends BaseActionController
 
     /**
      * retrieve setting entry table
-     * @return \Admin\Model\SettingsTable
+     * @return array|\Admin\Model\SettingsTable
      */
     public function getSettingsTable()
     {
