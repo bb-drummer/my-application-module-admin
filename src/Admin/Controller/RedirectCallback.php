@@ -59,20 +59,6 @@ class RedirectCallback extends ZfcUserRedirectCallback
     }
 
     /**
-     * @return Response
-     */
-    public function __invoke()
-    {
-        $routeMatch = $this->application->getMvcEvent()->getRouteMatch();
-        $redirect = $this->getRedirect($routeMatch->getMatchedRouteName(), $this->getRedirectRouteFromRequest());
-
-        $response = $this->application->getResponse();
-        $response->getHeaders()->addHeaderLine('Location', $redirect);
-        $response->setStatusCode(302);
-        return $response;
-    }
-
-    /**
      * Returns the url to redirect to based on current route.
      * If $redirect is set and the option to use redirect is set to true, it will return the $redirect url.
      *
