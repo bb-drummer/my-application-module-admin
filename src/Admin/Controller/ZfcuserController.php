@@ -31,6 +31,7 @@ use Zend\Stdlib\ResponseInterface as Response;
 use ZfcUser\Controller\UserController;
 use Zend\View\Model\ViewModel;
 use Zend\Mvc\MvcEvent;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 use Application\Controller\Traits\ControllerTranslatorTrait;
 use Application\Controller\Traits\ControllerActiontitlesTrait;
@@ -60,6 +61,21 @@ class ZfcuserController extends UserController
      */
     protected $userTable;
     
+    /**
+     * @param callable $redirectCallback
+     * @param callable $redirectCallback
+     */
+    public function __construct(ServiceLocatorInterface $serviceLocator, $redirectCallback)
+    {
+        if ( $serviceLocator ) {
+    		$this->setServiceLocator($serviceLocator);
+    	}
+    	if (!is_callable($redirectCallback)) {
+            throw new \InvalidArgumentException('You must supply a callable redirectCallback');
+        }
+        $this->redirectCallback = $redirectCallback;
+    }
+
     /**
      * set current action titles
      * @return self

@@ -32,19 +32,21 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Admin\Controller\Index'          => 'Admin\Controller\IndexController',
-            'Admin\Controller\Users'          => 'Admin\Controller\UsersController',
-            'Admin\Controller\Zfcuser'        => 'Admin\Controller\ZfcuserController',
-            'Admin\Controller\Acl'            => 'Admin\Controller\AclController',
-            'Admin\Controller\Applications'   => 'Admin\Controller\ApplicationsController',
-            'Admin\Controller\Clients'        => 'Admin\Controller\ClientsController',
-            'Admin\Controller\Settings'       => 'Admin\Controller\SettingsController',
+        ),
+        'factories' => array(
+            'Admin\Controller\Index'          => 'Admin\Factory\IndexControllerFactory',
+            'Admin\Controller\Users'          => 'Admin\Factory\UsersControllerFactory',
+            'Admin\Controller\Zfcuser'        => 'Admin\Factory\ZfcuserControllerFactory',
+            'Admin\Controller\Acl'            => 'Admin\Factory\AclControllerFactory',
+            'Admin\Controller\Applications'   => 'Admin\Factory\ApplicationsControllerFactory',
+            'Admin\Controller\Clients'        => 'Admin\Factory\ClientsControllerFactory',
+            'Admin\Controller\Settings'       => 'Admin\Factory\SettingsControllerFactory',
+            'zfcuser' => 'Admin\Factory\ZfcuserControllerFactory', // 'ZfcUser\Factory\Controller\UserControllerFactory',
         ),
     ),
         
     'service_manager' => array(
         'factories' => array(
-            
             // table services
             'Admin\Model\AclTable'            => 'Admin\Factory\AclTableFactory',
             'Admin\Model\AclresourceTable'    => 'Admin\Factory\AclresourceTableFactory',
