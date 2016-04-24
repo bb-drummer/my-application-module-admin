@@ -374,7 +374,8 @@ class ZfcuserController extends UserController
          * @var \Zend\Http\PhpEnvironment\Request|\Zend\Http\Request $request
          */
         $request    = $this->getRequest();
-        $service    = $this->getUserService();
+        //$service    = $this->getUserService();
+        $service    = \Application\Module::getService('zfcuser_user_service');
         $form        = new ResetPasswordForm(null, $options);
         $translator    = $this->getTranslator();
         
@@ -383,7 +384,7 @@ class ZfcuserController extends UserController
             return array('enableRegistration' => false);
         }
         
-        if ($this->getOptions()->getUseRedirectParameterIfPresent() && $request->getQuery()->get('redirect')) {
+        if ($options->getUseRedirectParameterIfPresent() && $request->getQuery()->get('redirect')) {
             $redirect = $request->getQuery()->get('redirect');
         } else {
             $redirect = false;
@@ -397,7 +398,7 @@ class ZfcuserController extends UserController
             $userId = (int) $this->params()->fromRoute('user_id');
             $resetToken = $this->params()->fromRoute('resettoken');
             
-            $userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
+            $userTable = \Application\Module::getService('zfcuser_user_mapper');
             $user = $userTable->findById($userId);
             
             if (!$user ) {
@@ -433,7 +434,7 @@ class ZfcuserController extends UserController
         $oModule->setAppConfig($config);
         $user = false;
         
-        $userTable = $this->getServiceLocator()->get('zfcuser_user_mapper');
+        $userTable = \Application\Module::getService('zfcuser_user_mapper');
         $user = $userTable->findByEmail($userId);
             
         if (!$user ) {
