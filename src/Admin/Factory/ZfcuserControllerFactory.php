@@ -39,17 +39,38 @@ class ZfcuserControllerFactory implements FactoryInterface
      *
      * @param ServiceLocatorInterface $controllerManager
      * @return mixed
+     * /
+    public function createService(ServiceLocatorInterface $controllerManager)
+    {
+        /* @var ControllerManager $controllerManager* /
+        $serviceManager = $controllerManager->getServiceLocator();
+
+        /* @var RedirectCallback $redirectCallback * /
+        $redirectCallback = $serviceManager->get('zfcuser_redirect_callback');
+
+        /* @var UserController $controller * /
+        $controller = new ZfcuserController($serviceManager, $redirectCallback);
+
+        return $controller;
+    }
+    
+    /**
+     * Create controller
+     *
+     * @param ControllerManager $serviceLocator
+     * @return UserController
      */
     public function createService(ServiceLocatorInterface $controllerManager)
     {
-        /* @var ControllerManager $controllerManager*/
-        $serviceManager = $controllerManager->getServiceLocator();
+        /* @var ServiceLocatorInterface $serviceLocator */
+        $serviceLocator = $controllerManager->getServiceLocator();
 
-        /* @var RedirectCallback $redirectCallback */
-        $redirectCallback = $serviceManager->get('zfcuser_redirect_callback');
+        $userService = $serviceLocator->get('zfcuser_user_service');
+        $registerForm = $serviceLocator->get('zfcuser_register_form');
+        $loginForm = $serviceLocator->get('zfcuser_login_form');
+        $options = $serviceLocator->get('zfcuser_module_options');
 
-        /* @var UserController $controller */
-        $controller = new ZfcuserController($serviceManager, $redirectCallback);
+        $controller = new ZfcuserController($userService, $options, $registerForm, $loginForm);
 
         return $controller;
     }

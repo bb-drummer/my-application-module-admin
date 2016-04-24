@@ -65,15 +65,22 @@ class ZfcuserController extends UserController
      * @param callable $redirectCallback
      * @param callable $redirectCallback
      */
-    public function __construct(ServiceLocatorInterface $serviceLocator, $redirectCallback)
+    //public function __construct(ServiceLocatorInterface $serviceLocator, $redirectCallback)
+    public function __construct($userService, $options, $registerForm, $loginForm)
     {
-        if ( $serviceLocator ) {
+        $this->userService = $userService;
+        $this->options = $options;
+        $this->registerForm = $registerForm;
+        $this->loginForm = $loginForm;
+        
+        /*if ( $serviceLocator ) {
     		$this->setServiceLocator($serviceLocator);
     	}
     	if (!is_callable($redirectCallback)) {
             throw new \InvalidArgumentException('You must supply a callable redirectCallback');
         }
-        $this->redirectCallback = $redirectCallback;
+        $this->redirectCallback = $redirectCallback;*/
+        
     }
 
     /**
@@ -212,7 +219,7 @@ class ZfcuserController extends UserController
     /**
      * Register new user
      * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
-     */
+     * /
     public function registerAction()
     {
         // if the user is logged in, we don't need to register
@@ -231,7 +238,7 @@ class ZfcuserController extends UserController
         $oModule = new AdminModule();
         $oModule->setAppConfig($config);
         
-        /** @var \Zend\Http\Response $registrationResponse */
+        /** @var \Zend\Http\Response $registrationResponse * /
         $registrationResponse = parent::registerAction();
         
         if ($registrationResponse instanceof Response) {
