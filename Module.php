@@ -54,6 +54,7 @@ use Admin\Model\Aclrole;
 use Admin\Model\AclroleTable;
 use Admin\Model\Aclresource;
 use Admin\Model\AclresourceTable;
+use Admin\Factory\ZfcuserControllerFactory;
 
 class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterface, ServiceProviderInterface
 {
@@ -441,7 +442,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
                         /** @var \Admin\Controller\RedirectCallback $redirectCallback */
                         $redirectCallback = $serviceManager->get('zfcuser_redirect_callback');
                         /** @var \Admin\Controller\ZfcuserController $controller */
-                        $controller = new ZfcuserController($redirectCallback);
+                        $controller = new ZfcuserControllerFactory($controllerManager);
 
                         return $controller;
                 },
