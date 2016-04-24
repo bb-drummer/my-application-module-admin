@@ -296,7 +296,7 @@ class ZfcuserController extends UserController
             return array('enableRegistration' => false);
         }
         
-        if ($this->getOptions()->getUseRedirectParameterIfPresent() && $request->getQuery()->get('redirect')) {
+        if ($options->getUseRedirectParameterIfPresent() && $request->getQuery()->get('redirect')) {
             $redirect = $request->getQuery()->get('redirect');
         } else {
             $redirect = false;
@@ -320,12 +320,12 @@ class ZfcuserController extends UserController
         $user = false;
         
             /** @var \Admin\Model\UserTable $userTable */
-            $userTable = $this->getServiceLocator()->get('\Admin\Model\UserTable');
+            $userTable = \Application\Module::getService('\Admin\Model\UserTable');
             /** @var \Admin\Entity\User $selectedUser */
             $selectedUser = $userTable->getUserByEmailOrUsername($identity);
             if ($selectedUser) {
                 /** @var \ZfcUser\Mapper\User $userMapper */
-                $userMapper = $this->getServiceLocator()->get('zfcuser_user_mapper');
+                $userMapper = \Application\Module::getService('zfcuser_user_mapper');
                 $user = $userMapper->findByUsername($selectedUser->username);
                 if (!$user) {
                     $user = $userMapper->findByEmail($selectedUser->email);
