@@ -271,9 +271,11 @@ class ZfcuserController extends UserController
             // redirect to the login redirect route
             return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
         }
-
-        $config        = $this->getServiceLocator()->get('Config');
-        $options    = $this->getServiceLocator()->get('zfcuser_module_options');
+        // \Application\Module::getService
+        //$config     = $this->getServiceLocator()->get('Config');
+        //$options    = $this->getServiceLocator()->get('zfcuser_module_options');
+        $config     = \Application\Module::getService('Config');
+        $options    = \Application\Module::getService('zfcuser_module_options');
         /**
          * @var \Zend\Http\PhpEnvironment\Request|\Zend\Http\Request $request
          */
@@ -357,8 +359,10 @@ class ZfcuserController extends UserController
             return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
         }
 
-        $config        = $this->getServiceLocator()->get('Config');
-        $options    = $this->getServiceLocator()->get('zfcuser_module_options');
+        //$config     = $this->getServiceLocator()->get('Config');
+        //$options    = $this->getServiceLocator()->get('zfcuser_module_options');
+        $config     = \Application\Module::getService('Config');
+        $options    = \Application\Module::getService('zfcuser_module_options');
         /**
          * @var \Zend\Http\PhpEnvironment\Request|\Zend\Http\Request $request
          */
