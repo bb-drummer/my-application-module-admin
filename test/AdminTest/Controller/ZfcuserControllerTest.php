@@ -52,9 +52,9 @@ class ZfcuserControllerTest extends ActionControllerTestCase
         $loginForm    = $serviceLocator->get('zfcuser_login_form');
         $options      = $serviceLocator->get('zfcuser_module_options');
 */
-        $controllerFactory = new ZfcuserControllerFactory();
-        $this->setController( $controllerFactory->createService($serviceLocator) ); // ($userService, $options, $registerForm, $loginForm) );
-        //$this->setController( new ZfcuserController($userService, $options, $registerForm, $loginForm) );
+        //$controllerFactory = new ZfcuserControllerFactory();
+        //$this->setController( $controllerFactory->createService($serviceLocator) ); // ($userService, $options, $registerForm, $loginForm) );
+        $this->setController( new ZfcuserController($userService, $options, $registerForm, $loginForm) );
         
         
         $this->getController()->setServiceLocator($this->getApplicationServiceLocator());
