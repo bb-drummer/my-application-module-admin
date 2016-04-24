@@ -554,13 +554,13 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
         }
         
         $sAclRole = 'public';
-        $oAuth = \Application\Module::getService('zfcuser_auth_service'); // $oServiceManager->get('zfcuser_auth_service');
+        $oAuth = $oServiceManager->get('zfcuser_auth_service'); // \Application\Module::getService('zfcuser_auth_service'); // 
         if ($oAuth->hasIdentity() ) {
             $oUser = $oAuth->getIdentity();
             $sAclRole = $oUser->getAclrole();
         }
 
-        $oNavigation = \Application\Module::getService('navigation'); // $oServiceManager->get('navigation');
+        $oNavigation = $oServiceManager->get('navigation'); // \Application\Module::getService('navigation'); // 
         $activePage = $oNavigation->findBy('active', 1);
         if ($activePage) {
             $sAclResource = $activePage->getResource();
