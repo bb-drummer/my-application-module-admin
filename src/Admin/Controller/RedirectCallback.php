@@ -28,7 +28,7 @@ use Zend\Http\Request;
 /**
  * Buils a redirect response based on the current routing and parameters
  */
-class RedirectCallback extends ZfcUserRedirectCallback
+class RedirectCallback //  extends ZfcUserRedirectCallback
 {
 
     /**

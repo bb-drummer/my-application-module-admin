@@ -465,6 +465,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
 
                     return new RedirectCallback($application, $router, $options);
                 },*/
+        		
             ),
         );
     }
