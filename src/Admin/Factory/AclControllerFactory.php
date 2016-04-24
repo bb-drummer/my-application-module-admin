@@ -31,6 +31,6 @@ class AclControllerFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $realServiceLocator = $serviceLocator->getServiceLocator();
-        return new AclController($realServiceLocator);
+        return new AclController($serviceLocator);
     }
 }
