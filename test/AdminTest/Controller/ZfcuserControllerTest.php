@@ -190,7 +190,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
     
     /**
      * @covers ::loginAction
-     */
+     * /
     public function testLoginActionCanBeDispatched()
     {
         // set public user
