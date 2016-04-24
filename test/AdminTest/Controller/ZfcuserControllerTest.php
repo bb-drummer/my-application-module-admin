@@ -11,6 +11,7 @@ use \Admin\Controller\ZfcuserController,
     Zend\Mvc\Router\RouteMatch,
     Zend\Mvc\Router\Http\TreeRouteStack as HttpRouter,
     ZfcUser\Options\ModuleOptions as ZfcuserModuleOptions;
+use Admin\Factory\ZfcuserControllerFactory;
 ;
 
 /**
@@ -33,13 +34,27 @@ class ZfcuserControllerTest extends ActionControllerTestCase
         
         //$redirCallback = new \Admin\Controller\RedirectCallback($this->getApplication(), $router, new ZfcuserModuleOptions($config['router']));
         //$this->setController(new ZfcuserController($redirCallback));
-
+        
+        $userService = $this->getMock('ZfcUser\Service\User');
+        
+        $options = $this->getMock('ZfcUser\Options\ModuleOptions');
+        
+        $registerForm = $this->getMockBuilder('ZfcUser\Form\Register')
+	        ->disableOriginalConstructor()
+	        ->getMock();
+        
+        $loginForm = $this->getMockBuilder('ZfcUser\Form\Login')
+	        ->disableOriginalConstructor()
+	        ->getMock();
+/*        
         $userService  = $serviceLocator->get('zfcuser_user_service');
         $registerForm = $serviceLocator->get('zfcuser_register_form');
         $loginForm    = $serviceLocator->get('zfcuser_login_form');
         $options      = $serviceLocator->get('zfcuser_module_options');
-        
-        $this->setController( new ZfcuserController($userService, $options, $registerForm, $loginForm) );
+*/
+        $controllerFactory = new ZfcuserControllerFactory();
+        $this->setController( $controllerFactory->createService($serviceLocator) ); // ($userService, $options, $registerForm, $loginForm) );
+        //$this->setController( new ZfcuserController($userService, $options, $registerForm, $loginForm) );
         
         
         $this->getController()->setServiceLocator($this->getApplicationServiceLocator());

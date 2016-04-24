@@ -440,7 +440,7 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
                         /** @var \Zend\Mvc\Controller\ControllerManager $controllerManager */
                         $serviceManager = $controllerManager->getServiceLocator();
                         /** @var \Admin\Controller\RedirectCallback $redirectCallback */
-                        $redirectCallback = $serviceManager->get('zfcuser_redirect_callback');
+                        //$redirectCallback = $serviceManager->get('zfcuser_redirect_callback');
                         /** @var \Admin\Controller\ZfcuserController $controller */
                         $controller = new ZfcuserControllerFactory($controllerManager);
 
@@ -456,16 +456,16 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
         'factories' => array(
                     
 
-               'zfcuser_redirect_callback' => function ($sm) {
-                    /** @var RouteInterface $router  */
+               /*'zfcuser_redirect_callback' => function ($sm) {
+                    /** @var RouteInterface $router  * /
                     $router = $sm->get('router');
-                    /** @var Application $application  */
+                    /** @var Application $application  * /
                     $application = $sm->get('Application');
-                    /** @var ModuleOptions $options  */
+                    /** @var ModuleOptions $options  * /
                     $options = $sm->get('zfcuser_module_options');
 
                     return new RedirectCallback($application, $router, $options);
-                },
+                },*/
         		
             ),
         );
