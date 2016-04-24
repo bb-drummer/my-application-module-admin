@@ -701,5 +701,16 @@ class ZfcuserController extends UserController
         return $this->aclroleTable;
     }
     
+    /**
+     * retrieve ZfcUser\ModuleOptions
+     *
+     * @return array|\ZfcUser\ModuleOptions
+     * @throws \Exception
+     */
+    public function getOptions()
+    {
+    	return \Application\Module::getService('zfcuser_module_options');
+    } 
+    
 }
     
