@@ -274,13 +274,20 @@ class ZfcuserController extends UserController
         // \Application\Module::getService
         //$config     = $this->getServiceLocator()->get('Config');
         //$options    = $this->getServiceLocator()->get('zfcuser_module_options');
+/*        
+        $userService  = $serviceLocator->get('zfcuser_user_service');
+        $registerForm = $serviceLocator->get('zfcuser_register_form');
+        $loginForm    = $serviceLocator->get('zfcuser_login_form');
+        $options      = $serviceLocator->get('zfcuser_module_options');
+*/
         $config     = \Application\Module::getService('Config');
         $options    = \Application\Module::getService('zfcuser_module_options');
         /**
          * @var \Zend\Http\PhpEnvironment\Request|\Zend\Http\Request $request
          */
         $request    = $this->getRequest();
-        $service    = $this->getUserService();
+        //$service    = $this->getUserService();
+        $service    = \Application\Module::getService('zfcuser_user_service');
         $form        = new RequestPasswordResetForm(null, $options);
         $translator    = $this->getTranslator();
         
