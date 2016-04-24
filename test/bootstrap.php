@@ -36,6 +36,8 @@ class Bootstrap
             ),
             'modules' => array(
                 'Application',
+                'ZfcBase',
+                'ZfcUser',
                 'Admin',
                 'UIComponents',
             )
