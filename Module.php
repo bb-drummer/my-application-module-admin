@@ -103,14 +103,14 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
     public function getViewHelperConfig()
     {
         return array(
-        'factories' => array(
-        'isallowed' => function (HelperPluginManager $pm) {
-            return $pm->get('Admin\View\Helper\Isallowed');
-        },
+            'factories' => array(
+                'isallowed' => function (HelperPluginManager $pm) {
+                    return $pm->get('Admin\View\Helper\Isallowed');
+                },
                 'isdenied' => function (HelperPluginManager $pm) {
                     return $pm->get('Admin\View\Helper\Isdenied');
                 },
-        ),
+            ),
         );
     }
     
@@ -554,13 +554,13 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
         }
         
         $sAclRole = 'public';
-        $oAuth = $oServiceManager->get('zfcuser_auth_service');
+        $oAuth = \Application\Module::getService('zfcuser_auth_service'); // $oServiceManager->get('zfcuser_auth_service');
         if ($oAuth->hasIdentity() ) {
             $oUser = $oAuth->getIdentity();
             $sAclRole = $oUser->getAclrole();
         }
 
-        $oNavigation = $oServiceManager->get('navigation');
+        $oNavigation = \Application\Module::getService('navigation'); // $oServiceManager->get('navigation');
         $activePage = $oNavigation->findBy('active', 1);
         if ($activePage) {
             $sAclResource = $activePage->getResource();
