@@ -463,8 +463,8 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
                     /** @var ModuleOptions $options  * /
                     $options = $sm->get('zfcuser_module_options');
 
-                    return new RedirectCallback($application, $router, $options);*/
-                },
+                    return new RedirectCallback($application, $router, $options);
+                },*/
             ),
         );
     }
