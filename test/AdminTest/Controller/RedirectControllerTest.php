@@ -23,6 +23,8 @@ class RedirectControllerTest extends ActionControllerTestCase
      */
     public function setupController()
     {
+    	$serviceLocator = $this->getApplicationServiceLocator();
+    	
         // special callback object, for now, no setup...
     }
 

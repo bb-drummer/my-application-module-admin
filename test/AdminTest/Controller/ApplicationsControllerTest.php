@@ -23,12 +23,14 @@ class ApplicationsControllerTest extends ActionControllerTestCase
      */
     public function setupController()
     {
-        $this->setController(new ApplicationsController());
-        $this->getController()->setServiceLocator($this->getApplicationServiceLocator());
+    	$serviceLocator = $this->getApplicationServiceLocator();
+    	
+        $this->setController(new ApplicationsController( $serviceLocator ));
+        $this->getController()->setServiceLocator( $serviceLocator );
         $this->setRequest(new Request());
         $this->setRouteMatch(new RouteMatch(array('controller' => '\Admin\Controller\Applications', 'action' => 'index')));
         $this->setEvent(new MvcEvent());
-        $config = $this->getApplicationServiceLocator()->get('Config');
+        $config = $serviceLocator->get('Config');
         $routerConfig = isset($config['router']) ? $config['router'] : array();
         $router = HttpRouter::factory($routerConfig);
         $this->getEvent()->setRouter($router);

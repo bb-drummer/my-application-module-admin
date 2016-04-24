@@ -25,14 +25,23 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      */
     public function setupController()
     {
-        
-        $config = $this->getApplicationServiceLocator()->get('Config');
+    	$serviceLocator = $this->getApplicationServiceLocator();
+    	
+        $config = $serviceLocator->get('Config');
         $routerConfig = isset($config['router']) ? $config['router'] : array();
         $router = HttpRouter::factory($routerConfig);
         
-        $redirCallback = new \Admin\Controller\RedirectCallback($this->getApplication(), $router, new ZfcuserModuleOptions($config['router']));
+        //$redirCallback = new \Admin\Controller\RedirectCallback($this->getApplication(), $router, new ZfcuserModuleOptions($config['router']));
+        //$this->setController(new ZfcuserController($redirCallback));
+
+        $userService  = $serviceLocator->get('zfcuser_user_service');
+        $registerForm = $serviceLocator->get('zfcuser_register_form');
+        $loginForm    = $serviceLocator->get('zfcuser_login_form');
+        $options      = $serviceLocator->get('zfcuser_module_options');
         
-        $this->setController(new ZfcuserController($redirCallback));
+        $this->setController( new ZfcuserController($userService, $options, $registerForm, $loginForm) );
+        
+        
         $this->getController()->setServiceLocator($this->getApplicationServiceLocator());
         $this->setRequest(new Request());
         $this->setRouteMatch(new RouteMatch(array('controller' => '\Admin\Controller\Zfcuser', 'action' => 'index')));
