@@ -454,113 +454,16 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
         return array(
         'factories' => array(
                     
-                
-        /* 'Admin\Model\ApplicationsTable' =>  function($sm) {
-        $tableGateway = $sm->get('AdminApplicationsTableGateway');
-        $table = new ApplicationsTable($tableGateway);
-        return $table;
-        },
-        'AdminApplicationsTableGateway' => function ($sm) {
-        $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-        $resultSetPrototype = new ResultSet();
-        $resultSetPrototype->setArrayObjectPrototype(new Applications());
-        return new TableGateway('applications', $dbAdapter, null, $resultSetPrototype);
-        }, */
-                    
-                        
-        /* 'Admin\Model\ClientsTable' =>  function($sm) {
-        $tableGateway = $sm->get('AdminClientsTableGateway');
-        $table = new ClientsTable($tableGateway);
-        return $table;
-        },
-        'AdminClientsTableGateway' => function ($sm) {
-        $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-        $resultSetPrototype = new ResultSet();
-        $resultSetPrototype->setArrayObjectPrototype(new Clients());
-        return new TableGateway('clients', $dbAdapter, null, $resultSetPrototype);
-        },
-                    
-                        
-        'Admin\Model\UserTable' =>  function ($sm) {
-            $tableGateway = $sm->get('AdminUserTableGateway');
-            $table = new UserTable($tableGateway);
-            return $table;
-        },
-                'AdminUserTableGateway' => function ($sm) {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new User());
-                    return new TableGateway('user', $dbAdapter, null, $resultSetPrototype);
-                },
-                
-                'Admin\Model\SettingsTable' =>  function ($sm) {
-                    $tableGateway = $sm->get('AdminSettingsTableGateway');
-                    $table = new SettingsTable($tableGateway);
-                    return $table;
-                },
-                'AdminSettingsTableGateway' => function ($sm) {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Settings());
-                    return new TableGateway('settings', $dbAdapter, null, $resultSetPrototype);
-                },
-                
-                
-                'Admin\Model\AclTable' =>  function ($sm) {
-                    $tableGateway = $sm->get('AdminAclTableGateway');
-                    $table = new AclTable($tableGateway);
-                    return $table;
-                },
-                'AdminAclTableGateway' => function ($sm) {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Acl());
-                    return new TableGateway('acl', $dbAdapter, null, $resultSetPrototype);
-                },
-                'Admin\Model\AclroleTable' =>  function ($sm) {
-                    $tableGateway = $sm->get('AdminAclroleTableGateway');
-                    $table = new AclroleTable($tableGateway);
-                    return $table;
-                },
-                'AdminAclroleTableGateway' => function ($sm) {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Aclrole());
-                    return new TableGateway('aclrole', $dbAdapter, null, $resultSetPrototype);
-                },
-                'Admin\Model\AclresourceTable' =>  function ($sm) {
-                    $tableGateway = $sm->get('AdminAclresourceTableGateway');
-                    $table = new AclresourceTable($tableGateway);
-                    return $table;
-                },
-                'AdminAclresourceTableGateway' => function ($sm) {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Aclresource());
-                    return new TableGateway('aclresource', $dbAdapter, null, $resultSetPrototype);
-                },
 
-                'Admin\Model\UserProfileTable' =>  function ($sm) {
-                    $tableGateway = $sm->get('AdminUserProfileTableGateway');
-                    $table = new UserProfileTable($tableGateway);
-                    return $table;
-                },
-                'AdminUserProfileTableGateway' => function ($sm) {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new UserProfile());
-                    return new TableGateway('userprofile', $dbAdapter, null, $resultSetPrototype);
-                },
- */
-                'zfcuser_redirect_callback' => function ($sm) {
-                    /** @var RouteInterface $router  */
+               /* 'zfcuser_redirect_callback' => function ($sm) {
+                    /** @var RouteInterface $router  * /
                     $router = $sm->get('router');
-                    /** @var Application $application  */
+                    /** @var Application $application  * /
                     $application = $sm->get('Application');
-                    /** @var ModuleOptions $options  */
+                    /** @var ModuleOptions $options  * /
                     $options = $sm->get('zfcuser_module_options');
 
-                    return new RedirectCallback($application, $router, $options);
+                    return new RedirectCallback($application, $router, $options);*/
                 },
             ),
         );
