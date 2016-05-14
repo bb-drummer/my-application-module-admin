@@ -217,6 +217,32 @@ class ZfcuserController extends UserController
     }
 
     /**
+     * request a user's password reset link
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
+     */
+    public function authenticateAction()
+    {
+    	return parent::authenticateAction();
+    }
+
+    /**
+     * request a user's password reset link
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
+     */
+    public function logoutAction()
+    {
+    	return parent::logoutAction();
+    }
+
+    /**
+     * request a user's password reset link
+     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
+     */
+    public function requestpasswordresetAction()
+    {
+    }
+
+    /**
      * Register new user
      * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      * /
