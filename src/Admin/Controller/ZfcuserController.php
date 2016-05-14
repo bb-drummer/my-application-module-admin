@@ -174,7 +174,7 @@ class ZfcuserController extends UserController
     public function onDispatch(MvcEvent $e)
     {
         $oEvent = $this->applyToolbarOnDispatch($e);
-        $result = parent::onDispatch($oEvent);
+        $result = parent::onDispatch($e);
         return $result;
     }
     
