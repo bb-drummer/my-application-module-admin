@@ -16,6 +16,10 @@
 
 namespace Admin\Controller;
 
+use Application\Controller\Traits\ControllerTranslatorTrait;
+use Application\Controller\Traits\ControllerActiontitlesTrait;
+use Application\Controller\Traits\ControllerToolbarTrait;
+
 use Admin\Module as AdminModule;
 use Admin\Form\RequestPasswordResetForm;
 use Admin\Form\ResetPasswordForm;
@@ -28,14 +32,11 @@ use Admin\Model\UserProfile;
 use Zend\Crypt\Password\Bcrypt;
 use Zend\Stdlib\ResponseInterface as Response;
 
-use ZfcUser\Controller\UserController;
 use Zend\View\Model\ViewModel;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-use Application\Controller\Traits\ControllerTranslatorTrait;
-use Application\Controller\Traits\ControllerActiontitlesTrait;
-use Application\Controller\Traits\ControllerToolbarTrait;
+use ZfcUser\Controller\UserController;
 use ZfcUser\Controller\Plugin\ZfcUserAuthentication;
 
 /**
@@ -217,7 +218,7 @@ class ZfcuserController extends UserController
     }
 
     /**
-     * request a user's password reset link
+     * call parent object's authenticate... 
      * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function authenticateAction()
@@ -226,20 +227,12 @@ class ZfcuserController extends UserController
     }
 
     /**
-     * request a user's password reset link
+     * call parent object's logout... 
      * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
      */
     public function logoutAction()
     {
     	return parent::logoutAction();
-    }
-
-    /**
-     * request a user's password reset link
-     * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
-     */
-    public function requestpasswordresetAction()
-    {
     }
 
     /**
