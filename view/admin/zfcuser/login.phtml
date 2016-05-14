@@ -1,19 +1,3 @@
-<h1><?php echo $this->translate('Sign In'); ?></h1>
-
-<?php
-$form = $this->loginForm;
-$form->prepare();
-$form->setAttribute('action', $this->url('zfcuser/login'));
-$form->setAttribute('method', 'post');
-$form->setAttribute('autocomplete', 'off');
-?>
-
-<?php echo $this->partial('_form.phtml', ['form' => $form]); ?>
-
-<?php if ($this->enableRegistration) : ?>
-<?php echo $this->translate('Not registered?'); ?> <a href="<?php echo $this->url('zfcuser/register') . ($this->redirect ? '?redirect='.$this->escapeUrl($this->redirect) : '') ?>"><?php echo $this->translate('Sign up!'); ?></a>
-<?php endif; ?>
-<?php /*
 <section>
     <?php 
         $form = $this->loginForm;
@@ -49,4 +33,3 @@ $form->setAttribute('autocomplete', 'off');
         <a href="<?php echo $this->url('userrequestpasswordreset'); ?>"><?php echo $this->translate('reset your password'); ?></a>
     </p>
 </section>
-*/ ?>
