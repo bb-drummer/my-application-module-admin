@@ -175,7 +175,7 @@ class ZfcuserController extends UserController
     public function onDispatch(MvcEvent $e)
     {
         $oEvent = $this->applyToolbarOnDispatch($e);
-        $result = parent::onDispatch($e);
+        $result = parent::onDispatch($oEvent);
         return $result;
     }
     
@@ -218,9 +218,59 @@ class ZfcuserController extends UserController
     }
 
     /**
+     * General-purpose authentication action
+     */
+    public function authenticateAction()
+    {
+        if ($this->zfcUserAuthentication()->hasIdentity()) {
+            return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
+        }
+
+        $adapter = $this->zfcUserAuthentication()->getAuthAdapter();
+        $redirect = $this->params()->fromPost('redirect', $this->params()->fromQuery('redirect', false));
+
+        $result = $adapter->prepareForAuthentication($this->getRequest());
+
+        // Return early if an adapter returned a response
+        if ($result instanceof Response) {
+            return $result;
+        }
+
+        $auth = $this->zfcUserAuthentication()->getAuthService()->authenticate($adapter);
+
+        if (!$auth->isValid()) {
+            $this->flashMessenger()->setNamespace('zfcuser-login-form')->addMessage($this->failedLoginMessage);
+            $adapter->resetAdapters();
+            return $this->redirect()->toUrl(
+                $this->url()->fromRoute(static::ROUTE_LOGIN) .
+                ($redirect ? '?redirect='. rawurlencode($redirect) : '')
+            );
+        }
+
+        $redirect = $this->redirectCallback;
+
+        return $redirect();
+    }
+    
+    /**
+     * Logout and clear the identity
+     */
+    public function logoutAction()
+    {
+        $this->zfcUserAuthentication()->getAuthAdapter()->resetAdapters();
+        $this->zfcUserAuthentication()->getAuthAdapter()->logoutAdapters();
+        $this->zfcUserAuthentication()->getAuthService()->clearIdentity();
+
+        $redirect = $this->redirectCallback;
+
+        return $redirect();
+    }
+
+    
+    /**
      * call parent object's authenticate... 
      * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
-     */
+     * /
     public function authenticateAction()
     {
     	return parent::authenticateAction();
@@ -229,7 +279,7 @@ class ZfcuserController extends UserController
     /**
      * call parent object's logout... 
      * @return mixed|\Zend\Http\Response|\Zend\View\Model\ViewModel
-     */
+     * /
     public function logoutAction()
     {
     	return parent::logoutAction();
