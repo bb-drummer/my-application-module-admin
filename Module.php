@@ -454,19 +454,19 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
     public function getServiceConfig()
     {
         return array(
-        'factories' => array(
+            'factories' => array(
                     
 
-               /*'zfcuser_redirect_callback' => function ($sm) {
-                    /** @var RouteInterface $router  * /
+               'zfcuser_redirect_callback' => function ($sm) {
+                    /** @var RouteInterface $router  */
                     $router = $sm->get('router');
-                    /** @var Application $application  * /
+                    /** @var Application $application  */
                     $application = $sm->get('Application');
-                    /** @var ModuleOptions $options  * /
+                    /** @var ModuleOptions $options  */
                     $options = $sm->get('zfcuser_module_options');
 
                     return new RedirectCallback($application, $router, $options);
-                },*/
+                },
         		
             ),
         );
