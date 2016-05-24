@@ -27,30 +27,31 @@ use Zend\Http\Request;
 
 /**
  * Buils a redirect response based on the current routing and parameters
+ * @see \ZfcUser\Controller\RedirectCallback
  */
-class RedirectCallback //  extends ZfcUserRedirectCallback
+class RedirectCallback extends ZfcUserRedirectCallback
 {
 
     /**
- * @var RouteInterface  
-*/
+     * @var RouteInterface  
+     * /
     private $router;
 
     /**
- * @var Application 
-*/
+     * @var Application 
+     * /
     private $application;
 
     /**
- * @var ModuleOptions 
-*/
+     * @var ModuleOptions 
+     * /
     private $options;
 
     /**
      * @param Application    $application
      * @param RouteInterface $router
      * @param ModuleOptions  $options
-     */
+     * /
     public function __construct(Application $application, RouteInterface $router, ModuleOptions $options)
     {
         $this->router = $router;
@@ -60,7 +61,7 @@ class RedirectCallback //  extends ZfcUserRedirectCallback
 
     /**
      * @return Response
-     */
+     * /
     public function __invoke()
     {
     	$routeMatch = $this->application->getMvcEvent()->getRouteMatch();
@@ -76,7 +77,7 @@ class RedirectCallback //  extends ZfcUserRedirectCallback
      * Return the redirect from param.
      * First checks GET then POST
      * @return string
-     */
+     * /
     private function determineRedirectRouteFromRequest()
     {
         $request  = $this->application->getRequest();
@@ -96,7 +97,7 @@ class RedirectCallback //  extends ZfcUserRedirectCallback
     /**
      * @param $route
      * @return bool
-     */
+     * /
     private function checkIfRouteExists($route)
     {
         try {
@@ -114,7 +115,7 @@ class RedirectCallback //  extends ZfcUserRedirectCallback
      * @param  string $currentRoute
      * @param  bool   $redirect
      * @return mixed
-     */
+     * /
     protected function getRedirect($currentRoute, $redirect = false)
     {
         $useRedirect = $this->options->getUseRedirectParameterIfPresent();
@@ -142,5 +143,7 @@ class RedirectCallback //  extends ZfcUserRedirectCallback
         default:
             return $this->router->assemble(array(), array('name' => 'zfcuser'));
         }
-    }
+    } 
+    
+    */
 }
