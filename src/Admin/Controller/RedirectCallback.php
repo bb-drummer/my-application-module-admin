@@ -127,6 +127,7 @@ class RedirectCallback //  extends ZfcUserRedirectCallback
         switch ($currentRoute) {
         case 'zfcuser/register':
         case 'zfcuser/login':
+        case 'zfcuser/authenticate':
             $route = ($redirect) ?: $this->options->getLoginRedirectRoute();
             if (!$routeExists && !empty($redirUrl)) {
                 return $redirUrl;
