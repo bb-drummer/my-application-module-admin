@@ -438,10 +438,11 @@ class Module implements AutoloaderProviderInterface, ServiceLocatorAwareInterfac
             'factories' => array(
                 'zfcuser' => function ($controllerManager) {
                         /** @var \Zend\Mvc\Controller\ControllerManager $controllerManager */
-                        $serviceManager = $controllerManager->getServiceLocator();
+                        //$serviceManager = $controllerManager->getServiceLocator();
                         /** @var \Admin\Controller\RedirectCallback $redirectCallback */
                         //$redirectCallback = $serviceManager->get('zfcuser_redirect_callback');
                         /** @var \Admin\Controller\ZfcuserController $controller */
+                        //$controller = new ZfcuserController($redirectCallback);
                         $controller = new ZfcuserControllerFactory($controllerManager);
 
                         return $controller;
