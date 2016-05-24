@@ -239,7 +239,7 @@ class ZfcuserController extends UserController
 
     /**
      * General-purpose authentication action
-     */
+     * /
     public function authenticateAction()
     {
         if ($this->zfcUserAuthentication()->hasIdentity()) {
@@ -274,7 +274,7 @@ class ZfcuserController extends UserController
     
     /**
      * Logout and clear the identity
-     */
+     * /
     public function logoutAction()
     {
         $this->zfcUserAuthentication()->getAuthAdapter()->resetAdapters();
