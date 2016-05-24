@@ -32,10 +32,10 @@ class ZfcuserControllerTest extends ActionControllerTestCase
         $routerConfig = isset($config['router']) ? $config['router'] : array();
         $router = HttpRouter::factory($routerConfig);
         
-        //$redirCallback = new \Admin\Controller\RedirectCallback($this->getApplication(), $router, new ZfcuserModuleOptions($config['router']));
-        //$this->setController(new ZfcuserController($redirCallback));
+        $redirCallback = new \Admin\Controller\RedirectCallback($this->getApplication(), $router, new ZfcuserModuleOptions($config['router']));
+        $this->setController(new ZfcuserController($redirCallback));
         
-        $userService = $this->getMock('ZfcUser\Service\User');
+        /* $userService = $this->getMock('ZfcUser\Service\User');
         
         $options = $this->getMock('ZfcUser\Options\ModuleOptions');
         
@@ -51,11 +51,11 @@ class ZfcuserControllerTest extends ActionControllerTestCase
         $registerForm = $serviceLocator->get('zfcuser_register_form');
         $loginForm    = $serviceLocator->get('zfcuser_login_form');
         $options      = $serviceLocator->get('zfcuser_module_options');
-*/
+* /
         //$controllerFactory = new ZfcuserControllerFactory();
         //$this->setController( $controllerFactory->createService($serviceLocator) ); // ($userService, $options, $registerForm, $loginForm) );
         $this->setController( new ZfcuserController($userService, $options, $registerForm, $loginForm) );
-        
+        */
         
         $this->getController()->setServiceLocator($this->getApplicationServiceLocator());
         $this->setRequest(new Request());
