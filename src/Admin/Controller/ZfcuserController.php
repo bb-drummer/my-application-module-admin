@@ -65,7 +65,7 @@ class ZfcuserController extends UserController
     /**
      * @param callable $redirectCallback
      * @param callable $redirectCallback
-     */
+     * /
     //public function __construct(ServiceLocatorInterface $serviceLocator, $redirectCallback)
     public function __construct($userService, $options, $registerForm, $loginForm)
     {
@@ -80,7 +80,7 @@ class ZfcuserController extends UserController
     	if (!is_callable($redirectCallback)) {
             throw new \InvalidArgumentException('You must supply a callable redirectCallback');
         }
-        $this->redirectCallback = $redirectCallback;*/
+        $this->redirectCallback = $redirectCallback; * /
         
     }
 

@@ -39,16 +39,16 @@ class ZfcuserControllerFactory implements FactoryInterface
      *
      * @param ServiceLocatorInterface $controllerManager
      * @return mixed
-     * /
+     */
     public function createService(ServiceLocatorInterface $controllerManager)
     {
-        /* @var ControllerManager $controllerManager* /
+        /* @var ControllerManager $controllerManager*/
         $serviceManager = $controllerManager->getServiceLocator();
 
-        /* @var RedirectCallback $redirectCallback * /
+        /* @var RedirectCallback $redirectCallback */
         $redirectCallback = $serviceManager->get('zfcuser_redirect_callback');
 
-        /* @var UserController $controller * /
+        /* @var ZfcuserController $controller */
         $controller = new ZfcuserController($serviceManager, $redirectCallback);
 
         return $controller;
@@ -59,10 +59,10 @@ class ZfcuserControllerFactory implements FactoryInterface
      *
      * @param ControllerManager $serviceLocator
      * @return UserController
-     */
+     * /
     public function createService(ServiceLocatorInterface $controllerManager)
     {
-        /* @var ServiceLocatorInterface $serviceLocator */
+        /* @var ServiceLocatorInterface $serviceLocator * /
         $serviceLocator = $controllerManager->getServiceLocator();
 
         $userService = $serviceLocator->get('zfcuser_user_service');
@@ -73,5 +73,5 @@ class ZfcuserControllerFactory implements FactoryInterface
         $controller = new ZfcuserController($userService, $options, $registerForm, $loginForm);
 
         return $controller;
-    }
+    } */
 }
