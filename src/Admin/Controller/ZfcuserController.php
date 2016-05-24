@@ -261,9 +261,9 @@ class ZfcuserController extends UserController
         $this->zfcUserAuthentication()->getAuthAdapter()->logoutAdapters();
         $this->zfcUserAuthentication()->getAuthService()->clearIdentity();
 
-        $redirect = $this->redirectCallback;
+        //$redirect = $this->redirectCallback;
 
-        return $redirect();
+        //return $redirect();
     }
 
     
