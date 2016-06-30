@@ -208,7 +208,7 @@ class ZfcuserController extends UserController
         // if the user is logged in...
         if (!$this->zfcUserAuthentication()->hasIdentity()) {
             // ...redirect to the login redirect route
-            return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
+            return $this->redirect()->toRoute('zfcuser/login'); //$this->getOptions()->getLoginRedirectRoute());
         }
     	$oIdentity = $this->zfcUserAuthentication()->getIdentity();
         $oProfile = new \Admin\Model\UserProfile();

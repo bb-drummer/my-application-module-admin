@@ -45,6 +45,8 @@
         <hr />
         <?php 
         try {
+        	$options    = \Application\Module::getService('zfcuser_module_options');
+        	echo '<!-- '.print_r($options, true).' -->'.PHP_EOL;
         	$captcha = $form->get('captcha');
         } catch (\Exception $ex ) {
         	$captcha = false;
