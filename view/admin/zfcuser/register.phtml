@@ -52,6 +52,7 @@
         if ($captcha) { 
         ?>
         <div class="form-group<?php echo (!empty($this->formElementErrors($form->get('captcha')))) ? ' has-error' : '' ?>">
+        	<div class="g-recaptcha" data-sitekey="6Lc21xETAAAAAFVyLcUogLYh7P9KS-Q5IFr1Cn7t"></div>
             <?php echo $this->formLabel($form->get('captcha')); ?>
             <?php echo $this->formCaptcha($form->get('captcha')->setAttributes(array('class' => 'form-control'))); ?>
             <?php echo $this->formElementErrors($form->get('captcha')); ?>
@@ -62,7 +63,6 @@
         <input class="button secondary btn btn-default" type="reset" value="<?php echo $this->translate("reset"); ?>" />
         <a class="button alert btn btn-danger" href="<?php echo $this->url('home'); ?>"><?php echo $this->translate("cancel"); ?></a>
         <?php if ($this->redirect): ?><input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" /><?php endif ?>
-        <div class="g-recaptcha" data-sitekey="6Lc21xETAAAAAFVyLcUogLYh7P9KS-Q5IFr1Cn7t"></div>
     <?php echo $this->form()->closeTag(); ?>
 </section>
 <?php } ?>
