@@ -52,7 +52,7 @@
         if ($captcha) { 
         ?>
         <div class="form-group<?php echo (!empty($this->formElementErrors($form->get('captcha')))) ? ' has-error' : '' ?>">
-        	<div class="g-recaptcha" data-sitekey="6Lc21xETAAAAAFVyLcUogLYh7P9KS-Q5IFr1Cn7t"></div>
+        	<!-- div class="g-recaptcha" data-sitekey="6Lc21xETAAAAAFVyLcUogLYh7P9KS-Q5IFr1Cn7t"></div -->
             <?php echo $this->formLabel($form->get('captcha')); ?>
             <?php echo $this->formCaptcha($form->get('captcha')->setAttributes(array('class' => 'form-control'))); ?>
             <?php echo $this->formElementErrors($form->get('captcha')); ?>
