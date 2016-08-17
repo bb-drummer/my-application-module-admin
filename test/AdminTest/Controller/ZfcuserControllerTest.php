@@ -35,15 +35,15 @@ class ZfcuserControllerTest extends ActionControllerTestCase
         $redirCallback = new \Admin\Controller\RedirectCallback($this->getApplication(), $router, new ZfcuserModuleOptions($config['router']));
         $this->setController(new ZfcuserController($redirCallback));
         
-        /* $userService = $this->getMock('ZfcUser\Service\User');
+        /* $userService = $this->createMock('ZfcUser\Service\User');
         
-        $options = $this->getMock('ZfcUser\Options\ModuleOptions');
+        $options = $this->createMock('ZfcUser\Options\ModuleOptions');
         
-        $registerForm = $this->getMockBuilder('ZfcUser\Form\Register')
+        $registerForm = $this->createMockBuilder('ZfcUser\Form\Register')
 	        ->disableOriginalConstructor()
 	        ->getMock();
         
-        $loginForm = $this->getMockBuilder('ZfcUser\Form\Login')
+        $loginForm = $this->createMockBuilder('ZfcUser\Form\Login')
 	        ->disableOriginalConstructor()
 	        ->getMock();
 /*        
@@ -444,9 +444,9 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      *  set mock for ZfcUserAuthentication
      * /
     private function setZfcUserValidAuthMock () {
-        $mockAuth = $this->getMock('ZfcUser\Entity\UserInterface');
+        $mockAuth = $this->createMock('ZfcUser\Entity\UserInterface');
         
-        $ZfcUserMock = $this->getMock('Admin\Entity\User');  
+        $ZfcUserMock = $this->createMock('Admin\Entity\User');  
         
         $ZfcUserMock->expects($this->any())
             ->method('getId')
@@ -456,7 +456,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
             ->method('getToken')
             ->will($this->returnValue('valid-password-reset-token'));
         
-        $authMock = $this->getMock('ZfcUser\Controller\Plugin\ZfcUserAuthentication');
+        $authMock = $this->createMock('ZfcUser\Controller\Plugin\ZfcUserAuthentication');
         
         $authMock->expects($this->any())
             ->method('hasIdentity')
@@ -474,9 +474,9 @@ class ZfcuserControllerTest extends ActionControllerTestCase
      *  set mock for ZfcUserAuthentication
      * /
     private function setZfcUserNoAuthMock () {
-        $mockAuth = $this->getMock('ZfcUser\Entity\UserInterface');
+        $mockAuth = $this->createMock('ZfcUser\Entity\UserInterface');
         
-        $ZfcUserMock = $this->getMock('Admin\Entity\User');  
+        $ZfcUserMock = $this->createMock('Admin\Entity\User');  
 
         $ZfcUserMock->expects($this->any())
             ->method('getId')
@@ -486,7 +486,7 @@ class ZfcuserControllerTest extends ActionControllerTestCase
             ->method('getToken')
             ->will($this->returnValue('valid-password-reset-token'));
         
-        $authMock = $this->getMock('ZfcUser\Controller\Plugin\ZfcUserAuthentication');
+        $authMock = $this->createMock('ZfcUser\Controller\Plugin\ZfcUserAuthentication');
         
         $authMock->expects($this->any())
             ->method('hasIdentity')
