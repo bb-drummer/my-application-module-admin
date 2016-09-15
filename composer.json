@@ -15,7 +15,8 @@
   },
   "autoload" : {
     "psr-0" : {
-      "Admin" : "src/"
+      "Admin" : "src/",
+      "AdminTest" : "test/"
     },
     "classmap" : [ "./Module.php", "./src/", "./test/" ]
   },
